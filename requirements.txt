@@ -1,0 +1,17 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+openai-whisper==20231117
+faster-whisper==1.0.3
+pyannote.audio==3.1.1
+torch==2.1.1
+torchaudio==2.1.1
+deep-translator==1.11.4
+python-multipart==0.0.6
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+numpy==1.24.3
+soundfile==0.12.1
+librosa==0.10.1
+webrtcvad==2.0.10

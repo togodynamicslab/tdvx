@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Transcription - TDv1-Fast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            max-width: 1200px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #0f172a;
+            border-bottom: 2px solid #22d3ee;
+            color: #f8fafc;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 20px;
+            margin-bottom: 4px;
+            font-weight: 700;
+            color: #22d3ee;
+            letter-spacing: 0.5px;
+        }
+
+        .header-left p {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .model-badge {
+            display: inline-block;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid #22d3ee;
+            color: #22d3ee;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            padding: 12px 32px;
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            background: #334155;
+            color: #22d3ee;
+        }
+
+        .nav-links a.active {
+            background: rgba(34, 211, 238, 0.1);
+            color: #22d3ee;
+            border: 1px solid #22d3ee;
+        }
+
+        .content {
+            padding: 24px 32px;
+            background: #1e293b;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-start {
+            background: #22d3ee;
+            color: #0f172a;
+            border: 1px solid #22d3ee;
+        }
+
+        .btn-start:hover {
+            background: #06b6d4;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+        }
+
+        .btn-start:disabled {
+            background: #334155;
+            color: #64748b;
+            border-color: #334155;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .btn-stop {
+            background: transparent;
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .btn-stop:hover {
+            background: rgba(239, 68, 68, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-stop:disabled {
+            background: transparent;
+            color: #64748b;
+            border-color: #334155;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .status {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .status.idle {
+            background: #334155;
+            color: #94a3b8;
+            border: 1px solid #475569;
+        }
+
+        .status.connecting {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+            border: 1px solid #fbbf24;
+        }
+
+        .status.recording {
+            background: rgba(34, 211, 238, 0.1);
+            color: #22d3ee;
+            border: 1px solid #22d3ee;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .transcription-container {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .transcription-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .transcription-container::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .transcription-container::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .transcription-item {
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.2s ease;
+        }
+
+        .transcription-item:hover {
+            border-color: #475569;
+            background: #27374d;
+        }
+
+        .speaker-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Speaker colors - supports up to 10 speakers */
+        .speaker-0 { background: #1e40af; color: #93c5fd; border: 1px solid #3b82f6; }
+        .speaker-1 { background: #7c2d12; color: #fdba74; border: 1px solid #f97316; }
+        .speaker-2 { background: #064e3b; color: #6ee7b7; border: 1px solid #10b981; }
+        .speaker-3 { background: #831843; color: #f9a8d4; border: 1px solid #ec4899; }
+        .speaker-4 { background: #713f12; color: #fde047; border: 1px solid #eab308; }
+        .speaker-5 { background: #4c1d95; color: #c4b5fd; border: 1px solid #8b5cf6; }
+        .speaker-6 { background: #083344; color: #67e8f9; border: 1px solid #06b6d4; }
+        .speaker-7 { background: #7f1d1d; color: #fca5a5; border: 1px solid #ef4444; }
+        .speaker-8 { background: #365314; color: #bef264; border: 1px solid #84cc16; }
+        .speaker-9 { background: #1e1b4b; color: #a5b4fc; border: 1px solid #6366f1; }
+
+        .text {
+            color: #e2e8f0;
+            line-height: 1.8;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .translation {
+            color: #94a3b8;
+            font-style: italic;
+            line-height: 1.6;
+            padding-top: 8px;
+            border-top: 1px solid #334155;
+            font-size: 13px;
+        }
+
+        .timestamp {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #64748b;
+            padding: 80px 20px;
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .empty-state div {
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .recording-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>// LIVE TRANSCRIPTION</h1>
+                <p>Real-time Speech-to-Text with Speaker Diarization</p>
+            </div>
+            <div class="model-badge">TDv1-Fast Pipeline</div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/" class="active">Live Transcription</a>
+            <a href="/upload.html">File Upload</a>
+        </div>
+
+        <div class="content">
+            <div class="controls">
+                <button class="btn btn-start" id="startBtn">
+                    <span>▶</span>
+                    <span>Start Recording</span>
+                </button>
+                <button class="btn btn-stop" id="stopBtn" disabled>
+                    <span>⏹</span>
+                    <span>Stop Recording</span>
+                </button>
+            </div>
+
+            <div class="status idle" id="status">
+                Ready to start - Click "Start Recording" to begin
+            </div>
+
+            <div class="transcription-container" id="transcriptionContainer">
+                <div class="empty-state">
+                    <div class="icon">💬</div>
+                    <div>Transcriptions will appear here in real-time...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let mediaRecorder = null;
+        let audioContext = null;
+        let websocket = null;
+        let audioChunks = [];
+
+        // Start button
+        document.getElementById('startBtn').addEventListener('click', async () => {
+            try {
+                await startRecording();
+            } catch (error) {
+                console.error('Error starting recording:', error);
+                updateStatus('error', 'Error: ' + error.message);
+            }
+        });
+
+        // Stop button
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            stopRecording();
+        });
+
+        async function startRecording() {
+            updateStatus('connecting', 'Connecting...');
+
+            // Connect to WebSocket
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${wsProtocol}//${window.location.hostname}:8000/ws/transcribe`;
+
+            websocket = new WebSocket(wsUrl);
+
+            websocket.onopen = async () => {
+                console.log('WebSocket connected');
+
+                try {
+                    // Get microphone audio
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            sampleRate: 16000
+                        }
+                    });
+
+                    // Create AudioContext to process audio
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+                    const source = audioContext.createMediaStreamSource(stream);
+                    const processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+                    source.connect(processor);
+                    processor.connect(audioContext.destination);
+
+                    processor.onaudioprocess = (e) => {
+                        if (websocket && websocket.readyState === WebSocket.OPEN) {
+                            const inputData = e.inputBuffer.getChannelData(0);
+                            const float32Array = new Float32Array(inputData);
+                            websocket.send(float32Array.buffer);
+                        }
+                    };
+
+                    // Store for cleanup
+                    window.audioProcessor = processor;
+                    window.audioSource = source;
+                    window.audioStream = stream;
+
+                    updateStatus('recording', 'Recording from microphone...');
+                    document.getElementById('startBtn').disabled = true;
+                    document.getElementById('stopBtn').disabled = false;
+
+                } catch (error) {
+                    console.error('Error accessing microphone:', error);
+                    updateStatus('error', 'Microphone access denied. Please allow microphone access and try again.');
+                    if (websocket) {
+                        websocket.close();
+                    }
+                }
+            };
+
+            websocket.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    console.log('Received:', data);
+
+                    if (data.error) {
+                        updateStatus('error', 'Error: ' + data.error);
+                    } else if (data.segment) {
+                        // Display transcription (data has segment property)
+                        addTranscription(data.segment);
+                    } else if (data.text || data.speaker) {
+                        // Fallback for direct format
+                        addTranscription(data);
+                    }
+                } catch (error) {
+                    console.error('Error parsing message:', error);
+                }
+            };
+
+            websocket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                updateStatus('error', 'Connection error - Please refresh and try again');
+            };
+
+            websocket.onclose = () => {
+                console.log('WebSocket closed');
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    stopRecording();
+                }
+            };
+        }
+
+        function stopRecording() {
+            // Clean up audio processing
+            if (window.audioProcessor) {
+                window.audioProcessor.disconnect();
+                window.audioProcessor = null;
+            }
+            if (window.audioSource) {
+                window.audioSource.disconnect();
+                window.audioSource = null;
+            }
+            if (window.audioStream) {
+                window.audioStream.getTracks().forEach(track => track.stop());
+                window.audioStream = null;
+            }
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+
+            if (websocket && websocket.readyState === WebSocket.OPEN) {
+                websocket.send('end');  // Send end signal
+                websocket.close();
+            }
+
+            updateStatus('idle', 'Stopped - Click "Start Recording" to begin again');
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+        }
+
+        function updateStatus(type, message) {
+            const statusEl = document.getElementById('status');
+            statusEl.className = 'status ' + type;
+
+            if (type === 'recording') {
+                statusEl.innerHTML = '<span class="recording-indicator"></span>' + message;
+            } else {
+                statusEl.textContent = message;
+            }
+        }
+
+        function addTranscription(data) {
+            const container = document.getElementById('transcriptionContainer');
+
+            // Remove empty state if present
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+
+            // Create transcription item
+            const item = document.createElement('div');
+            item.className = 'transcription-item';
+
+            // Get speaker number and color class
+            const speakerLabel = data.speaker || 'SPEAKER_00';
+            const speakerNum = speakerLabel.replace('SPEAKER_', '');
+            const speakerClass = 'speaker-' + (parseInt(speakerNum) % 10);
+
+            const speaker = document.createElement('div');
+            speaker.className = 'speaker-badge ' + speakerClass;
+            speaker.textContent = speakerLabel;
+
+            const text = document.createElement('div');
+            text.className = 'text';
+            text.textContent = data.text || '';
+
+            // Add translation if available
+            if (data.translation && data.translation !== data.text) {
+                const translation = document.createElement('div');
+                translation.className = 'translation';
+                translation.textContent = '→ ' + data.translation;
+                item.appendChild(speaker);
+                item.appendChild(text);
+                item.appendChild(translation);
+            } else {
+                item.appendChild(speaker);
+                item.appendChild(text);
+            }
+
+            const timestamp = document.createElement('div');
+            timestamp.className = 'timestamp';
+            const time = new Date().toLocaleTimeString();
+            timestamp.textContent = time + (data.start ? ` (${data.start.toFixed(1)}s - ${data.end.toFixed(1)}s)` : '');
+            item.appendChild(timestamp);
+
+            container.appendChild(item);
+
+            // Auto-scroll to bottom
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
+</body>
+</html>
