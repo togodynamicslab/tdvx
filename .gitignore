@@ -51,7 +51,6 @@ uploads/
 
 # Models cache
 .cache/
-models/
 
 # Test results
 test_results/
