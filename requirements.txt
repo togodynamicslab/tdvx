@@ -4,6 +4,7 @@ websockets==12.0
 openai-whisper==20231117
 faster-whisper==1.0.3
 pyannote.audio==3.1.1
+huggingface_hub<0.23.0
 torch==2.1.1
 torchaudio==2.1.1
 deep-translator==1.11.4
