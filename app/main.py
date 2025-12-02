@@ -1,4 +1,8 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile, File, HTTPException, Query
+# Fix for OpenMP library conflict on Windows (must be set before importing torch)
+import os
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile, File, HTTPException, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -7,7 +11,6 @@ import numpy as np
 import json
 from datetime import datetime
 import tempfile
-import os
 from pathlib import Path
 from typing import Optional
 import time
@@ -20,6 +23,9 @@ from app.services.processor import processor
 from app.services.vad_service import vad_service
 from app.models.response import TranscriptionResponse, ErrorResponse
 from app.models.model_config import ModelType, get_all_model_configs
+from app.security.dependencies import verify_api_key, verify_api_key_for_websocket, APIKeyInfo
+from app.routers import api_keys
+from app.database.init_db import initialize_database
 
 # Configure logging
 logging.basicConfig(
@@ -49,11 +55,23 @@ static_path = Path(__file__).parent.parent / "static"
 if static_path.exists():
     app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
+# Include API key management router
+app.include_router(api_keys.router)
+
 
 @app.on_event("startup")
 async def startup_event():
     """Load models on startup"""
     logger.info("Starting up...")
+
+    # Initialize database
+    logger.info("Initializing database...")
+    try:
+        initialize_database()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {e}")
+        raise
 
     # Load default model
     logger.info(f"Default model: {settings.default_model}")
@@ -122,9 +140,9 @@ async def health():
     }
 
 
-@app.get("/models")
+@app.get("/models", dependencies=[Depends(verify_api_key)])
 async def list_models():
-    """List available transcription models"""
+    """List available transcription models (requires API key)"""
     models = get_all_model_configs()
     return {
         "default_model": settings.default_model,
@@ -142,13 +160,27 @@ async def list_models():
 
 
 @app.websocket("/transcribe/live")
-async def websocket_transcribe_live(websocket: WebSocket):
+async def websocket_transcribe_live(
+    websocket: WebSocket,
+    api_key: Optional[str] = Query(None, description="API key for authentication")
+):
     """
-    WebSocket endpoint for live transcription from browser.
+    WebSocket endpoint for live transcription from browser (requires API key).
 
     Client sends WebM/Opus audio chunks.
     Server processes and returns JSON transcription results.
+
+    Authentication: Pass api_key as query parameter (?api_key=sk_tdvx_xxx)
     """
+    # Verify API key before accepting connection
+    try:
+        key_info = verify_api_key_for_websocket(api_key)
+        logger.info(f"WebSocket authenticated: {key_info.name}")
+    except HTTPException as e:
+        await websocket.close(code=1008, reason=str(e.detail))
+        logger.warning(f"WebSocket rejected: {e.detail}")
+        return
+
     await websocket.accept()
     logger.info(f"Live transcription WebSocket connected: {websocket.client}")
 
@@ -268,20 +300,30 @@ async def websocket_transcribe_live(websocket: WebSocket):
 @app.websocket("/ws/transcribe")
 async def websocket_transcribe(
     websocket: WebSocket,
+    api_key: Optional[str] = Query(None, description="API key for authentication"),
     model: Optional[str] = Query(None, description="Model to use: 'tdv1' or 'tdv1-fast'. Uses default if not specified.")
 ):
     """
-    WebSocket endpoint for live transcription.
+    WebSocket endpoint for live transcription (requires API key).
 
     Client should send audio chunks as binary data (PCM float32, 16kHz, mono).
     Server will send back JSON transcription chunks as they're processed.
 
     Protocol:
-    - Client connects with optional ?model=tdv1 or ?model=tdv1-fast query parameter
+    - Client connects with ?api_key=sk_tdvx_xxx and optional ?model=tdv1 or ?model=tdv1-fast
     - Client sends binary audio chunks
     - Server processes and sends JSON responses
     - Client sends empty message or disconnects to end
     """
+    # Verify API key before accepting connection
+    try:
+        key_info = verify_api_key_for_websocket(api_key)
+        logger.info(f"WebSocket authenticated: {key_info.name}")
+    except HTTPException as e:
+        await websocket.close(code=1008, reason=str(e.detail))
+        logger.warning(f"WebSocket rejected: {e.detail}")
+        return
+
     await websocket.accept()
 
     # Use default model if not specified
@@ -394,13 +436,13 @@ async def websocket_transcribe(
         logger.info("WebSocket connection closed")
 
 
-@app.post("/transcribe", response_model=TranscriptionResponse)
+@app.post("/transcribe", response_model=TranscriptionResponse, dependencies=[Depends(verify_api_key)])
 async def transcribe_file(
     file: UploadFile = File(...),
     model: Optional[str] = Query(None, description="Model to use: 'tdv1' or 'tdv1-fast'. Uses default if not specified.")
 ):
     """
-    Transcribe an uploaded audio file.
+    Transcribe an uploaded audio file (requires API key).
 
     Accepts: WAV, MP3, M4A, FLAC, etc.
     Returns: Complete transcription with speaker diarization and translation

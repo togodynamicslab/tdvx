@@ -55,3 +55,10 @@ uploads/
 # Test results
 test_results/
 *.json
+
+# Database files
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+!data/.gitkeep

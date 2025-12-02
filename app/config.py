@@ -49,9 +49,21 @@ class Settings(BaseSettings):
     # Segmentation threshold: Lower = more speech segments (default varies by model)
     pyannote_segmentation_onset: float = 0.5  # Speech detection sensitivity
 
+    # API Key Authentication
+    enable_api_key_auth: bool = True  # Enable/disable API key authentication
+    master_api_key: str  # Master key for API key management endpoints
+
+    # Database
+    database_path: str = "data/tdvx.db"  # Path to SQLite database
+
+    # Rate Limiting
+    default_rate_limit_per_hour: int = 100  # Default rate limit for new API keys
+    enable_usage_logging: bool = True  # Enable detailed usage logging
+
     class Config:
         env_file = ".env"
         case_sensitive = False
+        extra = "ignore"  # Ignore extra environment variables not in the model
 
 
 settings = Settings()
