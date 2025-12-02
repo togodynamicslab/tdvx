@@ -20,7 +20,7 @@ Real-time audio transcription service with speaker diarization and bilingual tra
 
 ## Prerequisites
 
-- Python 3.10+
+- Python 3.11 or 3.12 (required - Python 3.14+ not yet supported by dependencies)
 - FFmpeg (for audio processing)
 - CUDA-capable GPU (optional, for faster processing)
 - Hugging Face account and token
@@ -60,8 +60,14 @@ brew install ffmpeg
 ### 3. Install Python Dependencies
 
 ```bash
-# Create virtual environment
-python -m venv venv
+# Create virtual environment with Python 3.11 or 3.12
+# Windows:
+py -3.11 -m venv venv
+# or: py -3.12 -m venv venv
+
+# Linux/macOS:
+python3.11 -m venv venv
+# or: python3.12 -m venv venv
 
 # Activate virtual environment
 # Windows:
@@ -69,9 +75,14 @@ venv\Scripts\activate
 # Linux/macOS:
 source venv/bin/activate
 
+# Upgrade pip and setuptools
+pip install --upgrade pip setuptools wheel
+
 # Install dependencies
 pip install -r requirements.txt
 ```
+
+**Important**: Python 3.14+ is not yet supported. If you encounter installation errors, make sure you're using Python 3.11 or 3.12.
 
 **Note**: Installing PyTorch with CUDA support (recommended for GPU):
 ```bash
@@ -97,10 +108,7 @@ cp .env.example .env
 ### Development Mode
 
 ```bash
-# With auto-reload
-python app/main.py
-
-# Or using uvicorn directly
+# Run from the project root directory with auto-reload
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
@@ -109,6 +117,8 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
+
+**Important**: Always run uvicorn from the project root directory (where `requirements.txt` is located), not from inside the `app/` folder.
 
 The API will be available at http://localhost:8000
 
@@ -229,6 +239,11 @@ app/
 
 ## Troubleshooting
 
+**"ModuleNotFoundError: No module named 'app'" error:**
+- Make sure you're running uvicorn from the project root directory
+- Don't use `python app/main.py` - use `uvicorn app.main:app` instead
+- Ensure your virtual environment is activated
+
 **"CUDA out of memory" error:**
 - Use smaller Whisper model (`base` or `small`)
 - Reduce chunk duration
@@ -237,6 +252,10 @@ app/
 **Pyannote authentication error:**
 - Check your Hugging Face token in `.env`
 - Ensure you accepted the model license
+
+**Installation errors with Python 3.14+:**
+- Use Python 3.11 or 3.12 instead
+- Many ML dependencies don't yet support Python 3.14+
 
 **Audio format errors:**
 - WebSocket expects PCM Float32, 16kHz, mono

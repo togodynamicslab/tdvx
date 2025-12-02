@@ -1,18 +1,25 @@
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 websockets==12.0
-openai-whisper==20231117
+openai-whisper>=20240930
 faster-whisper==1.0.3
-pyannote.audio==3.1.1
-huggingface_hub<0.23.0
-torch==2.1.1
-torchaudio==2.1.1
+
+# PyTorch stack - compatible versions
+torch==2.3.1
+torchaudio==2.3.1
+numpy==1.26.4
+
+# Pyannote stack - compatible versions
+pyannote.audio==3.0.1
+pyannote.core==5.0.0
+huggingface_hub==0.20.3
+
+# Other dependencies
 deep-translator==1.11.4
 python-multipart==0.0.6
 python-dotenv==1.0.0
 pydantic==2.5.0
 pydantic-settings==2.1.0
-numpy==1.24.3
 soundfile==0.12.1
 librosa==0.10.1
 webrtcvad==2.0.10
