@@ -1,0 +1,94 @@
+{
+  "session_id": "978a1fc9fc06",
+  "source": "audio.wav",
+  "original_path": null,
+  "timestamp": "2026-03-17T13:07:09.157480",
+  "language": "pt",
+  "duration": 50.1547,
+  "segments": [
+    {
+      "speaker": "Speaker Unknown SPEAKER_01",
+      "start": 0.0,
+      "end": 3.3,
+      "text": "Que ideia foi aquela daquele cabelinho que tu lançou, cara?",
+      "confidence": 0.7853
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_01",
+      "start": 3.3,
+      "end": 4.7,
+      "text": "Parecia o cascão, cara.",
+      "confidence": 0.7853
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 4.7,
+      "end": 14.0,
+      "text": "O que aconteceu na verdade foi que na semifinal tava sentindo umas dores no adutor direito.",
+      "confidence": 0.7853
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 14.0,
+      "end": 18.8,
+      "text": "E ainda na véspera eu tinha o costume de raspar a cabeça sempre.",
+      "confidence": 0.7853
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_03",
+      "start": 18.8,
+      "end": 26.4,
+      "text": "Eu raspei e tal, chegou aqui na pontinha, eu deixei aqui, a galera tava no corredor zoando e tal, parei sair lá.",
+      "confidence": 0.7853
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_05",
+      "start": 26.6,
+      "end": 27.4,
+      "text": "Fui zoar, né?",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 27.4,
+      "end": 29.2,
+      "text": "Pô, é, cascão, vou assim...",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 29.2,
+      "end": 34.4,
+      "text": "Tavam se falando muito da minha lesão, possibilidade de não jogar, que não sei o quê.",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 34.4,
+      "end": 36.2,
+      "text": "E a notícia virou o cabelo.",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 36.2,
+      "end": 40.8,
+      "text": "A notícia virou o cabelo, ninguém falou mais nada da minha lesão no adutor.",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 40.8,
+      "end": 45.8,
+      "text": "Tratamos, fui pro jogo sem poder chutar de chapa, né?",
+      "confidence": 0.8138
+    },
+    {
+      "speaker": "Speaker Unknown SPEAKER_04",
+      "start": 45.8,
+      "end": 50.1,
+      "text": "O cabelo chamou muita atenção, porque eu também não joguei porra nenhuma na semifinal.",
+      "confidence": 0.8138
+    }
+  ]
+}
