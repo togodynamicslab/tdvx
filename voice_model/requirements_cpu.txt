@@ -1,0 +1,42 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# requirements_cpu.txt  —  STT Pipeline (CPU only)
+#
+# ATENÇÃO: PyTorch CPU-only NÃO deve ser instalado por este arquivo.
+#          O setup_cpu.bat / setup_cpu.sh já instala torch com o index URL correto.
+#          Se instalar manualmente:
+#
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# Depois:
+#   pip install -r requirements_cpu.txt
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Core STT — CTranslate2 backend (inclui ctranslate2 automaticamente)
+faster-whisper>=1.0.3
+
+# Speaker diarization + embedding
+# 3.3+ é compatível com torchaudio 2.1+ e huggingface_hub >= 0.22
+pyannote.audio>=3.3,<4.0
+
+# huggingface_hub — sem restrição de versão com pyannote 3.3+
+huggingface_hub>=0.22.0
+
+# Distância cosine para speaker re-ID
+scipy>=1.11.0
+
+# speechbrain — versão instalada pelo pyannote pode ter compat issues com torchaudio 2.1+
+# Forçar upgrade garante a versão que trata ausência de list_audio_backends
+speechbrain>=1.0.2
+
+# Operações numéricas — numpy 2.0 ainda quebra speechbrain internamente
+numpy>=1.24.0,<2.0
+
+# Leitura de variáveis de ambiente (.env)
+python-dotenv>=1.0.0
+
+# Informações de memória RAM (opcional — usado em stt_cpu.py)
+psutil>=5.9.0
+
+# Gravação de microfone (usado em record_mic.py)
+sounddevice>=0.4.6
+soundfile>=0.12.0

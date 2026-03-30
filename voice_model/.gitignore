@@ -1,0 +1,29 @@
+# Ambiente virtual
+venv_gpu/
+venv_cpu/
+.venv/
+env/
+
+# Modelos locais (não versionar — muito grandes)
+models/
+
+# Variáveis de ambiente — NUNCA commitar
+.env
+
+# Saídas do pipeline e gravações
+*.json
+*.wav
+*.mp3
+*.flac
+*.ogg
+!.gitignore
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Cache HuggingFace / torch
+*.pt
+*.bin
+*.safetensors
