@@ -48,10 +48,13 @@ _indexer: Optional[SpeakerIndexer] = None
 def _get_stt() -> STTEngine:
     global _stt
     if _stt is None:
-        _stt = STTEngine(
+        kwargs = dict(
             model_size=settings.whisper_model,
             cpu_threads=settings.cpu_threads,
         )
+        if settings.whisper_compute_type:
+            kwargs["compute_type"] = settings.whisper_compute_type
+        _stt = STTEngine(**kwargs)
     return _stt
 
 

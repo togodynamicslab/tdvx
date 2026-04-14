@@ -377,15 +377,23 @@ class DiarizationEngine:
         return turns
 
     def embed_segment(self, waveform: dict, start: float, end: float) -> np.ndarray:
-        audio = waveform["waveform"].squeeze(0).detach().cpu().numpy()
+        tensor = waveform["waveform"]          # (1, T) torch.Tensor
         sample_rate = int(waveform["sample_rate"])
-        n = len(audio)
+        n = tensor.shape[1]
 
         s = max(0, min(int(start * sample_rate), n))
-        e = max(s + 1, min(int(end * sample_rate), n))
-        chunk = audio[s:e]
+        e = max(s + 1, min(int(end   * sample_rate), n))
 
-        emb = self.inference(chunk)
+        # pyannote requer mínimo de 500 ms para embeddings estáveis
+        min_len = int(0.5 * sample_rate)
+        if (e - s) < min_len:
+            e = min(s + min_len, n)
+
+        chunk = tensor[:, s:e]  # (1, T_chunk) — mantém formato tensor
+
+        # pyannote Inference espera dict {"waveform": (1,T) tensor, "sample_rate": int}
+        audio_input = {"waveform": chunk, "sample_rate": sample_rate}
+        emb = self.inference(audio_input)
         emb = np.asarray(emb, dtype=np.float32).reshape(-1)
         norm = np.linalg.norm(emb)
         return emb / norm if norm > 1e-10 else emb

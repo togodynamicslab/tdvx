@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# setup_gpu.sh — STT Pipeline: ambiente GPU (Linux)
+# setup_cpu.sh — STT Pipeline: ambiente CPU (Linux)
 set -e
 
 echo ""
 echo " ╔══════════════════════════════════════════════════╗"
-echo " ║    STT Pipeline — Ambiente GPU  (CUDA 12.8)      ║"
-echo " ║    Quantizacao: int8_float16                     ║"
+echo " ║    STT Pipeline — Ambiente CPU (sem GPU)         ║"
+echo " ║    Quantizacao: int8  (~4x menos RAM)            ║"
 echo " ╚══════════════════════════════════════════════════╝"
 echo ""
 
@@ -16,49 +16,43 @@ if ! command -v python3 &>/dev/null; then
     exit 1
 fi
 echo "[OK] $(python3 --version)"
-
-if command -v nvidia-smi &>/dev/null; then
-    echo "[OK] GPU: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
-    echo "[OK] VRAM: $(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits) MB"
-else
-    echo "[AVISO] nvidia-smi nao encontrado — verifique drivers NVIDIA"
-fi
+echo "[OK] CPUs: $(nproc) nucleos"
 echo ""
 
 # ── Criar venv ────────────────────────────────────────────────────────────────
 
-echo "[1/5] Criando ambiente virtual: venv_gpu"
-if [ -d "venv_gpu" ]; then
-    echo "      venv_gpu ja existe — reutilizando"
+echo "[1/5] Criando ambiente virtual: venv_cpu"
+if [ -d "venv_cpu" ]; then
+    echo "      venv_cpu ja existe — reutilizando"
 else
-    python3 -m venv venv_gpu
+    python3 -m venv venv_cpu
 fi
 
 # ── Ativar venv ───────────────────────────────────────────────────────────────
 
-echo "[2/5] Ativando venv_gpu"
-source venv_gpu/bin/activate
+echo "[2/5] Ativando venv_cpu"
+source venv_cpu/bin/activate
 
 # ── pip ───────────────────────────────────────────────────────────────────────
 
 echo "[3/5] Atualizando pip"
 pip install --upgrade pip setuptools wheel -q
 
-# ── PyTorch CUDA ──────────────────────────────────────────────────────────────
+# ── PyTorch CPU-only ──────────────────────────────────────────────────────────
 
-echo "[4/5] Instalando PyTorch 2.x com CUDA 12.8 (~2.5 GB — aguarde...)"
-pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128 -q
+echo "[4/5] Instalando PyTorch CPU-only (~200 MB — rapido)"
+pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu -q
 
 # ── Demais dependências ───────────────────────────────────────────────────────
 
 echo "[5/5] Instalando dependencias do pipeline"
-pip install -r requirements_gpu.txt -q
+pip install -r requirements.txt -q
 
 # ── Verificação final ─────────────────────────────────────────────────────────
 
 echo ""
 echo " Verificando instalacao..."
-python -c "import torch; print('  PyTorch :', torch.__version__); print('  CUDA OK :', torch.cuda.is_available())" 2>/dev/null
+python -c "import torch; print('  PyTorch :', torch.__version__); print('  Threads :', torch.get_num_threads())" 2>/dev/null
 python -c "from faster_whisper import WhisperModel; print('  faster-whisper: OK')" 2>/dev/null
 python -c "from pyannote.audio import Pipeline; print('  pyannote.audio: OK')" 2>/dev/null
 
@@ -67,7 +61,7 @@ echo " ╔═══════════════════════�
 echo " ║   Setup concluido!                               ║"
 echo " ║                                                  ║"
 echo " ║   Para usar:                                     ║"
-echo " ║     source venv_gpu/bin/activate                 ║"
-echo " ║     python stt_gpu.py seu_audio.wav              ║"
+echo " ║     source venv_cpu/bin/activate                 ║"
+echo " ║     python voice_model/stt_cpu.py audio.wav      ║"
 echo " ╚══════════════════════════════════════════════════╝"
 echo ""

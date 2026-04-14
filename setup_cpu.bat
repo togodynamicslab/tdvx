@@ -68,9 +68,9 @@ echo       PyTorch CPU instalado com sucesso
 :: ── Demais dependências ──────────────────────────────────────────────────────
 
 echo [5/5] Instalando dependencias do pipeline
-pip install -r requirements_cpu.txt --quiet
+pip install -r requirements.txt --quiet
 if errorlevel 1 (
-    echo [ERRO] Falha ao instalar requirements_cpu.txt
+    echo [ERRO] Falha ao instalar requirements.txt
     pause & exit /b 1
 )
 
@@ -88,9 +88,9 @@ echo  ║   Setup concluido com sucesso!                   ║
 echo  ║                                                  ║
 echo  ║   Para usar:                                     ║
 echo  ║     venv_cpu\Scripts\activate.bat                ║
-echo  ║     python stt_cpu.py seu_audio.wav              ║
+echo  ║     python voice_model\stt_cpu.py audio.wav      ║
 echo  ║                                                  ║
-echo  ║   O token HF ja esta configurado em .env         ║
+echo  ║   Configure HF_TOKEN no .env da raiz             ║
 echo  ╚══════════════════════════════════════════════════╝
 echo.
 pause

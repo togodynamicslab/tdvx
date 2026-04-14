@@ -65,12 +65,12 @@ async def stream_audio_file(audio_path: str, ws_url: str = "ws://localhost:8000/
                         result = json.loads(response)
 
                         if 'error' in result:
-                            print(f"\n❌ Error: {result['error']}")
-                        else:
+                            print(f"\nError: {result['error']}")
+                        elif 'segment' in result:
                             segment = result['segment']
+                            lang = result.get('original_language', '??').upper()
                             print(f"\n[{segment['speaker']}] {segment['start']:.2f}s - {segment['end']:.2f}s")
-                            print(f"  {result['original_language'].upper()}: {segment['text']}")
-                            print(f"  {result['target_language'].upper()}: {segment['translation']}")
+                            print(f"  {lang}: {segment['text']}")
 
                 except asyncio.TimeoutError:
                     pass  # No response yet
@@ -82,7 +82,7 @@ async def stream_audio_file(audio_path: str, ws_url: str = "ws://localhost:8000/
                 # Small delay to simulate real-time
                 await asyncio.sleep(0.1)
 
-            # Send empty buffer to signal end
+            # Send empty bytes to signal end of stream
             print("\n\nSending end signal...")
             await websocket.send(b'')
 
@@ -94,12 +94,12 @@ async def stream_audio_file(audio_path: str, ws_url: str = "ws://localhost:8000/
                     result = json.loads(response)
 
                     if 'error' in result:
-                        print(f"\n❌ Error: {result['error']}")
-                    else:
+                        print(f"\nError: {result['error']}")
+                    elif 'segment' in result:
                         segment = result['segment']
+                        lang = result.get('original_language', '??').upper()
                         print(f"\n[{segment['speaker']}] {segment['start']:.2f}s - {segment['end']:.2f}s")
-                        print(f"  {result['original_language'].upper()}: {segment['text']}")
-                        print(f"  {result['target_language'].upper()}: {segment['translation']}")
+                        print(f"  {lang}: {segment['text']}")
 
             except asyncio.TimeoutError:
                 print("\nDone!")

@@ -1,51 +1,47 @@
-# Use NVIDIA CUDA base image for GPU support on Vast AI
-FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+# TDvX v3 — Transcrição + Diarização + Finetuning Dataset
+# Base: NVIDIA CUDA 12.8 + cuDNN 9 + Ubuntu 22.04
+FROM nvidia/cuda:12.8.0-cudnn9-runtime-ubuntu22.04
 
-# Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    HF_HUB_DISABLE_TELEMETRY=1 \
+    PYANNOTE_AUDIO_TELEMETRY=0
 
-# Install system dependencies
+# Dependências do sistema
 RUN apt-get update && apt-get install -y \
-    python3.10 \
+    python3.11 \
     python3-pip \
+    python3.11-dev \
     ffmpeg \
     git \
     curl \
+    && ln -sf /usr/bin/python3.11 /usr/bin/python3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements file
-COPY requirements.txt .
+# PyTorch CUDA 12.8 — instala antes do requirements.txt
+RUN pip3 install --no-cache-dir \
+    torch torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128
 
-# Install Python dependencies
+# Restante das dependências
+COPY ../requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Código da aplicação (apenas tdvx/)
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p temp uploads test_results
+# Diretórios de dados
+RUN mkdir -p finetuning_data/audio finetuning_data/labels
 
-# Expose port
 EXPOSE 8000
 
-# Set environment variables for the application
-# Note: PYANNOTE_AUTH_TOKEN should be passed at runtime via --env flag
-ENV HOST=0.0.0.0 \
-    PORT=8000 \
-    DEFAULT_MODEL=tdv1-fast \
-    ENABLE_DIARIZATION=true
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=15s --start-period=120s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-# Run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# PYANNOTE_AUTH_TOKEN deve ser passado em runtime: --env PYANNOTE_AUTH_TOKEN=hf_xxx
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

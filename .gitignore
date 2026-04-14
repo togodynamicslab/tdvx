@@ -1,0 +1,72 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .gitignore — raiz do projeto voice_model
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Ambientes virtuais ────────────────────────────────────────────────────────
+venv/
+venv_cpu/
+venv_gpu/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Variáveis de ambiente — NUNCA commitar ────────────────────────────────────
+.env
+
+# ── Modelos locais (muito grandes para versionar) ─────────────────────────────
+models/
+.cache/
+*.pt
+*.bin
+*.safetensors
+
+# ── Saídas do pipeline e gravações ───────────────────────────────────────────
+*.json
+*.wav
+*.mp3
+*.flac
+*.ogg
+!.gitignore
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyo
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ── Uploads e temporários ─────────────────────────────────────────────────────
+temp/
+uploads/
+test_results/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.jsonl
+finetuning_data/

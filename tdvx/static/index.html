@@ -368,8 +368,9 @@
       </div>
 
       <div class="nav-links">
-        <a href="/" class="active">Live Transcription</a>
+        <a href="/live" class="active">Live Transcription</a>
         <a href="/upload.html">File Upload</a>
+        <a href="/finetuning/stats" target="_blank">Dataset Stats</a>
       </div>
 
       <div class="content">
@@ -535,7 +536,7 @@
         }
 
         if (websocket && websocket.readyState === WebSocket.OPEN) {
-          websocket.send("end"); // Send end signal
+          websocket.send(new ArrayBuffer(0)); // sinaliza fim de stream (bytes vazio)
           websocket.close();
         }
 

@@ -1,134 +1,110 @@
 """
-Setup script to verify environment and download models
+setup.py — Verifica prerequisitos do TDvX v3.
+
+Uso:
+    python setup.py          (rode de dentro de tdvx/)
 """
 import os
 import sys
+import subprocess
+from pathlib import Path
+
+# .env esta na raiz do repo (um nivel acima de tdvx/)
+_ROOT_ENV = Path(__file__).parent.parent / ".env"
 
 
-def check_python_version():
-    """Check Python version"""
-    version = sys.version_info
-    if version.major < 3 or (version.major == 3 and version.minor < 10):
-        print("❌ Python 3.10+ required")
-        print(f"   Current version: {version.major}.{version.minor}.{version.micro}")
-        return False
-    print(f"✅ Python version: {version.major}.{version.minor}.{version.micro}")
-    return True
+def check_python():
+    v = sys.version_info
+    ok = v.major == 3 and v.minor >= 10
+    print(f"  {'OK' if ok else 'ERRO'} Python {v.major}.{v.minor}.{v.micro} {'(requer 3.10+)' if not ok else ''}")
+    return ok
 
 
-def check_env_file():
-    """Check if .env file exists"""
-    if not os.path.exists('.env'):
-        print("⚠️  .env file not found")
-        print("   Creating from .env.example...")
-        if os.path.exists('.env.example'):
-            with open('.env.example', 'r') as src:
-                content = src.read()
-            with open('.env', 'w') as dst:
-                dst.write(content)
-            print("✅ .env file created")
-            print("   ⚠️  Please edit .env and add your PYANNOTE_AUTH_TOKEN")
-            return False
-        else:
-            print("❌ .env.example not found")
-            return False
-    print("✅ .env file exists")
-    return True
-
-
-def check_token():
-    """Check if Pyannote token is configured"""
-    try:
-        from dotenv import load_dotenv
-        load_dotenv()
-        token = os.getenv('PYANNOTE_AUTH_TOKEN')
-        if not token or token == 'your_huggingface_token_here':
-            print("⚠️  PYANNOTE_AUTH_TOKEN not configured in .env")
-            print("   Get your token from: https://huggingface.co/settings/tokens")
-            print("   Accept model license: https://huggingface.co/pyannote/speaker-diarization-3.1")
-            return False
-        print("✅ Pyannote token configured")
-        return True
-    except ImportError:
-        print("⚠️  python-dotenv not installed yet")
-        return True  # Will be installed with requirements
-
-
-def check_ffmpeg():
-    """Check if FFmpeg is installed"""
-    import subprocess
-    try:
-        result = subprocess.run(
-            ['ffmpeg', '-version'],
-            capture_output=True,
-            timeout=5
-        )
-        if result.returncode == 0:
-            print("✅ FFmpeg installed")
+def check_env():
+    if _ROOT_ENV.exists():
+        token = None
+        for line in _ROOT_ENV.read_text(encoding="utf-8").splitlines():
+            if line.startswith("PYANNOTE_AUTH_TOKEN="):
+                token = line.split("=", 1)[1].strip()
+        if token and token not in ("", "your_huggingface_token_here"):
+            print(f"  OK  .env encontrado com token configurado ({_ROOT_ENV})")
             return True
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        pass
-
-    print("⚠️  FFmpeg not found")
-    print("   Install with: choco install ffmpeg (Windows)")
-    print("   Or visit: https://ffmpeg.org/download.html")
+        print(f"  AVISO  .env encontrado mas PYANNOTE_AUTH_TOKEN nao configurado")
+        print(f"         Edite: {_ROOT_ENV}")
+        return False
+    print(f"  ERRO  .env nao encontrado em {_ROOT_ENV}")
+    print(f"        Execute: cp ../.env.example ../.env  e configure o token")
     return False
 
 
+def check_ffmpeg():
+    try:
+        r = subprocess.run(["ffmpeg", "-version"], capture_output=True, timeout=5)
+        ok = r.returncode == 0
+        print(f"  {'OK' if ok else 'ERRO'} FFmpeg {'encontrado' if ok else 'nao encontrado'}")
+        if not ok:
+            print("       Instale: winget install ffmpeg")
+        return ok
+    except FileNotFoundError:
+        print("  ERRO  FFmpeg nao encontrado — instale: winget install ffmpeg")
+        return False
+
+
 def check_torch():
-    """Check PyTorch and CUDA availability"""
     try:
         import torch
-        print(f"✅ PyTorch installed: {torch.__version__}")
-
-        if torch.cuda.is_available():
-            print(f"✅ CUDA available: {torch.cuda.get_device_name(0)}")
-            print(f"   CUDA version: {torch.version.cuda}")
-        else:
-            print("⚠️  CUDA not available (CPU mode)")
-            print("   For GPU support, install CUDA-enabled PyTorch:")
-            print("   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu118")
+        cuda = torch.cuda.is_available()
+        gpu = torch.cuda.get_device_name(0) if cuda else "nenhuma"
+        print(f"  OK  PyTorch {torch.__version__} | CUDA: {'sim' if cuda else 'nao'} | GPU: {gpu}")
         return True
     except ImportError:
-        print("⚠️  PyTorch not installed yet")
-        return True  # Will be installed with requirements
+        print("  ERRO  PyTorch nao instalado")
+        print("        Execute: pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128")
+        return False
+
+
+def check_deps():
+    deps = ["faster_whisper", "pyannote.audio", "fastapi", "uvicorn", "webrtcvad", "soundfile", "librosa"]
+    all_ok = True
+    for dep in deps:
+        try:
+            __import__(dep)
+            print(f"  OK  {dep}")
+        except ImportError:
+            print(f"  MISS {dep}")
+            all_ok = False
+    if not all_ok:
+        print("\n  Execute: pip install -r ../requirements.txt")
+    return all_ok
 
 
 def main():
     print("=" * 60)
-    print("Live Transcription API - Setup Verification")
+    print("  TDvX v3 — Verificacao de prerequisitos")
     print("=" * 60)
-    print()
 
     checks = [
-        ("Python Version", check_python_version),
-        ("Environment File", check_env_file),
-        ("FFmpeg", check_ffmpeg),
-        ("PyTorch", check_torch),
-        ("Pyannote Token", check_token),
+        ("Python 3.10+",  check_python),
+        ("Arquivo .env",  check_env),
+        ("FFmpeg",        check_ffmpeg),
+        ("PyTorch/CUDA",  check_torch),
+        ("Dependencias",  check_deps),
     ]
 
     results = []
-    for name, check_func in checks:
-        print(f"Checking {name}...")
-        results.append(check_func())
-        print()
+    for name, fn in checks:
+        print(f"\n{name}:")
+        results.append(fn())
 
-    print("=" * 60)
+    print("\n" + "=" * 60)
     if all(results):
-        print("✅ All checks passed! You're ready to go!")
+        print("  Tudo OK! Para subir o servidor:")
         print()
-        print("Next steps:")
-        print("1. Run: python app/main.py")
-        print("2. Open: test_client.html in your browser")
+        print("    venv_gpu\\Scripts\\activate.bat   (Windows)")
+        print("    cd tdvx")
+        print("    uvicorn app.main:app --host 0.0.0.0 --port 8000")
     else:
-        print("⚠️  Some checks failed. Please review the messages above.")
-        print()
-        print("Common next steps:")
-        print("1. pip install -r requirements.txt")
-        print("2. Edit .env and add your PYANNOTE_AUTH_TOKEN")
-        print("3. Install FFmpeg if needed")
-
+        print("  Alguns checks falharam. Revise as mensagens acima.")
     print("=" * 60)
 
 
