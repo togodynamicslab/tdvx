@@ -1,0 +1,335 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-c1fe-7dc1-9f21-28f5a6ab19a3",
+    "sha256": "61afe1aa7ac667b293e35fe6cd4e83c3a379e0d620746f51949115ff8e01f391",
+    "created": "2026-04-19T18:19:08.559Z",
+    "duration": 4.7281876,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Hoje eu vou te mostrar 30 mods incríveis que vão mudar completamente seu GTA 5.",
+            "confidence": 0.99316406,
+            "words": [
+              {
+                "word": "hoje",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.85253906,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Hoje"
+              },
+              {
+                "word": "eu",
+                "start": 0.24,
+                "end": 0.39999998,
+                "confidence": 0.9790039,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "eu"
+              },
+              {
+                "word": "vou",
+                "start": 0.39999998,
+                "end": 0.56,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vou"
+              },
+              {
+                "word": "te",
+                "start": 0.56,
+                "end": 0.64,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "te"
+              },
+              {
+                "word": "mostrar",
+                "start": 0.64,
+                "end": 0.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mostrar"
+              },
+              {
+                "word": "30",
+                "start": 0.96,
+                "end": 1.28,
+                "confidence": 0.9819336,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "30"
+              },
+              {
+                "word": "mods",
+                "start": 1.28,
+                "end": 1.68,
+                "confidence": 0.9868164,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mods"
+              },
+              {
+                "word": "incríveis",
+                "start": 1.68,
+                "end": 2.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "incríveis"
+              },
+              {
+                "word": "que",
+                "start": 2.08,
+                "end": 2.24,
+                "confidence": 0.9892578,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "vão",
+                "start": 2.24,
+                "end": 2.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vão"
+              },
+              {
+                "word": "mudar",
+                "start": 2.48,
+                "end": 2.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mudar"
+              },
+              {
+                "word": "completamente",
+                "start": 2.72,
+                "end": 3.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "completamente"
+              },
+              {
+                "word": "seu",
+                "start": 3.28,
+                "end": 3.6,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "seu"
+              },
+              {
+                "word": "gta",
+                "start": 3.6,
+                "end": 4.08,
+                "confidence": 0.82373047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "GTA"
+              },
+              {
+                "word": "5",
+                "start": 4.08,
+                "end": 4.4,
+                "confidence": 0.8239746,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "5."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Hoje eu vou te mostrar 30 mods incríveis que vão mudar completamente seu GTA 5.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Hoje eu vou te mostrar 30 mods incríveis que vão mudar completamente seu GTA 5.",
+                      "start": 0.0,
+                      "end": 4.4
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 15,
+                  "start": 0.0,
+                  "end": 4.4
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 4.4,
+        "confidence": 0.96150714,
+        "channel": 0,
+        "transcript": "Hoje eu vou te mostrar 30 mods incríveis que vão mudar completamente seu GTA 5.",
+        "words": [
+          {
+            "word": "hoje",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.85253906,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Hoje"
+          },
+          {
+            "word": "eu",
+            "start": 0.24,
+            "end": 0.39999998,
+            "confidence": 0.9790039,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "eu"
+          },
+          {
+            "word": "vou",
+            "start": 0.39999998,
+            "end": 0.56,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vou"
+          },
+          {
+            "word": "te",
+            "start": 0.56,
+            "end": 0.64,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "te"
+          },
+          {
+            "word": "mostrar",
+            "start": 0.64,
+            "end": 0.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mostrar"
+          },
+          {
+            "word": "30",
+            "start": 0.96,
+            "end": 1.28,
+            "confidence": 0.9819336,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "30"
+          },
+          {
+            "word": "mods",
+            "start": 1.28,
+            "end": 1.68,
+            "confidence": 0.9868164,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mods"
+          },
+          {
+            "word": "incríveis",
+            "start": 1.68,
+            "end": 2.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "incríveis"
+          },
+          {
+            "word": "que",
+            "start": 2.08,
+            "end": 2.24,
+            "confidence": 0.9892578,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "vão",
+            "start": 2.24,
+            "end": 2.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vão"
+          },
+          {
+            "word": "mudar",
+            "start": 2.48,
+            "end": 2.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mudar"
+          },
+          {
+            "word": "completamente",
+            "start": 2.72,
+            "end": 3.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "completamente"
+          },
+          {
+            "word": "seu",
+            "start": 3.28,
+            "end": 3.6,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "seu"
+          },
+          {
+            "word": "gta",
+            "start": 3.6,
+            "end": 4.08,
+            "confidence": 0.82373047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "GTA"
+          },
+          {
+            "word": "5",
+            "start": 4.08,
+            "end": 4.4,
+            "confidence": 0.8239746,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "5."
+          }
+        ],
+        "speaker": 0,
+        "id": "786874ab-4dd1-45eb-a405-574a258e903e"
+      }
+    ]
+  }
+}

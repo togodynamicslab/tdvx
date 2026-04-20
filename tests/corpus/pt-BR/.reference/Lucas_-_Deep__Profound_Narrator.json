@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-c7a6-70b0-8609-e608a09fba7f",
+    "sha256": "a3d7fb6c9980487f176f426e3aec0769821025a06b84ad1b0eb8ee204c86cfab",
+    "created": "2026-04-19T18:19:10.119Z",
+    "duration": 10.39675,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Homens, corajosos, heróis esquecidos no tempo, sombras do passado, cada memória era lentamente revivida dentro do coração daquele jovem guerreiro.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "homens",
+                "start": 0.08,
+                "end": 0.71999997,
+                "confidence": 0.9157715,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Homens,"
+              },
+              {
+                "word": "corajosos",
+                "start": 0.71999997,
+                "end": 1.6800001,
+                "confidence": 0.9983724,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "corajosos,"
+              },
+              {
+                "word": "heróis",
+                "start": 1.76,
+                "end": 2.24,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "heróis"
+              },
+              {
+                "word": "esquecidos",
+                "start": 2.24,
+                "end": 2.8,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "esquecidos"
+              },
+              {
+                "word": "no",
+                "start": 2.8,
+                "end": 3.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "no"
+              },
+              {
+                "word": "tempo",
+                "start": 3.12,
+                "end": 3.7599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tempo,"
+              },
+              {
+                "word": "sombras",
+                "start": 3.76,
+                "end": 4.16,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sombras"
+              },
+              {
+                "word": "do",
+                "start": 4.16,
+                "end": 4.4,
+                "confidence": 0.9902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "passado",
+                "start": 4.4,
+                "end": 5.12,
+                "confidence": 0.79248047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "passado,"
+              },
+              {
+                "word": "cada",
+                "start": 5.12,
+                "end": 5.44,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "cada"
+              },
+              {
+                "word": "memória",
+                "start": 5.44,
+                "end": 6.0,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "memória"
+              },
+              {
+                "word": "era",
+                "start": 6.0,
+                "end": 6.3199997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "era"
+              },
+              {
+                "word": "lentamente",
+                "start": 6.3199997,
+                "end": 7.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "lentamente"
+              },
+              {
+                "word": "revivida",
+                "start": 7.04,
+                "end": 7.52,
+                "confidence": 0.9947917,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "revivida"
+              },
+              {
+                "word": "dentro",
+                "start": 7.52,
+                "end": 7.9199996,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "dentro"
+              },
+              {
+                "word": "do",
+                "start": 7.9199996,
+                "end": 8.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "coração",
+                "start": 8.16,
+                "end": 8.559999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "coração"
+              },
+              {
+                "word": "daquele",
+                "start": 8.559999,
+                "end": 9.04,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "daquele"
+              },
+              {
+                "word": "jovem",
+                "start": 9.04,
+                "end": 9.5199995,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "jovem"
+              },
+              {
+                "word": "guerreiro",
+                "start": 9.5199995,
+                "end": 10.0,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "guerreiro."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Homens, corajosos, heróis esquecidos no tempo, sombras do passado, cada memória era lentamente revivida dentro do coração daquele jovem guerreiro.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Homens, corajosos, heróis esquecidos no tempo, sombras do passado, cada memória era lentamente revivida dentro do coração daquele jovem guerreiro.",
+                      "start": 0.08,
+                      "end": 10.0
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 20,
+                  "start": 0.08,
+                  "end": 10.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.08,
+        "end": 1.6800001,
+        "confidence": 0.9570719,
+        "channel": 0,
+        "transcript": "Homens, corajosos,",
+        "words": [
+          {
+            "word": "homens",
+            "start": 0.08,
+            "end": 0.71999997,
+            "confidence": 0.9157715,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Homens,"
+          },
+          {
+            "word": "corajosos",
+            "start": 0.71999997,
+            "end": 1.6800001,
+            "confidence": 0.9983724,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "corajosos,"
+          }
+        ],
+        "speaker": 0,
+        "id": "9c741dd0-ea22-41ee-bc8a-b53d406566bc"
+      },
+      {
+        "start": 1.76,
+        "end": 10.0,
+        "confidence": 0.9870968,
+        "channel": 0,
+        "transcript": "heróis esquecidos no tempo, sombras do passado, cada memória era lentamente revivida dentro do coração daquele jovem guerreiro.",
+        "words": [
+          {
+            "word": "heróis",
+            "start": 1.76,
+            "end": 2.24,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "heróis"
+          },
+          {
+            "word": "esquecidos",
+            "start": 2.24,
+            "end": 2.8,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "esquecidos"
+          },
+          {
+            "word": "no",
+            "start": 2.8,
+            "end": 3.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "no"
+          },
+          {
+            "word": "tempo",
+            "start": 3.12,
+            "end": 3.7599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tempo,"
+          },
+          {
+            "word": "sombras",
+            "start": 3.76,
+            "end": 4.16,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sombras"
+          },
+          {
+            "word": "do",
+            "start": 4.16,
+            "end": 4.4,
+            "confidence": 0.9902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "passado",
+            "start": 4.4,
+            "end": 5.12,
+            "confidence": 0.79248047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "passado,"
+          },
+          {
+            "word": "cada",
+            "start": 5.12,
+            "end": 5.44,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "cada"
+          },
+          {
+            "word": "memória",
+            "start": 5.44,
+            "end": 6.0,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "memória"
+          },
+          {
+            "word": "era",
+            "start": 6.0,
+            "end": 6.3199997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "era"
+          },
+          {
+            "word": "lentamente",
+            "start": 6.3199997,
+            "end": 7.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "lentamente"
+          },
+          {
+            "word": "revivida",
+            "start": 7.04,
+            "end": 7.52,
+            "confidence": 0.9947917,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "revivida"
+          },
+          {
+            "word": "dentro",
+            "start": 7.52,
+            "end": 7.9199996,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "dentro"
+          },
+          {
+            "word": "do",
+            "start": 7.9199996,
+            "end": 8.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "coração",
+            "start": 8.16,
+            "end": 8.559999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "coração"
+          },
+          {
+            "word": "daquele",
+            "start": 8.559999,
+            "end": 9.04,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "daquele"
+          },
+          {
+            "word": "jovem",
+            "start": 9.04,
+            "end": 9.5199995,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "jovem"
+          },
+          {
+            "word": "guerreiro",
+            "start": 9.5199995,
+            "end": 10.0,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "guerreiro."
+          }
+        ],
+        "speaker": 0,
+        "id": "8b9d91eb-2cf3-48dd-b1cc-d4596b5a1649"
+      }
+    ]
+  }
+}

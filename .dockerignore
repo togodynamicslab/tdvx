@@ -1,4 +1,3 @@
-# Git
 .git
 .gitignore
 .gitattributes
@@ -12,14 +11,18 @@ __pycache__/
 
 # Virtual Environment
 venv/
+venv_gpu/
+venv_cpu/
 env/
 ENV/
 env.bak/
 venv.bak/
 
-# Environment variables (will be passed at runtime)
+# Secrets / local-only
 .env
-.env.local
+.env.*
+!.env.example
+.vastai_instance
 
 # IDE
 .vscode/
@@ -32,31 +35,30 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# Temporary files
+# Runtime data — never bake into image
 temp/
 uploads/
+test_results/
+*.log
 *.wav
 *.mp3
 *.m4a
+*.flac
 
-# Models cache (will be downloaded on first run)
-.cache/
+# Big dirs unrelated to the server
+distillation/
 models/
+scripts/
+tests/
 
-# Test results
-test_results/
-*.json
+# Stray model weights / datasets
+*.pt
+*.bin
+*.safetensors
+*.jsonl
 
-# Documentation
-README.md
-CLAUDE.md
+# Docs + docker meta (not needed at runtime)
 *.md
-
-# Docker
 Dockerfile
 docker-compose.yml
 .dockerignore
-
-# Test files
-test_*.py
-tests/

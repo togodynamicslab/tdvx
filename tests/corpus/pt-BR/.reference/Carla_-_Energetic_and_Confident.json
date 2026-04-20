@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-83e5-7c12-877f-e42f9c3d85ae",
+    "sha256": "b42f6478e4cccd59a67d272f21cb16c752d1d3a919db50a4793ffd6d8477b02c",
+    "created": "2026-04-19T18:18:52.640Z",
+    "duration": 8.071875,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Sou médica especializada em medicina funcional, e depois de anos tratando pacientes com dificuldades para dormir, eu descobri 1 planta.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "sou",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.6196289,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "Sou"
+              },
+              {
+                "word": "médica",
+                "start": 0.24,
+                "end": 0.56,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "médica"
+              },
+              {
+                "word": "especializada",
+                "start": 0.56,
+                "end": 1.12,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "especializada"
+              },
+              {
+                "word": "em",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "medicina",
+                "start": 1.36,
+                "end": 1.68,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "medicina"
+              },
+              {
+                "word": "funcional",
+                "start": 1.68,
+                "end": 2.4799998,
+                "confidence": 0.78881836,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "funcional,"
+              },
+              {
+                "word": "e",
+                "start": 2.48,
+                "end": 2.8,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "depois",
+                "start": 2.8,
+                "end": 3.12,
+                "confidence": 0.9863281,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "depois"
+              },
+              {
+                "word": "de",
+                "start": 3.12,
+                "end": 3.28,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "anos",
+                "start": 3.28,
+                "end": 3.6799998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "anos"
+              },
+              {
+                "word": "tratando",
+                "start": 3.6799998,
+                "end": 4.16,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "tratando"
+              },
+              {
+                "word": "pacientes",
+                "start": 4.16,
+                "end": 4.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "pacientes"
+              },
+              {
+                "word": "com",
+                "start": 4.72,
+                "end": 4.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "dificuldades",
+                "start": 4.96,
+                "end": 5.44,
+                "confidence": 0.9589844,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "dificuldades"
+              },
+              {
+                "word": "para",
+                "start": 5.44,
+                "end": 5.7599998,
+                "confidence": 0.9614258,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "dormir",
+                "start": 5.7599998,
+                "end": 6.3999996,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "dormir,"
+              },
+              {
+                "word": "eu",
+                "start": 6.3999996,
+                "end": 6.56,
+                "confidence": 0.8925781,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "eu"
+              },
+              {
+                "word": "descobri",
+                "start": 6.56,
+                "end": 6.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "descobri"
+              },
+              {
+                "word": "1",
+                "start": 6.96,
+                "end": 7.2799997,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.9272486,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "planta",
+                "start": 7.2799997,
+                "end": 7.68,
+                "confidence": 0.9277344,
+                "speaker": 0,
+                "speaker_confidence": 0.9272487,
+                "punctuated_word": "planta."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Sou médica especializada em medicina funcional, e depois de anos tratando pacientes com dificuldades para dormir, eu descobri 1 planta.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Sou médica especializada em medicina funcional, e depois de anos tratando pacientes com dificuldades para dormir, eu descobri 1 planta.",
+                      "start": 0.0,
+                      "end": 7.68
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 20,
+                  "start": 0.0,
+                  "end": 7.68
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.4799998,
+        "confidence": 0.8997803,
+        "channel": 0,
+        "transcript": "Sou médica especializada em medicina funcional,",
+        "words": [
+          {
+            "word": "sou",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.6196289,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "Sou"
+          },
+          {
+            "word": "médica",
+            "start": 0.24,
+            "end": 0.56,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "médica"
+          },
+          {
+            "word": "especializada",
+            "start": 0.56,
+            "end": 1.12,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "especializada"
+          },
+          {
+            "word": "em",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "medicina",
+            "start": 1.36,
+            "end": 1.68,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "medicina"
+          },
+          {
+            "word": "funcional",
+            "start": 1.68,
+            "end": 2.4799998,
+            "confidence": 0.78881836,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "funcional,"
+          }
+        ],
+        "speaker": 0,
+        "id": "ab6c94d6-b031-4352-a17d-aa1a953356b4"
+      },
+      {
+        "start": 2.48,
+        "end": 7.68,
+        "confidence": 0.97980607,
+        "channel": 0,
+        "transcript": "e depois de anos tratando pacientes com dificuldades para dormir, eu descobri 1 planta.",
+        "words": [
+          {
+            "word": "e",
+            "start": 2.48,
+            "end": 2.8,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "depois",
+            "start": 2.8,
+            "end": 3.12,
+            "confidence": 0.9863281,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "depois"
+          },
+          {
+            "word": "de",
+            "start": 3.12,
+            "end": 3.28,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "anos",
+            "start": 3.28,
+            "end": 3.6799998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "anos"
+          },
+          {
+            "word": "tratando",
+            "start": 3.6799998,
+            "end": 4.16,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "tratando"
+          },
+          {
+            "word": "pacientes",
+            "start": 4.16,
+            "end": 4.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "pacientes"
+          },
+          {
+            "word": "com",
+            "start": 4.72,
+            "end": 4.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "dificuldades",
+            "start": 4.96,
+            "end": 5.44,
+            "confidence": 0.9589844,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "dificuldades"
+          },
+          {
+            "word": "para",
+            "start": 5.44,
+            "end": 5.7599998,
+            "confidence": 0.9614258,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "dormir",
+            "start": 5.7599998,
+            "end": 6.3999996,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "dormir,"
+          },
+          {
+            "word": "eu",
+            "start": 6.3999996,
+            "end": 6.56,
+            "confidence": 0.8925781,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "eu"
+          },
+          {
+            "word": "descobri",
+            "start": 6.56,
+            "end": 6.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "descobri"
+          },
+          {
+            "word": "1",
+            "start": 6.96,
+            "end": 7.2799997,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.9272486,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "planta",
+            "start": 7.2799997,
+            "end": 7.68,
+            "confidence": 0.9277344,
+            "speaker": 0,
+            "speaker_confidence": 0.9272487,
+            "punctuated_word": "planta."
+          }
+        ],
+        "speaker": 0,
+        "id": "348abcdf-f0ce-47ed-a7d0-ac279633dd2e"
+      }
+    ]
+  }
+}

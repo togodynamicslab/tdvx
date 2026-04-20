@@ -1,0 +1,299 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-8f46-7a21-b8ba-23bddc06338c",
+    "sha256": "b1d4eafab31c4b2ba70695f66ed4695b8287b9442dd314f7b754ec77954f8b06",
+    "created": "2026-04-19T18:18:55.573Z",
+    "duration": 4.911,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Estar aqui agora, esteja em outro lugar mais tarde, é tão complicado assim?",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "estar",
+                "start": 0.08,
+                "end": 0.39999998,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Estar"
+              },
+              {
+                "word": "aqui",
+                "start": 0.39999998,
+                "end": 0.71999997,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "aqui"
+              },
+              {
+                "word": "agora",
+                "start": 0.71999997,
+                "end": 1.44,
+                "confidence": 0.7727051,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "agora,"
+              },
+              {
+                "word": "esteja",
+                "start": 1.52,
+                "end": 1.92,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "esteja"
+              },
+              {
+                "word": "em",
+                "start": 1.92,
+                "end": 2.1599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "outro",
+                "start": 2.1599998,
+                "end": 2.3999999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "outro"
+              },
+              {
+                "word": "lugar",
+                "start": 2.3999999,
+                "end": 2.6399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "lugar"
+              },
+              {
+                "word": "mais",
+                "start": 2.6399999,
+                "end": 2.96,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mais"
+              },
+              {
+                "word": "tarde",
+                "start": 2.96,
+                "end": 3.4399998,
+                "confidence": 0.82006836,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tarde,"
+              },
+              {
+                "word": "é",
+                "start": 3.4399998,
+                "end": 3.6,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "tão",
+                "start": 3.6,
+                "end": 3.76,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tão"
+              },
+              {
+                "word": "complicado",
+                "start": 3.76,
+                "end": 4.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "complicado"
+              },
+              {
+                "word": "assim",
+                "start": 4.16,
+                "end": 4.56,
+                "confidence": 0.9770508,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "assim?"
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Estar aqui agora, esteja em outro lugar mais tarde, é tão complicado assim?",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Estar aqui agora, esteja em outro lugar mais tarde, é tão complicado assim?",
+                      "start": 0.08,
+                      "end": 4.56
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 13,
+                  "start": 0.08,
+                  "end": 4.56
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.08,
+        "end": 4.56,
+        "confidence": 0.96593297,
+        "channel": 0,
+        "transcript": "Estar aqui agora, esteja em outro lugar mais tarde, é tão complicado assim?",
+        "words": [
+          {
+            "word": "estar",
+            "start": 0.08,
+            "end": 0.39999998,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Estar"
+          },
+          {
+            "word": "aqui",
+            "start": 0.39999998,
+            "end": 0.71999997,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "aqui"
+          },
+          {
+            "word": "agora",
+            "start": 0.71999997,
+            "end": 1.44,
+            "confidence": 0.7727051,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "agora,"
+          },
+          {
+            "word": "esteja",
+            "start": 1.52,
+            "end": 1.92,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "esteja"
+          },
+          {
+            "word": "em",
+            "start": 1.92,
+            "end": 2.1599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "outro",
+            "start": 2.1599998,
+            "end": 2.3999999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "outro"
+          },
+          {
+            "word": "lugar",
+            "start": 2.3999999,
+            "end": 2.6399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "lugar"
+          },
+          {
+            "word": "mais",
+            "start": 2.6399999,
+            "end": 2.96,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mais"
+          },
+          {
+            "word": "tarde",
+            "start": 2.96,
+            "end": 3.4399998,
+            "confidence": 0.82006836,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tarde,"
+          },
+          {
+            "word": "é",
+            "start": 3.4399998,
+            "end": 3.6,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "tão",
+            "start": 3.6,
+            "end": 3.76,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tão"
+          },
+          {
+            "word": "complicado",
+            "start": 3.76,
+            "end": 4.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "complicado"
+          },
+          {
+            "word": "assim",
+            "start": 4.16,
+            "end": 4.56,
+            "confidence": 0.9770508,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "assim?"
+          }
+        ],
+        "speaker": 0,
+        "id": "bf5b8c88-6352-4ea3-ba17-67bb74e66852"
+      }
+    ]
+  }
+}

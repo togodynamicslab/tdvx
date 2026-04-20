@@ -1,0 +1,490 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-b0e8-7662-83c6-d4fc50465783",
+    "sha256": "6ac9e7dec5bf97d389f452d7a707541940d897ff4b3549497b3d7b35668ecd78",
+    "created": "2026-04-19T18:19:04.273Z",
+    "duration": 8.437563,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Com 1 toque de sua varinha mágica, a fada fez com que todos os celulares, tablets e videogames da cidade parassem de funcionar.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "com",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.8520508,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "Com"
+              },
+              {
+                "word": "1",
+                "start": 0.24,
+                "end": 0.48,
+                "confidence": 0.98828125,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "toque",
+                "start": 0.48,
+                "end": 0.71999997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "toque"
+              },
+              {
+                "word": "de",
+                "start": 0.71999997,
+                "end": 0.96,
+                "confidence": 0.98291016,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "sua",
+                "start": 0.96,
+                "end": 1.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "sua"
+              },
+              {
+                "word": "varinha",
+                "start": 1.12,
+                "end": 1.52,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "varinha"
+              },
+              {
+                "word": "mágica",
+                "start": 1.52,
+                "end": 2.32,
+                "confidence": 0.9890137,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "mágica,"
+              },
+              {
+                "word": "a",
+                "start": 2.3999999,
+                "end": 2.56,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "fada",
+                "start": 2.56,
+                "end": 2.8,
+                "confidence": 0.98535156,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "fada"
+              },
+              {
+                "word": "fez",
+                "start": 2.8,
+                "end": 3.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "fez"
+              },
+              {
+                "word": "com",
+                "start": 3.12,
+                "end": 3.28,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "que",
+                "start": 3.28,
+                "end": 3.4399998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "todos",
+                "start": 3.4399998,
+                "end": 3.76,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "todos"
+              },
+              {
+                "word": "os",
+                "start": 3.76,
+                "end": 4.0,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "os"
+              },
+              {
+                "word": "celulares",
+                "start": 4.0,
+                "end": 4.7999997,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "celulares,"
+              },
+              {
+                "word": "tablets",
+                "start": 4.7999997,
+                "end": 5.2,
+                "confidence": 0.984375,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "tablets"
+              },
+              {
+                "word": "e",
+                "start": 5.2,
+                "end": 5.52,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "videogames",
+                "start": 5.52,
+                "end": 6.0,
+                "confidence": 0.89501953,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "videogames"
+              },
+              {
+                "word": "da",
+                "start": 6.0,
+                "end": 6.3199997,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "da"
+              },
+              {
+                "word": "cidade",
+                "start": 6.3199997,
+                "end": 6.8799996,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "cidade"
+              },
+              {
+                "word": "parassem",
+                "start": 6.8799996,
+                "end": 7.44,
+                "confidence": 0.99365234,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "parassem"
+              },
+              {
+                "word": "de",
+                "start": 7.44,
+                "end": 7.68,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.90539896,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "funcionar",
+                "start": 7.68,
+                "end": 8.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.9053987,
+                "punctuated_word": "funcionar."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Com 1 toque de sua varinha mágica, a fada fez com que todos os celulares, tablets e videogames da cidade parassem de funcionar.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Com 1 toque de sua varinha mágica, a fada fez com que todos os celulares, tablets e videogames da cidade parassem de funcionar.",
+                      "start": 0.0,
+                      "end": 8.08
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 23,
+                  "start": 0.0,
+                  "end": 8.08
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.32,
+        "confidence": 0.9730399,
+        "channel": 0,
+        "transcript": "Com 1 toque de sua varinha mágica,",
+        "words": [
+          {
+            "word": "com",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.8520508,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "Com"
+          },
+          {
+            "word": "1",
+            "start": 0.24,
+            "end": 0.48,
+            "confidence": 0.98828125,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "toque",
+            "start": 0.48,
+            "end": 0.71999997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "toque"
+          },
+          {
+            "word": "de",
+            "start": 0.71999997,
+            "end": 0.96,
+            "confidence": 0.98291016,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "sua",
+            "start": 0.96,
+            "end": 1.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "sua"
+          },
+          {
+            "word": "varinha",
+            "start": 1.12,
+            "end": 1.52,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "varinha"
+          },
+          {
+            "word": "mágica",
+            "start": 1.52,
+            "end": 2.32,
+            "confidence": 0.9890137,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "mágica,"
+          }
+        ],
+        "speaker": 0,
+        "id": "9d817029-7b9f-4c79-8476-d7b45429b9d2"
+      },
+      {
+        "start": 2.3999999,
+        "end": 8.08,
+        "confidence": 0.9901123,
+        "channel": 0,
+        "transcript": "a fada fez com que todos os celulares, tablets e videogames da cidade parassem de funcionar.",
+        "words": [
+          {
+            "word": "a",
+            "start": 2.3999999,
+            "end": 2.56,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "fada",
+            "start": 2.56,
+            "end": 2.8,
+            "confidence": 0.98535156,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "fada"
+          },
+          {
+            "word": "fez",
+            "start": 2.8,
+            "end": 3.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "fez"
+          },
+          {
+            "word": "com",
+            "start": 3.12,
+            "end": 3.28,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "que",
+            "start": 3.28,
+            "end": 3.4399998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "todos",
+            "start": 3.4399998,
+            "end": 3.76,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "todos"
+          },
+          {
+            "word": "os",
+            "start": 3.76,
+            "end": 4.0,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "os"
+          },
+          {
+            "word": "celulares",
+            "start": 4.0,
+            "end": 4.7999997,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "celulares,"
+          },
+          {
+            "word": "tablets",
+            "start": 4.7999997,
+            "end": 5.2,
+            "confidence": 0.984375,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "tablets"
+          },
+          {
+            "word": "e",
+            "start": 5.2,
+            "end": 5.52,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "videogames",
+            "start": 5.52,
+            "end": 6.0,
+            "confidence": 0.89501953,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "videogames"
+          },
+          {
+            "word": "da",
+            "start": 6.0,
+            "end": 6.3199997,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "da"
+          },
+          {
+            "word": "cidade",
+            "start": 6.3199997,
+            "end": 6.8799996,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "cidade"
+          },
+          {
+            "word": "parassem",
+            "start": 6.8799996,
+            "end": 7.44,
+            "confidence": 0.99365234,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "parassem"
+          },
+          {
+            "word": "de",
+            "start": 7.44,
+            "end": 7.68,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.90539896,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "funcionar",
+            "start": 7.68,
+            "end": 8.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.9053987,
+            "punctuated_word": "funcionar."
+          }
+        ],
+        "speaker": 0,
+        "id": "7310142f-9381-4c5c-b35b-44a132ecb3c4"
+      }
+    ]
+  }
+}

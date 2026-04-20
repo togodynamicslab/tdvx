@@ -1,0 +1,209 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-a066-70e2-99e6-a1cb72822c5b",
+    "sha256": "9a70ccf74a2ced84742d8452f8aff057dd57f6096eed158ba32b09fe8512e3fc",
+    "created": "2026-04-19T18:18:59.917Z",
+    "duration": 2.832875,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Não há fracasso exceto em não tentar mais.",
+            "confidence": 0.99853516,
+            "words": [
+              {
+                "word": "não",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.9873047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Não"
+              },
+              {
+                "word": "há",
+                "start": 0.24,
+                "end": 0.39999998,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "há"
+              },
+              {
+                "word": "fracasso",
+                "start": 0.39999998,
+                "end": 0.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "fracasso"
+              },
+              {
+                "word": "exceto",
+                "start": 0.88,
+                "end": 1.36,
+                "confidence": 0.7529297,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "exceto"
+              },
+              {
+                "word": "em",
+                "start": 1.36,
+                "end": 1.68,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "não",
+                "start": 1.68,
+                "end": 1.8399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "não"
+              },
+              {
+                "word": "tentar",
+                "start": 1.8399999,
+                "end": 2.1599998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tentar"
+              },
+              {
+                "word": "mais",
+                "start": 2.1599998,
+                "end": 2.48,
+                "confidence": 0.99853516,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mais."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Não há fracasso exceto em não tentar mais.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Não há fracasso exceto em não tentar mais.",
+                      "start": 0.0,
+                      "end": 2.48
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 8,
+                  "start": 0.0,
+                  "end": 2.48
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.48,
+        "confidence": 0.96673584,
+        "channel": 0,
+        "transcript": "Não há fracasso exceto em não tentar mais.",
+        "words": [
+          {
+            "word": "não",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.9873047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Não"
+          },
+          {
+            "word": "há",
+            "start": 0.24,
+            "end": 0.39999998,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "há"
+          },
+          {
+            "word": "fracasso",
+            "start": 0.39999998,
+            "end": 0.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "fracasso"
+          },
+          {
+            "word": "exceto",
+            "start": 0.88,
+            "end": 1.36,
+            "confidence": 0.7529297,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "exceto"
+          },
+          {
+            "word": "em",
+            "start": 1.36,
+            "end": 1.68,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "não",
+            "start": 1.68,
+            "end": 1.8399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "não"
+          },
+          {
+            "word": "tentar",
+            "start": 1.8399999,
+            "end": 2.1599998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tentar"
+          },
+          {
+            "word": "mais",
+            "start": 2.1599998,
+            "end": 2.48,
+            "confidence": 0.99853516,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mais."
+          }
+        ],
+        "speaker": 0,
+        "id": "00f738ff-9e06-4347-85b2-2e69404628da"
+      }
+    ]
+  }
+}

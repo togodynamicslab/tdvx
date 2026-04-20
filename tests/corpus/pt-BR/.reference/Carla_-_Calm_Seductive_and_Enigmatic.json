@@ -1,0 +1,580 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-80e9-7261-9e73-50269bdccf5f",
+    "sha256": "547ab5a8f788d0e3975a631107374178f8d6052e1bbd41d79a72c0522bd2c3cb",
+    "created": "2026-04-19T18:18:51.940Z",
+    "duration": 14.706938,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Relaxe, apenas siga o som da minha voz. Tudo que eu disser, você imagina como se fosse real. Não se assuste se você se arrepiar.",
+            "confidence": 1.0,
+            "words": [
+              {
+                "word": "relaxe",
+                "start": 0.16,
+                "end": 1.2,
+                "confidence": 0.8889974,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Relaxe,"
+              },
+              {
+                "word": "apenas",
+                "start": 1.76,
+                "end": 2.32,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "apenas"
+              },
+              {
+                "word": "siga",
+                "start": 2.32,
+                "end": 2.8,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "siga"
+              },
+              {
+                "word": "o",
+                "start": 2.8,
+                "end": 2.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "som",
+                "start": 2.96,
+                "end": 3.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "som"
+              },
+              {
+                "word": "da",
+                "start": 3.28,
+                "end": 3.52,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "da"
+              },
+              {
+                "word": "minha",
+                "start": 3.52,
+                "end": 3.6799998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "minha"
+              },
+              {
+                "word": "voz",
+                "start": 3.6799998,
+                "end": 4.4,
+                "confidence": 0.9736328,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "voz."
+              },
+              {
+                "word": "tudo",
+                "start": 5.12,
+                "end": 5.3599997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Tudo"
+              },
+              {
+                "word": "que",
+                "start": 5.3599997,
+                "end": 5.6,
+                "confidence": 0.5541992,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "eu",
+                "start": 5.6,
+                "end": 5.7599998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "eu"
+              },
+              {
+                "word": "disser",
+                "start": 5.7599998,
+                "end": 6.56,
+                "confidence": 0.953125,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "disser,"
+              },
+              {
+                "word": "você",
+                "start": 7.04,
+                "end": 7.44,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "você"
+              },
+              {
+                "word": "imagina",
+                "start": 7.44,
+                "end": 8.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "imagina"
+              },
+              {
+                "word": "como",
+                "start": 8.8,
+                "end": 9.04,
+                "confidence": 0.71777344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "como"
+              },
+              {
+                "word": "se",
+                "start": 9.04,
+                "end": 9.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "se"
+              },
+              {
+                "word": "fosse",
+                "start": 9.28,
+                "end": 9.599999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "fosse"
+              },
+              {
+                "word": "real",
+                "start": 9.599999,
+                "end": 10.4,
+                "confidence": 0.98706055,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "real."
+              },
+              {
+                "word": "não",
+                "start": 11.2,
+                "end": 11.5199995,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Não"
+              },
+              {
+                "word": "se",
+                "start": 11.5199995,
+                "end": 11.84,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "se"
+              },
+              {
+                "word": "assuste",
+                "start": 11.84,
+                "end": 12.32,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "assuste"
+              },
+              {
+                "word": "se",
+                "start": 12.32,
+                "end": 12.559999,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "se"
+              },
+              {
+                "word": "você",
+                "start": 12.559999,
+                "end": 12.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "você"
+              },
+              {
+                "word": "se",
+                "start": 12.88,
+                "end": 13.12,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "se"
+              },
+              {
+                "word": "arrepiar",
+                "start": 13.12,
+                "end": 13.679999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "arrepiar."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Relaxe, apenas siga o som da minha voz. Tudo que eu disser, você imagina como se fosse real. Não se assuste se você se arrepiar.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Relaxe, apenas siga o som da minha voz.",
+                      "start": 0.16,
+                      "end": 4.4
+                    },
+                    {
+                      "text": "Tudo que eu disser, você imagina como se fosse real.",
+                      "start": 5.12,
+                      "end": 10.4
+                    },
+                    {
+                      "text": "Não se assuste se você se arrepiar.",
+                      "start": 11.2,
+                      "end": 13.679999
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 25,
+                  "start": 0.16,
+                  "end": 13.679999
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.16,
+        "end": 1.2,
+        "confidence": 0.8889974,
+        "channel": 0,
+        "transcript": "Relaxe,",
+        "words": [
+          {
+            "word": "relaxe",
+            "start": 0.16,
+            "end": 1.2,
+            "confidence": 0.8889974,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Relaxe,"
+          }
+        ],
+        "speaker": 0,
+        "id": "8aa602da-75f0-4465-a702-ccb7c5853745"
+      },
+      {
+        "start": 1.76,
+        "end": 4.4,
+        "confidence": 0.99609375,
+        "channel": 0,
+        "transcript": "apenas siga o som da minha voz.",
+        "words": [
+          {
+            "word": "apenas",
+            "start": 1.76,
+            "end": 2.32,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "apenas"
+          },
+          {
+            "word": "siga",
+            "start": 2.32,
+            "end": 2.8,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "siga"
+          },
+          {
+            "word": "o",
+            "start": 2.8,
+            "end": 2.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "som",
+            "start": 2.96,
+            "end": 3.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "som"
+          },
+          {
+            "word": "da",
+            "start": 3.28,
+            "end": 3.52,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "da"
+          },
+          {
+            "word": "minha",
+            "start": 3.52,
+            "end": 3.6799998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "minha"
+          },
+          {
+            "word": "voz",
+            "start": 3.6799998,
+            "end": 4.4,
+            "confidence": 0.9736328,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "voz."
+          }
+        ],
+        "speaker": 0,
+        "id": "ba285a22-2147-42b5-afd5-8286d72310be"
+      },
+      {
+        "start": 5.12,
+        "end": 6.56,
+        "confidence": 0.8765869,
+        "channel": 0,
+        "transcript": "Tudo que eu disser,",
+        "words": [
+          {
+            "word": "tudo",
+            "start": 5.12,
+            "end": 5.3599997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Tudo"
+          },
+          {
+            "word": "que",
+            "start": 5.3599997,
+            "end": 5.6,
+            "confidence": 0.5541992,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "eu",
+            "start": 5.6,
+            "end": 5.7599998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "eu"
+          },
+          {
+            "word": "disser",
+            "start": 5.7599998,
+            "end": 6.56,
+            "confidence": 0.953125,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "disser,"
+          }
+        ],
+        "speaker": 0,
+        "id": "e803eae6-ae69-405e-bba0-f3cfa302f3c8"
+      },
+      {
+        "start": 7.04,
+        "end": 8.48,
+        "confidence": 1.0,
+        "channel": 0,
+        "transcript": "você imagina",
+        "words": [
+          {
+            "word": "você",
+            "start": 7.04,
+            "end": 7.44,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "você"
+          },
+          {
+            "word": "imagina",
+            "start": 7.44,
+            "end": 8.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "imagina"
+          }
+        ],
+        "speaker": 0,
+        "id": "bb4f966a-c9c6-44ae-8e05-9e92795f325c"
+      },
+      {
+        "start": 8.8,
+        "end": 10.4,
+        "confidence": 0.9262085,
+        "channel": 0,
+        "transcript": "como se fosse real.",
+        "words": [
+          {
+            "word": "como",
+            "start": 8.8,
+            "end": 9.04,
+            "confidence": 0.71777344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "como"
+          },
+          {
+            "word": "se",
+            "start": 9.04,
+            "end": 9.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "se"
+          },
+          {
+            "word": "fosse",
+            "start": 9.28,
+            "end": 9.599999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "fosse"
+          },
+          {
+            "word": "real",
+            "start": 9.599999,
+            "end": 10.4,
+            "confidence": 0.98706055,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "real."
+          }
+        ],
+        "speaker": 0,
+        "id": "b1db7d72-48cd-4345-bfad-202234dd9263"
+      },
+      {
+        "start": 11.2,
+        "end": 13.679999,
+        "confidence": 0.999721,
+        "channel": 0,
+        "transcript": "Não se assuste se você se arrepiar.",
+        "words": [
+          {
+            "word": "não",
+            "start": 11.2,
+            "end": 11.5199995,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Não"
+          },
+          {
+            "word": "se",
+            "start": 11.5199995,
+            "end": 11.84,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "se"
+          },
+          {
+            "word": "assuste",
+            "start": 11.84,
+            "end": 12.32,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "assuste"
+          },
+          {
+            "word": "se",
+            "start": 12.32,
+            "end": 12.559999,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "se"
+          },
+          {
+            "word": "você",
+            "start": 12.559999,
+            "end": 12.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "você"
+          },
+          {
+            "word": "se",
+            "start": 12.88,
+            "end": 13.12,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "se"
+          },
+          {
+            "word": "arrepiar",
+            "start": 13.12,
+            "end": 13.679999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "arrepiar."
+          }
+        ],
+        "speaker": 0,
+        "id": "41b7856b-c633-46e2-b4ac-290663c6ec6d"
+      }
+    ]
+  }
+}

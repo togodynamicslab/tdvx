@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-de05-75a2-8bf9-2794a0c3ee37",
+    "sha256": "c90ebb80e531dd79eaa1c1a854b7d57efd040a865867ed3090c8d390ccf25689",
+    "created": "2026-04-19T18:19:15.767Z",
+    "duration": 7.1314373,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Preparese, pois hoje veremos mais histórias reais incríveis de pessoas sortudas que sobreviveram ao impossível.",
+            "confidence": 1.0,
+            "words": [
+              {
+                "word": "preparese",
+                "start": 0.0,
+                "end": 0.88,
+                "confidence": 0.9885254,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Preparese,"
+              },
+              {
+                "word": "pois",
+                "start": 0.88,
+                "end": 1.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pois"
+              },
+              {
+                "word": "hoje",
+                "start": 1.04,
+                "end": 1.36,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "hoje"
+              },
+              {
+                "word": "veremos",
+                "start": 1.36,
+                "end": 1.76,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "veremos"
+              },
+              {
+                "word": "mais",
+                "start": 1.76,
+                "end": 2.1599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mais"
+              },
+              {
+                "word": "histórias",
+                "start": 2.1599998,
+                "end": 2.56,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "histórias"
+              },
+              {
+                "word": "reais",
+                "start": 2.56,
+                "end": 3.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "reais"
+              },
+              {
+                "word": "incríveis",
+                "start": 3.04,
+                "end": 3.6799998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "incríveis"
+              },
+              {
+                "word": "de",
+                "start": 3.6799998,
+                "end": 4.0,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "pessoas",
+                "start": 4.0,
+                "end": 4.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pessoas"
+              },
+              {
+                "word": "sortudas",
+                "start": 4.4,
+                "end": 5.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sortudas"
+              },
+              {
+                "word": "que",
+                "start": 5.04,
+                "end": 5.2799997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "sobreviveram",
+                "start": 5.2799997,
+                "end": 5.92,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sobreviveram"
+              },
+              {
+                "word": "ao",
+                "start": 5.92,
+                "end": 6.3199997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ao"
+              },
+              {
+                "word": "impossível",
+                "start": 6.3199997,
+                "end": 6.7999997,
+                "confidence": 0.99853516,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "impossível."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Preparese, pois hoje veremos mais histórias reais incríveis de pessoas sortudas que sobreviveram ao impossível.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Preparese, pois hoje veremos mais histórias reais incríveis de pessoas sortudas que sobreviveram ao impossível.",
+                      "start": 0.0,
+                      "end": 6.7999997
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 15,
+                  "start": 0.0,
+                  "end": 6.7999997
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 0.88,
+        "confidence": 0.9885254,
+        "channel": 0,
+        "transcript": "Preparese,",
+        "words": [
+          {
+            "word": "preparese",
+            "start": 0.0,
+            "end": 0.88,
+            "confidence": 0.9885254,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Preparese,"
+          }
+        ],
+        "speaker": 0,
+        "id": "ac4f3281-1b5b-4a11-9fcb-ce41f4a4531c"
+      },
+      {
+        "start": 0.88,
+        "end": 6.7999997,
+        "confidence": 0.9995466,
+        "channel": 0,
+        "transcript": "pois hoje veremos mais histórias reais incríveis de pessoas sortudas que sobreviveram ao impossível.",
+        "words": [
+          {
+            "word": "pois",
+            "start": 0.88,
+            "end": 1.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pois"
+          },
+          {
+            "word": "hoje",
+            "start": 1.04,
+            "end": 1.36,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "hoje"
+          },
+          {
+            "word": "veremos",
+            "start": 1.36,
+            "end": 1.76,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "veremos"
+          },
+          {
+            "word": "mais",
+            "start": 1.76,
+            "end": 2.1599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mais"
+          },
+          {
+            "word": "histórias",
+            "start": 2.1599998,
+            "end": 2.56,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "histórias"
+          },
+          {
+            "word": "reais",
+            "start": 2.56,
+            "end": 3.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "reais"
+          },
+          {
+            "word": "incríveis",
+            "start": 3.04,
+            "end": 3.6799998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "incríveis"
+          },
+          {
+            "word": "de",
+            "start": 3.6799998,
+            "end": 4.0,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "pessoas",
+            "start": 4.0,
+            "end": 4.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pessoas"
+          },
+          {
+            "word": "sortudas",
+            "start": 4.4,
+            "end": 5.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sortudas"
+          },
+          {
+            "word": "que",
+            "start": 5.04,
+            "end": 5.2799997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "sobreviveram",
+            "start": 5.2799997,
+            "end": 5.92,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sobreviveram"
+          },
+          {
+            "word": "ao",
+            "start": 5.92,
+            "end": 6.3199997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ao"
+          },
+          {
+            "word": "impossível",
+            "start": 6.3199997,
+            "end": 6.7999997,
+            "confidence": 0.99853516,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "impossível."
+          }
+        ],
+        "speaker": 0,
+        "id": "d8621033-2c9a-4264-84b1-b1ba4dba4457"
+      }
+    ]
+  }
+}

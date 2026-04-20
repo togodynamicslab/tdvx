@@ -1,0 +1,495 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-a3d2-7020-b9fd-da8988e9df6f",
+    "sha256": "1824c599e8be822c29a5f5c893d9d167639c6e5fe608fbae3892dc6b6a0561d1",
+    "created": "2026-04-19T18:19:00.917Z",
+    "duration": 8.071875,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "A inteligência artificial já faz parte da nossa rotina. Às vezes a gente nem percebe, mas ela está ali, tornando tudo mais simples.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "a",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.9394531,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "A"
+              },
+              {
+                "word": "inteligência",
+                "start": 0.24,
+                "end": 0.71999997,
+                "confidence": 0.8803711,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "inteligência"
+              },
+              {
+                "word": "artificial",
+                "start": 0.71999997,
+                "end": 1.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "artificial"
+              },
+              {
+                "word": "já",
+                "start": 1.28,
+                "end": 1.5999999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "já"
+              },
+              {
+                "word": "faz",
+                "start": 1.5999999,
+                "end": 1.8399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "faz"
+              },
+              {
+                "word": "parte",
+                "start": 1.8399999,
+                "end": 2.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "parte"
+              },
+              {
+                "word": "da",
+                "start": 2.08,
+                "end": 2.24,
+                "confidence": 0.9790039,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "da"
+              },
+              {
+                "word": "nossa",
+                "start": 2.24,
+                "end": 2.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "nossa"
+              },
+              {
+                "word": "rotina",
+                "start": 2.48,
+                "end": 3.1999998,
+                "confidence": 0.99194336,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "rotina."
+              },
+              {
+                "word": "às",
+                "start": 3.4399998,
+                "end": 3.76,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "Às"
+              },
+              {
+                "word": "vezes",
+                "start": 3.76,
+                "end": 3.9199998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "vezes"
+              },
+              {
+                "word": "a",
+                "start": 3.9199998,
+                "end": 4.24,
+                "confidence": 0.921875,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "gente",
+                "start": 4.24,
+                "end": 4.3199997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "gente"
+              },
+              {
+                "word": "nem",
+                "start": 4.3199997,
+                "end": 4.56,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "nem"
+              },
+              {
+                "word": "percebe",
+                "start": 4.56,
+                "end": 5.12,
+                "confidence": 0.98339844,
+                "speaker": 0,
+                "speaker_confidence": 0.86397195,
+                "punctuated_word": "percebe,"
+              },
+              {
+                "word": "mas",
+                "start": 5.12,
+                "end": 5.2799997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "mas"
+              },
+              {
+                "word": "ela",
+                "start": 5.2799997,
+                "end": 5.52,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "ela"
+              },
+              {
+                "word": "está",
+                "start": 5.52,
+                "end": 5.68,
+                "confidence": 0.984375,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "está"
+              },
+              {
+                "word": "ali",
+                "start": 5.68,
+                "end": 6.2400002,
+                "confidence": 0.97314453,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "ali,"
+              },
+              {
+                "word": "tornando",
+                "start": 6.3199997,
+                "end": 6.72,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "tornando"
+              },
+              {
+                "word": "tudo",
+                "start": 6.72,
+                "end": 7.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "tudo"
+              },
+              {
+                "word": "mais",
+                "start": 7.04,
+                "end": 7.3599997,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.92536324,
+                "punctuated_word": "mais"
+              },
+              {
+                "word": "simples",
+                "start": 7.3599997,
+                "end": 7.7599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.7205099,
+                "punctuated_word": "simples."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: A inteligência artificial já faz parte da nossa rotina. Às vezes a gente nem percebe, mas ela está ali, tornando tudo mais simples.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "A inteligência artificial já faz parte da nossa rotina.",
+                      "start": 0.0,
+                      "end": 3.1999998
+                    },
+                    {
+                      "text": "Às vezes a gente nem percebe, mas ela está ali, tornando tudo mais simples.",
+                      "start": 3.4399998,
+                      "end": 7.7599998
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 23,
+                  "start": 0.0,
+                  "end": 7.7599998
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 3.1999998,
+        "confidence": 0.9767524,
+        "channel": 0,
+        "transcript": "A inteligência artificial já faz parte da nossa rotina.",
+        "words": [
+          {
+            "word": "a",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.9394531,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "A"
+          },
+          {
+            "word": "inteligência",
+            "start": 0.24,
+            "end": 0.71999997,
+            "confidence": 0.8803711,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "inteligência"
+          },
+          {
+            "word": "artificial",
+            "start": 0.71999997,
+            "end": 1.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "artificial"
+          },
+          {
+            "word": "já",
+            "start": 1.28,
+            "end": 1.5999999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "já"
+          },
+          {
+            "word": "faz",
+            "start": 1.5999999,
+            "end": 1.8399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "faz"
+          },
+          {
+            "word": "parte",
+            "start": 1.8399999,
+            "end": 2.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "parte"
+          },
+          {
+            "word": "da",
+            "start": 2.08,
+            "end": 2.24,
+            "confidence": 0.9790039,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "da"
+          },
+          {
+            "word": "nossa",
+            "start": 2.24,
+            "end": 2.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "nossa"
+          },
+          {
+            "word": "rotina",
+            "start": 2.48,
+            "end": 3.1999998,
+            "confidence": 0.99194336,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "rotina."
+          }
+        ],
+        "speaker": 0,
+        "id": "61f72506-2279-4c1a-8967-e72f15a8367f"
+      },
+      {
+        "start": 3.4399998,
+        "end": 7.7599998,
+        "confidence": 0.9894322,
+        "channel": 0,
+        "transcript": "Às vezes a gente nem percebe, mas ela está ali, tornando tudo mais simples.",
+        "words": [
+          {
+            "word": "às",
+            "start": 3.4399998,
+            "end": 3.76,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "Às"
+          },
+          {
+            "word": "vezes",
+            "start": 3.76,
+            "end": 3.9199998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "vezes"
+          },
+          {
+            "word": "a",
+            "start": 3.9199998,
+            "end": 4.24,
+            "confidence": 0.921875,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "gente",
+            "start": 4.24,
+            "end": 4.3199997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "gente"
+          },
+          {
+            "word": "nem",
+            "start": 4.3199997,
+            "end": 4.56,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "nem"
+          },
+          {
+            "word": "percebe",
+            "start": 4.56,
+            "end": 5.12,
+            "confidence": 0.98339844,
+            "speaker": 0,
+            "speaker_confidence": 0.86397195,
+            "punctuated_word": "percebe,"
+          },
+          {
+            "word": "mas",
+            "start": 5.12,
+            "end": 5.2799997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "mas"
+          },
+          {
+            "word": "ela",
+            "start": 5.2799997,
+            "end": 5.52,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "ela"
+          },
+          {
+            "word": "está",
+            "start": 5.52,
+            "end": 5.68,
+            "confidence": 0.984375,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "está"
+          },
+          {
+            "word": "ali",
+            "start": 5.68,
+            "end": 6.2400002,
+            "confidence": 0.97314453,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "ali,"
+          },
+          {
+            "word": "tornando",
+            "start": 6.3199997,
+            "end": 6.72,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "tornando"
+          },
+          {
+            "word": "tudo",
+            "start": 6.72,
+            "end": 7.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "tudo"
+          },
+          {
+            "word": "mais",
+            "start": 7.04,
+            "end": 7.3599997,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.92536324,
+            "punctuated_word": "mais"
+          },
+          {
+            "word": "simples",
+            "start": 7.3599997,
+            "end": 7.7599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.7205099,
+            "punctuated_word": "simples."
+          }
+        ],
+        "speaker": 0,
+        "id": "f6fd0f03-fb6e-49dd-ae27-b90f1bdde013"
+      }
+    ]
+  }
+}

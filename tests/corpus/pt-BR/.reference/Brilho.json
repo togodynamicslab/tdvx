@@ -1,0 +1,227 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-796c-7c12-833c-8134e281a4b4",
+    "sha256": "5903c5226496101e625748bee8e4baa62765175139069a4e3e842207ff2eef46",
+    "created": "2026-04-19T18:18:49.857Z",
+    "duration": 3.8080626,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Nada desaparece até nos ensinar o que precisamos saber.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "nada",
+                "start": 0.0,
+                "end": 0.32,
+                "confidence": 0.9873047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Nada"
+              },
+              {
+                "word": "desaparece",
+                "start": 0.32,
+                "end": 1.04,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "desaparece"
+              },
+              {
+                "word": "até",
+                "start": 1.04,
+                "end": 1.36,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "até"
+              },
+              {
+                "word": "nos",
+                "start": 1.36,
+                "end": 1.5999999,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "nos"
+              },
+              {
+                "word": "ensinar",
+                "start": 1.5999999,
+                "end": 2.0,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ensinar"
+              },
+              {
+                "word": "o",
+                "start": 2.0,
+                "end": 2.1599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "que",
+                "start": 2.1599998,
+                "end": 2.32,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "precisamos",
+                "start": 2.32,
+                "end": 2.8,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "precisamos"
+              },
+              {
+                "word": "saber",
+                "start": 2.8,
+                "end": 3.36,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "saber."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Nada desaparece até nos ensinar o que precisamos saber.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Nada desaparece até nos ensinar o que precisamos saber.",
+                      "start": 0.0,
+                      "end": 3.36
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 9,
+                  "start": 0.0,
+                  "end": 3.36
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 3.36,
+        "confidence": 0.9968533,
+        "channel": 0,
+        "transcript": "Nada desaparece até nos ensinar o que precisamos saber.",
+        "words": [
+          {
+            "word": "nada",
+            "start": 0.0,
+            "end": 0.32,
+            "confidence": 0.9873047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Nada"
+          },
+          {
+            "word": "desaparece",
+            "start": 0.32,
+            "end": 1.04,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "desaparece"
+          },
+          {
+            "word": "até",
+            "start": 1.04,
+            "end": 1.36,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "até"
+          },
+          {
+            "word": "nos",
+            "start": 1.36,
+            "end": 1.5999999,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "nos"
+          },
+          {
+            "word": "ensinar",
+            "start": 1.5999999,
+            "end": 2.0,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ensinar"
+          },
+          {
+            "word": "o",
+            "start": 2.0,
+            "end": 2.1599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "que",
+            "start": 2.1599998,
+            "end": 2.32,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "precisamos",
+            "start": 2.32,
+            "end": 2.8,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "precisamos"
+          },
+          {
+            "word": "saber",
+            "start": 2.8,
+            "end": 3.36,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "saber."
+          }
+        ],
+        "speaker": 0,
+        "id": "5c59a95e-2b56-4e24-8361-0b0b87f22032"
+      }
+    ]
+  }
+}

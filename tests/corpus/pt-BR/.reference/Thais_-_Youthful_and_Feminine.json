@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-f26f-73c2-8c9b-fea1a99318e2",
+    "sha256": "cda5f29cc4a56c281249685fcadeb1f29532630ff621d65b598a5f261de9f97b",
+    "created": "2026-04-19T18:19:20.779Z",
+    "duration": 5.6685624,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "2 amigas partem em busca de sossego em 1 fazenda orgânica, longe do barulho da cidade.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "2",
+                "start": 0.0,
+                "end": 0.39999998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "2"
+              },
+              {
+                "word": "amigas",
+                "start": 0.39999998,
+                "end": 0.79999995,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "amigas"
+              },
+              {
+                "word": "partem",
+                "start": 0.79999995,
+                "end": 1.28,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "partem"
+              },
+              {
+                "word": "em",
+                "start": 1.28,
+                "end": 1.52,
+                "confidence": 0.9716797,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "busca",
+                "start": 1.52,
+                "end": 1.68,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "busca"
+              },
+              {
+                "word": "de",
+                "start": 1.68,
+                "end": 1.92,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "sossego",
+                "start": 1.92,
+                "end": 2.3999999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sossego"
+              },
+              {
+                "word": "em",
+                "start": 2.3999999,
+                "end": 2.72,
+                "confidence": 0.9404297,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "1",
+                "start": 2.72,
+                "end": 2.8799999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "fazenda",
+                "start": 2.8799999,
+                "end": 3.1999998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "fazenda"
+              },
+              {
+                "word": "orgânica",
+                "start": 3.1999998,
+                "end": 4.0,
+                "confidence": 0.95874023,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "orgânica,"
+              },
+              {
+                "word": "longe",
+                "start": 4.0,
+                "end": 4.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "longe"
+              },
+              {
+                "word": "do",
+                "start": 4.24,
+                "end": 4.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "barulho",
+                "start": 4.4,
+                "end": 4.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "barulho"
+              },
+              {
+                "word": "da",
+                "start": 4.72,
+                "end": 5.04,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "da"
+              },
+              {
+                "word": "cidade",
+                "start": 5.04,
+                "end": 5.3599997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "cidade."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: 2 amigas partem em busca de sossego em 1 fazenda orgânica, longe do barulho da cidade.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "2 amigas partem em busca de sossego em 1 fazenda orgânica, longe do barulho da cidade.",
+                      "start": 0.0,
+                      "end": 5.3599997
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 16,
+                  "start": 0.0,
+                  "end": 5.3599997
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 4.0,
+        "confidence": 0.9872825,
+        "channel": 0,
+        "transcript": "2 amigas partem em busca de sossego em 1 fazenda orgânica,",
+        "words": [
+          {
+            "word": "2",
+            "start": 0.0,
+            "end": 0.39999998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "2"
+          },
+          {
+            "word": "amigas",
+            "start": 0.39999998,
+            "end": 0.79999995,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "amigas"
+          },
+          {
+            "word": "partem",
+            "start": 0.79999995,
+            "end": 1.28,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "partem"
+          },
+          {
+            "word": "em",
+            "start": 1.28,
+            "end": 1.52,
+            "confidence": 0.9716797,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "busca",
+            "start": 1.52,
+            "end": 1.68,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "busca"
+          },
+          {
+            "word": "de",
+            "start": 1.68,
+            "end": 1.92,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "sossego",
+            "start": 1.92,
+            "end": 2.3999999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sossego"
+          },
+          {
+            "word": "em",
+            "start": 2.3999999,
+            "end": 2.72,
+            "confidence": 0.9404297,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "1",
+            "start": 2.72,
+            "end": 2.8799999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "fazenda",
+            "start": 2.8799999,
+            "end": 3.1999998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "fazenda"
+          },
+          {
+            "word": "orgânica",
+            "start": 3.1999998,
+            "end": 4.0,
+            "confidence": 0.95874023,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "orgânica,"
+          }
+        ],
+        "speaker": 0,
+        "id": "1ca13b76-598b-4b86-81ef-cb010898526e"
+      },
+      {
+        "start": 4.0,
+        "end": 5.3599997,
+        "confidence": 0.9998047,
+        "channel": 0,
+        "transcript": "longe do barulho da cidade.",
+        "words": [
+          {
+            "word": "longe",
+            "start": 4.0,
+            "end": 4.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "longe"
+          },
+          {
+            "word": "do",
+            "start": 4.24,
+            "end": 4.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "barulho",
+            "start": 4.4,
+            "end": 4.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "barulho"
+          },
+          {
+            "word": "da",
+            "start": 4.72,
+            "end": 5.04,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "da"
+          },
+          {
+            "word": "cidade",
+            "start": 5.04,
+            "end": 5.3599997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "cidade."
+          }
+        ],
+        "speaker": 0,
+        "id": "0d398eab-29de-4cb9-b026-2f2ac933ee62"
+      }
+    ]
+  }
+}
