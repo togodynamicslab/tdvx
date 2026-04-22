@@ -245,16 +245,289 @@ FINETUNING_ENABLED=true
 
 ---
 
+## Fine-tuning do modelo proprietário
+
+### Como os dados são coletados
+
+Toda transcrição feita pelo app salva automaticamente os segmentos em `finetuning_data/` (relativo à raiz do serviço):
+
+```
+finetuning_data/
+├── audio/
+│   └── {session_id}/
+│       ├── Speaker0_0.500_3.200.wav   ← segmento cortado por speaker, 16kHz mono PCM
+│       └── Speaker1_3.500_6.800.wav
+├── labels/
+│   └── {session_id}.json              ← transcrição completa da sessão
+└── manifest.jsonl                     ← uma linha JSON por segmento (índice global)
+```
+
+Cada linha do `manifest.jsonl`:
+```json
+{
+  "id": "abc123_Speaker0_0.500_3.200",
+  "audio_filepath": "audio/abc123/Speaker0_0.500_3.200.wav",
+  "text": "Bom dia, como você está?",
+  "speaker": "Speaker 0",
+  "duration": 2.7,
+  "confidence": 0.94,
+  "language": "pt",
+  "source": "reuniao.wav",
+  "session_id": "abc123def456",
+  "timestamp": "2025-03-17T14:30:00"
+}
+```
+
+Para desativar a coleta: `FINETUNING_ENABLED=false` no `.env`.
+
+---
+
+### Rodando o fine-tuning (após fechar a sprint)
+
+#### 1. Instale as dependências de treino
+
+```bash
+pip install -r ../requirements-finetune.txt
+```
+
+#### 2. Verifique o dataset antes de treinar
+
+```bash
+python finetune.py --dry-run
+```
+
+Saída esperada:
+```
+Manifest: 1.240 entradas carregadas, 0 ignoradas
+Filtro: 1.187/1.240 entradas mantidas | descartadas → {'duration': 31, 'confidence': 22, ...}
+Distribuição de idiomas: {'portuguese': 980, 'english': 207}
+[dry-run] 1.187 entradas prontas para treino. Encerrando.
+```
+
+#### 3. Treine
+
+```bash
+# Padrão: whisper-medium, PT + EN, 3 épocas
+python finetune.py
+
+# Modelo de maior qualidade (TDv1)
+python finetune.py --base-model openai/whisper-large-v3
+
+# Limitar steps (útil para testar o pipeline)
+python finetune.py --max-steps 500
+
+# Especificar onde estão os dados e onde salvar
+python finetune.py \
+  --data-dir /dados/finetuning_data \
+  --output-dir /modelos/tdv1-v2
+```
+
+#### 4. Onde o modelo é salvo
+
+```
+models/
+├── tdv1-finetuned/          ← modelo HuggingFace (usado para re-treinos futuros)
+│   ├── config.json
+│   ├── model.safetensors
+│   ├── tokenizer.json
+│   └── ...
+└── tdv1-finetuned-ct2/      ← modelo convertido para CTranslate2 (usado pelo app)
+    ├── model.bin
+    ├── config.json
+    └── vocabulary.json
+```
+
+A conversão para CTranslate2 roda automaticamente ao final do treino.
+
+#### 5. Ativar o modelo fine-tunado no app
+
+Em [app/services/engine.py](app/services/engine.py), passe o caminho do diretório `-ct2` para o `STTEngine`:
+
+```python
+# Antes (modelo base do HuggingFace Hub)
+self.model = WhisperModel("medium", device=self.device, ...)
+
+# Depois (modelo proprietário fine-tunado)
+self.model = WhisperModel("models/tdv1-finetuned-ct2", device=self.device, ...)
+```
+
+Ou via variável de ambiente no `.env`:
+```env
+WHISPER_MODEL=models/tdv1-finetuned-ct2
+```
+
+---
+
+### MLflow — tracking de experimentos
+
+O fine-tuning integra com MLflow para registrar parâmetros, métricas por step e versionar o modelo no Model Registry.
+
+#### Subir o servidor MLflow
+
+```bash
+# Instala (junto com as outras deps de treino)
+pip install -r ../requirements-finetune.txt
+
+# Sobe o servidor (deixe rodando em segundo plano)
+mlflow server --host 0.0.0.0 --port 5000
+
+# UI disponível em: http://localhost:5000
+```
+
+Configure no `.env`:
+```env
+MLFLOW_TRACKING_URI=http://localhost:5000
+MLFLOW_FINETUNE_EXPERIMENT=tdv1-finetune
+```
+
+#### O que é registrado automaticamente
+
+| O quê | Onde aparece na UI |
+|---|---|
+| Parâmetros de treino (lr, batch, epochs...) | aba **Parameters** |
+| Stats do dataset (total, duração, idiomas) | aba **Parameters** |
+| `train/loss` a cada 25 steps | aba **Metrics** (gráfico) |
+| `eval/loss` e `eval/wer` a cada `--eval-steps` | aba **Metrics** (gráfico) |
+| WER final | aba **Metrics** |
+| `eval_results.json` | aba **Artifacts** |
+| Modelo registrado (se `--model-name`) | seção **Models** |
+
+#### Rodar com tracking completo
+
+```bash
+python finetune.py \
+    --run-name tdv1-sprint-4 \
+    --model-name tdv1-pt-en \
+    --hub-model-id minha-empresa/tdv1-pt-en-v2
+```
+
+Cada sprint gera uma nova versão no Model Registry (`v1 → v2 → v3`), comparável via UI.
+
+#### Promover uma versão para Production
+
+Na UI do MLflow (`http://localhost:5000`), aba **Models → tdv1-pt-en**:
+1. Selecione a versão desejada
+2. Clique em **Stage → Production**
+
+Ou via código:
+```python
+from mlflow import MlflowClient
+client = MlflowClient("http://localhost:5000")
+client.transition_model_version_stage(
+    name="tdv1-pt-en", version="3", stage="Production"
+)
+```
+
+---
+
+### Referência de parâmetros CLI
+
+| Parâmetro | Padrão | Descrição |
+|---|---|---|
+| `--data-dir` | `finetuning_data/` | Diretório com `manifest.jsonl` |
+| `--output-dir` | `models/tdv1-finetuned/` | Saída do modelo HuggingFace |
+| `--base-model` | `openai/whisper-medium` | Modelo base (`openai/whisper-large-v3` para TDv1) |
+| `--languages` | `portuguese english` | Idiomas a incluir no treino |
+| `--max-steps` | `0` (usa épocas) | Máximo de steps de treino |
+| `--num-epochs` | `3` | Épocas de treino |
+| `--batch-size` | `8` | Amostras por batch por GPU |
+| `--min-confidence` | `0.40` | Confiança mínima para usar como ground-truth |
+| `--eval-steps` | `200` | Frequência de avaliação e checkpoint |
+| `--mlflow-uri` | `MLFLOW_TRACKING_URI` do `.env` | URI do servidor MLflow |
+| `--mlflow-experiment` | `tdv1-finetune` | Nome do experimento |
+| `--run-name` | `tdv1-YYYYMMDD-HHMM` | Nome do run (ex.: `tdv1-sprint-4`) |
+| `--model-name` | — | Nome no Model Registry (ex.: `tdv1-pt-en`) |
+| `--hub-model-id` | — | `usuario/repo` no HuggingFace Hub |
+| `--dry-run` | — | Valida o dataset sem treinar |
+
+---
+
+## Versionamento do modelo
+
+Os arquivos de modelo são grandes demais para o git (centenas de MB a vários GB). A estratégia adotada usa o **HuggingFace Hub** como repositório de modelos, já que o token HF já está configurado no projeto.
+
+### Convenção de nomes
+
+```
+{org}/tdv1-{idiomas}-v{N}
+```
+
+Exemplos:
+- `minha-empresa/tdv1-pt-en-v1` — primeiro modelo treinado
+- `minha-empresa/tdv1-pt-en-v2` — após a sprint 2
+
+### Publicar após o treino
+
+```bash
+python finetune.py --hub-model-id minha-empresa/tdv1-pt-en-v2
+```
+
+O script faz push do modelo HuggingFace (não do CTranslate2) para um repositório **privado** no Hub, criando um commit rastreável com as métricas de WER.
+
+### Carregar uma versão específica no app
+
+```python
+# engine.py — carrega direto do Hub (requer HF_TOKEN no .env)
+self.model = WhisperModel(
+    "minha-empresa/tdv1-pt-en-v2",
+    device=self.device,
+    compute_type=self.compute_type,
+)
+```
+
+Ou baixe localmente e use o caminho:
+```bash
+python -c "
+from huggingface_hub import snapshot_download
+snapshot_download('minha-empresa/tdv1-pt-en-v2', local_dir='models/tdv1-v2-ct2')
+"
+```
+
+### Criar repositório privado (uma vez)
+
+```bash
+python -c "
+from huggingface_hub import HfApi
+HfApi().create_repo('tdv1-pt-en-v1', private=True, repo_type='model')
+"
+```
+
+### Histórico de versões
+
+Mantenha um `MODEL_VERSIONS.md` na raiz do repo git para registrar o que mudou em cada versão:
+
+```markdown
+## v2 — Sprint 4 (2025-04-30)
+- hub: minha-empresa/tdv1-pt-en-v2
+- base: openai/whisper-medium
+- dados: 1.187 segmentos PT + 207 EN (14h de áudio)
+- WER: PT 6.2% | EN 8.1%
+- mudanças: primeira versão bilíngue
+
+## v1 — Sprint 2 (2025-03-15)
+- hub: minha-empresa/tdv1-pt-en-v1
+- base: openai/whisper-medium
+- dados: 543 segmentos PT (6h de áudio)
+- WER: PT 9.4%
+```
+
+---
+
 ## Ferramentas incluídas
 
 | Arquivo | O que faz |
 |---|---|
+| `finetune.py` | Fine-tuning do modelo TDv1 a partir do dataset acumulado |
 | `benchmark.py` | Mede RTF e qualidade do pipeline em um arquivo de áudio |
 | `test_live_transcription.py` | Testa o WebSocket enviando um arquivo em chunks |
 | `example_client.py` | Cliente Python de exemplo para WebSocket |
 | `load_test/locustfile.py` | Teste de carga HTTP + WebSocket (requer `locust`) |
 
 ```bash
+# Fine-tuning (após fechar sprint)
+python finetune.py --dry-run          # valida dataset
+python finetune.py                    # treina e converte
+
 # Benchmark
 python benchmark.py audio.wav
 

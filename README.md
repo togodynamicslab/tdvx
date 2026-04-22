@@ -89,6 +89,24 @@ ws://localhost:8000/transcribe/live
 
 ---
 
+## Fine-tuning (após fechar a sprint)
+
+```bash
+cd tdvx
+pip install -r ../requirements-finetune.txt
+
+python finetune.py --dry-run   # valida o dataset
+python finetune.py             # treina + converte para CTranslate2
+
+# Com publicação no HuggingFace Hub (versionamento)
+python finetune.py --hub-model-id minha-empresa/tdv1-pt-en-v2
+```
+
+Os dados são coletados automaticamente em `tdvx/finetuning_data/` a cada transcrição.
+O modelo treinado é salvo em `tdvx/models/tdv1-finetuned-ct2/`.
+
+---
+
 ## Documentação completa
 
 Ver [tdvx/README.md](tdvx/README.md)

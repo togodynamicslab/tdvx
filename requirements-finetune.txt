@@ -1,0 +1,23 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# requirements-finetune.txt — Dependências exclusivas do fine-tuning TDv1
+#
+# Instale APÓS o requirements.txt base:
+#   pip install -r requirements-finetune.txt
+#
+# PyTorch já deve estar instalado (CPU ou GPU) via requirements.txt.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── HuggingFace stack (treino) ────────────────────────────────────────────────
+transformers>=4.36.0        # WhisperForConditionalGeneration + Seq2SeqTrainer
+datasets>=2.14.0            # Dataset.from_dict, Audio cast, train_test_split
+accelerate>=0.25.0          # backend do Trainer (mixed precision, multi-GPU)
+
+# ── Métricas ──────────────────────────────────────────────────────────────────
+evaluate>=0.4.0             # evaluate.load("wer")
+jiwer>=3.0.0                # implementação de WER usada pelo evaluate
+
+# ── MLflow — tracking de experimentos + Model Registry ───────────────────────
+mlflow>=2.10.0              # tracking server, Model Registry, UI
+
+# ── Logging opcional ──────────────────────────────────────────────────────────
+tensorboard>=2.14.0         # habilite com --tensorboard (combinável com MLflow)
