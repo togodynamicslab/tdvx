@@ -645,7 +645,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             push_to_hub=False,
             predict_with_generate=True,
             generation_max_length=225,
-            dataloader_num_workers=0,   # Windows exige 0; Linux pode usar 4
+            dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
         )
 
