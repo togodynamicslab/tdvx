@@ -7,10 +7,14 @@ venv/
 venv_cpu/
 venv_gpu/
 .venv/
+.venv-finetune/
 env/
 ENV/
 env.bak/
 venv.bak/
+
+# ── Logs de instalação pip ────────────────────────────────────────────────────
+[0-9]*.[0-9]*.[0-9]
 
 # ── Variáveis de ambiente — NUNCA commitar ────────────────────────────────────
 .env
@@ -49,6 +53,7 @@ parts/
 sdist/
 var/
 wheels/
+cvss/
 *.egg-info/
 .installed.cfg
 *.egg
