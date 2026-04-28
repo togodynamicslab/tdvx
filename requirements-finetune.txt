@@ -24,6 +24,8 @@ peft>=0.10.0                # LoRA adapters para Whisper (Hugging Face PEFT)
 
 # ── MLflow — tracking de experimentos + Model Registry ───────────────────────
 mlflow>=2.10.0              # tracking server, Model Registry, UI
+psycopg2-binary>=2.9.0      # driver PostgreSQL (backend do MLflow)
+requests>=2.31.0            # verificação de health check do MLflow
 
 # ── Logging opcional ──────────────────────────────────────────────────────────
 tensorboard>=2.14.0         # habilite com --tensorboard (combinável com MLflow)

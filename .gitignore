@@ -75,3 +75,10 @@ test_results/
 Thumbs.db
 *.jsonl
 finetuning_data/
+
+# ── MLflow — tracking de experimentos ────────────────────────────────────────
+mlruns/                  # runs locais (SQLite backend)
+mlartifacts/             # artefatos locais
+mlflow.db                # banco SQLite local (dev)
+.mlflow/
+

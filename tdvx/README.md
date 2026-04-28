@@ -362,7 +362,46 @@ WHISPER_MODEL=models/tdv1-finetuned-ct2
 
 O fine-tuning integra com MLflow para registrar parâmetros, métricas por step e versionar o modelo no Model Registry.
 
-#### Subir o servidor MLflow
+#### Opção 1: Subir MLflow via Docker (Recomendado)
+
+O projeto inclui um stack completo de MLflow com PostgreSQL para persistência:
+
+```bash
+# Crie o arquivo .env se ainda não existir
+cp .env.example .env
+
+# Inicie os serviços MLflow + PostgreSQL
+docker-compose up -d mlflow postgres
+
+# Verifique se está rodando
+docker-compose ps
+
+# UI disponível em: http://localhost:5000
+```
+
+**Ou use o script auxiliar:**
+
+```bash
+# Linux/Mac
+./start_mlflow.sh
+
+# Windows
+start_mlflow.bat
+```
+
+O que é criado:
+- **MLflow Tracking Server** (porta 5000) — API + UI web
+- **PostgreSQL** (porta 5432) — banco de metadados (runs, params, metrics)
+- **Volumes Docker** — persistência de artefatos e dados do banco
+
+**pgAdmin (opcional)** — Interface web para gerenciar o PostgreSQL:
+```bash
+docker-compose --profile tools up -d pgadmin
+# Acesse: http://localhost:5050
+# Credenciais: ver .env (PGADMIN_EMAIL / PGADMIN_PASSWORD)
+```
+
+#### Opção 2: MLflow standalone (desenvolvimento local)
 
 ```bash
 # Instala (junto com as outras deps de treino)
@@ -374,10 +413,14 @@ mlflow server --host 0.0.0.0 --port 5000
 # UI disponível em: http://localhost:5000
 ```
 
-Configure no `.env`:
+**Limitação**: Usa SQLite local (não recomendado para produção).
+
+#### Configuração no .env
+
 ```env
 MLFLOW_TRACKING_URI=http://localhost:5000
 MLFLOW_FINETUNE_EXPERIMENT=tdv1-finetune
+MLFLOW_DB_PASSWORD=mlflow123
 ```
 
 #### O que é registrado automaticamente
@@ -393,6 +436,36 @@ MLFLOW_FINETUNE_EXPERIMENT=tdv1-finetune
 | Modelo registrado (se `--model-name`) | seção **Models** |
 
 #### Rodar com tracking completo
+
+**Opção A: Wrapper simplificado (Recomendado)**
+
+Use o script `run_finetune_with_mlflow.py` que automatiza todo o processo:
+
+```bash
+# Inicia MLflow automaticamente e executa fine-tuning
+python ../run_finetune_with_mlflow.py --sprint 4
+
+# Com parâmetros customizados
+python ../run_finetune_with_mlflow.py \
+    --sprint 4 \
+    --base-model openai/whisper-large-v3 \
+    --max-steps 1000 \
+    --register-model \
+    --model-name tdv1-pt-en
+
+# Apenas validar dataset (dry-run)
+python ../run_finetune_with_mlflow.py --sprint 4 --dry-run
+```
+
+O wrapper automaticamente:
+- ✅ Verifica se MLflow está rodando
+- ✅ Inicia containers Docker se necessário
+- ✅ Valida o dataset antes de treinar
+- ✅ Nomeia runs de forma padronizada (`tdv1-sprint-N`)
+- ✅ Registra modelo no Model Registry
+- ✅ Mostra links diretos para a UI do MLflow
+
+**Opção B: Script original (controle total)**
 
 ```bash
 python finetune.py \

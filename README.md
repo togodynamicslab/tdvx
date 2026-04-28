@@ -11,14 +11,25 @@ Roda 100% local — sem enviar áudio para serviços externos.
 
 ```
 voice_model/
-├── tdvx/               ← serviço principal (API + GUI + finetuning)
-├── venv_gpu/           ← ambiente virtual GPU (criado pelo setup_gpu.bat)
-├── requirements.txt    ← dependências Python (sem torch)
-├── setup_gpu.bat       ← setup Windows GPU (CUDA 12.8)
-├── setup_gpu.sh        ← setup Linux GPU
-├── setup_cpu.bat       ← setup Windows CPU
-├── setup_cpu.sh        ← setup Linux CPU
-└── .env                ← variáveis de ambiente (não versionar)
+├── tdvx/                         ← serviço principal (API + GUI + finetuning)
+│   ├── app/                      ← FastAPI application
+│   ├── finetuning_data/          ← dataset coletado automaticamente
+│   ├── models/                   ← modelos fine-tunados
+│   ├── finetune.py               ← script de fine-tuning
+│   ├── docker-compose.yml        ← MLflow + PostgreSQL + TDvX
+│   ├── .env.example              ← template de configuração
+│   └── MLFLOW.md                 ← documentação completa do MLflow
+├── run_finetune_with_mlflow.py   ← wrapper para fine-tuning com MLflow
+├── start_mlflow.sh               ← inicia stack MLflow (Linux/Mac)
+├── start_mlflow.bat              ← inicia stack MLflow (Windows)
+├── venv_gpu/                     ← ambiente virtual GPU (criado pelo setup)
+├── requirements.txt              ← dependências Python (sem torch)
+├── requirements-finetune.txt     ← dependências de fine-tuning
+├── setup_gpu.bat                 ← setup Windows GPU (CUDA 12.8)
+├── setup_gpu.sh                  ← setup Linux GPU
+├── setup_cpu.bat                 ← setup Windows CPU
+├── setup_cpu.sh                  ← setup Linux CPU
+└── .env                          ← variáveis de ambiente (não versionar)
 ```
 
 ---
@@ -37,7 +48,28 @@ Configure o `.env`:
 ```env
 PYANNOTE_AUTH_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 WHISPER_COMPUTE_TYPE=int8_float16
+MLFLOW_TRACKING_URI=http://localhost:5000
 ```
+
+---
+
+## MLflow Tracking (Opcional)
+
+Para rastreamento de experimentos de fine-tuning:
+
+```bash
+# Inicia MLflow + PostgreSQL via Docker
+./start_mlflow.sh        # Linux/Mac
+start_mlflow.bat         # Windows
+
+# Ou manualmente
+cd tdvx
+docker-compose up -d mlflow postgres
+```
+
+**UI**: http://localhost:5000
+
+**Documentação completa**: [tdvx/MLFLOW.md](tdvx/MLFLOW.md)
 
 ---
 
