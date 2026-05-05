@@ -1,0 +1,44 @@
+# Frases de teste pt-BR — synthetic_eval.py
+# Uma frase por linha. Linhas com # são ignoradas.
+
+# ── Frases cotidianas ─────────────────────────────────────────────────────────
+Bom dia, como você está hoje?
+Boa tarde, tudo bem por aí?
+Por favor, pode me ajudar com essa questão?
+Obrigado pela sua atenção e gentileza.
+Qual é o seu nome completo?
+
+# ── Negócios e reuniões ───────────────────────────────────────────────────────
+Precisamos agendar uma reunião para amanhã de manhã.
+O relatório financeiro do trimestre foi concluído com sucesso.
+Por favor, envie o documento por e-mail assim que possível.
+Vamos revisar o contrato antes de assinar qualquer documento.
+A proposta comercial precisa ser enviada até sexta-feira.
+
+# ── Tecnologia ────────────────────────────────────────────────────────────────
+O projeto de transcrição está funcionando muito bem.
+A inteligência artificial está transformando o mercado de trabalho.
+O sistema de reconhecimento de voz precisa ser calibrado.
+Os dados foram atualizados no sistema automaticamente.
+O servidor apresentou um erro de conexão inesperado.
+
+# ── Saúde ─────────────────────────────────────────────────────────────────────
+O médico recomendou repouso e hidratação abundante.
+Preciso marcar uma consulta com o cardiologista.
+Os exames de sangue mostraram resultados normais.
+O paciente deve tomar o medicamento de seis em seis horas.
+Sinto dores nas costas quando fico muito tempo sentado.
+
+# ── Frases difíceis (nomes próprios, siglas, números) ─────────────────────────
+O CPF do cliente é necessário para finalizar o cadastro.
+A reunião ocorrerá na Avenida Paulista, número mil e quinhentos.
+O IBGE divulgou os dados do censo demográfico de dois mil e vinte e dois.
+O prazo para recurso é de trinta dias corridos a partir da notificação.
+O protocolo foi registrado sob o número BR dois zero dois cinco barra zero zero um.
+
+# ── Sotaque e regionalismos ───────────────────────────────────────────────────
+Oxente, que coisa boa de se ver!
+Aff, isso não tá certo de jeito nenhum.
+Saudade é uma palavra que não tem tradução.
+Tô com uma fome danada, vamos comer?
+Pode crer, esse negócio vai funcionar.

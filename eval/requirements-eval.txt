@@ -1,0 +1,10 @@
+# Dependências para avaliação com dados sintéticos
+# pip install -r eval/requirements-eval.txt
+
+edge-tts>=6.1.9          # TTS neural pt-BR (Microsoft Edge voices — gratuito)
+faster-whisper>=1.0.0    # transcrição rápida CTranslate2
+librosa>=0.10.0          # manipulação de áudio (resample, pitch, stretch)
+soundfile>=0.12.0        # leitura/escrita de WAV
+jiwer>=3.0.0             # cálculo de WER
+numpy>=1.24.0
+torch>=2.0.0             # requerido pelo faster-whisper
