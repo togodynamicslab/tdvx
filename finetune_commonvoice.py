@@ -53,11 +53,25 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import re
+import unicodedata
+
 import numpy as np
 import torch
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
+def _normalize_text(text: str) -> str:
+    """Normaliza texto pt-BR para treino: Unicode NFC, espaços, pontuação."""
+    text = unicodedata.normalize("NFC", text)
+    text = text.strip()
+    # colapsa múltiplos espaços
+    text = re.sub(r"\s+", " ", text)
+    # remove caracteres de controle
+    text = re.sub(r"[\x00-\x1f\x7f]", "", text)
+    return text
 
 logging.basicConfig(
     level=logging.INFO,
@@ -208,8 +222,9 @@ def load_cv_split(
     with open(tsv_path, encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
-            sentence = row.get("sentence", "").strip()
-            if not sentence:
+            sentence = _normalize_text(row.get("sentence", ""))
+            # descarta frases muito curtas (< 3 palavras) — causam hallucination
+            if not sentence or len(sentence.split()) < 3:
                 skipped += 1
                 continue
 
@@ -242,6 +257,38 @@ def load_cv_split(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Amostras sintéticas de silêncio/ruído com label vazio
+# Ensina o modelo a NÃO transcrever nada quando não há fala — anti-hallucination
+# ─────────────────────────────────────────────────────────────────────────────
+
+def generate_no_speech_entries(n: int, sample_rate: int = 16_000) -> List[Dict]:
+    """
+    Gera n entradas sintéticas de ruído/silêncio com transcrição vazia.
+    Cada entrada tem o áudio inline em 'audio_array' (sem arquivo em disco).
+    """
+    rng = np.random.default_rng(seed=42)
+    entries = []
+    durations = [1.0, 2.0, 3.0, 4.0, 5.0]   # segundos variados
+
+    noise_fns = [
+        lambda n: rng.standard_normal(n).astype(np.float32) * 0.02,          # white noise fraco
+        lambda n: rng.standard_normal(n).astype(np.float32) * 0.10,          # white noise forte
+        lambda n: np.zeros(n, dtype=np.float32),                             # silêncio puro
+        lambda n: (np.cumsum(rng.standard_normal(n)) * 0.005).astype(np.float32),  # ruído rosa
+    ]
+
+    for i in range(n):
+        dur = durations[i % len(durations)]
+        fn  = noise_fns[i % len(noise_fns)]
+        length = int(dur * sample_rate)
+        audio = np.clip(fn(length), -1.0, 1.0)
+        entries.append({"audio_array": audio, "sentence": ""})
+
+    log.info("Geradas %d amostras no-speech sintéticas", len(entries))
+    return entries
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Dataset lazy (PyTorch) — evita serializar espectrogramas via IPC
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -266,19 +313,27 @@ class CommonVoiceDataset(torch.utils.data.Dataset):
         task: str,
         whisper_language: str,
         label: str = "dataset",
+        augment: bool = False,
     ) -> None:
         import librosa as _librosa
         self._librosa   = _librosa
         self._processor = processor
+        self._augment   = augment
+        self._rng       = np.random.default_rng(seed=0)
 
         processor.tokenizer.set_prefix_tokens(language=whisper_language, task=task)
 
-        # Pré-tokeniza para filtrar textos que excedem o limite do decoder
         valid, skipped = [], 0
         for e in entries:
-            ids = processor.tokenizer(e["sentence"]).input_ids
+            sentence = e.get("sentence", "")
+            ids = processor.tokenizer(sentence).input_ids
             if len(ids) <= self._MAX_LABEL_TOKENS:
-                valid.append({"path": e["audio_filepath"], "label_ids": ids})
+                item = {"label_ids": ids}
+                if "audio_array" in e:
+                    item["audio_array"] = e["audio_array"]   # no-speech inline
+                else:
+                    item["path"] = e["audio_filepath"]
+                valid.append(item)
             else:
                 skipped += 1
 
@@ -290,16 +345,43 @@ class CommonVoiceDataset(torch.utils.data.Dataset):
         log.info("%s: %d amostras válidas", label, len(valid))
         self._items = valid
 
+    def _augment_audio(self, audio: np.ndarray) -> np.ndarray:
+        """Augmentação leve aleatória para robustez a ruído e variações de fala."""
+        rng = self._rng
+
+        # 40% chance: adiciona ruído branco fraco (SNR ~25 dB)
+        if rng.random() < 0.4:
+            noise = rng.standard_normal(len(audio)).astype(np.float32)
+            signal_rms = np.sqrt(np.mean(audio ** 2)) + 1e-9
+            noise_rms  = np.sqrt(np.mean(noise ** 2)) + 1e-9
+            snr_linear = 10 ** (25 / 20)
+            audio = audio + (signal_rms / (noise_rms * snr_linear)) * noise
+
+        # 20% chance: leve variação de velocidade (±10%)
+        if rng.random() < 0.2:
+            rate = float(rng.uniform(0.9, 1.1))
+            audio = self._librosa.effects.time_stretch(audio, rate=rate)
+
+        return np.clip(audio, -1.0, 1.0).astype(np.float32)
+
     def __len__(self) -> int:
         return len(self._items)
 
     def __getitem__(self, idx: int) -> Dict:
         item = self._items[idx]
-        try:
-            array, _ = self._librosa.load(item["path"], sr=16_000, mono=True)
-        except Exception as exc:
-            log.debug("Falha ao carregar %s: %s — substituindo por silêncio", item["path"], exc)
-            array = np.zeros(16_000, dtype=np.float32)
+
+        if "audio_array" in item:
+            array = item["audio_array"]
+        else:
+            try:
+                array, _ = self._librosa.load(item["path"], sr=16_000, mono=True)
+            except Exception as exc:
+                log.debug("Falha ao carregar %s: %s — substituindo por silêncio", item["path"], exc)
+                array = np.zeros(16_000, dtype=np.float32)
+
+        if self._augment and len(item["label_ids"]) > 1:
+            # só aumenta amostras com fala real (não no-speech)
+            array = self._augment_audio(array)
 
         feats = self._processor.feature_extractor(
             array, sampling_rate=16_000, return_tensors="pt"
@@ -590,9 +672,22 @@ def run_finetune(args: argparse.Namespace) -> None:
     log.info("Carregando processor: %s", args.base_model)
     processor = WhisperProcessor.from_pretrained(args.base_model)
 
-    # ── 4. Dataset lazy (PyTorch) — sem datasets.map(), sem IPC, sem OOM ─────
-    train_ds = CommonVoiceDataset(train_entries, processor, args.task, whisper_lang, "treino")
-    eval_ds  = CommonVoiceDataset(eval_entries,  processor, args.task, whisper_lang, "avaliação")
+    # ── 4. Amostras no-speech (anti-hallucination) ────────────────────────────
+    # Injeta ~5% de ruído/silêncio com label vazio no treino
+    n_no_speech = max(50, len(train_entries) // 20)
+    no_speech_entries = generate_no_speech_entries(n_no_speech)
+    train_entries_aug = train_entries + no_speech_entries
+    # embaralha para não deixar todos os no-speech no final
+    import random as _random
+    _random.seed(42)
+    _random.shuffle(train_entries_aug)
+
+    # ── 5. Dataset lazy (PyTorch) — sem datasets.map(), sem IPC, sem OOM ─────
+    train_ds = CommonVoiceDataset(
+        train_entries_aug, processor, args.task, whisper_lang, "treino",
+        augment=not args.no_augment,
+    )
+    eval_ds = CommonVoiceDataset(eval_entries, processor, args.task, whisper_lang, "avaliação")
 
     with MlflowTracker(args) as tracker:
         tracker.log_params(args, len(train_ds), len(eval_ds))
@@ -602,9 +697,15 @@ def run_finetune(args: argparse.Namespace) -> None:
         model = WhisperForConditionalGeneration.from_pretrained(args.base_model)
 
         # Configura geração para o idioma alvo
-        model.generation_config.language          = whisper_lang
-        model.generation_config.task              = args.task
-        model.generation_config.forced_decoder_ids = None
+        model.generation_config.language               = whisper_lang
+        model.generation_config.task                   = args.task
+        model.generation_config.forced_decoder_ids     = None
+        # Anti-hallucination: não condiciona no texto anterior (evita snowball)
+        model.generation_config.condition_on_previous_text = False
+        # Suprime saída quando confiança é baixa (ruído, silêncio)
+        model.generation_config.no_speech_threshold   = 0.6
+        model.generation_config.logprob_threshold     = -1.0
+        model.generation_config.compression_ratio_threshold = 2.4
 
         if args.use_lora:
             model = apply_lora(model)
@@ -647,6 +748,10 @@ def run_finetune(args: argparse.Namespace) -> None:
             generation_max_length=225,
             dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
+            # Reduz overconfidence → melhora precisão em palavras raras
+            label_smoothing_factor=0.1,
+            # Clip de gradiente para estabilidade
+            max_grad_norm=1.0,
         )
 
         # ── 9. Trainer ────────────────────────────────────────────────────────
@@ -783,6 +888,10 @@ def parse_args() -> argparse.Namespace:
     # Checkpoint
     p.add_argument("--resume-from-checkpoint", default="",
                    help="Caminho para checkpoint ou 'auto' para retomar o último")
+
+    # Augmentação e anti-hallucination
+    p.add_argument("--no-augment", action="store_true",
+                   help="Desativa augmentação de áudio no treino (mais rápido, menos robusto)")
 
     # Utilitário
     p.add_argument("--dry-run", action="store_true",
