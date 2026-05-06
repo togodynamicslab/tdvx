@@ -21,10 +21,16 @@ venv.bak/
 
 # ── Modelos locais (muito grandes para versionar) ─────────────────────────────
 models/
+model/
 .cache/
 *.pt
 *.bin
 *.safetensors
+*.tar.gz
+
+# ── Resultados de avaliação gerados ──────────────────────────────────────────
+eval/results/
+eval/audio/
 
 # ── Saídas do pipeline e gravações ───────────────────────────────────────────
 *.json

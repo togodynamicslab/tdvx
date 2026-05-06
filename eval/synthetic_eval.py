@@ -228,19 +228,18 @@ def apply_noise(audio: np.ndarray, noise_type: str) -> np.ndarray:
         return _add_noise(audio, pink, snr_db=12)
 
     elif noise_type == "reverb_small":
-        # Reverb simples via convolução com IR sintético curto
         ir_len = int(0.2 * SAMPLE_RATE)
-        ir = np.exp(-np.linspace(0, 6, ir_len)) * np.random.randn(ir_len)
-        ir = ir.astype(np.float32) / (np.max(np.abs(ir)) + 1e-9)
-        reverbed = np.convolve(audio, ir, mode="full")[:n]
-        return np.clip(reverbed / (np.max(np.abs(reverbed)) + 1e-9), -1.0, 1.0)
+        ir = (np.exp(-np.linspace(0, 6, ir_len)) * np.random.randn(ir_len)).astype(np.float32)
+        ir /= np.max(np.abs(ir)) + 1e-9
+        reverbed = np.convolve(audio.astype(np.float32), ir, mode="full")[:n].astype(np.float32)
+        return np.clip(reverbed / (np.max(np.abs(reverbed)) + 1e-9), -1.0, 1.0).astype(np.float32)
 
     elif noise_type == "reverb_large":
         ir_len = int(1.5 * SAMPLE_RATE)
-        ir = np.exp(-np.linspace(0, 3, ir_len)) * np.random.randn(ir_len)
-        ir = ir.astype(np.float32) / (np.max(np.abs(ir)) + 1e-9)
-        reverbed = np.convolve(audio, ir, mode="full")[:n]
-        return np.clip(reverbed / (np.max(np.abs(reverbed)) + 1e-9), -1.0, 1.0)
+        ir = (np.exp(-np.linspace(0, 3, ir_len)) * np.random.randn(ir_len)).astype(np.float32)
+        ir /= np.max(np.abs(ir)) + 1e-9
+        reverbed = np.convolve(audio.astype(np.float32), ir, mode="full")[:n].astype(np.float32)
+        return np.clip(reverbed / (np.max(np.abs(reverbed)) + 1e-9), -1.0, 1.0).astype(np.float32)
 
     elif noise_type == "low_bitrate":
         # Simula compressão: downsample → upsample (artefatos de aliasing)
@@ -282,14 +281,18 @@ def transcribe(model: "WhisperModel", audio: np.ndarray) -> Tuple[str, str, floa
         vad_filter=True,
     )
     texts = []
-    avg_log_prob = 0.0
-    no_speech_prob = info.all_language_probs.get("", 0.0) if hasattr(info, "all_language_probs") else 0.0
+    avg_log_probs = []
+    no_speech_probs = []
 
     for seg in segments:
         texts.append(seg.text.strip())
-        avg_log_prob = seg.avg_logprob
+        avg_log_probs.append(seg.avg_logprob)
+        no_speech_probs.append(seg.no_speech_prob)
 
-    return " ".join(texts).strip(), info.language, avg_log_prob, info.vad_options.min_silence_duration_ms if hasattr(info, "vad_options") else 0.0
+    avg_log_prob = float(np.mean(avg_log_probs)) if avg_log_probs else 0.0
+    no_speech_prob = float(np.mean(no_speech_probs)) if no_speech_probs else 0.0
+
+    return " ".join(texts).strip(), info.language, avg_log_prob, no_speech_prob
 
 
 def _safe_wer(reference: str, hypothesis: str) -> float:
@@ -380,8 +383,8 @@ def save_reports(results: List[EvalResult], output_dir: Path):
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Avaliação sintética do modelo TDvX")
-    p.add_argument("--model-path", default="openai/whisper-medium",
-                   help="Caminho do modelo fine-tunado ou nome HuggingFace (padrão: openai/whisper-medium)")
+    p.add_argument("--model-path", default="Systran/faster-whisper-medium",
+                   help="Caminho do modelo fine-tunado ou nome HuggingFace CTranslate2 (padrão: Systran/faster-whisper-medium)")
     p.add_argument("--texts-file", type=Path,
                    help="Arquivo .txt com frases (uma por linha). Padrão: frases embutidas")
     p.add_argument("--noise-types", nargs="+", default=NOISE_TYPES,
