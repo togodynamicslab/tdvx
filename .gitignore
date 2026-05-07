@@ -21,7 +21,6 @@ venv.bak/
 
 # ── Modelos locais (muito grandes para versionar) ─────────────────────────────
 models/
-model/
 .cache/
 *.pt
 *.bin

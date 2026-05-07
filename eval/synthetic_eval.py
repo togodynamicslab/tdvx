@@ -388,8 +388,8 @@ def save_reports(results: List[EvalResult], output_dir: Path):
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Avaliação sintética do modelo TDvX")
-    p.add_argument("--model-path", default="./model/tdv1-cv-pt-ct2",
-                   help="Caminho do modelo CTranslate2 (padrão: ./model/tdv1-cv-pt-ct2)")
+    p.add_argument("--model-path", default="./models/tdv2",
+                   help="Caminho do modelo CTranslate2 (padrão: ./models/tdv2)")
     p.add_argument("--texts-file", type=Path,
                    help="Arquivo .txt com frases (uma por linha). Padrão: frases embutidas")
     p.add_argument("--noise-types", nargs="+", default=NOISE_TYPES,
