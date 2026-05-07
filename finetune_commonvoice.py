@@ -112,6 +112,16 @@ try:
 except ImportError:
     pass
 
+_GDRIVE_AVAILABLE = False
+try:
+    from google.oauth2 import service_account as _gdrive_sa
+    from google.oauth2.credentials import Credentials as _OAuthCredentials
+    from googleapiclient.discovery import build as _gdrive_build
+    from googleapiclient.http import MediaFileUpload as _MediaFileUpload
+    _GDRIVE_AVAILABLE = True
+except ImportError:
+    pass
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Constantes e configuração padrão
@@ -517,6 +527,114 @@ def convert_to_ctranslate2(hf_dir: Path, ct2_dir: Path, quantization: str = "int
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Upload para Google Drive (modelos grandes → evita perda em VM efêmera)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def upload_dir_to_gdrive(
+    local_dir: Path,
+    parent_folder_id: str,
+    credentials_path: Path,
+    folder_name: Optional[str] = None,
+) -> Optional[str]:
+    """
+    Faz upload de um diretório inteiro para o Google Drive via upload resumível.
+
+    Usa chunks de 100 MB para tolerar conexões lentas e permitir retomada
+    automática em caso de falha de rede — adequado para modelos de vários GB.
+
+    Requer Service Account com papel "Editor" (ou "Contributor") na pasta destino.
+    Para criar uma Service Account e o JSON de credenciais, veja:
+      https://developers.google.com/drive/api/guides/about-auth
+
+    Args:
+        local_dir:        Diretório local a enviar.
+        parent_folder_id: ID da pasta destino no Drive (string após /folders/ na URL).
+        credentials_path: Caminho para o JSON de Service Account.
+        folder_name:      Nome da subpasta a criar no Drive (padrão: local_dir.name).
+
+    Returns:
+        URL da pasta criada no Drive, ou None se o upload falhar.
+    """
+    if not _GDRIVE_AVAILABLE:
+        log.warning(
+            "google-api-python-client não instalado — upload ignorado.\n"
+            "  pip install google-api-python-client google-auth"
+        )
+        return None
+
+    if not local_dir.exists():
+        log.warning("Diretório local não existe, upload ignorado: %s", local_dir)
+        return None
+
+    _SCOPES     = ["https://www.googleapis.com/auth/drive"]
+    _CHUNK_SIZE = 100 * 1024 * 1024  # 100 MB por chunk
+
+    try:
+        import json as _json
+        key_data = _json.loads(credentials_path.read_text(encoding="utf-8"))
+        if key_data.get("type") == "service_account":
+            creds = _gdrive_sa.Credentials.from_service_account_file(
+                str(credentials_path), scopes=_SCOPES
+            )
+        else:
+            # token.json OAuth2 gerado pelo auth_gdrive.py
+            creds = _OAuthCredentials.from_authorized_user_file(str(credentials_path), _SCOPES)
+            if creds.expired and creds.refresh_token:
+                from google.auth.transport.requests import Request as _Request
+                creds.refresh(_Request())
+        service = _gdrive_build("drive", "v3", credentials=creds, cache_discovery=False)
+    except Exception as exc:
+        log.error("Falha ao autenticar no Google Drive: %s", exc)
+        return None
+
+    folder_name = folder_name or local_dir.name
+
+    def _make_folder(name: str, parent_id: str) -> str:
+        meta = {
+            "name": name,
+            "mimeType": "application/vnd.google-apps.folder",
+            "parents": [parent_id],
+        }
+        return service.files().create(body=meta, fields="id").execute()["id"]
+
+    def _upload_file(file_path: Path, parent_id: str) -> None:
+        size_mb = file_path.stat().st_size / 1e6
+        log.info("  Enviando %-40s (%.1f MB) ...", file_path.name, size_mb)
+        media   = _MediaFileUpload(str(file_path), resumable=True, chunksize=_CHUNK_SIZE)
+        request = service.files().create(
+            body={"name": file_path.name, "parents": [parent_id]},
+            media_body=media,
+            fields="id",
+        )
+        response = None
+        while response is None:
+            status, response = request.next_chunk()
+            if status:
+                log.info("    %s ... %d%%", file_path.name, int(status.progress() * 100))
+        log.info("  ✓ %s", file_path.name)
+
+    def _upload_dir(dir_path: Path, parent_id: str) -> None:
+        for item in sorted(dir_path.iterdir()):
+            if item.is_dir():
+                sub_id = _make_folder(item.name, parent_id)
+                _upload_dir(item, sub_id)
+            elif item.is_file():
+                _upload_file(item, parent_id)
+
+    try:
+        log.info("Google Drive: criando pasta '%s' em folder_id=%s ...", folder_name, parent_folder_id)
+        drive_folder_id = _make_folder(folder_name, parent_folder_id)
+        drive_url       = f"https://drive.google.com/drive/folders/{drive_folder_id}"
+        log.info("Google Drive: iniciando upload de '%s' → %s", local_dir, drive_url)
+        _upload_dir(local_dir, drive_folder_id)
+        log.info("Google Drive: upload concluído → %s", drive_url)
+        return drive_url
+    except Exception as exc:
+        log.error("Falha no upload para Google Drive: %s", exc)
+        return None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # MLflow tracking (simplificado — sem Model Registry)
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -809,12 +927,44 @@ def run_finetune(args: argparse.Namespace) -> None:
 
         tracker.log_final(metrics)
 
+        # ── 14. Upload para Google Drive (opcional) ───────────────────────────
+        if args.gdrive_folder_id and args.gdrive_credentials:
+            creds_path = Path(args.gdrive_credentials).resolve()
+            if not creds_path.exists():
+                log.warning(
+                    "Credenciais do Drive não encontradas: %s — upload ignorado.", creds_path
+                )
+            else:
+                timestamp = datetime.now().strftime("%Y%m%d-%H%M")
+                run_label = args.run_name or f"cv-{lang_code}-{timestamp}"
+
+                hf_url = upload_dir_to_gdrive(
+                    output_dir,
+                    args.gdrive_folder_id,
+                    creds_path,
+                    folder_name=f"{run_label}-hf",
+                )
+                if hf_url:
+                    log.info("Modelo HF no Drive: %s", hf_url)
+
+                if args.convert_ct2 and ct2_dir.exists():
+                    ct2_url = upload_dir_to_gdrive(
+                        ct2_dir,
+                        args.gdrive_folder_id,
+                        creds_path,
+                        folder_name=f"{run_label}-ct2",
+                    )
+                    if ct2_url:
+                        log.info("Modelo CT2 no Drive: %s", ct2_url)
+
     log.info("═" * 65)
     log.info("Fine-tuning concluído!")
     log.info("  WER pt-BR    : %.2f%%", wer)
     log.info("  Modelo HF    : %s", output_dir)
     if args.convert_ct2:
         log.info("  Modelo CT2   : %s", ct2_dir)
+    if args.gdrive_folder_id:
+        log.info("  Google Drive : https://drive.google.com/drive/folders/%s", args.gdrive_folder_id)
     log.info("═" * 65)
 
 
@@ -892,6 +1042,22 @@ def parse_args() -> argparse.Namespace:
     # Augmentação e anti-hallucination
     p.add_argument("--no-augment", action="store_true",
                    help="Desativa augmentação de áudio no treino (mais rápido, menos robusto)")
+
+    # Google Drive — upload automático do modelo após o treino
+    p.add_argument(
+        "--gdrive-folder-id", default="",
+        help=(
+            "ID da pasta destino no Google Drive. Encontre na URL: "
+            "https://drive.google.com/drive/folders/<ID>"
+        ),
+    )
+    p.add_argument(
+        "--gdrive-credentials", default="",
+        help=(
+            "Caminho para o JSON de Service Account do Google Drive. "
+            "Crie em: console.cloud.google.com → IAM → Service Accounts → Keys."
+        ),
+    )
 
     # Utilitário
     p.add_argument("--dry-run", action="store_true",

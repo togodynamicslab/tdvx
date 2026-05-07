@@ -29,3 +29,7 @@ requests>=2.31.0            # verificação de health check do MLflow
 
 # ── Logging opcional ──────────────────────────────────────────────────────────
 tensorboard>=2.14.0         # habilite com --tensorboard (combinável com MLflow)
+
+# ── Google Drive — upload automático do modelo (opcional, --gdrive-folder-id) ──
+google-api-python-client>=2.100.0   # cliente REST da Drive API v3
+google-auth>=2.23.0                  # autenticação via Service Account JSON
