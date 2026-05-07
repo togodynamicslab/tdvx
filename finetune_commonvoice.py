@@ -653,9 +653,13 @@ def upload_dir_to_gdrive(
                 log.info("    %s ... %d%%", file_path.name, int(status.progress() * 100))
         log.info("  ✓ %s", file_path.name)
 
-    def _upload_dir(dir_path: Path, parent_id: str) -> None:
+    def _upload_dir(dir_path: Path, parent_id: str, top_level: bool = False) -> None:
         for item in sorted(dir_path.iterdir()):
             if item.is_dir():
+                # Ignora checkpoints intermediários na raiz do modelo
+                if top_level and item.name.startswith("checkpoint-"):
+                    log.info("  Ignorando checkpoint: %s", item.name)
+                    continue
                 sub_id = _make_folder(item.name, parent_id)
                 _upload_dir(item, sub_id)
             elif item.is_file():
@@ -666,7 +670,7 @@ def upload_dir_to_gdrive(
         drive_folder_id = _make_folder(folder_name, parent_folder_id)
         drive_url       = f"https://drive.google.com/drive/folders/{drive_folder_id}"
         log.info("Google Drive: iniciando upload de '%s' → %s", local_dir, drive_url)
-        _upload_dir(local_dir, drive_folder_id)
+        _upload_dir(local_dir, drive_folder_id, top_level=True)
         log.info("Google Drive: upload concluído → %s", drive_url)
         return drive_url
     except Exception as exc:
