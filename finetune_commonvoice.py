@@ -434,7 +434,7 @@ class WhisperDataCollator:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def make_compute_metrics_fn(processor: "WhisperProcessor"):
-    wer_metric = evaluate.load("wer")
+    from jiwer import wer as _jiwer_wer
     normalizer = getattr(processor.tokenizer, "normalize", None) or processor.tokenizer._normalize
 
     def compute_metrics(pred):
@@ -452,7 +452,7 @@ def make_compute_metrics_fn(processor: "WhisperProcessor"):
         if not pairs:
             return {"wer": float("nan")}
         pred_f, label_f = zip(*pairs)
-        wer = wer_metric.compute(predictions=list(pred_f), references=list(label_f))
+        wer = _jiwer_wer(list(label_f), list(pred_f))
         return {"wer": round(100 * wer, 2)}
 
     return compute_metrics
