@@ -435,11 +435,17 @@ class WhisperDataCollator:
 
 def make_compute_metrics_fn(processor: "WhisperProcessor"):
     from jiwer import wer as _jiwer_wer
+    import numpy as _np
     normalizer = getattr(processor.tokenizer, "normalize", None) or processor.tokenizer._normalize
 
     def compute_metrics(pred):
         pred_ids  = pred.predictions
         label_ids = pred.label_ids
+
+        # predict_with_generate=False → predictions são logits [batch, seq, vocab]
+        if isinstance(pred_ids, _np.ndarray) and pred_ids.ndim == 3:
+            pred_ids = _np.argmax(pred_ids, axis=-1)
+
         label_ids[label_ids == -100] = processor.tokenizer.pad_token_id
 
         pred_str  = processor.tokenizer.batch_decode(pred_ids,  skip_special_tokens=True)
@@ -859,10 +865,10 @@ def run_finetune(args: argparse.Namespace) -> None:
             logging_steps=50,
             report_to=tracker.report_to,
             load_best_model_at_end=True,
-            metric_for_best_model="wer",
+            metric_for_best_model="eval_loss",
             greater_is_better=False,
             push_to_hub=False,
-            predict_with_generate=True,
+            predict_with_generate=False,
             generation_max_length=225,
             dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
@@ -880,7 +886,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             eval_dataset=eval_ds,
             data_collator=data_collator,
             compute_metrics=compute_metrics,
-            tokenizer=processor.feature_extractor,
+            tokenizer=processor.tokenizer,
         )
 
         # ── 10. Treino (com suporte a retomada de checkpoint) ─────────────────
