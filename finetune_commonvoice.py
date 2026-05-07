@@ -750,6 +750,9 @@ def run_finetune(args: argparse.Namespace) -> None:
         )
         sys.exit(1)
 
+    # Reduz fragmentação de VRAM em multi-GPU — especialmente durante eval com logits grandes
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
     set_seed(42)
 
     lang_code      = args.language.lower()
@@ -849,7 +852,7 @@ def run_finetune(args: argparse.Namespace) -> None:
         training_args = Seq2SeqTrainingArguments(
             output_dir=str(output_dir),
             per_device_train_batch_size=args.batch_size,
-            per_device_eval_batch_size=max(1, args.batch_size // 2),
+            per_device_eval_batch_size=max(1, args.batch_size // 8),
             gradient_accumulation_steps=args.gradient_accumulation_steps,
             learning_rate=args.learning_rate,
             warmup_steps=args.warmup_steps,
