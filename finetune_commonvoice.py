@@ -90,8 +90,8 @@ try:
     from datasets import Dataset
     from transformers import (
         EarlyStoppingCallback,
-        Seq2SeqTrainer,
-        Seq2SeqTrainingArguments,
+        Trainer,
+        TrainingArguments,
         WhisperForConditionalGeneration,
         WhisperProcessor,
         set_seed,
@@ -849,7 +849,7 @@ def run_finetune(args: argparse.Namespace) -> None:
         use_fp16 = torch.cuda.is_available() and not args.bf16
         use_bf16 = args.bf16 and torch.cuda.is_available()
 
-        training_args = Seq2SeqTrainingArguments(
+        training_args = TrainingArguments(
             output_dir=str(output_dir),
             per_device_train_batch_size=args.batch_size,
             per_device_eval_batch_size=max(1, args.batch_size // 8),
@@ -870,9 +870,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             metric_for_best_model="eval_loss",
             greater_is_better=False,
             push_to_hub=False,
-            predict_with_generate=False,
             prediction_loss_only=True,
-            generation_max_length=225,
             dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
             label_smoothing_factor=0.0,
@@ -892,14 +890,14 @@ def run_finetune(args: argparse.Namespace) -> None:
                 args.early_stopping_patience, args.early_stopping_threshold,
             )
 
-        trainer = Seq2SeqTrainer(
+        trainer = Trainer(
             model=model,
             args=training_args,
             train_dataset=train_ds,
             eval_dataset=eval_ds,
             data_collator=data_collator,
             compute_metrics=compute_metrics,
-            tokenizer=processor.tokenizer,
+            processing_class=processor.feature_extractor,
             callbacks=callbacks or None,
         )
 
