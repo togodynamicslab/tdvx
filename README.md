@@ -93,15 +93,24 @@ python finetune_commonvoice.py \
   --dry-run
 ```
 
-### 9. Treino completo
+### 9. Credenciais do Google Drive (criar com nano na VM)
+
+```bash
+# Token OAuth2 gerado pelo auth_gdrive.py na sua máquina local
+nano ~/tdvx/token.json
+# (cole o conteúdo do token.json e salve: Ctrl+O, Enter, Ctrl+X)
+```
+
+### 10. Treino completo v3 com upload automático para o Drive
 
 ```bash
 nohup python finetune_commonvoice.py \
   --language pt \
   --cvss-dir ./cvss \
-  --run-name tdv1-cv-pt-v2 \
-  --model-name tdv1-pt-proprietario \
+  --run-name tdv3-cv-pt-v1 \
   --num-epochs 3 \
+  --gdrive-folder-id 1NGYsJ_weolOgWOVgcs_MJxY_FBBqkLxC \
+  --gdrive-credentials token.json \
   > finetune.log 2>&1 &
 
 # Acompanhar o log
@@ -111,12 +120,19 @@ tail -f finetune.log
 watch -n 2 nvidia-smi
 ```
 
-### 10. Retomar de checkpoint (se a VM cair)
+Ao final do treino, o modelo é enviado automaticamente para o Drive:
+- `tdv3-cv-pt-v1-hf/` — modelo HuggingFace
+- `tdv3-cv-pt-v1-ct2/` — modelo CTranslate2 int8 (produção)
+
+### 11. Retomar de checkpoint (se a VM cair)
 
 ```bash
 python finetune_commonvoice.py \
   --language pt \
   --cvss-dir ./cvss \
+  --run-name tdv3-cv-pt-v1 \
+  --gdrive-folder-id 1NGYsJ_weolOgWOVgcs_MJxY_FBBqkLxC \
+  --gdrive-credentials token.json \
   --resume-from-checkpoint auto
 ```
 
