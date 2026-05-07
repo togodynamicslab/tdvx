@@ -279,6 +279,11 @@ def transcribe(model: "WhisperModel", audio: np.ndarray) -> Tuple[str, str, floa
         language="pt",
         beam_size=5,
         vad_filter=True,
+        # v2: anti-alucinação em ruído
+        condition_on_previous_text=False,
+        no_speech_threshold=0.6,
+        logprob_threshold=-1.0,
+        compression_ratio_threshold=2.4,
     )
     texts = []
     avg_log_probs = []
@@ -383,8 +388,8 @@ def save_reports(results: List[EvalResult], output_dir: Path):
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Avaliação sintética do modelo TDvX")
-    p.add_argument("--model-path", default="Systran/faster-whisper-medium",
-                   help="Caminho do modelo fine-tunado ou nome HuggingFace CTranslate2 (padrão: Systran/faster-whisper-medium)")
+    p.add_argument("--model-path", default="./model/tdv1-cv-pt-ct2",
+                   help="Caminho do modelo CTranslate2 (padrão: ./model/tdv1-cv-pt-ct2)")
     p.add_argument("--texts-file", type=Path,
                    help="Arquivo .txt com frases (uma por linha). Padrão: frases embutidas")
     p.add_argument("--noise-types", nargs="+", default=NOISE_TYPES,
@@ -430,7 +435,9 @@ def main():
         device = args.device
 
     compute_type = "int8_float16" if device == "cuda" else "int8"
-    log.info("Carregando modelo '%s' em %s (%s)…", args.model_path, device, compute_type)
+    model_label = "tdv2"
+    log.info("Carregando modelo '%s' [%s] em %s (%s)…", args.model_path, model_label, device, compute_type)
+    log.info("TDv2 inference: condition_on_previous_text=False | no_speech_threshold=0.6 | logprob_threshold=-1.0")
 
     model = WhisperModel(args.model_path, device=device, compute_type=compute_type)
     log.info("Modelo carregado.")
