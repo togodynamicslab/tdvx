@@ -506,31 +506,64 @@ def convert_to_ctranslate2(hf_dir: Path, ct2_dir: Path, quantization: str = "int
     """
     Converte o modelo fine-tunado para o formato CTranslate2 (faster-whisper).
     A quantização int8 reduz o modelo em ~4x e acelera 2-3x em CPU/GPU.
-    """
-    ct2_dir.mkdir(parents=True, exist_ok=True)
-    commands = [
-        [sys.executable, "-m", "ctranslate2.converters.transformers",
-         "--model", str(hf_dir), "--output_dir", str(ct2_dir),
-         "--quantization", quantization, "--force"],
-        ["ct2-transformers-converter",
-         "--model", str(hf_dir), "--output_dir", str(ct2_dir),
-         "--quantization", quantization, "--force"],
-    ]
-    for cmd in commands:
-        try:
-            log.info("Convertendo para CTranslate2 (quantização: %s) ...", quantization)
-            subprocess.run(cmd, check=True)
-            log.info("Conversão concluída → %s", ct2_dir)
-            return True
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            continue
 
-    log.warning(
-        "Conversão automática falhou. Execute manualmente:\n"
-        "  ct2-transformers-converter --model %s --output_dir %s --quantization %s",
-        hf_dir, ct2_dir, quantization,
-    )
-    return False
+    Lida automaticamente com a incompatibilidade entre transformers>=5.0 e ctranslate2:
+    faz downgrade temporário para 4.44.2, converte, e restaura a versão original.
+    """
+    import importlib.metadata as _meta
+
+    ct2_dir.mkdir(parents=True, exist_ok=True)
+
+    ct2_cmd = [sys.executable, "-m", "ctranslate2.converters.transformers",
+               "--model", str(hf_dir), "--output_dir", str(ct2_dir),
+               "--quantization", quantization, "--force"]
+
+    def _run_conversion() -> bool:
+        for cmd in [ct2_cmd, ["ct2-transformers-converter",
+                               "--model", str(hf_dir), "--output_dir", str(ct2_dir),
+                               "--quantization", quantization, "--force"]]:
+            try:
+                log.info("Convertendo para CTranslate2 (quantização: %s) ...", quantization)
+                subprocess.run(cmd, check=True)
+                log.info("Conversão concluída → %s", ct2_dir)
+                return True
+            except (subprocess.CalledProcessError, FileNotFoundError):
+                continue
+        return False
+
+    # Verifica se transformers >= 5.0 (incompatível com ctranslate2 atual)
+    try:
+        tf_version = _meta.version("transformers")
+        needs_downgrade = int(tf_version.split(".")[0]) >= 5
+    except Exception:
+        needs_downgrade = False
+
+    if needs_downgrade:
+        log.info("transformers %s detectado — downgrade temporário para 4.44.2 (CT2)", tf_version)
+        try:
+            subprocess.run(
+                [sys.executable, "-m", "pip", "install", "transformers==4.44.2", "-q"],
+                check=True,
+            )
+            ok = _run_conversion()
+        finally:
+            log.info("Restaurando transformers %s ...", tf_version)
+            subprocess.run(
+                [sys.executable, "-m", "pip", "install", f"transformers=={tf_version}", "-q"],
+                check=True,
+            )
+        return ok
+
+    ok = _run_conversion()
+    if not ok:
+        log.warning(
+            "Conversão automática falhou. Execute manualmente:\n"
+            "  pip install transformers==4.44.2\n"
+            "  ct2-transformers-converter --model %s --output_dir %s --quantization %s\n"
+            "  pip install --upgrade transformers",
+            hf_dir, ct2_dir, quantization,
+        )
+    return ok
 
 
 # ─────────────────────────────────────────────────────────────────────────────

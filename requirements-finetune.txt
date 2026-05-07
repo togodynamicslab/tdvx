@@ -8,7 +8,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── HuggingFace stack (treino) ────────────────────────────────────────────────
-transformers==4.46.3        # WhisperForConditionalGeneration + Seq2SeqTrainer (>4.46 quebra predict_with_generate no Whisper)
+transformers>=4.44.0        # 4.44+ funciona; conversão CT2 com transformers>=5.0 é tratada automaticamente
 datasets>=2.14.0            # Dataset.from_dict, Audio cast, train_test_split
 accelerate>=0.25.0          # backend do Trainer (mixed precision, multi-GPU)
 
