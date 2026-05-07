@@ -966,47 +966,50 @@ def run_finetune(args: argparse.Namespace) -> None:
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
 
-        # ── 13. Conversão CTranslate2 (int8 → produção) ───────────────────────
-        if args.convert_ct2:
-            ok = convert_to_ctranslate2(output_dir, ct2_dir, quantization=args.ct2_quantization)
-            if ok:
-                log.info(
-                    "\nPara usar no tdvx, atualize engine.py:\n"
-                    "  WhisperModel('%s', device='cuda', compute_type='%s')",
-                    ct2_dir, args.ct2_quantization,
-                )
-
         tracker.log_final(metrics)
 
-        # ── 14. Upload para Google Drive (opcional) ───────────────────────────
-        if args.gdrive_folder_id and args.gdrive_credentials:
-            creds_path = Path(args.gdrive_credentials).resolve()
-            if not creds_path.exists():
-                log.warning(
-                    "Credenciais do Drive não encontradas: %s — upload ignorado.", creds_path
-                )
-            else:
-                timestamp = datetime.now().strftime("%Y%m%d-%H%M")
-                run_label = args.run_name or f"cv-{lang_code}-{timestamp}"
+        # Passos pós-treino executados apenas pelo rank 0 (evita conflitos em multi-GPU)
+        is_main = int(os.environ.get("RANK", 0)) == 0
+        if is_main:
+            # ── 13. Conversão CTranslate2 (int8 → produção) ───────────────────
+            if args.convert_ct2:
+                ok = convert_to_ctranslate2(output_dir, ct2_dir, quantization=args.ct2_quantization)
+                if ok:
+                    log.info(
+                        "\nPara usar no tdvx, atualize engine.py:\n"
+                        "  WhisperModel('%s', device='cuda', compute_type='%s')",
+                        ct2_dir, args.ct2_quantization,
+                    )
 
-                hf_url = upload_dir_to_gdrive(
-                    output_dir,
-                    args.gdrive_folder_id,
-                    creds_path,
-                    folder_name=f"{run_label}-hf",
-                )
-                if hf_url:
-                    log.info("Modelo HF no Drive: %s", hf_url)
+            # ── 14. Upload para Google Drive (opcional) ───────────────────────
+            if args.gdrive_folder_id and args.gdrive_credentials:
+                creds_path = Path(args.gdrive_credentials).resolve()
+                if not creds_path.exists():
+                    log.warning(
+                        "Credenciais do Drive não encontradas: %s — upload ignorado.", creds_path
+                    )
+                else:
+                    timestamp = datetime.now().strftime("%Y%m%d-%H%M")
+                    run_label = args.run_name or f"cv-{lang_code}-{timestamp}"
 
-                if args.convert_ct2 and ct2_dir.exists():
-                    ct2_url = upload_dir_to_gdrive(
-                        ct2_dir,
+                    hf_url = upload_dir_to_gdrive(
+                        output_dir,
                         args.gdrive_folder_id,
                         creds_path,
-                        folder_name=f"{run_label}-ct2",
+                        folder_name=f"{run_label}-hf",
                     )
-                    if ct2_url:
-                        log.info("Modelo CT2 no Drive: %s", ct2_url)
+                    if hf_url:
+                        log.info("Modelo HF no Drive: %s", hf_url)
+
+                    if args.convert_ct2 and ct2_dir.exists():
+                        ct2_url = upload_dir_to_gdrive(
+                            ct2_dir,
+                            args.gdrive_folder_id,
+                            creds_path,
+                            folder_name=f"{run_label}-ct2",
+                        )
+                        if ct2_url:
+                            log.info("Modelo CT2 no Drive: %s", ct2_url)
 
     log.info("═" * 65)
     log.info("Fine-tuning concluído!")
