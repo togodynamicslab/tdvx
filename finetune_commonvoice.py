@@ -872,8 +872,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             generation_max_length=225,
             dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
-            # Reduz overconfidence → melhora precisão em palavras raras
-            label_smoothing_factor=0.1,
+            label_smoothing_factor=0.0,
             # Clip de gradiente para estabilidade
             max_grad_norm=1.0,
         )
