@@ -871,6 +871,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             greater_is_better=False,
             push_to_hub=False,
             predict_with_generate=False,
+            prediction_loss_only=True,
             generation_max_length=225,
             dataloader_num_workers=0 if sys.platform == "win32" else 4,
             remove_unused_columns=False,
