@@ -89,6 +89,7 @@ try:
     import evaluate
     from datasets import Dataset
     from transformers import (
+        EarlyStoppingCallback,
         Seq2SeqTrainer,
         Seq2SeqTrainingArguments,
         WhisperForConditionalGeneration,
@@ -878,6 +879,17 @@ def run_finetune(args: argparse.Namespace) -> None:
         )
 
         # ── 9. Trainer ────────────────────────────────────────────────────────
+        callbacks = []
+        if args.early_stopping_patience > 0:
+            callbacks.append(EarlyStoppingCallback(
+                early_stopping_patience=args.early_stopping_patience,
+                early_stopping_threshold=args.early_stopping_threshold,
+            ))
+            log.info(
+                "Early stopping: patience=%d, threshold=%.4f",
+                args.early_stopping_patience, args.early_stopping_threshold,
+            )
+
         trainer = Seq2SeqTrainer(
             model=model,
             args=training_args,
@@ -886,6 +898,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             data_collator=data_collator,
             compute_metrics=compute_metrics,
             tokenizer=processor.tokenizer,
+            callbacks=callbacks or None,
         )
 
         # ── 10. Treino (com suporte a retomada de checkpoint) ─────────────────
@@ -1007,7 +1020,11 @@ def parse_args() -> argparse.Namespace:
     # Treino
     p.add_argument("--max-steps",                type=int,   default=0,
                    help="Steps máximos (0 = usa --num-epochs)")
-    p.add_argument("--num-epochs",               type=int,   default=3)
+    p.add_argument("--num-epochs",               type=int,   default=10)
+    p.add_argument("--early-stopping-patience",  type=int,   default=3,
+                   help="Para o treino se eval_loss nao melhorar por N avaliações (0 = desativado)")
+    p.add_argument("--early-stopping-threshold", type=float, default=0.001,
+                   help="Melhora mínima no eval_loss para contar como progresso")
     p.add_argument("--batch-size",               type=int,   default=8)
     p.add_argument("--gradient-accumulation-steps", type=int, default=4,
                    help="Batch efetivo = batch_size × grad_accum (ex.: 8×4=32)")
