@@ -854,7 +854,7 @@ def run_finetune(args: argparse.Namespace) -> None:
             warmup_steps=args.warmup_steps,
             max_steps=args.max_steps if args.max_steps else -1,
             num_train_epochs=args.num_epochs if not args.max_steps else 1,
-            gradient_checkpointing=False,
+            gradient_checkpointing=True,
             fp16=use_fp16,
             bf16=use_bf16,
             eval_strategy="steps",
