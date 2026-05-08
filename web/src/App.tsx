@@ -1,7 +1,8 @@
-import { Waves, FlaskConical, Mic, Gauge, Gamepad2, Trophy } from "lucide-react"
+import { Waves, FlaskConical, Mic, Gauge, Gamepad2, Trophy, Youtube } from "lucide-react"
 
 import { useRoute, navigate } from "@/lib/hashRouter"
 import LiveConsole from "@/pages/LiveConsole"
+import YouTubeReplay from "@/pages/YouTubeReplay"
 import RunsList from "@/pages/RunsList"
 import RunDetail from "@/pages/RunDetail"
 import Compare from "@/pages/Compare"
@@ -36,10 +37,11 @@ function NavItem({
 export default function App() {
   const route = useRoute()
   const isLive = route.name === "live"
+  const isYouTube = route.name === "youtube"
   const isEvals = route.name === "evals"
   const isValidate = route.name === "validate"
   const isBenchmark = route.name === "benchmark"
-  const isStress = !isLive && !isEvals && !isValidate && !isBenchmark
+  const isStress = !isLive && !isYouTube && !isEvals && !isValidate && !isBenchmark
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -62,6 +64,9 @@ export default function App() {
             <NavItem active={isLive} onClick={() => navigate("live")} icon={Mic}>
               Live
             </NavItem>
+            <NavItem active={isYouTube} onClick={() => navigate("youtube")} icon={Youtube}>
+              YouTube
+            </NavItem>
             <NavItem active={isBenchmark} onClick={() => navigate("benchmark")} icon={Trophy}>
               Benchmark
             </NavItem>
@@ -79,6 +84,7 @@ export default function App() {
       </header>
 
       {route.name === "live" && <LiveConsole />}
+      {route.name === "youtube" && <YouTubeReplay />}
       {route.name === "benchmark" && <Benchmark />}
       {route.name === "evals" && <EvalsList />}
       {route.name === "validate" && <Validate />}

@@ -16,10 +16,13 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/ws": { target: "ws://96.38.133.243:22961", ws: true, changeOrigin: true },
-      "/transcribe": { target: "http://96.38.133.243:22961", changeOrigin: true },
-      "/health": { target: "http://96.38.133.243:22961", changeOrigin: true },
-      "/models": { target: "http://96.38.133.243:22961", changeOrigin: true },
+      "/ws": { target: "ws://localhost:8000", ws: true, changeOrigin: true },
+      "/transcribe": { target: "http://localhost:8000", changeOrigin: true },
+      "/health": { target: "http://localhost:8000", changeOrigin: true },
+      "/models": { target: "http://localhost:8000", changeOrigin: true },
+      // YouTube replay: HTTP for /extract, WS for /stream. Both share the
+      // /youtube prefix; Vite picks the matching ws/http handler per request.
+      "/youtube": { target: "ws://localhost:8000", ws: true, changeOrigin: true },
     },
   },
 })

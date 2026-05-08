@@ -25,6 +25,7 @@ from app.models.model_config import ModelType, get_all_model_configs
 from app.services import stress_results
 from app.services import eval_results
 from app.services import validations as validations_service
+from app.services import youtube_service
 
 # Configure logging
 logging.basicConfig(
@@ -371,6 +372,166 @@ async def api_get_corpus_audio(lang: str, filename: str):
     if not target.is_file():
         raise HTTPException(status_code=404, detail=f"{filename} not found in {lang}")
     return FileResponse(str(target), media_type="audio/wav", filename=filename)
+
+
+@app.post("/youtube/extract")
+async def youtube_extract(payload: dict):
+    """Resolve a YouTube URL → cached 16 kHz mono PCM WAV.
+
+    The browser cannot fetch YouTube media directly (CORS). The browser keeps
+    the YouTube IFrame embed for playback; this endpoint just exists to make
+    the audio available to /youtube/stream for transcription.
+
+    Body: {"url": str}
+    Returns: {video_id, title, duration_s, channel}
+    """
+    url = (payload or {}).get("url", "").strip()
+    if not url:
+        raise HTTPException(status_code=400, detail="missing 'url'")
+    try:
+        loop = asyncio.get_event_loop()
+        # yt-dlp blocks on network IO. Run in the default thread pool so
+        # we don't stall the event loop while a long video downloads.
+        yt = await loop.run_in_executor(None, youtube_service.fetch_youtube_audio, url)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    return yt.metadata_dict()
+
+
+@app.websocket("/youtube/stream")
+async def youtube_stream(
+    websocket: WebSocket,
+    url: str = Query(..., description="YouTube URL or video ID. Must already be cached via /youtube/extract."),
+    model: Optional[str] = Query(None),
+    language: str = Query("pt"),
+    diarize: bool = Query(True),
+    translate: bool = Query(False),
+    speed: float = Query(1.0, ge=0.1, le=10.0,
+                         description="Playback speed multiplier. 1.0 = real-time, 2.0 = 2x faster, etc. Use a high number for max-throughput dogfood."),
+    chunk_seconds: float = Query(2.0, ge=0.5, le=10.0,
+                                 description="WS chunk duration sent to the pipeline. Smaller = more granular telemetry, larger = fewer chunk overheads."),
+    session_id: Optional[str] = Query(None),
+):
+    """Replay a cached YouTube video's audio through the live pipeline at
+    `speed`× wall-clock pace. Emits the same per-chunk transcription objects
+    /ws/transcribe does, so the frontend can reuse its live transcript UI.
+
+    Each emitted chunk also carries a `video_offset_s` field so the frontend
+    can sync transcript display with the YouTube IFrame's getCurrentTime().
+
+    Backpressure: chunks are processed sequentially. If the pipeline is
+    slower than the requested speed, real wall-clock time will exceed the
+    target — that's the whole point of telemetry, you'll see it.
+    """
+    await websocket.accept()
+
+    # Resolve cached audio. Caller must have hit /youtube/extract first.
+    try:
+        yt = youtube_service.fetch_youtube_audio(url)
+    except ValueError as e:
+        await websocket.send_json({"error": str(e)})
+        await websocket.close()
+        return
+
+    selected_model = model if model else settings.default_model
+    sess_id = session_id or diarization_session.new_session_id()
+    logger.info(
+        f"youtube/stream connected: video_id={yt.video_id} duration={yt.duration_s:.1f}s "
+        f"model={selected_model} speed={speed}x chunk={chunk_seconds}s sess={sess_id[:8]}"
+    )
+
+    # Send a header so the client knows what it's receiving.
+    await websocket.send_json({
+        "type": "header",
+        "video_id": yt.video_id,
+        "title": yt.title,
+        "duration_s": yt.duration_s,
+        "channel": yt.channel,
+        "model": selected_model,
+        "speed": speed,
+        "chunk_seconds": chunk_seconds,
+    })
+
+    audio, sr = youtube_service.load_audio_pcm_f32(yt.audio_path)
+    chunk_samples = int(chunk_seconds * sr)
+    total_samples = len(audio)
+    processor.reset_counter()
+
+    try:
+        for i in range(0, total_samples, chunk_samples):
+            # Bail out fast if the client disconnected.
+            if websocket.client_state.name != "CONNECTED":
+                break
+
+            chunk = audio[i : i + chunk_samples]
+            if chunk.size == 0:
+                continue
+            chunk_start_s = i / float(sr)
+            chunk_end_s = min((i + chunk.size) / float(sr), yt.duration_s)
+            is_final = (i + chunk_samples) >= total_samples
+
+            t0 = time.time()
+            try:
+                results = await processor.process_audio_chunk_batched(
+                    chunk,
+                    sample_rate=sr,
+                    is_final=is_final,
+                    model_type=selected_model,
+                    language=language,
+                    session_id=sess_id,
+                    diarize=diarize,
+                    translate=translate,
+                )
+            except Exception as e:
+                logger.error(f"youtube/stream processing error: {e}", exc_info=True)
+                await websocket.send_json({"error": f"Processing failed: {e}"})
+                continue
+            processing_ms = int((time.time() - t0) * 1000)
+
+            for c in results:
+                payload = c.model_dump(mode='json')
+                # Translate chunk-relative offsets into video-absolute offsets so
+                # the frontend can sync against YouTube's getCurrentTime().
+                if "segment" in payload and payload["segment"]:
+                    seg = payload["segment"]
+                    seg["video_start_s"] = chunk_start_s + (seg.get("start") or 0.0)
+                    seg["video_end_s"] = chunk_start_s + (seg.get("end") or 0.0)
+                payload["video_offset_s"] = chunk_start_s
+                payload["video_chunk_end_s"] = chunk_end_s
+                payload["pipeline_ms"] = processing_ms
+                await websocket.send_json(payload)
+
+            # Pace the next chunk so the apparent playback rate matches `speed`.
+            # If processing already took longer than the target chunk duration,
+            # don't sleep — just go again. The user will see telemetry slip,
+            # which is the point.
+            target_wall_s = (chunk.size / float(sr)) / max(speed, 0.01)
+            elapsed_s = time.time() - t0
+            sleep_s = target_wall_s - elapsed_s
+            if sleep_s > 0:
+                await asyncio.sleep(sleep_s)
+
+        # End-of-stream marker so the frontend can stop polling progress.
+        try:
+            await websocket.send_json({"type": "eos", "video_id": yt.video_id})
+        except Exception:
+            pass
+
+    except WebSocketDisconnect:
+        logger.info(f"youtube/stream client disconnected (video_id={yt.video_id})")
+    except Exception as e:
+        logger.exception(f"youtube/stream fatal: {e}")
+        try:
+            await websocket.send_json({"error": str(e)})
+        except Exception:
+            pass
+    finally:
+        try:
+            await websocket.close()
+        except Exception:
+            pass
 
 
 @app.get("/models")

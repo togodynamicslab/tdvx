@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 export type Route =
   | { name: "live" }
+  | { name: "youtube" }
   | { name: "runs" }
   | { name: "run"; id: string }
   | { name: "compare"; ids: string[] }
@@ -12,6 +13,7 @@ export type Route =
 function parse(hash: string): Route {
   const h = hash.replace(/^#\/?/, "")
   if (!h || h === "live") return { name: "live" }
+  if (h === "youtube") return { name: "youtube" }
   if (h === "stress" || h === "runs") return { name: "runs" }
   if (h === "evals") return { name: "evals" }
   if (h === "validate") return { name: "validate" }
