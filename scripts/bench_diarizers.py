@@ -43,6 +43,10 @@ if str(_REPO_ROOT) not in sys.path:
 
 import numpy as np
 
+# Helpers for DER computation and ground-truth loading. Live with the corpus
+# so labelers find them next to the data; bench imports via sys.path.
+sys.path.insert(0, str(_REPO_ROOT / "tests" / "corpus" / "pt-BR" / "diar-eval"))
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
@@ -246,21 +250,86 @@ def bench_backend_on_windows(
 
 
 def format_table(file_rows: List[Dict[str, Any]]) -> str:
-    """Render a compact fixed-width table."""
-    header = f"| {'backend':<12} | {'p50_ms':>8} | {'p95_ms':>8} | {'speakers':>8} | {'speech_s':>8} | {'segments':>8} |"
+    """Render a compact fixed-width table. Includes DER if any row has it."""
+    has_der = any(r.get("der") is not None for r in file_rows)
+    header_cols = [
+        f"{'backend':<12}", f"{'p50_ms':>8}", f"{'p95_ms':>8}",
+        f"{'speakers':>8}", f"{'speech_s':>8}", f"{'segments':>8}",
+    ]
+    if has_der:
+        header_cols.append(f"{'DER':>6}")
+    header = "| " + " | ".join(header_cols) + " |"
     sep = "|" + "-" * (len(header) - 2) + "|"
     lines = [header, sep]
     for row in file_rows:
         tl = row["timeline"]
-        lines.append(
-            f"| {row['backend']:<12} | "
-            f"{(row['p50_ms'] if row['p50_ms'] is not None else 'n/a'):>8} | "
-            f"{(row['p95_ms'] if row['p95_ms'] is not None else 'n/a'):>8} | "
-            f"{tl['speakers']:>8} | "
-            f"{tl['speech_s']:>8} | "
-            f"{tl['segments']:>8} |"
-        )
+        cells = [
+            f"{row['backend']:<12}",
+            f"{(row['p50_ms'] if row['p50_ms'] is not None else 'n/a'):>8}",
+            f"{(row['p95_ms'] if row['p95_ms'] is not None else 'n/a'):>8}",
+            f"{tl['speakers']:>8}",
+            f"{tl['speech_s']:>8}",
+            f"{tl['segments']:>8}",
+        ]
+        if has_der:
+            der = row.get("der")
+            cells.append(f"{(f'{der:.3f}' if der is not None else 'n/a'):>6}")
+        lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+# ----------------------------- DER + manifest -------------------------------
+
+
+def compute_der(
+    reference_segments: List[Dict[str, Any]],
+    hypothesis_segments: List[Dict[str, Any]],
+    uri: str,
+    collar: float = 0.25,
+    skip_overlap: bool = False,
+) -> Optional[float]:
+    """Diarization Error Rate against ground truth using pyannote.metrics.
+
+    `collar` (seconds) is forgiveness around speaker turn boundaries — 0.25 is
+    the NIST RT-09 standard. Don't tighten without a reason; smaller collars
+    inflate DER from labeling jitter, not real model errors.
+
+    Returns None if pyannote.metrics isn't importable or if reference is empty
+    (DER undefined when there's nothing to be wrong about).
+    """
+    if not reference_segments:
+        return None
+    try:
+        from pyannote.metrics.diarization import DiarizationErrorRate  # type: ignore
+        from rttm_helpers import segments_to_annotation  # type: ignore
+    except Exception as e:
+        logger.warning("DER unavailable (%s); skipping", e)
+        return None
+
+    ref = segments_to_annotation(reference_segments, uri=uri)
+    hyp = segments_to_annotation(hypothesis_segments, uri=uri)
+    metric = DiarizationErrorRate(collar=collar, skip_overlap=skip_overlap)
+    return float(metric(ref, hyp))
+
+
+def load_manifest(manifest_path: Path) -> List[Dict[str, Any]]:
+    """Load a diar-eval manifest. Returns absolute paths for audio + RTTM."""
+    manifest_path = manifest_path.expanduser().resolve()
+    base = manifest_path.parent
+    data = json.loads(manifest_path.read_text())
+    clips = data.get("clips", [])
+    resolved = []
+    for c in clips:
+        audio = (base / c["audio"]).resolve()
+        rttm = (base / c["rttm"]).resolve()
+        if not audio.exists():
+            logger.warning("manifest clip %s missing audio %s", c.get("clip_id"), audio)
+            continue
+        if not rttm.exists():
+            logger.warning("manifest clip %s missing rttm %s", c.get("clip_id"), rttm)
+            continue
+        resolved.append({**c, "_audio_path": audio, "_rttm_path": rttm})
+    return resolved
 
 
 # ------------------------------- main ---------------------------------------
@@ -268,7 +337,10 @@ def format_table(file_rows: List[Dict[str, Any]]) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Diarizer benchmark: Pyannote vs Sortformer")
-    ap.add_argument("--audio", nargs="+", required=True, help="One or more WAV paths")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--audio", nargs="+", help="One or more WAV paths (no DER computed)")
+    src.add_argument("--manifest", type=Path,
+                     help="Path to a diar-eval manifest.json (enables DER vs RTTM ground truth)")
     ap.add_argument("--repeats", type=int, default=3, help="Trials per window (first is cold, discarded)")
     ap.add_argument(
         "--buffer-seconds",
@@ -280,14 +352,33 @@ def main() -> int:
     ap.add_argument("--output", type=str, default="bench_results.json", help="Where to write raw results JSON")
     ap.add_argument("--backends", nargs="+", default=["pyannote", "sortformer"],
                     help="Subset of backends to run")
+    ap.add_argument("--der-collar", type=float, default=0.25,
+                    help="Forgiveness window (seconds) around turn boundaries for DER. NIST RT-09 standard is 0.25.")
     args = ap.parse_args()
 
-    # Resolve audio paths up front.
-    audio_paths = [Path(p).expanduser().resolve() for p in args.audio]
-    for p in audio_paths:
-        if not p.exists():
-            logger.error("Audio not found: %s", p)
+    # Resolve sources. Two modes:
+    #   --audio path1 path2 ...  → no ground truth, latency-only bench
+    #   --manifest path/to/json  → load clips with RTTM, compute DER
+    rttm_by_audio: Dict[Path, Path] = {}
+    clip_meta_by_audio: Dict[Path, Dict[str, Any]] = {}
+    if args.manifest:
+        clips = load_manifest(args.manifest)
+        if not clips:
+            logger.error("Manifest %s yielded no clips", args.manifest)
             return 2
+        audio_paths = [c["_audio_path"] for c in clips]
+        for c in clips:
+            rttm_by_audio[c["_audio_path"]] = c["_rttm_path"]
+            clip_meta_by_audio[c["_audio_path"]] = {
+                k: v for k, v in c.items() if not k.startswith("_")
+            }
+        logger.info("Loaded %d clips from %s", len(clips), args.manifest)
+    else:
+        audio_paths = [Path(p).expanduser().resolve() for p in args.audio]
+        for p in audio_paths:
+            if not p.exists():
+                logger.error("Audio not found: %s", p)
+                return 2
 
     # Load backends.
     backends: List[Any] = []
@@ -332,16 +423,42 @@ def main() -> int:
         windows = window_slices(audio, sr, args.buffer_seconds)
         logger.info("  windows=%d (buffer_seconds=%s)", len(windows), args.buffer_seconds)
 
+        # Load ground truth (manifest mode only).
+        reference_segments: List[Dict[str, Any]] = []
+        rttm_path = rttm_by_audio.get(audio_path)
+        if rttm_path is not None:
+            try:
+                from rttm_helpers import parse_rttm  # type: ignore
+                reference_segments = [s.to_dict() for s in parse_rttm(rttm_path)]
+                logger.info("  ground truth: %d segments from %s",
+                            len(reference_segments), rttm_path.name)
+            except Exception as e:
+                logger.warning("  could not load RTTM %s: %s", rttm_path, e)
+
         file_rows: List[Dict[str, Any]] = []
         for backend in loaded:
             logger.info("  running %s (trials=%d)", backend.name, args.repeats)
             row = bench_backend_on_windows(backend, windows, sr, args.repeats)
+
+            # DER vs ground truth, if we have it.
+            if reference_segments:
+                der = compute_der(
+                    reference_segments=reference_segments,
+                    hypothesis_segments=row["merged_segments"],
+                    uri=audio_path.stem,
+                    collar=args.der_collar,
+                )
+                row["der"] = round(der, 4) if der is not None else None
+            else:
+                row["der"] = None
+
             file_rows.append(row)
+            der_str = f"{row['der']:.3f}" if row["der"] is not None else "n/a"
             logger.info(
-                "    %s: p50=%s ms p95=%s ms speakers=%d speech=%.2fs segs=%d",
+                "    %s: p50=%s ms p95=%s ms speakers=%d speech=%.2fs segs=%d der=%s",
                 backend.name, row["p50_ms"], row["p95_ms"],
                 row["timeline"]["speakers"], row["timeline"]["speech_s"],
-                row["timeline"]["segments"],
+                row["timeline"]["segments"], der_str,
             )
 
         print()
@@ -351,8 +468,10 @@ def main() -> int:
 
         results["files"].append({
             "path": str(audio_path),
+            "clip_id": clip_meta_by_audio.get(audio_path, {}).get("clip_id"),
             "duration_s": round(duration, 3),
             "windows": len(windows),
+            "ground_truth_rttm": str(rttm_path) if rttm_path else None,
             "rows": file_rows,
         })
 

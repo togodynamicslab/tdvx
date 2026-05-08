@@ -1,0 +1,32 @@
+{
+  "clip_id": "synth-00",
+  "duration_s": 62.192,
+  "n_speakers": 3,
+  "speakers": [
+    {
+      "id": "SPEAKER_00",
+      "role": "synthetic",
+      "source_voice": "Amandoca",
+      "gender": "unknown"
+    },
+    {
+      "id": "SPEAKER_01",
+      "role": "synthetic",
+      "source_voice": "Rener",
+      "gender": "unknown"
+    },
+    {
+      "id": "SPEAKER_02",
+      "role": "synthetic",
+      "source_voice": "Lucas",
+      "gender": "unknown"
+    }
+  ],
+  "recording": {
+    "source": "synthetic",
+    "device": "concatenation",
+    "noise_level": "clean",
+    "overlap": "none"
+  },
+  "notes": "Synthetic stitched from tests/corpus/pt-BR/ single-speaker clips. No overlap, no backchannels, studio-clean. Use as sanity floor only."
+}

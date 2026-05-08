@@ -128,6 +128,11 @@ class DiarizationService:
                 max_speakers=settings.pyannote_max_speakers
             )
 
+            # pyannote.audio 4.0 wraps the Annotation in DiarizeOutput.
+            # 3.x returned the Annotation directly. Handle both.
+            if hasattr(diarization, "speaker_diarization"):
+                diarization = diarization.speaker_diarization
+
             segments = []
             for turn, _, speaker in diarization.itertracks(yield_label=True):
                 segments.append({
@@ -156,6 +161,10 @@ class DiarizationService:
                 min_speakers=settings.pyannote_min_speakers,
                 max_speakers=settings.pyannote_max_speakers
             )
+
+            # pyannote.audio 4.0 wraps Annotation in DiarizeOutput.
+            if hasattr(diarization, "speaker_diarization"):
+                diarization = diarization.speaker_diarization
 
             segments = []
             for turn, _, speaker in diarization.itertracks(yield_label=True):
@@ -193,6 +202,9 @@ class DiarizationService:
                 min_speakers=settings.pyannote_min_speakers,
                 max_speakers=settings.pyannote_max_speakers,
             )
+            # pyannote.audio 4.0 wraps Annotation in DiarizeOutput.
+            if hasattr(diarization, "speaker_diarization"):
+                diarization = diarization.speaker_diarization
         except Exception as e:
             logger.error(f"File diarization error: {e}")
             return [{'start': 0.0, 'end': 0.0, 'speaker': 'SPEAKER_00'}], {}
