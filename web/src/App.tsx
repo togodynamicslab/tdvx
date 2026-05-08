@@ -1,4 +1,4 @@
-import { Waves, FlaskConical, Mic, Gauge, Gamepad2, Trophy, Youtube } from "lucide-react"
+import { Waves, FlaskConical, Mic, Gauge, Gamepad2, Trophy, Video } from "lucide-react"
 
 import { useRoute, navigate } from "@/lib/hashRouter"
 import LiveConsole from "@/pages/LiveConsole"
@@ -64,7 +64,7 @@ export default function App() {
             <NavItem active={isLive} onClick={() => navigate("live")} icon={Mic}>
               Live
             </NavItem>
-            <NavItem active={isYouTube} onClick={() => navigate("youtube")} icon={Youtube}>
+            <NavItem active={isYouTube} onClick={() => navigate("youtube")} icon={Video}>
               YouTube
             </NavItem>
             <NavItem active={isBenchmark} onClick={() => navigate("benchmark")} icon={Trophy}>

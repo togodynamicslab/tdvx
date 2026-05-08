@@ -4,7 +4,6 @@ import { Loader2, Play, Square } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -291,52 +290,51 @@ export default function YouTubeReplay() {
           <CardContent className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs text-muted-foreground">Video URL</label>
-              <Input
+              <input
+                type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://www.youtube.com/watch?v=..."
                 disabled={isExtracting || isStreaming}
-                className="font-mono text-xs"
+                className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 font-mono text-xs shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
               />
               <div className="text-[11px] font-mono text-muted-foreground">
                 {videoId ? `id=${videoId}` : url ? "not a YouTube URL" : "paste any youtube.com / youtu.be link"}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <div className="space-y-1.5">
-                <label className="text-xs text-muted-foreground">Model</label>
-                <Select value={model} onValueChange={setModel} disabled={isStreaming}>
-                  <SelectTrigger className="font-mono text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {MODELS.map((m) => (
-                      <SelectItem key={m.id} value={m.id}>
-                        <div className="flex flex-col">
-                          <span>{m.name}</span>
-                          <span className="text-[10px] text-muted-foreground">{m.hint}</span>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs text-muted-foreground">Language</label>
-                <Select value={lang} onValueChange={(v) => setLang(v as "pt" | "en")} disabled={isStreaming}>
-                  <SelectTrigger className="font-mono text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {LANGS.map((l) => (
-                      <SelectItem key={l.code} value={l.code}>
-                        {l.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-xs text-muted-foreground">Model</label>
+              <Select value={model} onValueChange={setModel} disabled={isStreaming}>
+                <SelectTrigger className="w-full font-mono text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {MODELS.map((m) => (
+                    <SelectItem key={m.id} value={m.id}>
+                      <div className="flex flex-col">
+                        <span>{m.name}</span>
+                        <span className="text-[10px] text-muted-foreground">{m.hint}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs text-muted-foreground">Language</label>
+              <Select value={lang} onValueChange={(v) => setLang(v as "pt" | "en")} disabled={isStreaming}>
+                <SelectTrigger className="w-full font-mono text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {LANGS.map((l) => (
+                    <SelectItem key={l.code} value={l.code}>
+                      {l.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-1.5">
@@ -426,11 +424,9 @@ export default function YouTubeReplay() {
             )}
           </CardContent>
         </Card>
-
-        <TelemetryPanel events={telemetry} sessionId={sessionIdRef.current} />
       </aside>
 
-      {/* Right column — embed + transcript */}
+      {/* Right column — embed + transcript + telemetry */}
       <section className="space-y-4">
         <Card>
           <CardContent className="p-0">
@@ -438,7 +434,10 @@ export default function YouTubeReplay() {
               <div className="aspect-video w-full overflow-hidden rounded-md bg-black">
                 <iframe
                   ref={iframeRef}
-                  src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0`}
+                  // mute=1 so the embed never plays audio simultaneously with
+                  // the streaming pipeline. The user can unmute manually if
+                  // they want to listen along after extraction.
+                  src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&mute=1`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -528,6 +527,8 @@ export default function YouTubeReplay() {
             </Conversation>
           </CardContent>
         </Card>
+
+        <TelemetryPanel events={telemetry} sessionId={sessionIdRef.current} />
       </section>
     </main>
   )
