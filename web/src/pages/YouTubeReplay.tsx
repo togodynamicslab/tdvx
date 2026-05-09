@@ -124,6 +124,18 @@ export default function YouTubeReplay() {
     return Math.min(100, (progressS / header.durationS) * 100)
   }, [progressS, header])
 
+  // YouTube IFrame Player API speaks postMessage when the iframe URL has
+  // ?enablejsapi=1. Keep this dep-free instead of pulling in their JS API.
+  // Defined up here because handleStream / stopStream below close over it.
+  const ytCommand = useCallback((func: string, args: unknown[] = []) => {
+    const iframe = iframeRef.current
+    if (!iframe || !iframe.contentWindow) return
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func, args }),
+      "*",
+    )
+  }, [])
+
   const handleExtract = useCallback(async () => {
     if (!videoId) return
     setError(null)
@@ -172,7 +184,10 @@ export default function YouTubeReplay() {
       }
     }
     wsRef.current = null
-  }, [])
+    // Pause the embed when the user explicitly stops streaming. Don't auto-mute;
+    // user already chose this state by clicking play, leave it where they had it.
+    ytCommand("pauseVideo")
+  }, [ytCommand])
 
   const handleStream = useCallback(() => {
     if (!header) return
@@ -181,6 +196,14 @@ export default function YouTubeReplay() {
     setTelemetry([])
     setProgressS(0)
     setStatus("streaming")
+
+    // Sync embed playback with the streaming pipeline. Seek to 0, unmute,
+    // and play. At speed=1 this stays in sync with the chunk pacing on the
+    // server. At speed>1 the embed will drift behind the transcript — that's
+    // expected and called out in the speed-selector helper text.
+    ytCommand("seekTo", [0, true])
+    ytCommand("unMute")
+    ytCommand("playVideo")
 
     // Same-origin WS so the Vite proxy / FastAPI mount handles routing.
     const wsProto = window.location.protocol === "https:" ? "wss" : "ws"
@@ -255,27 +278,16 @@ export default function YouTubeReplay() {
       setStatus((prev) => (prev === "streaming" ? "done" : prev))
       wsRef.current = null
     }
-  }, [header, url, model, lang, speed, diarize])
+  }, [header, url, model, lang, speed, diarize, ytCommand])
 
   // If the user navigates away mid-stream, drop the WS so we don't leak.
   useEffect(() => () => stopStream(), [stopStream])
 
-  // Click-to-seek: jump the YouTube embed to a segment's start time. Uses
-  // postMessage instead of the IFrame Player API to keep this dep-free.
-  // YouTube accepts {event: 'command', func: 'seekTo', args: [seconds, true]}
-  // on the iframe contentWindow when the iframe URL has ?enablejsapi=1.
+  // Click-to-seek: jump the YouTube embed to a segment's start time and play.
   const seekTo = useCallback((seconds: number) => {
-    const iframe = iframeRef.current
-    if (!iframe || !iframe.contentWindow) return
-    iframe.contentWindow.postMessage(
-      JSON.stringify({ event: "command", func: "seekTo", args: [seconds, true] }),
-      "*",
-    )
-    iframe.contentWindow.postMessage(
-      JSON.stringify({ event: "command", func: "playVideo", args: [] }),
-      "*",
-    )
-  }, [])
+    ytCommand("seekTo", [seconds, true])
+    ytCommand("playVideo")
+  }, [ytCommand])
 
   return (
     <main className="mx-auto grid max-w-7xl gap-6 px-6 py-6 lg:grid-cols-[360px_1fr]">
@@ -434,9 +446,11 @@ export default function YouTubeReplay() {
               <div className="aspect-video w-full overflow-hidden rounded-md bg-black">
                 <iframe
                   ref={iframeRef}
-                  // mute=1 so the embed never plays audio simultaneously with
-                  // the streaming pipeline. The user can unmute manually if
-                  // they want to listen along after extraction.
+                  // mute=1 keeps the embed quiet until the user explicitly
+                  // hits "Stream transcription" — at which point we fire
+                  // unMute + playVideo via postMessage so audio + transcript
+                  // start together. Click-to-seek into a segment also unmutes
+                  // implicitly via playVideo.
                   src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&mute=1`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
