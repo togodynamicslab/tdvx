@@ -1,7 +1,7 @@
 import torch
 import torch.serialization
 import numpy as np
-from typing import List, Dict
+from typing import List, Dict, Optional
 import logging
 import tempfile
 import soundfile as sf
@@ -179,6 +179,93 @@ class DiarizationService:
         except Exception as e:
             logger.error(f"File diarization error: {e}")
             return [{'start': 0.0, 'end': 0.0, 'speaker': 'SPEAKER_00'}]
+
+    def diarize_audio_with_embeddings(
+        self,
+        audio_data: np.ndarray,
+        sample_rate: int = 16000,
+        min_segment_seconds: float = 0.5,
+    ) -> tuple[List[Dict], Dict[str, np.ndarray]]:
+        """In-memory variant of diarize_file_with_embeddings.
+
+        Why: pyannote 4.0's path-based loading requires torchcodec, which on
+        py3.12+cu130 fails to import (needs the full CUDA 13 toolkit installed
+        system-wide for video decode libs we don't need). The in-memory waveform
+        path is the supported workaround per pyannote's own warning, and it's
+        also cheaper — no tmp-WAV roundtrip per chunk.
+
+        Caller passes float32 mono PCM. Returns the same shape as
+        diarize_file_with_embeddings.
+        """
+        if not settings.enable_diarization or self.pipeline is None:
+            return [{'start': 0.0, 'end': 0.0, 'speaker': 'SPEAKER_00'}], {}
+
+        waveform = torch.from_numpy(np.asarray(audio_data, dtype=np.float32)).unsqueeze(0)
+        audio_input = {"waveform": waveform, "sample_rate": int(sample_rate)}
+
+        try:
+            diarization = self.pipeline(
+                audio_input,
+                min_speakers=settings.pyannote_min_speakers,
+                max_speakers=settings.pyannote_max_speakers,
+            )
+            if hasattr(diarization, "speaker_diarization"):
+                diarization = diarization.speaker_diarization
+        except Exception as e:
+            logger.error(f"In-memory diarization error: {e}", exc_info=True)
+            return [{'start': 0.0, 'end': 0.0, 'speaker': 'SPEAKER_00'}], {}
+
+        segments: List[Dict] = []
+        per_speaker_duration: Dict[str, float] = {}
+        for turn, _, speaker in diarization.itertracks(yield_label=True):
+            segments.append({'start': turn.start, 'end': turn.end, 'speaker': speaker})
+            per_speaker_duration[speaker] = per_speaker_duration.get(speaker, 0.0) + (turn.end - turn.start)
+
+        if not segments:
+            return [{'start': 0.0, 'end': 0.0, 'speaker': 'SPEAKER_00'}], {}
+
+        embeddings: Dict[str, np.ndarray] = {}
+        if self.embedding_inference is None:
+            return segments, embeddings
+
+        # Same embedding-extraction logic as the file-path version, but feed
+        # the in-memory waveform dict to Inference.crop instead of a path.
+        try:
+            from pyannote.core import Segment
+            file_dur = float(audio_data.size) / float(sample_rate) if sample_rate > 0 else 0.0
+            for label in diarization.labels():
+                if per_speaker_duration.get(label, 0.0) < min_segment_seconds:
+                    continue
+                best_turn: Optional[Segment] = None  # type: ignore[name-defined]
+                best_len = 0.0
+                for turn, _, spk in diarization.itertracks(yield_label=True):
+                    if spk != label:
+                        continue
+                    if (turn.end - turn.start) > best_len:
+                        best_len = turn.end - turn.start
+                        best_turn = turn
+                if best_turn is None or best_len < min_segment_seconds:
+                    continue
+                # Pull the right edge in by 1 sample to dodge pyannote's strict
+                # "end time greater than file duration" check on exact matches.
+                eps = 1.0 / float(sample_rate) if sample_rate > 0 else 1e-3
+                clamp_end = min(best_turn.end, max(0.0, file_dur - eps)) if file_dur > 0 else best_turn.end
+                clamp_start = min(best_turn.start, max(0.0, clamp_end - 0.1))
+                if clamp_end - clamp_start < min_segment_seconds:
+                    continue
+                clamped = Segment(clamp_start, clamp_end)
+                try:
+                    emb = self.embedding_inference.crop(audio_input, clamped)
+                    embeddings[label] = np.asarray(emb).reshape(-1)
+                except Exception as e:
+                    logger.warning(
+                        f"Embedding extraction failed for {label} turn={clamped} "
+                        f"(dur={file_dur:.3f}s): {type(e).__name__}: {e}"
+                    )
+        except Exception as e:
+            logger.warning(f"Embedding extraction loop failed: {type(e).__name__}: {e}", exc_info=True)
+
+        return segments, embeddings
 
     def diarize_file_with_embeddings(
         self, audio_path: str, min_segment_seconds: float = 0.5

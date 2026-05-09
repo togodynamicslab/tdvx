@@ -274,23 +274,12 @@ def assign_global_speakers_windowed(
         # If buffer hasn't filled yet, the new chunk starts at (buffer_total - new_chunk_duration).
         chunk_offset = max(0.0, buffer_total_seconds - new_chunk_duration)
 
-        # Persist full buffer to a tmp WAV so diarize_file_with_embeddings can
-        # read it (pyannote Inference.crop needs a path; soundfile.write is the
-        # cheap path for 20s @ 16kHz = ~1.3 MB).
-        tmp_path: Optional[str] = None
-        try:
-            import soundfile as sf  # local import — avoids import cost if windowed path unused
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
-                tmp_path = tmp.name
-            sf.write(tmp_path, sess.buffer, sample_rate, subtype="FLOAT")
-
-            full_segments, embeddings = diarization_service.diarize_file_with_embeddings(tmp_path)
-        finally:
-            if tmp_path is not None:
-                try:
-                    os.unlink(tmp_path)
-                except OSError:
-                    pass
+        # Run diarization on the in-memory rolling buffer. Avoids both the
+        # tmp-WAV roundtrip cost AND the pyannote 4.0 / torchcodec issue on
+        # py3.12+cu130 (torchcodec wants the full CUDA 13 system toolkit).
+        full_segments, embeddings = diarization_service.diarize_audio_with_embeddings(
+            sess.buffer, sample_rate=sample_rate,
+        )
 
         # Resolve against the session registry (already holding the lock).
         assignment = _assign_global_speakers_locked(sess, full_segments, embeddings)
