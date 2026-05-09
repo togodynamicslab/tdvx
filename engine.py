@@ -2,7 +2,7 @@
 """
 engine.py — Motor de transcrição com diarização
 ================================================
-faster-whisper (CTranslate2) + NVIDIA NeMo SortFormer
+CTranslate2 direto + NVIDIA NeMo SortFormer
 
 Regras fixas:
   - task="transcribe" SEMPRE — nunca traduzir
@@ -16,11 +16,17 @@ import ast
 import os
 import zipfile
 import logging
+import numpy as np
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 log = logging.getLogger(__name__)
+
+_SAMPLE_RATE  = 16000
+_CHUNK_SECS   = 30
+_FRAME_MS     = 20   # VAD: tamanho de frame em ms
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Estruturas de dados
@@ -78,73 +84,81 @@ def _fmt(seconds: float) -> str:
     return f"{m:02d}:{s:02d}"
 
 
-def _read_hf_cached_token() -> str:
-    """Lê o token salvo por `huggingface-cli login` ou pelo hf_hub."""
-    candidates = [
-        Path.home() / ".cache" / "huggingface" / "token",
-        Path.home() / ".huggingface" / "token",
-    ]
-    for p in candidates:
-        if p.exists():
-            return p.read_text().strip()
-    try:
-        from huggingface_hub import HfFolder
-        return HfFolder.get_token() or ""
-    except Exception:
-        return ""
-
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Motor principal
 # ─────────────────────────────────────────────────────────────────────────────
 
 _SORTFORMER_MODEL = "nvidia/diar_sortformer_4spk-v1"
+_MODEL_DEFAULT    = str(Path(__file__).parent / "models" / "tdv3-cv-pt-v1-ct2")
 
 
 class TranscriptionEngine:
     """
     Parâmetros:
-        model_path      Caminho para o diretório CTranslate2 OU para o .zip do modelo.
-        sortformer_name Modelo SortFormer NeMo (padrão: nvidia/diar_sortformer_4spk-v1).
-        device          "cpu" | "cuda" | "mps" | "auto"
+        model_path      Diretório CTranslate2 do modelo (tdv3-cv-pt-v1-ct2).
+        sortformer_name Modelo SortFormer NeMo.
+        device          "cpu" | "cuda" | "auto"
         compute_type    "int8" (padrão) | "int8_float16" | "float16"
-        beam_size       Tamanho do feixe de busca (5 = boa qualidade).
+        beam_size       Tamanho do feixe de busca.
     """
 
     def __init__(
         self,
-        model_path: str,
+        model_path: str = _MODEL_DEFAULT,
         sortformer_name: str = _SORTFORMER_MODEL,
         device: str = "auto",
         compute_type: str = "int8",
         beam_size: int = 5,
     ) -> None:
-        self._model_dir       = self._resolve_model(Path(model_path))
+        self._model_dir       = _resolve_model(Path(model_path))
         self._sortformer_name = sortformer_name
-        self._device          = self._pick_device(device)
+        self._device          = _pick_device(device)
         self._compute         = compute_type
         self._beam_size       = beam_size
 
-        self._whisper    = None   # lazy load
-        self._diarizer   = None   # lazy load
+        self._ct2      = None   # ctranslate2.models.Whisper — lazy
+        self._fe       = None   # WhisperFeatureExtractor     — lazy
+        self._tok      = None   # WhisperTokenizer            — lazy
+        self._ts_map   = None   # {token_id: seconds}         — lazy
+        self._diarizer = None   # SortformerEncLabelModel     — lazy
 
     # ── Inicialização lazy ────────────────────────────────────────────────────
 
     def _load_whisper(self):
-        if self._whisper is not None:
+        if self._ct2 is not None:
             return
-        try:
-            from faster_whisper import WhisperModel
-        except ImportError:
-            raise ImportError("pip install faster-whisper")
 
-        log.info("Carregando faster-whisper de: %s (device=%s, compute=%s)",
+        import ctranslate2
+        from transformers import WhisperFeatureExtractor, WhisperTokenizer
+
+        log.info("Carregando CTranslate2 de: %s  (device=%s  compute=%s)",
                  self._model_dir, self._device, self._compute)
-        self._whisper = WhisperModel(
+
+        self._ct2 = ctranslate2.models.Whisper(
             str(self._model_dir),
             device=self._device,
             compute_type=self._compute,
         )
+        # O feature extractor e tokenizer base do whisper-medium
+        # compartilham o mesmo vocabulário do modelo fine-tunado
+        self._fe  = WhisperFeatureExtractor.from_pretrained("openai/whisper-medium")
+        self._tok = WhisperTokenizer.from_pretrained("openai/whisper-medium")
+
+        # Monta mapa {token_id → segundos} para tokens de timestamp
+        vocab = self._tok.get_vocab()
+        self._ts_map: Dict[int, float] = {}
+        for token, tid in vocab.items():
+            if token.startswith("<|") and token.endswith("|>"):
+                try:
+                    self._ts_map[tid] = float(token[2:-2])
+                except ValueError:
+                    pass
+
+        # Prompt fixo: PT, transcribe — sem detecção de idioma
+        self._prompt_ids = self._tok.convert_tokens_to_ids([
+            "<|startoftranscript|>", "<|pt|>", "<|transcribe|>",
+        ])
+        log.info("Modelo pronto.  Prompt: %s", self._prompt_ids)
 
     def _load_diarizer(self):
         if self._diarizer is not None:
@@ -177,181 +191,224 @@ class TranscriptionEngine:
         min_speakers: Optional[int] = None,
         max_speakers: Optional[int] = None,
     ) -> TranscriptionResult:
-        """
-        Transcreve um arquivo de áudio com diarização de falantes.
-
-        Args:
-            audio_path    Caminho para o arquivo de áudio.
-            num_speakers  Número exato de falantes (None = auto).
-            min_speakers  Mínimo de falantes esperado.
-            max_speakers  Máximo de falantes esperado.
-
-        Returns:
-            TranscriptionResult com segmentos atribuídos a cada falante.
-        """
+        """Transcreve com diarização SortFormer."""
         self._load_whisper()
         self._load_diarizer()
+
+        audio, duration = _load_audio(audio_path)
 
         # ── 1. Diarização ─────────────────────────────────────────────────────
         log.info("Diarizando: %s", audio_path)
         speaker_turns = _run_sortformer(
-            self._diarizer,
-            audio_path,
+            self._diarizer, audio_path,
             num_speakers=num_speakers,
             min_speakers=min_speakers,
             max_speakers=max_speakers,
         )
-        log.info("Diarização: %d segmentos de voz detectados", len(speaker_turns))
+        log.info("Diarização: %d turnos detectados", len(speaker_turns))
 
-        # ── 2. Transcrição com timestamps por palavra ─────────────────────────
+        # ── 2. Transcrição ────────────────────────────────────────────────────
         log.info("Transcrevendo: %s", audio_path)
-        raw_segments, info = self._whisper.transcribe(
-            audio_path,
-            task="transcribe",
-            language="pt",          # sem etapa de identificação; sem tradução
-            condition_on_previous_text=False,
-            no_speech_threshold=0.6,
-            log_prob_threshold=-1.0,
-            compression_ratio_threshold=2.4,
-            beam_size=self._beam_size,
-            word_timestamps=True,
-            vad_filter=True,
-            vad_parameters=dict(
-                threshold=0.5,
-                min_speech_duration_ms=250,
-                min_silence_duration_ms=500,
-                speech_pad_ms=150,
-            ),
-        )
+        words = self._transcribe_audio(audio, duration)
+        log.info("Transcrição: %d palavras válidas  (%.1fs)", len(words), duration)
 
-        # Materializa o gerador
-        words: List[Word] = []
-        for seg in raw_segments:
-            if seg.words:
-                for w in seg.words:
-                    # Descarta palavras com probabilidade muito baixa (ruído)
-                    if w.probability >= 0.4:
-                        words.append(Word(
-                            start=w.start,
-                            end=w.end,
-                            text=w.word,
-                            probability=w.probability,
-                        ))
-
-        log.info(
-            "Transcrição: idioma=%s | %.1fs | %d palavras válidas",
-            info.language, info.duration, len(words),
-        )
-
-        # ── 3. Atribuição palavra → falante ───────────────────────────────────
+        # ── 3. Atribuição falante ─────────────────────────────────────────────
         segments = _assign_words_to_speakers(words, speaker_turns)
-
-        return TranscriptionResult(
-            segments=segments,
-            language=info.language,
-            duration=info.duration,
-        )
+        return TranscriptionResult(segments=segments, language="pt", duration=duration)
 
     def transcribe_only(self, audio_path: str) -> TranscriptionResult:
-        """Transcreve sem diarização (falante único 'SPK_00')."""
+        """Transcreve sem diarização (falante único SPK_00)."""
         self._load_whisper()
 
-        raw_segments, info = self._whisper.transcribe(
-            audio_path,
-            task="transcribe",
-            language="pt",
-            condition_on_previous_text=False,
-            no_speech_threshold=0.6,
-            log_prob_threshold=-1.0,
-            compression_ratio_threshold=2.4,
+        audio, duration = _load_audio(audio_path)
+        words = self._transcribe_audio(audio, duration)
+        log.info("Transcrição: %d palavras  (%.1fs)", len(words), duration)
+
+        segments = _words_to_single_speaker(words)
+        return TranscriptionResult(segments=segments, language="pt", duration=duration)
+
+    # ── Transcrição interna ───────────────────────────────────────────────────
+
+    def _transcribe_audio(self, audio: np.ndarray, duration: float) -> List[Word]:
+        """Aplica VAD e transcreve em chunks de 30s via CTranslate2."""
+        speech_segs = _vad_segments(audio)
+        if not speech_segs:
+            log.info("VAD: nenhuma fala detectada.")
+            return []
+
+        removed = duration - sum(e - s for s, e in speech_segs)
+        log.info("VAD: %.3fs de não-fala removidos", removed)
+
+        words: List[Word] = []
+        chunk = _CHUNK_SECS * _SAMPLE_RATE
+
+        for seg_start, seg_end in speech_segs:
+            i0, i1 = int(seg_start * _SAMPLE_RATE), int(seg_end * _SAMPLE_RATE)
+            seg_audio = audio[i0:i1]
+
+            # Divide em sub-chunks de 30s se necessário
+            for sub_start in range(0, len(seg_audio), chunk):
+                sub = seg_audio[sub_start:sub_start + chunk]
+                time_offset = seg_start + sub_start / _SAMPLE_RATE
+                chunk_words = self._transcribe_chunk(sub, time_offset)
+                words.extend(chunk_words)
+
+        return words
+
+    def _transcribe_chunk(self, audio: np.ndarray, offset: float) -> List[Word]:
+        import ctranslate2
+
+        # Pad até 30s (requisito do encoder Whisper)
+        target = _CHUNK_SECS * _SAMPLE_RATE
+        if len(audio) < target:
+            audio = np.pad(audio, (0, target - len(audio)))
+        else:
+            audio = audio[:target]
+
+        features = self._fe(
+            audio.astype(np.float32),
+            sampling_rate=_SAMPLE_RATE,
+            return_tensors="np",
+        )
+        storage = ctranslate2.StorageView.from_array(features.input_features)
+
+        # Prompt sem <|notimestamps|> → o modelo gera tokens de timestamp
+        # no_speech_prob e scores são checados manualmente (ctranslate2 não tem
+        # os parâmetros de alto nível do faster-whisper)
+        # Filtro de idioma — só processa PT; qualquer outra língua é descartada
+        # ctranslate2 retorna tokens no formato "<|pt|>" — normaliza para "pt"
+        lang_results = self._ct2.detect_language(storage)
+        raw_lang, best_prob = lang_results[0][0]
+        best_lang = raw_lang.strip("<|>")
+        if best_lang != "pt":
+            log.info("Chunk ignorado: idioma=%s (prob=%.2f) — só PT é processado",
+                     best_lang, best_prob)
+            return []
+
+        result = self._ct2.generate(
+            storage,
+            [self._prompt_ids],
             beam_size=self._beam_size,
-            word_timestamps=True,
-            vad_filter=True,
-            vad_parameters=dict(
-                threshold=0.5,
-                min_speech_duration_ms=250,
-                min_silence_duration_ms=500,
-                speech_pad_ms=150,
-            ),
+            return_no_speech_prob=True,
+            return_scores=True,
+            max_initial_timestamp_index=50,
+        )[0]
+
+        if result.no_speech_prob > 0.6:
+            return []
+        if result.scores and result.scores[0] < -1.0:
+            return []
+
+        return _parse_timestamp_tokens(
+            result.sequences_ids[0], self._tok, self._ts_map, offset
         )
-
-        segments = []
-        for seg in raw_segments:
-            words = [
-                Word(w.start, w.end, w.word, w.probability)
-                for w in (seg.words or [])
-                if w.probability >= 0.4
-            ]
-            if not words:
-                continue
-            segments.append(Segment(
-                speaker="SPK_00",
-                start=seg.start,
-                end=seg.end,
-                text=seg.text,
-                words=words,
-            ))
-
-        return TranscriptionResult(
-            segments=segments,
-            language=info.language,
-            duration=info.duration,
-        )
-
-    # ── Helpers internos ──────────────────────────────────────────────────────
-
-    @staticmethod
-    def _resolve_model(path: Path) -> Path:
-        """Extrai o zip se necessário e retorna o diretório do modelo CT2."""
-        if path.is_dir():
-            _check_ct2_dir(path)
-            return path
-
-        if path.suffix == ".zip":
-            dest = path.parent / path.stem.split("-ct2")[0].split("_ct2")[0]
-            # Procura pasta ct2 dentro do zip
-            with zipfile.ZipFile(path) as zf:
-                names = zf.namelist()
-                roots = {n.split("/")[0] for n in names if "/" in n}
-                ct2_root = next(
-                    (r for r in roots if "ct2" in r.lower()),
-                    next(iter(roots), None),
-                )
-                if ct2_root is None:
-                    raise ValueError(f"Zip inválido: nenhuma pasta encontrada em {path}")
-
-                dest = path.parent / ct2_root
-                if not dest.is_dir():
-                    log.info("Extraindo modelo de %s → %s", path.name, dest)
-                    zf.extractall(path.parent)
-                    log.info("Extração concluída.")
-                else:
-                    log.info("Modelo já extraído: %s", dest)
-
-            _check_ct2_dir(dest)
-            return dest
-
-        raise FileNotFoundError(
-            f"model_path deve ser um diretório CTranslate2 ou um .zip.\n"
-            f"Recebido: {path}"
-        )
-
-    @staticmethod
-    def _pick_device(device: str) -> str:
-        if device != "auto":
-            return device
-        try:
-            import torch
-            if torch.cuda.is_available():
-                return "cuda"
-        except ImportError:
-            pass
-        # faster-whisper (CTranslate2) não suporta mps — usa cpu
-        return "cpu"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SortFormer — diarização via NeMo 2.x (SortformerEncLabelModel)
+# Áudio — carregamento e VAD por energia
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _load_audio(path: str) -> Tuple[np.ndarray, float]:
+    import librosa
+    audio, _ = librosa.load(path, sr=_SAMPLE_RATE, mono=True)
+    return audio.astype(np.float32), len(audio) / _SAMPLE_RATE
+
+
+def _vad_segments(
+    audio: np.ndarray,
+    threshold_db: float = -38.0,
+    min_speech_ms: int  = 250,
+    min_silence_ms: int = 500,
+    pad_ms: int         = 150,
+) -> List[Tuple[float, float]]:
+    """
+    VAD por energia RMS (frame a frame).
+    Retorna lista de (start_s, end_s) com fala detectada.
+    """
+    frame_len = int(_SAMPLE_RATE * _FRAME_MS / 1000)
+    n_frames  = len(audio) // frame_len
+
+    is_speech = []
+    for i in range(n_frames):
+        frame = audio[i * frame_len:(i + 1) * frame_len]
+        rms   = np.sqrt(np.mean(frame ** 2) + 1e-10)
+        db    = 20.0 * np.log10(rms)
+        is_speech.append(db > threshold_db)
+
+    # Converte sequência booleana → intervalos
+    raw: List[Tuple[float, float]] = []
+    in_speech = False
+    t_start   = 0.0
+    for i, speech in enumerate(is_speech):
+        t = i * _FRAME_MS / 1000
+        if speech and not in_speech:
+            t_start   = t
+            in_speech = True
+        elif not speech and in_speech:
+            if (t - t_start) * 1000 >= min_speech_ms:
+                raw.append((t_start, t))
+            in_speech = False
+    if in_speech:
+        raw.append((t_start, len(audio) / _SAMPLE_RATE))
+
+    # Funde segmentos próximos
+    merged: List[Tuple[float, float]] = []
+    for s, e in raw:
+        if merged and (s - merged[-1][1]) * 1000 < min_silence_ms:
+            merged[-1] = (merged[-1][0], e)
+        else:
+            merged.append((s, e))
+
+    # Padding
+    pad = pad_ms / 1000
+    dur = len(audio) / _SAMPLE_RATE
+    return [(max(0.0, s - pad), min(dur, e + pad)) for s, e in merged]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Parser de tokens de timestamp do Whisper
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _parse_timestamp_tokens(
+    token_ids: List[int],
+    tokenizer,
+    ts_map: Dict[int, float],
+    offset: float,
+) -> List[Word]:
+    """
+    Converte a sequência de tokens (texto + timestamps) em Words com timing.
+    Whisper gera: <|t0|> texto <|t1|> texto ...
+    """
+    words: List[Word] = []
+    current_start: Optional[float] = None
+    current_ids:   List[int]       = []
+    all_special    = set(tokenizer.all_special_ids)
+
+    for tid in token_ids:
+        if tid in ts_map:
+            t = ts_map[tid] + offset
+            if current_start is not None and current_ids:
+                text = tokenizer.decode(current_ids, skip_special_tokens=True).strip()
+                if text:
+                    words.append(Word(start=current_start, end=t, text=" " + text))
+                current_ids = []
+            current_start = t
+        elif tid not in all_special:
+            if current_start is not None:
+                current_ids.append(tid)
+
+    # Último segmento sem timestamp final
+    if current_start is not None and current_ids:
+        text = tokenizer.decode(current_ids, skip_special_tokens=True).strip()
+        if text:
+            end = current_start + max(len(text) * 0.07, 0.1)
+            words.append(Word(start=current_start, end=end, text=" " + text))
+
+    return words
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SortFormer — diarização via NeMo 2.x
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _run_sortformer(
@@ -361,60 +418,33 @@ def _run_sortformer(
     min_speakers: Optional[int] = None,
     max_speakers: Optional[int] = None,
 ) -> List[Tuple[float, float, str]]:
-    """
-    Executa o SortFormer num arquivo de áudio e retorna lista de
-    (start, end, speaker_label) ordenada por tempo.
-
-    O NeMo 2.x retorna List[List[str]] onde cada string tem formato
-    "[begin_seconds, end_seconds, speaker_index]".
-    SortFormer é end-to-end: determina falantes automaticamente.
-    max_speakers limita via DiarizeConfig.max_num_of_spks.
-    """
     from nemo.collections.asr.parts.mixins.diarization import DiarizeConfig
 
-    # SortFormer não aceita oracle_num_speakers; apenas max é suportado
-    max_spk = max_speakers or num_speakers  # se usuário deu exato, usa como máximo
-    cfg = DiarizeConfig(
-        max_num_of_spks=max_spk,
-        verbose=False,
-        num_workers=0,
-    )
+    # DiarizeConfig só expõe max; min não é suportado pelo SortFormer
+    if min_speakers is not None:
+        log.warning("SortFormer: min_speakers ignorado (não suportado pelo modelo)")
+    max_spk = max_speakers or num_speakers
+    cfg = DiarizeConfig(max_num_of_spks=max_spk, verbose=False, num_workers=0)
 
-    # model.diarize aceita path direto ou lista de paths
-    results = model.diarize(
-        audio=audio_path,
-        batch_size=1,
-        override_config=cfg,
-    )
-
-    # results é List[List[str]]; o primeiro item corresponde ao único arquivo
-    raw_turns: List[str] = results[0] if results else []
-    return _parse_sortformer_output(raw_turns)
+    results  = model.diarize(audio=audio_path, batch_size=1, override_config=cfg)
+    raw: List[str] = results[0] if results else []
+    return _parse_sortformer_output(raw)
 
 
 def _parse_sortformer_output(turns: List[str]) -> List[Tuple[float, float, str]]:
-    """
-    Converte a saída do SortformerEncLabelModel para (start, end, speaker_label).
-    NeMo 2.x retorna strings no formato: "start_sec end_sec speaker_label"
-    Ex: "0.000 4.560 speaker_0"
-    """
     parsed = []
     for entry in turns:
         parts = entry.strip().split()
         if len(parts) == 3:
             try:
-                start = float(parts[0])
-                end   = float(parts[1])
                 label = parts[2].upper().replace("SPEAKER_", "SPK_")
-                parsed.append((start, end, label))
+                parsed.append((float(parts[0]), float(parts[1]), label))
                 continue
             except ValueError:
                 pass
-        # Fallback: tenta como lista Python "[start, end, idx]"
         try:
             start, end, spk_idx = ast.literal_eval(entry)
-            label = f"SPK_{int(spk_idx):02d}"
-            parsed.append((float(start), float(end), label))
+            parsed.append((float(start), float(end), f"SPK_{int(spk_idx):02d}"))
         except Exception:
             log.warning("SortFormer: entrada ignorada: %r", entry)
     parsed.sort(key=lambda t: t[0])
@@ -422,97 +452,123 @@ def _parse_sortformer_output(turns: List[str]) -> List[Tuple[float, float, str]]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Atribuição de falantes por sobreposição temporal de palavras
+# Atribuição falante → palavras
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _speaker_at(t_start: float, t_end: float, turns: list) -> str:
-    """Retorna o falante com maior sobreposição no intervalo [t_start, t_end]."""
-    best_label   = "SPK_UNK"
-    best_overlap = 0.0
+    best_label, best_overlap = "SPK_UNK", 0.0
     for (s, e, label) in turns:
         overlap = max(0.0, min(t_end, e) - max(t_start, s))
         if overlap > best_overlap:
-            best_overlap = overlap
-            best_label   = label
+            best_overlap, best_label = overlap, label
     return best_label
 
 
 def _assign_words_to_speakers(words: List[Word], turns: list) -> List[Segment]:
-    """
-    Agrupa palavras em segmentos por falante.
-    Usa sobreposição de timestamp para decidir a quem cada palavra pertence.
-    """
     if not words:
         return []
-
     segments: List[Segment] = []
-    current_speaker = _speaker_at(words[0].start, words[0].end, turns)
-    current_words: List[Word] = []
-
+    cur_spk   = _speaker_at(words[0].start, words[0].end, turns)
+    cur_words: List[Word] = []
     for w in words:
-        speaker = _speaker_at(w.start, w.end, turns)
-        if speaker != current_speaker and current_words:
-            segments.append(_make_segment(current_speaker, current_words))
-            current_speaker = speaker
-            current_words   = []
-        current_words.append(w)
+        spk = _speaker_at(w.start, w.end, turns)
+        if spk != cur_spk and cur_words:
+            segments.append(_make_segment(cur_spk, cur_words))
+            cur_spk, cur_words = spk, []
+        cur_words.append(w)
+    if cur_words:
+        segments.append(_make_segment(cur_spk, cur_words))
+    return segments
 
-    if current_words:
-        segments.append(_make_segment(current_speaker, current_words))
 
+def _words_to_single_speaker(words: List[Word]) -> List[Segment]:
+    if not words:
+        return []
+    # Agrupa por pausas > 1s
+    segments: List[Segment] = []
+    cur: List[Word] = [words[0]]
+    for w in words[1:]:
+        if w.start - cur[-1].end > 1.0:
+            segments.append(_make_segment("SPK_00", cur))
+            cur = []
+        cur.append(w)
+    if cur:
+        segments.append(_make_segment("SPK_00", cur))
     return segments
 
 
 def _make_segment(speaker: str, words: List[Word]) -> Segment:
-    text = "".join(w.text for w in words)
     return Segment(
         speaker=speaker,
         start=words[0].start,
         end=words[-1].end,
-        text=text,
+        text="".join(w.text for w in words),
         words=words,
     )
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Helpers
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _resolve_model(path: Path) -> Path:
+    """Aceita diretório CT2 ou .zip; extrai se necessário."""
+    if path.is_dir():
+        _check_ct2_dir(path)
+        return path
+    if path.suffix == ".zip":
+        with zipfile.ZipFile(path) as zf:
+            roots = {n.split("/")[0] for n in zf.namelist() if "/" in n}
+            ct2_root = next((r for r in roots if "ct2" in r.lower()), next(iter(roots), None))
+            if ct2_root is None:
+                raise ValueError(f"Zip inválido: {path}")
+            dest = path.parent / ct2_root
+            if not dest.is_dir():
+                log.info("Extraindo %s → %s", path.name, dest)
+                zf.extractall(path.parent)
+        _check_ct2_dir(dest)
+        return dest
+    raise FileNotFoundError(f"model_path inválido: {path}")
+
+
 def _check_ct2_dir(path: Path) -> None:
-    required = {"model.bin", "config.json", "vocabulary.json"}
-    found = {f.name for f in path.iterdir()} if path.is_dir() else set()
-    missing = required - found
+    missing = {"model.bin", "config.json", "vocabulary.json"} - {f.name for f in path.iterdir()}
     if missing:
-        raise FileNotFoundError(
-            f"Diretório CTranslate2 incompleto em '{path}'.\n"
-            f"Arquivos faltando: {missing}"
-        )
+        raise FileNotFoundError(f"Modelo incompleto em '{path}': faltam {missing}")
+
+
+def _pick_device(device: str) -> str:
+    if device != "auto":
+        return device
+    try:
+        import torch
+        if torch.cuda.is_available():
+            return "cuda"
+    except ImportError:
+        pass
+    return "cpu"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CLI simples para teste
+# CLI
 # ─────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     import argparse, json
 
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s",
-    )
-
-    _MODEL_DEFAULT = str(
-        Path(__file__).parent / "models" /
-        "tdv3-cv-pt-v1-ct2-20260508T184337Z-3-001.zip"
-    )
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
     p = argparse.ArgumentParser(description="Motor de transcrição TDvX")
-    p.add_argument("audio",        help="Arquivo de áudio a transcrever")
-    p.add_argument("--model",      default=_MODEL_DEFAULT, help="Caminho do modelo CT2 ou zip")
-    p.add_argument("--sortformer", default=_SORTFORMER_MODEL, help="Modelo SortFormer NeMo")
-    p.add_argument("--device",     default="auto", choices=["auto","cpu","cuda","mps"])
-    p.add_argument("--compute",    default="int8", choices=["int8","int8_float16","float16"])
-    p.add_argument("--speakers",   type=int, default=None, help="Número exato de falantes")
+    p.add_argument("audio")
+    p.add_argument("--model",        default=_MODEL_DEFAULT)
+    p.add_argument("--sortformer",   default=_SORTFORMER_MODEL)
+    p.add_argument("--device",       default="auto", choices=["auto", "cpu", "cuda"])
+    p.add_argument("--compute",      default="int8", choices=["int8", "int8_float16", "float16"])
+    p.add_argument("--speakers",     type=int, default=None)
     p.add_argument("--min-speakers", type=int, default=None)
     p.add_argument("--max-speakers", type=int, default=None)
-    p.add_argument("--no-diarize", action="store_true", help="Pula diarização")
-    p.add_argument("--json",       action="store_true", help="Saída em JSON")
+    p.add_argument("--no-diarize",   action="store_true")
+    p.add_argument("--json",         action="store_true")
     args = p.parse_args()
 
     engine = TranscriptionEngine(
@@ -535,6 +591,5 @@ if __name__ == "__main__":
     if args.json:
         print(json.dumps(result.as_dict(), ensure_ascii=False, indent=2))
     else:
-        print(f"\nIdioma detectado: {result.language}")
-        print(f"Duração: {result.duration:.1f}s\n")
+        print(f"\nIdioma: {result.language}  |  Duração: {result.duration:.1f}s\n")
         print(result.text)
