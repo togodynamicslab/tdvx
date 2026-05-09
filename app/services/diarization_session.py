@@ -223,6 +223,138 @@ def assign_global_speakers(
         return _assign_global_speakers_locked(sess, local_segments, local_embeddings)
 
 
+def assign_global_speakers_windowed_sortformer(
+    session_id: str,
+    new_audio: np.ndarray,
+    sample_rate: int,
+    diarization_service,  # for embedding extraction across chunks
+    sortformer_service,   # for per-buffer segmentation
+) -> WindowedAssignmentResult:
+    """Sortformer variant of assign_global_speakers_windowed.
+
+    Sortformer gives us per-buffer segments + per-buffer speaker labels
+    (SPEAKER_00..SPEAKER_03 in label space, capped at 4). To keep speaker
+    identity stable across buffers (and therefore across WS chunks), we
+    extract a pyannote/embedding x-vector for the longest turn of each
+    Sortformer-detected speaker in the buffer, then run the same registry
+    matching that the pyannote path uses. Sortformer-only output would
+    relabel speakers per buffer.
+
+    Trade-off vs the pyannote path: gain ~24× faster segmentation (measured
+    99ms vs 2348ms p50 on 30s windows for vO9Z5zXSnhk), pay one extra
+    embedding call per detected speaker per buffer (small, ~30-50ms total).
+    """
+    sess = registry.get_or_create(session_id)
+    new_audio = np.asarray(new_audio, dtype=np.float32).reshape(-1)
+    new_chunk_duration = len(new_audio) / float(sample_rate) if sample_rate > 0 else 0.0
+
+    with sess.lock:
+        if sess.buffer.size > 0 and sess.buffer_sample_rate != sample_rate:
+            logger.warning(
+                f"[diar-session-sf] sample rate changed {sess.buffer_sample_rate}->{sample_rate}; resetting buffer"
+            )
+            sess.buffer = np.zeros(0, dtype=np.float32)
+        sess.buffer_sample_rate = sample_rate
+
+        combined = np.concatenate([sess.buffer, new_audio]) if sess.buffer.size else new_audio
+        max_samples = int(MAX_BUFFER_SECONDS * sample_rate)
+        if combined.shape[0] > max_samples:
+            combined = combined[-max_samples:]
+        sess.buffer = combined
+
+        buffer_total_seconds = sess.buffer.shape[0] / float(sample_rate) if sample_rate > 0 else 0.0
+        chunk_offset = max(0.0, buffer_total_seconds - new_chunk_duration)
+
+        # Sortformer segmentation on the rolling buffer.
+        try:
+            full_segments = sortformer_service.diarize_audio(sess.buffer, sample_rate=sample_rate)
+        except Exception as e:
+            logger.error(f"[diar-session-sf] sortformer failed, falling back to pyannote: {e}")
+            full_segments, embeddings = diarization_service.diarize_audio_with_embeddings(
+                sess.buffer, sample_rate=sample_rate,
+            )
+            assignment = _assign_global_speakers_locked(sess, full_segments, embeddings)
+            speakers_in_buffer = len({s["speaker"] for s in assignment.segments}) if assignment.segments else 0
+            cropped = _crop_segments_to_chunk(assignment.segments, chunk_offset)
+            return WindowedAssignmentResult(
+                segments=cropped, resolutions=assignment.resolutions,
+                registry_size=assignment.registry_size, buffer_seconds=buffer_total_seconds,
+                speakers_in_buffer=speakers_in_buffer, chunk_offset_seconds=chunk_offset,
+            )
+
+        # Sortformer's per-buffer SPEAKER_NN labels do not match across calls.
+        # To resolve them to global IDs we extract one embedding per detected
+        # speaker (longest contiguous turn) and feed the registry, same as the
+        # pyannote path. Reuses diarization_service.embedding_inference.
+        embeddings = _extract_embeddings_for_segments(
+            full_segments, sess.buffer, sample_rate, diarization_service,
+        )
+        assignment = _assign_global_speakers_locked(sess, full_segments, embeddings)
+        speakers_in_buffer = len({s["speaker"] for s in assignment.segments}) if assignment.segments else 0
+        cropped = _crop_segments_to_chunk(assignment.segments, chunk_offset)
+        return WindowedAssignmentResult(
+            segments=cropped, resolutions=assignment.resolutions,
+            registry_size=assignment.registry_size, buffer_seconds=buffer_total_seconds,
+            speakers_in_buffer=speakers_in_buffer, chunk_offset_seconds=chunk_offset,
+        )
+
+
+def _extract_embeddings_for_segments(
+    segments: List[dict], audio_buffer: np.ndarray, sample_rate: int, diarization_service,
+) -> Dict[str, np.ndarray]:
+    """For each unique speaker label in `segments`, find their longest turn
+    and extract one pyannote x-vector embedding from that turn. Used by the
+    Sortformer path so the registry has something to match on. Skips
+    speakers with too little audio for a reliable embedding."""
+    if not segments or diarization_service.embedding_inference is None:
+        return {}
+    import torch
+    from pyannote.core import Segment
+
+    longest_per_speaker: Dict[str, Tuple[float, float]] = {}
+    for s in segments:
+        spk = s["speaker"]
+        dur = float(s["end"]) - float(s["start"])
+        prev = longest_per_speaker.get(spk)
+        if prev is None or dur > (prev[1] - prev[0]):
+            longest_per_speaker[spk] = (float(s["start"]), float(s["end"]))
+
+    waveform = torch.from_numpy(audio_buffer.astype(np.float32)).unsqueeze(0)
+    audio_input = {"waveform": waveform, "sample_rate": int(sample_rate)}
+    file_dur = audio_buffer.size / float(sample_rate) if sample_rate > 0 else 0.0
+
+    out: Dict[str, np.ndarray] = {}
+    for spk, (start, end) in longest_per_speaker.items():
+        if (end - start) < MIN_SEGMENT_SECONDS:
+            continue
+        # Same eps trick as diarize_audio_with_embeddings: dodge the strict
+        # "end > duration" check on exact-match boundaries.
+        eps = 1.0 / float(sample_rate) if sample_rate > 0 else 1e-3
+        clamp_end = min(end, max(0.0, file_dur - eps))
+        clamp_start = min(start, max(0.0, clamp_end - 0.1))
+        if clamp_end - clamp_start < MIN_SEGMENT_SECONDS:
+            continue
+        try:
+            emb = diarization_service.embedding_inference.crop(audio_input, Segment(clamp_start, clamp_end))
+            out[spk] = np.asarray(emb).reshape(-1)
+        except Exception as e:
+            logger.warning(f"[diar-session-sf] embedding failed for {spk}: {type(e).__name__}: {e}")
+    return out
+
+
+def _crop_segments_to_chunk(segments: List[dict], chunk_offset: float) -> List[dict]:
+    """Crop buffer-relative segments to the new chunk window and re-base."""
+    cropped: List[dict] = []
+    for seg in segments:
+        if seg["end"] <= chunk_offset:
+            continue
+        new_seg = dict(seg)
+        new_seg["start"] = max(0.0, seg["start"] - chunk_offset)
+        new_seg["end"] = max(new_seg["start"], seg["end"] - chunk_offset)
+        cropped.append(new_seg)
+    return cropped
+
+
 def assign_global_speakers_windowed(
     session_id: str,
     new_audio: np.ndarray,

@@ -376,6 +376,7 @@ class TranscriptionProcessor:
         session_id: Optional[str] = None,
         diarize: bool = True,
         translate: bool = False,
+        diarizer: str = "pyannote",
     ) -> List[LiveTranscriptionChunk]:
         """Live chunk path that shares the cross-request batcher with /transcribe-batch.
 
@@ -422,11 +423,22 @@ class TranscriptionProcessor:
             diar_task = None
             if diarize and settings.enable_diarization:
                 if session_id:
-                    diar_task = loop.run_in_executor(
-                        None,
-                        diarization_session.assign_global_speakers_windowed,
-                        session_id, audio_data, sample_rate, diarization_service,
-                    )
+                    if diarizer == "sortformer":
+                        # Lazy import — sortformer pulls in NeMo (~2GB deps) and we
+                        # don't want that loading on every processor module import.
+                        from app.services.sortformer_service import sortformer_service
+                        diar_task = loop.run_in_executor(
+                            None,
+                            diarization_session.assign_global_speakers_windowed_sortformer,
+                            session_id, audio_data, sample_rate,
+                            diarization_service, sortformer_service,
+                        )
+                    else:
+                        diar_task = loop.run_in_executor(
+                            None,
+                            diarization_session.assign_global_speakers_windowed,
+                            session_id, audio_data, sample_rate, diarization_service,
+                        )
                 else:
                     diar_task = loop.run_in_executor(
                         None, diarization_service.diarize_file, tmp_path

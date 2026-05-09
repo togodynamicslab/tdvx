@@ -35,6 +35,11 @@ const LANGS = [
   { code: "en" as const, label: "English (en-US)" },
 ]
 
+const DIARIZERS = [
+  { id: "pyannote" as const, name: "Pyannote 4.0", hint: "production · ~2.4s/window · unbounded speakers" },
+  { id: "sortformer" as const, name: "Sortformer v2.1", hint: "NVIDIA streaming · ~100ms/window · capped at 4 speakers" },
+]
+
 const SPEEDS = [1, 2, 4, 8, 16] as const
 
 // YouTube exposes 11-character video IDs. Capture the ID from any of the
@@ -98,6 +103,7 @@ export default function YouTubeReplay() {
   const [lang, setLang] = useState<"pt" | "en">("pt")
   const [speed, setSpeed] = useState<number>(1)
   const [diarize, setDiarize] = useState(true)
+  const [diarizer, setDiarizer] = useState<"pyannote" | "sortformer">("pyannote")
 
   const [status, setStatus] = useState<Status>("idle")
   const [error, setError] = useState<string | null>(null)
@@ -213,6 +219,7 @@ export default function YouTubeReplay() {
       language: lang,
       speed: String(speed),
       diarize: String(diarize),
+      diarizer,
       session_id: sessionIdRef.current,
     })
     const wsUrl = `${wsProto}://${window.location.host}/youtube/stream?${params.toString()}`
@@ -278,7 +285,7 @@ export default function YouTubeReplay() {
       setStatus((prev) => (prev === "streaming" ? "done" : prev))
       wsRef.current = null
     }
-  }, [header, url, model, lang, speed, diarize, ytCommand])
+  }, [header, url, model, lang, speed, diarize, diarizer, ytCommand])
 
   // If the user navigates away mid-stream, drop the WS so we don't leak.
   useEffect(() => () => stopStream(), [stopStream])
@@ -343,6 +350,29 @@ export default function YouTubeReplay() {
                   {LANGS.map((l) => (
                     <SelectItem key={l.code} value={l.code}>
                       {l.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs text-muted-foreground">Diarizer</label>
+              <Select
+                value={diarizer}
+                onValueChange={(v) => setDiarizer(v as "pyannote" | "sortformer")}
+                disabled={isStreaming}
+              >
+                <SelectTrigger className="w-full font-mono text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {DIARIZERS.map((d) => (
+                    <SelectItem key={d.id} value={d.id}>
+                      <div className="flex flex-col">
+                        <span>{d.name}</span>
+                        <span className="text-[10px] text-muted-foreground">{d.hint}</span>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>

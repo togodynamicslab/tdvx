@@ -413,6 +413,8 @@ async def youtube_stream(
     chunk_seconds: float = Query(2.0, ge=0.5, le=10.0,
                                  description="WS chunk duration sent to the pipeline. Smaller = more granular telemetry, larger = fewer chunk overheads."),
     session_id: Optional[str] = Query(None),
+    diarizer: str = Query("pyannote", regex="^(pyannote|sortformer)$",
+                          description="Which diarization backend to use. pyannote = production default (proven, slower); sortformer = NVIDIA streaming (~24x faster on this hardware, capped at 4 speakers)."),
 ):
     """Replay a cached YouTube video's audio through the live pipeline at
     `speed`× wall-clock pace. Emits the same per-chunk transcription objects
@@ -452,6 +454,7 @@ async def youtube_stream(
         "model": selected_model,
         "speed": speed,
         "chunk_seconds": chunk_seconds,
+        "diarizer": diarizer,
     })
 
     audio, sr = youtube_service.load_audio_pcm_f32(yt.audio_path)
@@ -483,6 +486,7 @@ async def youtube_stream(
                     session_id=sess_id,
                     diarize=diarize,
                     translate=translate,
+                    diarizer=diarizer,
                 )
             except Exception as e:
                 logger.error(f"youtube/stream processing error: {e}", exc_info=True)

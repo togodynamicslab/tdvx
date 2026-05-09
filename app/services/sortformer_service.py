@@ -210,17 +210,31 @@ class SortformerService:
     def _parse_segment(seg: Any):
         """Normalize a single Sortformer segment into (begin, end, speaker_idx).
 
-        NeMo has shipped this as tuple, list, and "b e s" strings at various
-        points. Return (None, None, None) if we can't parse it — caller skips.
+        NeMo has shipped this as tuple, list, "b e s" strings, and dict at
+        various points. Speaker token can be a bare integer ('2') OR a
+        prefixed label like 'speaker_2' / 'SPEAKER_02' depending on version.
+        Return (None, None, None) if we can't parse — caller skips.
         """
+        def _spk_to_int(token: Any) -> int:
+            # Accept '2', 2, '2.0', 'speaker_2', 'SPEAKER_02', etc.
+            if isinstance(token, int):
+                return token
+            s = str(token).strip()
+            # Pull the first run of digits after any 'speaker_' / 'SPEAKER_' prefix.
+            import re
+            m = re.search(r"\d+", s)
+            if not m:
+                raise ValueError(f"no digits in speaker token {s!r}")
+            return int(m.group(0))
+
         try:
             if isinstance(seg, str):
                 parts = seg.strip().split()
                 if len(parts) < 3:
                     return None, None, None
-                return float(parts[0]), float(parts[1]), int(float(parts[2]))
+                return float(parts[0]), float(parts[1]), _spk_to_int(parts[2])
             if isinstance(seg, (list, tuple)) and len(seg) >= 3:
-                return float(seg[0]), float(seg[1]), int(float(seg[2]))
+                return float(seg[0]), float(seg[1]), _spk_to_int(seg[2])
             # Some NeMo versions return dicts.
             if isinstance(seg, dict):
                 begin = seg.get("begin", seg.get("start"))
@@ -228,7 +242,7 @@ class SortformerService:
                 spk = seg.get("speaker", seg.get("speaker_index"))
                 if begin is None or end is None or spk is None:
                     return None, None, None
-                return float(begin), float(end), int(float(spk))
+                return float(begin), float(end), _spk_to_int(spk)
         except (TypeError, ValueError):
             return None, None, None
         return None, None, None
