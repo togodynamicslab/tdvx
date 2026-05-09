@@ -426,7 +426,7 @@
         // Connect to WebSocket
         const wsProtocol =
           window.location.protocol === "https:" ? "wss:" : "ws:";
-        const wsUrl = `${wsProtocol}//${window.location.hostname}/ws/transcribe`;
+        const wsUrl = `${wsProtocol}//${window.location.host}/ws/transcribe`;
 
         websocket = new WebSocket(wsUrl);
 

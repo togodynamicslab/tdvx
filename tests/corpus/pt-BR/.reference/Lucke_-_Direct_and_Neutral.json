@@ -1,0 +1,263 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-d351-7253-8395-ac0b9e44aec3",
+    "sha256": "cfcd687ea76a88bd7498e43941d9985f0fef49b627de4b94b2b0b5f6baa9c88f",
+    "created": "2026-04-19T18:19:13.009Z",
+    "duration": 4.1331873,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Devemos abraçar a dor e usála como combustível para nossa jornada.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "devemos",
+                "start": 0.0,
+                "end": 0.39999998,
+                "confidence": 0.98535156,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "Devemos"
+              },
+              {
+                "word": "abraçar",
+                "start": 0.39999998,
+                "end": 0.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "abraçar"
+              },
+              {
+                "word": "a",
+                "start": 0.88,
+                "end": 1.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "dor",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "dor"
+              },
+              {
+                "word": "e",
+                "start": 1.36,
+                "end": 1.5999999,
+                "confidence": 0.9921875,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "usála",
+                "start": 1.5999999,
+                "end": 2.0,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "usála"
+              },
+              {
+                "word": "como",
+                "start": 2.0,
+                "end": 2.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "como"
+              },
+              {
+                "word": "combustível",
+                "start": 2.24,
+                "end": 2.8,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "combustível"
+              },
+              {
+                "word": "para",
+                "start": 2.8,
+                "end": 3.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "nossa",
+                "start": 3.04,
+                "end": 3.36,
+                "confidence": 0.7211914,
+                "speaker": 0,
+                "speaker_confidence": 0.8629918,
+                "punctuated_word": "nossa"
+              },
+              {
+                "word": "jornada",
+                "start": 3.36,
+                "end": 3.84,
+                "confidence": 0.9995117,
+                "speaker": 0,
+                "speaker_confidence": 0.86299187,
+                "punctuated_word": "jornada."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Devemos abraçar a dor e usála como combustível para nossa jornada.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Devemos abraçar a dor e usála como combustível para nossa jornada.",
+                      "start": 0.0,
+                      "end": 3.84
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 11,
+                  "start": 0.0,
+                  "end": 3.84
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 3.84,
+        "confidence": 0.9722124,
+        "channel": 0,
+        "transcript": "Devemos abraçar a dor e usála como combustível para nossa jornada.",
+        "words": [
+          {
+            "word": "devemos",
+            "start": 0.0,
+            "end": 0.39999998,
+            "confidence": 0.98535156,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "Devemos"
+          },
+          {
+            "word": "abraçar",
+            "start": 0.39999998,
+            "end": 0.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "abraçar"
+          },
+          {
+            "word": "a",
+            "start": 0.88,
+            "end": 1.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "dor",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "dor"
+          },
+          {
+            "word": "e",
+            "start": 1.36,
+            "end": 1.5999999,
+            "confidence": 0.9921875,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "usála",
+            "start": 1.5999999,
+            "end": 2.0,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "usála"
+          },
+          {
+            "word": "como",
+            "start": 2.0,
+            "end": 2.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "como"
+          },
+          {
+            "word": "combustível",
+            "start": 2.24,
+            "end": 2.8,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "combustível"
+          },
+          {
+            "word": "para",
+            "start": 2.8,
+            "end": 3.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "nossa",
+            "start": 3.04,
+            "end": 3.36,
+            "confidence": 0.7211914,
+            "speaker": 0,
+            "speaker_confidence": 0.8629918,
+            "punctuated_word": "nossa"
+          },
+          {
+            "word": "jornada",
+            "start": 3.36,
+            "end": 3.84,
+            "confidence": 0.9995117,
+            "speaker": 0,
+            "speaker_confidence": 0.86299187,
+            "punctuated_word": "jornada."
+          }
+        ],
+        "speaker": 0,
+        "id": "9f57cc73-a689-4c59-af0a-dae6bf5cf0a6"
+      }
+    ]
+  }
+}

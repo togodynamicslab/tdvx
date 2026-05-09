@@ -31,6 +31,11 @@ class Settings(BaseSettings):
     enable_tdv1_fast: bool = True
     tdv1_fast_whisper_model: str = "small"
 
+    # Supported languages (restricts detection + skips unused language overhead)
+    supported_languages: list = ["pt", "en"]
+    live_beam_size: int = 2  # Beam size for live transcription (lower = faster)
+    file_beam_size: int = 5  # Beam size for file transcription (higher = better quality)
+
     # Audio processing
     chunk_duration_seconds: float = 2.5
     max_audio_file_size_mb: int = 100
@@ -38,6 +43,22 @@ class Settings(BaseSettings):
     # VAD settings
     enable_vad: bool = True
     vad_aggressiveness: int = 3  # 0-3, higher = more aggressive
+
+    # Diarizer backend selector — "pyannote" (default, production) or "sortformer"
+    # (prototype, behind flag). Sortformer is NVIDIA's streaming-native end-to-end
+    # diarizer with built-in Arrival-Order Speaker Cache for cross-chunk identity.
+    # See scripts/bench_diarizers.py for A/B benchmarking before any rollout.
+    diarizer_backend: str = "pyannote"
+
+    # Streaming Sortformer (prototype) — measured in 80ms frames. Defaults are
+    # NVIDIA's "very high latency" preset; override per-env for latency tuning.
+    # Low-latency alt: chunk_len=6, chunk_right_context=7, fifo_len=188.
+    sortformer_model_name: str = "nvidia/diar_streaming_sortformer_4spk-v2.1"
+    sortformer_chunk_len: int = 340
+    sortformer_chunk_right_context: int = 40
+    sortformer_fifo_len: int = 40
+    sortformer_spkcache_update_period: int = 300
+    sortformer_spkcache_len: int = 188
 
     # Pyannote Diarization settings
     pyannote_min_speakers: int = 1  # Minimum number of speakers (1 = auto-detect)
@@ -52,6 +73,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
+        extra = "ignore"
 
 
 settings = Settings()

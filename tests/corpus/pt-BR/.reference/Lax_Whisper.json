@@ -1,0 +1,368 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-bf47-76a0-af71-ee7d0e392364",
+    "sha256": "cba48156f1118f98b0ac714043920c760c1d3762f0c1c60458ebe53d9376d143",
+    "created": "2026-04-19T18:19:07.856Z",
+    "duration": 7.83675,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Apesar da completa escuridão, eu pude ver 1 luz na distância, mas o mistério continuava.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "apesar",
+                "start": 0.0,
+                "end": 0.48,
+                "confidence": 0.9790039,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Apesar"
+              },
+              {
+                "word": "da",
+                "start": 0.48,
+                "end": 0.79999995,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "da"
+              },
+              {
+                "word": "completa",
+                "start": 0.79999995,
+                "end": 1.28,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "completa"
+              },
+              {
+                "word": "escuridão",
+                "start": 1.28,
+                "end": 2.24,
+                "confidence": 0.99194336,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "escuridão,"
+              },
+              {
+                "word": "eu",
+                "start": 2.3999999,
+                "end": 2.6399999,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "eu"
+              },
+              {
+                "word": "pude",
+                "start": 2.6399999,
+                "end": 2.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pude"
+              },
+              {
+                "word": "ver",
+                "start": 2.96,
+                "end": 3.5199997,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ver"
+              },
+              {
+                "word": "1",
+                "start": 3.84,
+                "end": 4.16,
+                "confidence": 0.42919922,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "luz",
+                "start": 4.16,
+                "end": 4.4,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "luz"
+              },
+              {
+                "word": "na",
+                "start": 4.4,
+                "end": 4.64,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "na"
+              },
+              {
+                "word": "distância",
+                "start": 4.64,
+                "end": 5.44,
+                "confidence": 0.7590332,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "distância,"
+              },
+              {
+                "word": "mas",
+                "start": 5.8399997,
+                "end": 6.08,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mas"
+              },
+              {
+                "word": "o",
+                "start": 6.08,
+                "end": 6.3199997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "mistério",
+                "start": 6.3199997,
+                "end": 6.72,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mistério"
+              },
+              {
+                "word": "continuava",
+                "start": 6.72,
+                "end": 7.44,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "continuava."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Apesar da completa escuridão, eu pude ver 1 luz na distância, mas o mistério continuava.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Apesar da completa escuridão, eu pude ver 1 luz na distância, mas o mistério continuava.",
+                      "start": 0.0,
+                      "end": 7.44
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 15,
+                  "start": 0.0,
+                  "end": 7.44
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.24,
+        "confidence": 0.99176025,
+        "channel": 0,
+        "transcript": "Apesar da completa escuridão,",
+        "words": [
+          {
+            "word": "apesar",
+            "start": 0.0,
+            "end": 0.48,
+            "confidence": 0.9790039,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Apesar"
+          },
+          {
+            "word": "da",
+            "start": 0.48,
+            "end": 0.79999995,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "da"
+          },
+          {
+            "word": "completa",
+            "start": 0.79999995,
+            "end": 1.28,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "completa"
+          },
+          {
+            "word": "escuridão",
+            "start": 1.28,
+            "end": 2.24,
+            "confidence": 0.99194336,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "escuridão,"
+          }
+        ],
+        "speaker": 0,
+        "id": "71041769-9e58-4fe2-bd2c-dd55334e5986"
+      },
+      {
+        "start": 2.3999999,
+        "end": 3.5199997,
+        "confidence": 0.99641925,
+        "channel": 0,
+        "transcript": "eu pude ver",
+        "words": [
+          {
+            "word": "eu",
+            "start": 2.3999999,
+            "end": 2.6399999,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "eu"
+          },
+          {
+            "word": "pude",
+            "start": 2.6399999,
+            "end": 2.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pude"
+          },
+          {
+            "word": "ver",
+            "start": 2.96,
+            "end": 3.5199997,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ver"
+          }
+        ],
+        "speaker": 0,
+        "id": "a3a08dd3-579b-4330-bc1d-d65375cf710b"
+      },
+      {
+        "start": 3.84,
+        "end": 5.44,
+        "confidence": 0.79608154,
+        "channel": 0,
+        "transcript": "1 luz na distância,",
+        "words": [
+          {
+            "word": "1",
+            "start": 3.84,
+            "end": 4.16,
+            "confidence": 0.42919922,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "luz",
+            "start": 4.16,
+            "end": 4.4,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "luz"
+          },
+          {
+            "word": "na",
+            "start": 4.4,
+            "end": 4.64,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "na"
+          },
+          {
+            "word": "distância",
+            "start": 4.64,
+            "end": 5.44,
+            "confidence": 0.7590332,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "distância,"
+          }
+        ],
+        "speaker": 0,
+        "id": "3fc338cf-a753-4508-b6f0-52a20500f313"
+      },
+      {
+        "start": 5.8399997,
+        "end": 7.44,
+        "confidence": 0.99902344,
+        "channel": 0,
+        "transcript": "mas o mistério continuava.",
+        "words": [
+          {
+            "word": "mas",
+            "start": 5.8399997,
+            "end": 6.08,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mas"
+          },
+          {
+            "word": "o",
+            "start": 6.08,
+            "end": 6.3199997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "mistério",
+            "start": 6.3199997,
+            "end": 6.72,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mistério"
+          },
+          {
+            "word": "continuava",
+            "start": 6.72,
+            "end": 7.44,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "continuava."
+          }
+        ],
+        "speaker": 0,
+        "id": "be9f8dab-2c65-4063-b2bf-a5965ac3eabf"
+      }
+    ]
+  }
+}

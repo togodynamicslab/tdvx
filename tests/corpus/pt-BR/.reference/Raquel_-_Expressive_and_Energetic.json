@@ -1,0 +1,535 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-e0d4-7fe2-b38c-95ab86e120b5",
+    "sha256": "0f74c03e7a5a67479e1082f30c0842cfd6d5142cc4acc5fef403fd255646b9ca",
+    "created": "2026-04-19T18:19:16.342Z",
+    "duration": 8.594313,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Ele disse pra mim umas 3 vezes que não adianta tentar educar desse jeito, mas ele é nosso filho. Nossa, dá vontade de chorar.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "ele",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.8964844,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Ele"
+              },
+              {
+                "word": "disse",
+                "start": 0.24,
+                "end": 0.48,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "disse"
+              },
+              {
+                "word": "pra",
+                "start": 0.48,
+                "end": 0.71999997,
+                "confidence": 0.796875,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pra"
+              },
+              {
+                "word": "mim",
+                "start": 0.71999997,
+                "end": 0.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mim"
+              },
+              {
+                "word": "umas",
+                "start": 0.88,
+                "end": 1.12,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "umas"
+              },
+              {
+                "word": "3",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "3"
+              },
+              {
+                "word": "vezes",
+                "start": 1.36,
+                "end": 1.68,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vezes"
+              },
+              {
+                "word": "que",
+                "start": 1.68,
+                "end": 1.92,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "não",
+                "start": 1.92,
+                "end": 2.1599998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "não"
+              },
+              {
+                "word": "adianta",
+                "start": 2.1599998,
+                "end": 2.6399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "adianta"
+              },
+              {
+                "word": "tentar",
+                "start": 2.6399999,
+                "end": 3.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tentar"
+              },
+              {
+                "word": "educar",
+                "start": 3.04,
+                "end": 3.36,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "educar"
+              },
+              {
+                "word": "desse",
+                "start": 3.36,
+                "end": 3.6799998,
+                "confidence": 0.9902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "desse"
+              },
+              {
+                "word": "jeito",
+                "start": 3.6799998,
+                "end": 4.24,
+                "confidence": 0.7937012,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "jeito,"
+              },
+              {
+                "word": "mas",
+                "start": 4.48,
+                "end": 4.72,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mas"
+              },
+              {
+                "word": "ele",
+                "start": 4.72,
+                "end": 4.96,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ele"
+              },
+              {
+                "word": "é",
+                "start": 4.96,
+                "end": 5.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "nosso",
+                "start": 5.12,
+                "end": 5.3599997,
+                "confidence": 0.9892578,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "nosso"
+              },
+              {
+                "word": "filho",
+                "start": 5.3599997,
+                "end": 5.92,
+                "confidence": 0.8881836,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "filho."
+              },
+              {
+                "word": "nossa",
+                "start": 6.16,
+                "end": 6.88,
+                "confidence": 0.9379883,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Nossa,"
+              },
+              {
+                "word": "dá",
+                "start": 6.96,
+                "end": 7.2799997,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "dá"
+              },
+              {
+                "word": "vontade",
+                "start": 7.2799997,
+                "end": 7.6,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vontade"
+              },
+              {
+                "word": "de",
+                "start": 7.6,
+                "end": 7.8399997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "chorar",
+                "start": 7.8399997,
+                "end": 8.24,
+                "confidence": 0.9946289,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "chorar."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Ele disse pra mim umas 3 vezes que não adianta tentar educar desse jeito, mas ele é nosso filho. Nossa, dá vontade de chorar.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Ele disse pra mim umas 3 vezes que não adianta tentar educar desse jeito, mas ele é nosso filho.",
+                      "start": 0.0,
+                      "end": 5.92
+                    },
+                    {
+                      "text": "Nossa, dá vontade de chorar.",
+                      "start": 6.16,
+                      "end": 8.24
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 24,
+                  "start": 0.0,
+                  "end": 8.24
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 4.24,
+        "confidence": 0.9616176,
+        "channel": 0,
+        "transcript": "Ele disse pra mim umas 3 vezes que não adianta tentar educar desse jeito,",
+        "words": [
+          {
+            "word": "ele",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.8964844,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Ele"
+          },
+          {
+            "word": "disse",
+            "start": 0.24,
+            "end": 0.48,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "disse"
+          },
+          {
+            "word": "pra",
+            "start": 0.48,
+            "end": 0.71999997,
+            "confidence": 0.796875,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pra"
+          },
+          {
+            "word": "mim",
+            "start": 0.71999997,
+            "end": 0.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mim"
+          },
+          {
+            "word": "umas",
+            "start": 0.88,
+            "end": 1.12,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "umas"
+          },
+          {
+            "word": "3",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "3"
+          },
+          {
+            "word": "vezes",
+            "start": 1.36,
+            "end": 1.68,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vezes"
+          },
+          {
+            "word": "que",
+            "start": 1.68,
+            "end": 1.92,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "não",
+            "start": 1.92,
+            "end": 2.1599998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "não"
+          },
+          {
+            "word": "adianta",
+            "start": 2.1599998,
+            "end": 2.6399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "adianta"
+          },
+          {
+            "word": "tentar",
+            "start": 2.6399999,
+            "end": 3.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tentar"
+          },
+          {
+            "word": "educar",
+            "start": 3.04,
+            "end": 3.36,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "educar"
+          },
+          {
+            "word": "desse",
+            "start": 3.36,
+            "end": 3.6799998,
+            "confidence": 0.9902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "desse"
+          },
+          {
+            "word": "jeito",
+            "start": 3.6799998,
+            "end": 4.24,
+            "confidence": 0.7937012,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "jeito,"
+          }
+        ],
+        "speaker": 0,
+        "id": "1c391357-5579-4f38-a8e5-86cb1f2b8bcb"
+      },
+      {
+        "start": 4.48,
+        "end": 5.92,
+        "confidence": 0.974707,
+        "channel": 0,
+        "transcript": "mas ele é nosso filho.",
+        "words": [
+          {
+            "word": "mas",
+            "start": 4.48,
+            "end": 4.72,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mas"
+          },
+          {
+            "word": "ele",
+            "start": 4.72,
+            "end": 4.96,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ele"
+          },
+          {
+            "word": "é",
+            "start": 4.96,
+            "end": 5.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "nosso",
+            "start": 5.12,
+            "end": 5.3599997,
+            "confidence": 0.9892578,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "nosso"
+          },
+          {
+            "word": "filho",
+            "start": 5.3599997,
+            "end": 5.92,
+            "confidence": 0.8881836,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "filho."
+          }
+        ],
+        "speaker": 0,
+        "id": "86ae113c-31e7-4454-b798-019f221ff1f8"
+      },
+      {
+        "start": 6.16,
+        "end": 6.88,
+        "confidence": 0.9379883,
+        "channel": 0,
+        "transcript": "Nossa,",
+        "words": [
+          {
+            "word": "nossa",
+            "start": 6.16,
+            "end": 6.88,
+            "confidence": 0.9379883,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Nossa,"
+          }
+        ],
+        "speaker": 0,
+        "id": "abd7406a-87f5-49e4-a2ba-5aa139a4d283"
+      },
+      {
+        "start": 6.96,
+        "end": 8.24,
+        "confidence": 0.9979248,
+        "channel": 0,
+        "transcript": "dá vontade de chorar.",
+        "words": [
+          {
+            "word": "dá",
+            "start": 6.96,
+            "end": 7.2799997,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "dá"
+          },
+          {
+            "word": "vontade",
+            "start": 7.2799997,
+            "end": 7.6,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vontade"
+          },
+          {
+            "word": "de",
+            "start": 7.6,
+            "end": 7.8399997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "chorar",
+            "start": 7.8399997,
+            "end": 8.24,
+            "confidence": 0.9946289,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "chorar."
+          }
+        ],
+        "speaker": 0,
+        "id": "ba74c8b2-281a-47ac-be5a-37427733d9b8"
+      }
+    ]
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-eedf-7b20-a94f-23999477660c",
+    "sha256": "ab96cd47bac2ca1fe382a6fc2918846b0b501044018b49fe369c10071c8f20e1",
+    "created": "2026-04-19T18:19:19.843Z",
+    "duration": 7.3404374,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Se quer 1 voz com carisma para narrações de audiobooks, storytelling e apresentações, você acertou em sua escolha.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "se",
+                "start": 0.0,
+                "end": 0.16,
+                "confidence": 0.9790039,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Se"
+              },
+              {
+                "word": "quer",
+                "start": 0.16,
+                "end": 0.39999998,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "quer"
+              },
+              {
+                "word": "1",
+                "start": 0.39999998,
+                "end": 0.64,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "voz",
+                "start": 0.64,
+                "end": 0.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "voz"
+              },
+              {
+                "word": "com",
+                "start": 0.88,
+                "end": 1.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "carisma",
+                "start": 1.04,
+                "end": 1.4399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "carisma"
+              },
+              {
+                "word": "para",
+                "start": 1.4399999,
+                "end": 1.68,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "narrações",
+                "start": 1.68,
+                "end": 2.1599998,
+                "confidence": 0.9880371,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "narrações"
+              },
+              {
+                "word": "de",
+                "start": 2.1599998,
+                "end": 2.3999999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "audiobooks",
+                "start": 2.3999999,
+                "end": 3.28,
+                "confidence": 0.95214844,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "audiobooks,"
+              },
+              {
+                "word": "storytelling",
+                "start": 3.28,
+                "end": 3.9199998,
+                "confidence": 0.9983724,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "storytelling"
+              },
+              {
+                "word": "e",
+                "start": 3.9199998,
+                "end": 4.24,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "apresentações",
+                "start": 4.24,
+                "end": 5.28,
+                "confidence": 0.98950195,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "apresentações,"
+              },
+              {
+                "word": "você",
+                "start": 5.3599997,
+                "end": 5.68,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "você"
+              },
+              {
+                "word": "acertou",
+                "start": 5.68,
+                "end": 6.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "acertou"
+              },
+              {
+                "word": "em",
+                "start": 6.16,
+                "end": 6.3999996,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "sua",
+                "start": 6.3999996,
+                "end": 6.64,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sua"
+              },
+              {
+                "word": "escolha",
+                "start": 6.64,
+                "end": 7.04,
+                "confidence": 0.99560547,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "escolha."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Se quer 1 voz com carisma para narrações de audiobooks, storytelling e apresentações, você acertou em sua escolha.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Se quer 1 voz com carisma para narrações de audiobooks, storytelling e apresentações, você acertou em sua escolha.",
+                      "start": 0.0,
+                      "end": 7.04
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 18,
+                  "start": 0.0,
+                  "end": 7.04
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 3.28,
+        "confidence": 0.991333,
+        "channel": 0,
+        "transcript": "Se quer 1 voz com carisma para narrações de audiobooks,",
+        "words": [
+          {
+            "word": "se",
+            "start": 0.0,
+            "end": 0.16,
+            "confidence": 0.9790039,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Se"
+          },
+          {
+            "word": "quer",
+            "start": 0.16,
+            "end": 0.39999998,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "quer"
+          },
+          {
+            "word": "1",
+            "start": 0.39999998,
+            "end": 0.64,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "voz",
+            "start": 0.64,
+            "end": 0.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "voz"
+          },
+          {
+            "word": "com",
+            "start": 0.88,
+            "end": 1.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "carisma",
+            "start": 1.04,
+            "end": 1.4399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "carisma"
+          },
+          {
+            "word": "para",
+            "start": 1.4399999,
+            "end": 1.68,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "narrações",
+            "start": 1.68,
+            "end": 2.1599998,
+            "confidence": 0.9880371,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "narrações"
+          },
+          {
+            "word": "de",
+            "start": 2.1599998,
+            "end": 2.3999999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "audiobooks",
+            "start": 2.3999999,
+            "end": 3.28,
+            "confidence": 0.95214844,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "audiobooks,"
+          }
+        ],
+        "speaker": 0,
+        "id": "b1aa870f-4a73-4e01-873e-a538744fd75f"
+      },
+      {
+        "start": 3.28,
+        "end": 5.28,
+        "confidence": 0.9930284,
+        "channel": 0,
+        "transcript": "storytelling e apresentações,",
+        "words": [
+          {
+            "word": "storytelling",
+            "start": 3.28,
+            "end": 3.9199998,
+            "confidence": 0.9983724,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "storytelling"
+          },
+          {
+            "word": "e",
+            "start": 3.9199998,
+            "end": 4.24,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "apresentações",
+            "start": 4.24,
+            "end": 5.28,
+            "confidence": 0.98950195,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "apresentações,"
+          }
+        ],
+        "speaker": 0,
+        "id": "8028e16f-f5f0-4300-b627-0abbe7163e1f"
+      },
+      {
+        "start": 5.3599997,
+        "end": 7.04,
+        "confidence": 0.9987305,
+        "channel": 0,
+        "transcript": "você acertou em sua escolha.",
+        "words": [
+          {
+            "word": "você",
+            "start": 5.3599997,
+            "end": 5.68,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "você"
+          },
+          {
+            "word": "acertou",
+            "start": 5.68,
+            "end": 6.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "acertou"
+          },
+          {
+            "word": "em",
+            "start": 6.16,
+            "end": 6.3999996,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "sua",
+            "start": 6.3999996,
+            "end": 6.64,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sua"
+          },
+          {
+            "word": "escolha",
+            "start": 6.64,
+            "end": 7.04,
+            "confidence": 0.99560547,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "escolha."
+          }
+        ],
+        "speaker": 0,
+        "id": "3fccc1d8-978e-4bcd-93f6-2f2defd9eb13"
+      }
+    ]
+  }
+}

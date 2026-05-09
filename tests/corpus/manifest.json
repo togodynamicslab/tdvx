@@ -1,0 +1,304 @@
+{
+  "samples": [
+    {
+      "name": "Vinicius",
+      "path": "tests/corpus/pt-BR/Vinicius.wav",
+      "duration_s": 1.579
+    },
+    {
+      "name": "Erik_Alves_-_Professional__Calm",
+      "path": "tests/corpus/pt-BR/Erik_Alves_-_Professional__Calm.wav",
+      "duration_s": 1.625
+    },
+    {
+      "name": "Ricardo_Vianna_-_Calm_and_Resonating",
+      "path": "tests/corpus/pt-BR/Ricardo_Vianna_-_Calm_and_Resonating.wav",
+      "duration_s": 2.168
+    },
+    {
+      "name": "Juliano_Magalhes_-_Clear_and_Deep",
+      "path": "tests/corpus/pt-BR/Juliano_Magalhes_-_Clear_and_Deep.wav",
+      "duration_s": 2.22
+    },
+    {
+      "name": "Diego_-_Confident_Announcer",
+      "path": "tests/corpus/pt-BR/Diego_-_Confident_Announcer.wav",
+      "duration_s": 2.461
+    },
+    {
+      "name": "Guilherme_-_Serious_and_Diplomatic",
+      "path": "tests/corpus/pt-BR/Guilherme_-_Serious_and_Diplomatic.wav",
+      "duration_s": 2.821
+    },
+    {
+      "name": "Fabio_Filho_-_Neutral_and_Direct",
+      "path": "tests/corpus/pt-BR/Fabio_Filho_-_Neutral_and_Direct.wav",
+      "duration_s": 2.833
+    },
+    {
+      "name": "Ceeli",
+      "path": "tests/corpus/pt-BR/Ceeli.wav",
+      "duration_s": 2.952
+    },
+    {
+      "name": "Ryan_Avila_-_Youthful_Upbeat_and_Kind",
+      "path": "tests/corpus/pt-BR/Ryan_Avila_-_Youthful_Upbeat_and_Kind.wav",
+      "duration_s": 3.004
+    },
+    {
+      "name": "Anderson_Carlos_-_Pleasant_and_Animated",
+      "path": "tests/corpus/pt-BR/Anderson_Carlos_-_Pleasant_and_Animated.wav",
+      "duration_s": 3.111
+    },
+    {
+      "name": "Flvio_-_Chill_Calm_and_Friendly",
+      "path": "tests/corpus/pt-BR/Flvio_-_Chill_Calm_and_Friendly.wav",
+      "duration_s": 3.291
+    },
+    {
+      "name": "Samuel_-_Slow_and_Confident",
+      "path": "tests/corpus/pt-BR/Samuel_-_Slow_and_Confident.wav",
+      "duration_s": 3.297
+    },
+    {
+      "name": "Katiuscia_-_Feminine_and_Gentle",
+      "path": "tests/corpus/pt-BR/Katiuscia_-_Feminine_and_Gentle.wav",
+      "duration_s": 3.344
+    },
+    {
+      "name": "Julio_-_Shorts__Energetic",
+      "path": "tests/corpus/pt-BR/Julio_-_Shorts__Energetic.wav",
+      "duration_s": 3.422
+    },
+    {
+      "name": "Roberto_Barbieri_-_Smooth_and_Sauve",
+      "path": "tests/corpus/pt-BR/Roberto_Barbieri_-_Smooth_and_Sauve.wav",
+      "duration_s": 3.622
+    },
+    {
+      "name": "Brilho",
+      "path": "tests/corpus/pt-BR/Brilho.wav",
+      "duration_s": 3.808
+    },
+    {
+      "name": "Vagner_de_Souza_-_Sharp_and_Sarcastic",
+      "path": "tests/corpus/pt-BR/Vagner_de_Souza_-_Sharp_and_Sarcastic.wav",
+      "duration_s": 3.808
+    },
+    {
+      "name": "Eliser",
+      "path": "tests/corpus/pt-BR/Eliser.wav",
+      "duration_s": 3.901
+    },
+    {
+      "name": "Ana_Dias_-_Engaging_Smooth_and_Forceful",
+      "path": "tests/corpus/pt-BR/Ana_Dias_-_Engaging_Smooth_and_Forceful.wav",
+      "duration_s": 3.947
+    },
+    {
+      "name": "Weverton_-_Youthful_Energetic_and_Clear",
+      "path": "tests/corpus/pt-BR/Weverton_-_Youthful_Energetic_and_Clear.wav",
+      "duration_s": 4.087
+    },
+    {
+      "name": "Lucas_-_Engaging_Captivating_and_Kind",
+      "path": "tests/corpus/pt-BR/Lucas_-_Engaging_Captivating_and_Kind.wav",
+      "duration_s": 4.127
+    },
+    {
+      "name": "Kaique_-_Poetic_Soft_and_Gentle",
+      "path": "tests/corpus/pt-BR/Kaique_-_Poetic_Soft_and_Gentle.wav",
+      "duration_s": 4.133
+    },
+    {
+      "name": "Lucke_-_Direct_and_Neutral",
+      "path": "tests/corpus/pt-BR/Lucke_-_Direct_and_Neutral.wav",
+      "duration_s": 4.133
+    },
+    {
+      "name": "Marcos_-_Didatic_Insightful_and_Warm",
+      "path": "tests/corpus/pt-BR/Marcos_-_Didatic_Insightful_and_Warm.wav",
+      "duration_s": 4.31
+    },
+    {
+      "name": "Leonardo_Hamaral_-_Warm_and_Confident",
+      "path": "tests/corpus/pt-BR/Leonardo_Hamaral_-_Warm_and_Confident.wav",
+      "duration_s": 4.412
+    },
+    {
+      "name": "Cleber_-_Tender_Warm_and_Energetic",
+      "path": "tests/corpus/pt-BR/Cleber_-_Tender_Warm_and_Energetic.wav",
+      "duration_s": 4.598
+    },
+    {
+      "name": "Amandoca_-_Fun_Breathy_and_Vibrant",
+      "path": "tests/corpus/pt-BR/Amandoca_-_Fun_Breathy_and_Vibrant.wav",
+      "duration_s": 4.676
+    },
+    {
+      "name": "Leon",
+      "path": "tests/corpus/pt-BR/Leon.wav",
+      "duration_s": 4.728
+    },
+    {
+      "name": "DiMo",
+      "path": "tests/corpus/pt-BR/DiMo.wav",
+      "duration_s": 4.911
+    },
+    {
+      "name": "Thais_-_Youthful_and_Feminine",
+      "path": "tests/corpus/pt-BR/Thais_-_Youthful_and_Feminine.wav",
+      "duration_s": 5.669
+    },
+    {
+      "name": "Mercos_Assunxao_-_Calm_and_Poetic",
+      "path": "tests/corpus/pt-BR/Mercos_Assunxao_-_Calm_and_Poetic.wav",
+      "duration_s": 5.695
+    },
+    {
+      "name": "Dinis_-_Optimistic_and_Encouraging",
+      "path": "tests/corpus/pt-BR/Dinis_-_Optimistic_and_Encouraging.wav",
+      "duration_s": 5.851
+    },
+    {
+      "name": "Bruno__Calm_Warm_and_Seductive",
+      "path": "tests/corpus/pt-BR/Bruno__Calm_Warm_and_Seductive.wav",
+      "duration_s": 6.217
+    },
+    {
+      "name": "Paulo_-_Expressive_and_Confident",
+      "path": "tests/corpus/pt-BR/Paulo_-_Expressive_and_Confident.wav",
+      "duration_s": 7.131
+    },
+    {
+      "name": "Roberta_-_Smooth_and_Confident",
+      "path": "tests/corpus/pt-BR/Roberta_-_Smooth_and_Confident.wav",
+      "duration_s": 7.34
+    },
+    {
+      "name": "Sandro_Dutra_-_Articulated_and_Clear",
+      "path": "tests/corpus/pt-BR/Sandro_Dutra_-_Articulated_and_Clear.wav",
+      "duration_s": 7.34
+    },
+    {
+      "name": "Aougueiro_-_Evil_Cartoon_Character",
+      "path": "tests/corpus/pt-BR/Aougueiro_-_Evil_Cartoon_Character.wav",
+      "duration_s": 7.549
+    },
+    {
+      "name": "Rener_-_Friendly_Polite_and_Inviting",
+      "path": "tests/corpus/pt-BR/Rener_-_Friendly_Polite_and_Inviting.wav",
+      "duration_s": 7.654
+    },
+    {
+      "name": "Will_-_Dynamic_Deep_and_Articulate",
+      "path": "tests/corpus/pt-BR/Will_-_Dynamic_Deep_and_Articulate.wav",
+      "duration_s": 7.706
+    },
+    {
+      "name": "Lax_Whisper",
+      "path": "tests/corpus/pt-BR/Lax_Whisper.wav",
+      "duration_s": 7.837
+    },
+    {
+      "name": "Matheus_-_Clear_Calm_and_Confident",
+      "path": "tests/corpus/pt-BR/Matheus_-_Clear_Calm_and_Confident.wav",
+      "duration_s": 7.889
+    },
+    {
+      "name": "Carla_-_Energetic_and_Confident",
+      "path": "tests/corpus/pt-BR/Carla_-_Energetic_and_Confident.wav",
+      "duration_s": 8.072
+    },
+    {
+      "name": "Fernanda_-_Formal_and_Neutral",
+      "path": "tests/corpus/pt-BR/Fernanda_-_Formal_and_Neutral.wav",
+      "duration_s": 8.072
+    },
+    {
+      "name": "Helena_-_Kids_Storyteller",
+      "path": "tests/corpus/pt-BR/Helena_-_Kids_Storyteller.wav",
+      "duration_s": 8.438
+    },
+    {
+      "name": "Raquel_-_Expressive_and_Energetic",
+      "path": "tests/corpus/pt-BR/Raquel_-_Expressive_and_Energetic.wav",
+      "duration_s": 8.594
+    },
+    {
+      "name": "Lucas_-_Direct_and_Tender",
+      "path": "tests/corpus/pt-BR/Lucas_-_Direct_and_Tender.wav",
+      "duration_s": 8.908
+    },
+    {
+      "name": "Campanholi_-_Expressive_and_Friendly",
+      "path": "tests/corpus/pt-BR/Campanholi_-_Expressive_and_Friendly.wav",
+      "duration_s": 8.96
+    },
+    {
+      "name": "Lucas_-_Natural_Calm_and_Steady",
+      "path": "tests/corpus/pt-BR/Lucas_-_Natural_Calm_and_Steady.wav",
+      "duration_s": 9.091
+    },
+    {
+      "name": "Elvis_-_Resonating_Deep_and_Engaging",
+      "path": "tests/corpus/pt-BR/Elvis_-_Resonating_Deep_and_Engaging.wav",
+      "duration_s": 9.274
+    },
+    {
+      "name": "Anita",
+      "path": "tests/corpus/pt-BR/Anita.wav",
+      "duration_s": 9.456
+    },
+    {
+      "name": "Arnold_-_Br",
+      "path": "tests/corpus/pt-BR/Arnold_-_Br.wav",
+      "duration_s": 9.744
+    },
+    {
+      "name": "Wlademir_-_Deep_Emotive_and_Resonant",
+      "path": "tests/corpus/pt-BR/Wlademir_-_Deep_Emotive_and_Resonant.wav",
+      "duration_s": 9.874
+    },
+    {
+      "name": "Will_-_Intense_Dramatic_and_Captivating",
+      "path": "tests/corpus/pt-BR/Will_-_Intense_Dramatic_and_Captivating.wav",
+      "duration_s": 9.927
+    },
+    {
+      "name": "Lucas_-_Deep__Profound_Narrator",
+      "path": "tests/corpus/pt-BR/Lucas_-_Deep__Profound_Narrator.wav",
+      "duration_s": 10.397
+    },
+    {
+      "name": "David_-_Deep_Gravelly_and_Resonnat",
+      "path": "tests/corpus/pt-BR/David_-_Deep_Gravelly_and_Resonnat.wav",
+      "duration_s": 10.527
+    },
+    {
+      "name": "Graziella_-_Childrens_Narrator",
+      "path": "tests/corpus/pt-BR/Graziella_-_Childrens_Narrator.wav",
+      "duration_s": 11.415
+    },
+    {
+      "name": "Sergio_-_Deep_Resonant_and_Clear",
+      "path": "tests/corpus/pt-BR/Sergio_-_Deep_Resonant_and_Clear.wav",
+      "duration_s": 11.964
+    },
+    {
+      "name": "Adriano_-_Deep_Gravelly_and_Rugged",
+      "path": "tests/corpus/pt-BR/Adriano_-_Deep_Gravelly_and_Rugged.wav",
+      "duration_s": 12.487
+    },
+    {
+      "name": "Ana_Alice_-_Friendly__Clear",
+      "path": "tests/corpus/pt-BR/Ana_Alice_-_Friendly__Clear.wav",
+      "duration_s": 13.27
+    },
+    {
+      "name": "Carla_-_Calm_Seductive_and_Enigmatic",
+      "path": "tests/corpus/pt-BR/Carla_-_Calm_Seductive_and_Enigmatic.wav",
+      "duration_s": 14.707
+    }
+  ]
+}

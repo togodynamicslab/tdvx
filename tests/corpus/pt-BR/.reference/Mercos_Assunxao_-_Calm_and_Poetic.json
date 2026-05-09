@@ -1,0 +1,340 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-d988-7310-b6e6-a7b0669977a9",
+    "sha256": "62353baa7e1fe49b8c4e53bbe172ce5f77aa6bdba9b197d5527a96923cd3bd01",
+    "created": "2026-04-19T18:19:14.792Z",
+    "duration": 5.6946874,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "A felicidade reside não em posses e não em ouro. A felicidade habita na alma.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "a",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "A"
+              },
+              {
+                "word": "felicidade",
+                "start": 0.24,
+                "end": 0.71999997,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "felicidade"
+              },
+              {
+                "word": "reside",
+                "start": 0.71999997,
+                "end": 1.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "reside"
+              },
+              {
+                "word": "não",
+                "start": 1.28,
+                "end": 1.5999999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "não"
+              },
+              {
+                "word": "em",
+                "start": 1.5999999,
+                "end": 1.76,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "posses",
+                "start": 1.76,
+                "end": 2.24,
+                "confidence": 0.99560547,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "posses"
+              },
+              {
+                "word": "e",
+                "start": 2.24,
+                "end": 2.48,
+                "confidence": 0.9194336,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "não",
+                "start": 2.48,
+                "end": 2.6399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "não"
+              },
+              {
+                "word": "em",
+                "start": 2.6399999,
+                "end": 2.8799999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "ouro",
+                "start": 2.8799999,
+                "end": 3.4399998,
+                "confidence": 0.7573242,
+                "speaker": 0,
+                "speaker_confidence": 0.70531285,
+                "punctuated_word": "ouro."
+              },
+              {
+                "word": "a",
+                "start": 3.6799998,
+                "end": 3.84,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.45612407,
+                "punctuated_word": "A"
+              },
+              {
+                "word": "felicidade",
+                "start": 3.84,
+                "end": 4.3199997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.6874067,
+                "punctuated_word": "felicidade"
+              },
+              {
+                "word": "habita",
+                "start": 4.3199997,
+                "end": 4.7999997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.6874067,
+                "punctuated_word": "habita"
+              },
+              {
+                "word": "na",
+                "start": 4.7999997,
+                "end": 5.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.6874067,
+                "punctuated_word": "na"
+              },
+              {
+                "word": "alma",
+                "start": 5.04,
+                "end": 5.3599997,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.6874067,
+                "punctuated_word": "alma."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: A felicidade reside não em posses e não em ouro. A felicidade habita na alma.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "A felicidade reside não em posses e não em ouro.",
+                      "start": 0.0,
+                      "end": 3.4399998
+                    },
+                    {
+                      "text": "A felicidade habita na alma.",
+                      "start": 3.6799998,
+                      "end": 5.3599997
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 15,
+                  "start": 0.0,
+                  "end": 5.3599997
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 5.3599997,
+        "confidence": 0.9776367,
+        "channel": 0,
+        "transcript": "A felicidade reside não em posses e não em ouro. A felicidade habita na alma.",
+        "words": [
+          {
+            "word": "a",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "A"
+          },
+          {
+            "word": "felicidade",
+            "start": 0.24,
+            "end": 0.71999997,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "felicidade"
+          },
+          {
+            "word": "reside",
+            "start": 0.71999997,
+            "end": 1.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "reside"
+          },
+          {
+            "word": "não",
+            "start": 1.28,
+            "end": 1.5999999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "não"
+          },
+          {
+            "word": "em",
+            "start": 1.5999999,
+            "end": 1.76,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "posses",
+            "start": 1.76,
+            "end": 2.24,
+            "confidence": 0.99560547,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "posses"
+          },
+          {
+            "word": "e",
+            "start": 2.24,
+            "end": 2.48,
+            "confidence": 0.9194336,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "não",
+            "start": 2.48,
+            "end": 2.6399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "não"
+          },
+          {
+            "word": "em",
+            "start": 2.6399999,
+            "end": 2.8799999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "ouro",
+            "start": 2.8799999,
+            "end": 3.4399998,
+            "confidence": 0.7573242,
+            "speaker": 0,
+            "speaker_confidence": 0.70531285,
+            "punctuated_word": "ouro."
+          },
+          {
+            "word": "a",
+            "start": 3.6799998,
+            "end": 3.84,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.45612407,
+            "punctuated_word": "A"
+          },
+          {
+            "word": "felicidade",
+            "start": 3.84,
+            "end": 4.3199997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.6874067,
+            "punctuated_word": "felicidade"
+          },
+          {
+            "word": "habita",
+            "start": 4.3199997,
+            "end": 4.7999997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.6874067,
+            "punctuated_word": "habita"
+          },
+          {
+            "word": "na",
+            "start": 4.7999997,
+            "end": 5.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.6874067,
+            "punctuated_word": "na"
+          },
+          {
+            "word": "alma",
+            "start": 5.04,
+            "end": 5.3599997,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.6874067,
+            "punctuated_word": "alma."
+          }
+        ],
+        "speaker": 0,
+        "id": "040a74f1-afd9-46f0-b4b0-e824e2f49063"
+      }
+    ]
+  }
+}

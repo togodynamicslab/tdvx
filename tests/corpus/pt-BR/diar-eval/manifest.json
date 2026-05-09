@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "description": "PT-BR diarization eval manifest. Add one entry per clip. Bench reads this list, not a directory glob, so synthetic and real clips can coexist with the real ones explicitly tagged.",
+  "clips": [
+    {
+      "clip_id": "synth-00",
+      "audio": "clips/synth-00.wav",
+      "rttm": "clips/synth-00.rttm",
+      "metadata": "clips/synth-00.json",
+      "synthetic": true,
+      "duration_s": 62.192,
+      "n_speakers": 3
+    },
+    {
+      "clip_id": "synth-01",
+      "audio": "clips/synth-01.wav",
+      "rttm": "clips/synth-01.rttm",
+      "metadata": "clips/synth-01.json",
+      "synthetic": true,
+      "duration_s": 62.161,
+      "n_speakers": 3
+    },
+    {
+      "clip_id": "synth-02",
+      "audio": "clips/synth-02.wav",
+      "rttm": "clips/synth-02.rttm",
+      "metadata": "clips/synth-02.json",
+      "synthetic": true,
+      "duration_s": 64.61,
+      "n_speakers": 3
+    },
+    {
+      "clip_id": "synth-03",
+      "audio": "clips/synth-03.wav",
+      "rttm": "clips/synth-03.rttm",
+      "metadata": "clips/synth-03.json",
+      "synthetic": true,
+      "duration_s": 62.663,
+      "n_speakers": 3
+    }
+  ]
+}
