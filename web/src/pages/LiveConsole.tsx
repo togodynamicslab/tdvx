@@ -27,6 +27,8 @@ const MODELS = [
   { id: "tdv1-fast", name: "TDv1-Fast", hint: "faster-whisper small · live" },
   { id: "tdv1-medium", name: "TDv1-Medium", hint: "faster-whisper medium · balanced" },
   { id: "tdv1", name: "TDv1", hint: "faster-whisper large-v3 · highest quality" },
+  { id: "tdv1-cv-pt", name: "TDv1-CV-PT", hint: "fine-tuned medium · CommonVoice PT (CT2 int8)" },
+  { id: "tdv3-cv-pt", name: "TDv3-CV-PT", hint: "fine-tuned medium · CommonVoice PT v3 (CT2 int8)" },
 ]
 
 const LANGS = [

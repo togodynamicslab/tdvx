@@ -77,6 +77,17 @@ static/dist/
 # Python build artifacts
 *.pyc
 
+# Playwright MCP debug artifacts (snapshots, console logs, screenshots)
+.playwright-mcp/
+
+# Ad-hoc debug screenshots written to repo root by manual / AI tooling
+/yt-*.png
+/page-*.png
+/*-debug.png
+
+# Editor / tool backup files
+*.bak
+
 # But explicitly allow:
 #   tests/corpus/**/.reference/*.json  — Deepgram ground-truth references
 #   tests/corpus/**/.validations.json  — human judgments
