@@ -145,8 +145,242 @@ _LANGUAGE_MAP: Dict[str, str] = {
 
 _MAX_DURATION_S = 28.0   # limite técnico da janela de contexto do Whisper
 
-_CORAA_DATASET_ID  = "gabrielrstan/CORAA-v1.1"   # 290h pt-BR espontâneo
+_CORAA_BASE_URL    = "https://huggingface.co/datasets/gabrielrstan/CORAA-v1.1/resolve/main"
 _LAPSBM_DATASET_ID = "falabrasil/lapsbm"          # LaPS BM — usado só como eval
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CORAA v1.1 — download e carregamento local
+# Estrutura HuggingFace: CSV de metadados + zip (dev/test) ou RAR (train)
+# Campos CSV: file_path, text, up_votes, down_votes, votes_for_noise_or_low_voice
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _hf_download(url: str, dest: Path, token: Optional[str] = None,
+                 desc: str = "") -> bool:
+    """Download com progress bar simples. Retorna True se OK."""
+    import urllib.request as _ur
+    headers = {}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    req = _ur.Request(url, headers=headers)
+    try:
+        log.info("Baixando %s → %s", desc or url.split("/")[-1], dest)
+        with _ur.urlopen(req, timeout=300) as resp, open(dest, "wb") as f:
+            total = int(resp.headers.get("Content-Length", 0))
+            done = 0
+            chunk = 1 << 20  # 1 MB
+            while True:
+                buf = resp.read(chunk)
+                if not buf:
+                    break
+                f.write(buf)
+                done += len(buf)
+                if total:
+                    pct = done * 100 // total
+                    print(f"\r  {desc or dest.name}: {pct}% ({done//1e6:.0f}/{total//1e6:.0f} MB)",
+                          end="", flush=True)
+            print()
+        return True
+    except Exception as exc:
+        log.error("Falha ao baixar %s: %s", url, exc)
+        return False
+
+
+def _extract_zip(zip_path: Path, dest: Path) -> bool:
+    import zipfile as _zf
+    log.info("Extraindo %s → %s", zip_path.name, dest)
+    try:
+        with _zf.ZipFile(zip_path) as z:
+            z.extractall(dest)
+        return True
+    except Exception as exc:
+        log.error("Falha ao extrair zip: %s", exc)
+        return False
+
+
+def _extract_rars(rar_dir: Path, dest: Path) -> bool:
+    """Extrai partes RAR usando rarfile (pip) ou unrar do sistema."""
+    parts = sorted(rar_dir.glob("*.rar"))
+    if not parts:
+        log.error("Nenhum .rar encontrado em %s", rar_dir)
+        return False
+    first = parts[0]
+    log.info("Extraindo %d parte(s) RAR → %s", len(parts), dest)
+    dest.mkdir(parents=True, exist_ok=True)
+    try:
+        import rarfile as _rf
+        with _rf.RarFile(first) as rf:
+            rf.extractall(dest)
+        return True
+    except ImportError:
+        pass
+    try:
+        subprocess.run(["unrar", "x", "-y", str(first), str(dest)], check=True)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        log.error(
+            "Não foi possível extrair RAR.\n"
+            "Instale: pip install rarfile  OU  apt install unrar"
+        )
+        return False
+
+
+def setup_coraa(coraa_dir: Path, split: str = "dev",
+                hf_token: Optional[str] = None) -> bool:
+    """
+    Baixa e extrai o CORAA v1.1 para coraa_dir se ainda não estiver lá.
+
+    split: "dev" (~1.2 GB zip) | "test" (~2.4 GB zip) | "train" (~50 GB RAR)
+    Estrutura gerada:
+        coraa_dir/
+            metadata_{split}_final.csv
+            {split}/sp/*.wav   (arquivos extraídos)
+    """
+    coraa_dir.mkdir(parents=True, exist_ok=True)
+
+    csv_dest = coraa_dir / f"metadata_{split}_final.csv"
+    audio_marker = coraa_dir / split   # pasta criada após extração
+
+    # CSV
+    if not csv_dest.exists():
+        ok = _hf_download(
+            f"{_CORAA_BASE_URL}/metadata_{split}_final.csv",
+            csv_dest, token=hf_token, desc=f"CORAA {split} CSV",
+        )
+        if not ok:
+            return False
+
+    # Áudio
+    if not audio_marker.exists():
+        if split in ("dev", "test"):
+            zip_dest = coraa_dir / f"{split}.zip"
+            if not zip_dest.exists():
+                ok = _hf_download(
+                    f"{_CORAA_BASE_URL}/{split}.zip",
+                    zip_dest, token=hf_token, desc=f"CORAA {split} áudio",
+                )
+                if not ok:
+                    return False
+            if not _extract_zip(zip_dest, coraa_dir):
+                return False
+        else:  # train — RARs grandes
+            rar_dir = coraa_dir / "train_rar"
+            rar_dir.mkdir(exist_ok=True)
+            for i in range(1, 6):
+                part = rar_dir / f"train.part{i}.rar"
+                if not part.exists():
+                    ok = _hf_download(
+                        f"{_CORAA_BASE_URL}/train_dividido/train.part{i}.rar",
+                        part, token=hf_token, desc=f"CORAA train part{i}/5",
+                    )
+                    if not ok:
+                        return False
+            if not _extract_rars(rar_dir, coraa_dir):
+                return False
+
+    log.info("CORAA %s pronto em %s", split, coraa_dir)
+    return True
+
+
+class CORAALocalDataset(torch.utils.data.Dataset):
+    """
+    Carrega CORAA v1.1 a partir de arquivos locais (CSV + WAV).
+
+    CSV colunas relevantes:
+        file_path   — caminho relativo ao coraa_dir (ex.: dev/sp/58031_sp_.wav)
+        text        — transcrição pt-BR
+        up_votes / down_votes / votes_for_noise_or_low_voice
+    """
+    _MAX_LABEL_TOKENS = 448
+
+    def __init__(
+        self,
+        coraa_dir: Path,
+        split: str,
+        processor: "WhisperProcessor",
+        task: str,
+        whisper_language: str,
+        max_samples: Optional[int] = None,
+        augment: bool = False,
+        min_up_votes: int = 1,
+    ) -> None:
+        import librosa as _librosa
+        self._librosa   = _librosa
+        self._processor = processor
+        self._augment   = augment
+        self._rng       = np.random.default_rng(seed=3)
+        self._coraa_dir = coraa_dir
+
+        processor.tokenizer.set_prefix_tokens(language=whisper_language, task=task)
+
+        csv_path = coraa_dir / f"metadata_{split}_final.csv"
+        if not csv_path.exists():
+            raise FileNotFoundError(f"CORAA CSV não encontrado: {csv_path}\n"
+                                    "Execute setup_coraa() primeiro ou passe --coraa-dir correto.")
+
+        valid: List[Dict] = []
+        skipped = 0
+        with open(csv_path, encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                up   = int(row.get("up_votes", 0) or 0)
+                down = int(row.get("down_votes", 0) or 0)
+                noise = int(row.get("votes_for_noise_or_low_voice", 0) or 0)
+                if up < min_up_votes or down > up or noise >= up:
+                    skipped += 1
+                    continue
+
+                text = _normalize_text(row.get("text", ""))
+                if not text or len(text.split()) < 2:
+                    skipped += 1
+                    continue
+
+                ids = processor.tokenizer(text).input_ids
+                if len(ids) > self._MAX_LABEL_TOKENS:
+                    skipped += 1
+                    continue
+
+                audio_path = coraa_dir / row["file_path"]
+                if not audio_path.exists():
+                    skipped += 1
+                    continue
+
+                valid.append({"path": str(audio_path), "label_ids": ids})
+                if max_samples and len(valid) >= max_samples:
+                    break
+
+        log.info("CORAA %s: %d válidas, %d ignoradas (CSV: %s)",
+                 split, len(valid), skipped, csv_path.name)
+        self._items = valid
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+    def __getitem__(self, idx: int) -> Dict:
+        item = self._items[idx]
+        try:
+            array, _ = self._librosa.load(item["path"], sr=16_000, mono=True)
+        except Exception:
+            array = np.zeros(16_000, dtype=np.float32)
+
+        array = np.clip(array, -1.0, 1.0).astype(np.float32)
+        if self._augment and len(item["label_ids"]) > 1:
+            array = self._augment_audio(array)
+
+        feats = self._processor.feature_extractor(array, sampling_rate=16_000, return_tensors="pt")
+        return {"input_features": feats.input_features[0], "labels": item["label_ids"]}
+
+    def _augment_audio(self, audio: np.ndarray) -> np.ndarray:
+        rng = self._rng
+        if rng.random() < 0.4:
+            noise     = rng.standard_normal(len(audio)).astype(np.float32)
+            sig_rms   = np.sqrt(np.mean(audio ** 2)) + 1e-9
+            noise_rms = np.sqrt(np.mean(noise  ** 2)) + 1e-9
+            audio     = audio + (sig_rms / (noise_rms * 10 ** (25 / 20))) * noise
+        if rng.random() < 0.2:
+            audio = self._librosa.effects.time_stretch(audio, rate=float(rng.uniform(0.9, 1.1)))
+        return np.clip(audio, -1.0, 1.0).astype(np.float32)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -965,32 +1199,34 @@ def run_finetune(args: argparse.Namespace) -> None:
     eval_datasets  = [cv_eval_ds]
 
     if args.coraa:
-        coraa_train = HFAudioDataset(
-            dataset_id=_CORAA_DATASET_ID,
-            split="train",
-            text_field="text",
-            audio_field="audio",
-            processor=processor,
-            task=args.task,
-            whisper_language=whisper_lang,
-            max_samples=args.max_coraa_samples,
-            augment=not args.no_augment,
-            hf_token=hf_token,
-        )
-        coraa_dev = HFAudioDataset(
-            dataset_id=_CORAA_DATASET_ID,
-            split="dev",
-            text_field="text",
-            audio_field="audio",
-            processor=processor,
-            task=args.task,
-            whisper_language=whisper_lang,
-            max_samples=min(args.max_eval_samples or 2000, 2000),
-            hf_token=hf_token,
-        )
-        train_datasets.append(coraa_train)
-        eval_datasets.append(coraa_dev)
-        log.info("CORAA: %d treino | %d avaliação", len(coraa_train), len(coraa_dev))
+        coraa_dir = Path(args.coraa_dir).resolve()
+
+        # Download automático do dev set (sempre) e train (se não for só dev)
+        dev_ok   = setup_coraa(coraa_dir, "dev",   hf_token=hf_token)
+        train_ok = setup_coraa(coraa_dir, "train", hf_token=hf_token) if not args.coraa_dev_only else False
+
+        if dev_ok:
+            coraa_eval_ds = CORAALocalDataset(
+                coraa_dir, "dev", processor, args.task, whisper_lang,
+                max_samples=min(args.max_eval_samples or 2000, 2000),
+            )
+            eval_datasets.append(coraa_eval_ds)
+            log.info("CORAA dev: %d amostras de avaliação", len(coraa_eval_ds))
+
+        if train_ok:
+            coraa_train_ds = CORAALocalDataset(
+                coraa_dir, "train", processor, args.task, whisper_lang,
+                max_samples=args.max_coraa_samples,
+                augment=not args.no_augment,
+            )
+            train_datasets.append(coraa_train_ds)
+            log.info("CORAA train: %d amostras de treino", len(coraa_train_ds))
+        elif args.coraa_dev_only:
+            log.info("CORAA: modo --coraa-dev-only — usando dev como treino adicional")
+            if dev_ok:
+                train_datasets.append(coraa_eval_ds)
+        else:
+            log.warning("CORAA train: download falhou ou RAR não extraído — treino só com CV.")
 
     # ── 7. LaPS BM (eval adicional, opcional) ─────────────────────────────────
     if args.lapsbm_eval:
@@ -1312,6 +1548,10 @@ def parse_args() -> argparse.Namespace:
     # CORAA + LaPS BM
     p.add_argument("--coraa", action="store_true",
                    help="Inclui CORAA v1.1 (290h pt-BR espontâneo) no treino")
+    p.add_argument("--coraa-dir", default="./coraa",
+                   help="Pasta local onde CORAA será baixado/extraído")
+    p.add_argument("--coraa-dev-only", action="store_true",
+                   help="Usa só o dev do CORAA (~1.2 GB zip) — útil para teste rápido sem baixar os 50 GB de train")
     p.add_argument("--max-coraa-samples", type=int, default=0,
                    help="Limita amostras do CORAA (0 = usar tudo)")
     p.add_argument("--lapsbm-eval", action="store_true",
