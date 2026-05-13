@@ -674,15 +674,16 @@ class HFAudioDataset(torch.utils.data.Dataset):
         augment: bool = False,
         hf_token: Optional[str] = None,
     ) -> None:
-        from datasets import load_dataset, Audio as HFAudio
+        from datasets import load_dataset
 
         log.info("HFAudioDataset: carregando %s (split=%s) ...", dataset_id, split)
+        # Sem cast_column(Audio) — evita dependência de torchcodec (datasets>=3.x)
         ds = load_dataset(dataset_id, split=split, token=hf_token, trust_remote_code=True)
-        ds = ds.cast_column(audio_field, HFAudio(sampling_rate=16_000))
         if max_samples:
             ds = ds.select(range(min(max_samples, len(ds))))
 
         self._ds          = ds
+        self._text_field  = text_field
         self._audio_field = audio_field
         self._processor   = processor
         self._augment     = augment
@@ -690,12 +691,12 @@ class HFAudioDataset(torch.utils.data.Dataset):
 
         processor.tokenizer.set_prefix_tokens(language=whisper_language, task=task)
 
-        # Pré-valida labels; guarda apenas índices + token ids (não o áudio)
+        # Pré-valida só o texto (não carrega áudio nesta etapa)
+        texts = ds[text_field]
         valid: List[tuple] = []
         skipped = 0
-        for i in range(len(ds)):
-            raw_text = ds[i].get(text_field, "") or ""
-            text = _normalize_text(raw_text)
+        for i, raw_text in enumerate(texts):
+            text = _normalize_text(raw_text or "")
             if not text or len(text.split()) < 3:
                 skipped += 1
                 continue
@@ -711,16 +712,56 @@ class HFAudioDataset(torch.utils.data.Dataset):
     def __len__(self) -> int:
         return len(self._valid)
 
+    def _load_audio_col(self, audio_col) -> np.ndarray:
+        """Carrega áudio de coluna HF sem torchcodec — usa soundfile + librosa."""
+        import io
+        try:
+            import soundfile as _sf
+        except ImportError:
+            _sf = None
+
+        if audio_col is None:
+            return np.zeros(16_000, dtype=np.float32)
+
+        # Caso 1: já decodificado como dict com "array" (datasets antigo)
+        if isinstance(audio_col, dict) and "array" in audio_col:
+            arr = np.array(audio_col["array"], dtype=np.float32)
+            sr  = audio_col.get("sampling_rate", 16_000)
+            if sr != 16_000 and len(arr) > 0:
+                import librosa as _lib
+                arr = _lib.resample(arr, orig_sr=sr, target_sr=16_000)
+            return arr
+
+        # Caso 2: bytes brutos
+        raw_bytes = None
+        raw_path  = None
+        if isinstance(audio_col, dict):
+            raw_bytes = audio_col.get("bytes")
+            raw_path  = audio_col.get("path")
+        elif isinstance(audio_col, bytes):
+            raw_bytes = audio_col
+
+        if raw_bytes and _sf:
+            arr, sr = _sf.read(io.BytesIO(raw_bytes), dtype="float32", always_2d=False)
+            if sr != 16_000:
+                import librosa as _lib
+                arr = _lib.resample(arr, orig_sr=sr, target_sr=16_000)
+            return arr.astype(np.float32)
+
+        if raw_path and _sf:
+            arr, sr = _sf.read(raw_path, dtype="float32", always_2d=False)
+            if sr != 16_000:
+                import librosa as _lib
+                arr = _lib.resample(arr, orig_sr=sr, target_sr=16_000)
+            return arr.astype(np.float32)
+
+        return np.zeros(16_000, dtype=np.float32)
+
     def __getitem__(self, idx: int) -> Dict:
         hf_idx, label_ids = self._valid[idx]
         sample = self._ds[hf_idx]
-
-        audio_col = sample.get(self._audio_field) or {}
-        array = np.array(audio_col.get("array", []), dtype=np.float32)
-        if array.size == 0:
-            array = np.zeros(16_000, dtype=np.float32)
-
-        array = np.clip(array, -1.0, 1.0)
+        array  = self._load_audio_col(sample.get(self._audio_field))
+        array  = np.clip(array, -1.0, 1.0).astype(np.float32)
 
         if self._augment and len(label_ids) > 1:
             array = self._augment_audio(array)
