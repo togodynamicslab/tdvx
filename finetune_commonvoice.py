@@ -1270,19 +1270,24 @@ def run_finetune(args: argparse.Namespace) -> None:
             log.warning("CORAA train: download falhou ou RAR não extraído — treino só com CV.")
 
     # ── 7. LaPS BM (eval adicional, opcional) ─────────────────────────────────
+    # Nota: falabrasil/lapsbm armazena áudio em .tar.gz por speaker — formato
+    # não suportado pelo datasets>=3.x. Carregamento falha graciosamente.
     if args.lapsbm_eval:
-        lapsbm_ds = HFAudioDataset(
-            dataset_id=_LAPSBM_DATASET_ID,
-            split="test",
-            text_field="txt",
-            audio_field="wav",
-            processor=processor,
-            task=args.task,
-            whisper_language=whisper_lang,
-            hf_token=hf_token,
-        )
-        eval_datasets.append(lapsbm_ds)
-        log.info("LaPS BM eval: %d amostras", len(lapsbm_ds))
+        try:
+            lapsbm_ds = HFAudioDataset(
+                dataset_id=_LAPSBM_DATASET_ID,
+                split="test",
+                text_field="txt",
+                audio_field="wav",
+                processor=processor,
+                task=args.task,
+                whisper_language=whisper_lang,
+                hf_token=hf_token,
+            )
+            eval_datasets.append(lapsbm_ds)
+            log.info("LaPS BM eval: %d amostras", len(lapsbm_ds))
+        except Exception as exc:
+            log.warning("LaPS BM: não foi possível carregar (%s) — continuando sem ele.", exc)
 
     # ── 8. Merge datasets ─────────────────────────────────────────────────────
     import torch.utils.data as _td
