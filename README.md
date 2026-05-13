@@ -110,16 +110,46 @@ export HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx
 echo "HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx" >> ~/tdvx/.env
 ```
 
-### 9. Credenciais do Google Drive (upload automático do modelo)
+### 9. Credenciais do Google Drive (OAuth2 — recomendado)
+
+> **Service Account não funciona** para upload ao Drive pessoal (sem quota).
+> Use OAuth2 com suas credenciais pessoais.
+
+**Passo 1 — Criar credenciais OAuth2 no Google Cloud Console:**
 
 1. Acesse [console.cloud.google.com](https://console.cloud.google.com)
-2. IAM → Service Accounts → Create → papel **Editor**
-3. Keys → Add Key → JSON → salve como `~/tdvx/gdrive_credentials.json`
-4. Compartilhe a pasta de destino no Drive com o e-mail da Service Account
+2. APIs & Services → **Enable APIs** → ativar **Google Drive API**
+3. APIs & Services → **Credentials** → **Create Credentials** → **OAuth 2.0 Client ID**
+   - Tipo: **Desktop app** → OK
+4. Baixar JSON → salvar como `client_secrets.json` (no seu Mac)
+5. OAuth consent screen → **Add test user** → seu e-mail do Google
+
+**Passo 2 — Copiar `client_secrets.json` para a VM:**
 
 ```bash
-# Verificar que o arquivo está no lugar
-ls -lh ~/tdvx/gdrive_credentials.json
+# No Mac (ajuste a porta e IP da sua VM)
+scp -P 40280 client_secrets.json root@<IP_DA_VM>:~/tdvx/
+```
+
+**Passo 3 — Gerar `token.json` na VM (modo headless, sem browser):**
+
+```bash
+cd ~/tdvx
+source /venv/main/bin/activate   # ou .venv se existir
+pip install google-auth-oauthlib google-auth-httplib2
+
+python auth_gdrive.py --secrets client_secrets.json --console
+# Imprime uma URL → abra no seu browser → autorize → copie o código → cole no terminal
+```
+
+O arquivo `token.json` será salvo em `~/tdvx/token.json`.
+
+**Passo 4 — Verificar o upload antes de rodar o treino:**
+
+```bash
+python test_gdrive_upload.py \
+  --folder-id SEU_FOLDER_ID \
+  --credentials token.json
 ```
 
 ### 10. Dry-run (valida ambiente antes do treino longo)
@@ -155,7 +185,7 @@ nohup torchrun --nproc_per_node=8 finetune_commonvoice.py \
   --num-epochs 3 \
   --convert-ct2 \
   --gdrive-folder-id SEU_FOLDER_ID_DO_DRIVE \
-  --gdrive-credentials gdrive_credentials.json \
+  --gdrive-credentials token.json \
   > finetune.log 2>&1 &
 
 echo "Treino iniciado (PID $!). Acompanhe: tail -f finetune.log"
@@ -183,7 +213,7 @@ nohup torchrun --nproc_per_node=8 finetune_commonvoice.py \
   --no-gradient-checkpointing \
   --run-name tdvx-v4 \
   --gdrive-folder-id SEU_FOLDER_ID_DO_DRIVE \
-  --gdrive-credentials gdrive_credentials.json \
+  --gdrive-credentials token.json \
   --resume-from-checkpoint auto \
   > finetune_resume.log 2>&1 &
 ```
