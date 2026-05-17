@@ -67,6 +67,9 @@ cvss/
 temp/
 uploads/
 test_results/
+eval/
+labeler/uploads/
+labeler/exports/
 
 # ── IDE ───────────────────────────────────────────────────────────────────────
 .vscode/

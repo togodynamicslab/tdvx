@@ -2,10 +2,11 @@
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let jobId     = null;
-let segments  = [];   // [{id, start, end, text}]
-let ws        = null; // WaveSurfer instance
-let regions   = null; // RegionsPlugin
-let activeId  = null; // segment id em foco
+let segments  = [];       // [{id, start, end, text}]
+let ws        = null;     // WaveSurfer instance
+let wsRegions = null;     // RegionsPlugin instance
+let regMap    = {};       // id → Region object
+let activeId  = null;
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const uploadPanel   = document.getElementById('upload-panel');
@@ -31,8 +32,8 @@ fileInput.addEventListener('change', () => {
   if (fileInput.files[0]) handleFile(fileInput.files[0]);
 });
 
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-dropZone.addEventListener('dragleave',  () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
 dropZone.addEventListener('drop', e => {
   e.preventDefault();
   dropZone.classList.remove('drag-over');
@@ -41,14 +42,14 @@ dropZone.addEventListener('drop', e => {
 
 async function handleFile(file) {
   showPanel('progress');
-  progressMsg.textContent = 'Enviando arquivo...';
+  progressMsg.textContent = `Enviando "${file.name}"...`;
 
   const form = new FormData();
   form.append('file', file);
 
   let data;
   try {
-    const res  = await fetch('/upload', { method: 'POST', body: form });
+    const res = await fetch('/upload', { method: 'POST', body: form });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ detail: res.statusText }));
       throw new Error(err.detail || res.statusText);
@@ -67,17 +68,21 @@ async function handleFile(file) {
   showPanel('editor');
   btnExport.disabled = false;
 
-  // Carrega waveform em segundo plano — editor já está visível
-  initWaveform().catch(e => console.error('WaveSurfer:', e));
+  // Waveform carrega em segundo plano
+  initWaveform().catch(e => showWaveformError(e.message));
 }
 
-// ── WaveSurfer ────────────────────────────────────────────────────────────────
+// ── WaveSurfer v7 ─────────────────────────────────────────────────────────────
 async function initWaveform() {
-  if (ws) { ws.destroy(); ws = null; regions = null; }
+  if (ws) { ws.destroy(); ws = null; wsRegions = null; regMap = {}; }
 
-  regions = WaveSurfer.Regions.create({
-    dragSelection: { slop: 5 },
-  });
+  if (typeof WaveSurfer === 'undefined') throw new Error('WaveSurfer não carregou (verifique conexão)');
+
+  // Regions plugin — v7 UMD expõe via WaveSurfer.Regions ou window.RegionsPlugin
+  const RegPlugin = (WaveSurfer.Regions || window.RegionsPlugin);
+  if (!RegPlugin) throw new Error('RegionsPlugin não encontrado');
+
+  wsRegions = RegPlugin.create();
 
   ws = WaveSurfer.create({
     container:    '#waveform',
@@ -86,29 +91,25 @@ async function initWaveform() {
     cursorColor:  '#fff',
     height:       100,
     normalize:    true,
-    plugins:      [regions],
+    plugins:      [wsRegions],
   });
-
-  await ws.load(`/audio/${jobId}`);
 
   ws.on('timeupdate', t => {
     timeDisplay.textContent = `${fmt(t)} / ${fmt(ws.getDuration())}`;
   });
-
-  ws.on('finish', () => { btnPlay.textContent = '▶'; });
-
+  ws.on('finish',  () => { btnPlay.textContent = '▶'; });
   ws.on('seeking', t => {
     const seg = segments.find(s => t >= s.start && t <= s.end);
     if (seg) focusSegment(seg.id, false);
   });
 
-  regions.on('region-clicked', (r, e) => {
+  wsRegions.on('region-clicked', (r, e) => {
     e.stopPropagation();
     focusSegment(Number(r.id), false);
     ws.setTime(r.start);
   });
 
-  regions.on('region-updated', r => {
+  wsRegions.on('region-updated', r => {
     const seg = segments.find(s => s.id === Number(r.id));
     if (!seg) return;
     seg.start = round(r.start);
@@ -118,15 +119,22 @@ async function initWaveform() {
 
   zoomRange.addEventListener('input', () => ws.zoom(Number(zoomRange.value)));
 
+  await ws.load(`/audio/${jobId}`);
   drawRegions();
 }
 
+function showWaveformError(msg) {
+  const wrap = document.getElementById('waveform-wrap');
+  if (wrap) wrap.innerHTML = `<p style="color:#e05252;padding:16px;font-size:13px">⚠ Waveform: ${msg}</p>`;
+}
+
 function drawRegions() {
-  if (!regions) return;
-  regions.clearRegions();
+  if (!wsRegions) return;
+  wsRegions.clearRegions();
+  regMap = {};
   const colors = ['rgba(74,158,255,0.25)', 'rgba(80,220,120,0.25)', 'rgba(255,180,50,0.25)'];
   segments.forEach((seg, i) => {
-    regions.addRegion({
+    const r = wsRegions.addRegion({
       id:      String(seg.id),
       start:   seg.start,
       end:     seg.end,
@@ -135,6 +143,7 @@ function drawRegions() {
       drag:    true,
       resize:  true,
     });
+    regMap[seg.id] = r;
   });
 }
 
@@ -174,36 +183,32 @@ function buildRow(seg) {
     if (!ws) return;
     ws.setTime(seg.start);
     ws.play();
-    ws.once('timeupdate', function check(t) {
-      if (t >= seg.end) { ws.pause(); btnPlay.textContent = '▶'; }
-      else ws.once('timeupdate', check);
-    });
+    const check = t => { if (t >= seg.end) { ws.pause(); btnPlay.textContent = '▶'; } else ws.once('timeupdate', check); };
+    ws.once('timeupdate', check);
   });
 
   row.querySelector('[data-action="delete"]').addEventListener('click', () => {
+    if (regMap[seg.id]) { regMap[seg.id].remove(); delete regMap[seg.id]; }
     segments = segments.filter(s => s.id !== seg.id);
-    drawRegions();
     renderSegments();
   });
 
   row.querySelector('.seg-text').addEventListener('input', e => {
     const s = segments.find(s => s.id === seg.id);
-    if (s) s.text = e.target.value;
-    const r = regions?.getRegions().find(r => r.id === String(seg.id));
-    if (r) r.setOptions({ content: s.text.slice(0, 40) || '—' });
+    if (!s) return;
+    s.text = e.target.value;
+    if (regMap[seg.id]) regMap[seg.id].setOptions({ content: s.text.slice(0, 40) || '—' });
   });
 
-  // Time inputs: parse MM:SS.mmm or raw seconds
   row.querySelectorAll('.time-input').forEach(inp => {
     inp.addEventListener('change', () => {
-      const s   = segments.find(s => s.id === seg.id);
+      const s = segments.find(s => s.id === seg.id);
       if (!s) return;
       const val = parseTime(inp.value);
       if (isNaN(val)) { inp.value = fmt(s[inp.dataset.field]); return; }
       s[inp.dataset.field] = val;
       inp.value = fmt(val);
-      const r = regions?.getRegions().find(r => r.id === String(seg.id));
-      if (r) r.setOptions({ start: s.start, end: s.end });
+      if (regMap[seg.id]) regMap[seg.id].setOptions({ start: s.start, end: s.end });
     });
   });
 
@@ -213,9 +218,8 @@ function buildRow(seg) {
 
 function updateSegmentRow(id) {
   const seg = segments.find(s => s.id === id);
-  if (!seg) return;
   const row = segmentsList.querySelector(`[data-id="${id}"]`);
-  if (!row) return;
+  if (!seg || !row) return;
   row.querySelector('[data-field="start"]').value = fmt(seg.start);
   row.querySelector('[data-field="end"]').value   = fmt(seg.end);
 }
@@ -226,21 +230,15 @@ function focusSegment(id, scroll) {
     r.classList.toggle('active', Number(r.dataset.id) === id);
   });
   if (scroll) {
-    const row = segmentsList.querySelector(`[data-id="${id}"]`);
-    row?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    segmentsList.querySelector(`[data-id="${id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
 // ── Add segment ───────────────────────────────────────────────────────────────
 btnAddSeg.addEventListener('click', () => {
-  const t   = ws ? ws.getCurrentTime() : 0;
-  const dur = ws ? ws.getDuration()    : 10;
-  const newSeg = normalizeSegment({
-    id: Date.now(),
-    start: round(t),
-    end:   round(Math.min(t + 3, dur)),
-    text: '',
-  });
+  const t   = ws?.getCurrentTime() ?? 0;
+  const dur = ws?.getDuration()    ?? 10;
+  const newSeg = normalizeSegment({ id: Date.now(), start: round(t), end: round(Math.min(t + 3, dur)), text: '' });
   segments.push(newSeg);
   segments.sort((a, b) => a.start - b.start);
   drawRegions();
@@ -250,9 +248,8 @@ btnAddSeg.addEventListener('click', () => {
 
 // ── Export ────────────────────────────────────────────────────────────────────
 btnExport.addEventListener('click', async () => {
-  btnExport.disabled = true;
+  btnExport.disabled    = true;
   btnExport.textContent = 'Exportando...';
-
   try {
     const res  = await fetch(`/export/${jobId}`, {
       method:  'POST',
@@ -261,7 +258,6 @@ btnExport.addEventListener('click', async () => {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.detail || res.statusText);
-
     exportCount.textContent = data.exported;
     exportPath.textContent  = data.path;
     exportToast.hidden      = false;
@@ -273,7 +269,7 @@ btnExport.addEventListener('click', async () => {
   }
 });
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Utils ─────────────────────────────────────────────────────────────────────
 function showPanel(name) {
   uploadPanel.hidden   = name !== 'upload';
   progressPanel.hidden = name !== 'progress';
@@ -281,7 +277,7 @@ function showPanel(name) {
 }
 
 function fmt(s) {
-  if (isNaN(s)) return '0:00.0';
+  if (s == null || isNaN(s)) return '0:00.0';
   const m   = Math.floor(s / 60);
   const sec = (s % 60).toFixed(1).padStart(4, '0');
   return `${m}:${sec}`;
@@ -295,6 +291,6 @@ function parseTime(str) {
   return NaN;
 }
 
-function round(n) { return Math.round(n * 1000) / 1000; }
-function esc(s)   { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function normalizeSegment(s) { return { id: s.id ?? Date.now(), start: s.start, end: s.end, text: s.text ?? '' }; }
+function round(n)             { return Math.round(n * 1000) / 1000; }
+function esc(s)               { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function normalizeSegment(s)  { return { id: s.id ?? Date.now(), start: s.start ?? 0, end: s.end ?? 1, text: s.text ?? '' }; }
