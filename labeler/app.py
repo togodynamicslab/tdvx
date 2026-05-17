@@ -161,7 +161,7 @@ async def upload(file: UploadFile = File(...)):
     """Recebe vídeo/áudio, extrai WAV, transcreve e retorna job_id + segmentos."""
     job_id   = str(uuid.uuid4())[:8]
     job_dir  = UPLOADS_DIR / job_id
-    job_dir.mkdir()
+    job_dir.mkdir(parents=True, exist_ok=True)
 
     # Salva arquivo original
     suffix   = Path(file.filename).suffix or ".bin"
