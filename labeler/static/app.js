@@ -62,13 +62,13 @@ async function handleFile(file) {
   jobId    = data.job_id;
   segments = data.segments.map(normalizeSegment);
 
-  progressMsg.textContent = 'Carregando áudio...';
-  fileName.textContent    = data.filename;
-
-  await initWaveform();
+  fileName.textContent = data.filename;
   renderSegments();
   showPanel('editor');
   btnExport.disabled = false;
+
+  // Carrega waveform em segundo plano — editor já está visível
+  initWaveform().catch(e => console.error('WaveSurfer:', e));
 }
 
 // ── WaveSurfer ────────────────────────────────────────────────────────────────

@@ -1,9 +1,0 @@
-# Instalar no ambiente voice_env (Python 3.11):
-#   conda run -n voice_env pip install -r requirements-engine.txt
-#
-# NeMo não suporta Python 3.13 (base Anaconda) — use voice_env
-
-faster-whisper>=1.0.3
-nemo_toolkit[asr]>=2.0.0
-torch>=2.2.0
-torchaudio>=2.2.0
