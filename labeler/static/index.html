@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TDvX Labeler</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">TDvX <span>Labeler</span></div>
+  <div class="header-actions">
+    <button id="btn-export" class="btn btn-primary" disabled>Exportar segmentos</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Upload panel -->
+  <section id="upload-panel">
+    <div class="upload-box" id="drop-zone">
+      <div class="upload-icon">🎙</div>
+      <p>Arraste um vídeo ou áudio aqui</p>
+      <p class="upload-hint">ou</p>
+      <label class="btn btn-secondary" for="file-input">Escolher arquivo</label>
+      <input type="file" id="file-input" accept="audio/*,video/*" hidden />
+      <p class="upload-formats">MP4 · MOV · MKV · MP3 · WAV · OGG · FLAC · M4A</p>
+    </div>
+  </section>
+
+  <!-- Progress -->
+  <section id="progress-panel" hidden>
+    <div class="progress-wrap">
+      <div class="spinner"></div>
+      <p id="progress-msg">Enviando arquivo...</p>
+    </div>
+  </section>
+
+  <!-- Editor -->
+  <section id="editor-panel" hidden>
+
+    <div class="editor-top">
+      <div class="file-info">
+        <span id="file-name">—</span>
+        <span id="seg-count" class="badge">0 segmentos</span>
+      </div>
+      <div class="player-controls">
+        <button id="btn-play" class="btn btn-icon" title="Play / Pause">▶</button>
+        <span id="time-display">0:00 / 0:00</span>
+        <label class="zoom-label">Zoom
+          <input type="range" id="zoom-range" min="1" max="200" value="50" />
+        </label>
+      </div>
+    </div>
+
+    <!-- Waveform -->
+    <div id="waveform-wrap">
+      <div id="waveform"></div>
+    </div>
+
+    <!-- Segments list -->
+    <div id="segments-panel">
+      <div class="seg-header">
+        <span>Segmentos</span>
+        <button id="btn-add-seg" class="btn btn-sm">+ Novo</button>
+      </div>
+      <div id="segments-list"></div>
+    </div>
+
+  </section>
+
+  <!-- Export result -->
+  <div id="export-toast" hidden>
+    <strong id="export-count"></strong> segmentos exportados para <code id="export-path"></code>
+    <button class="toast-close" onclick="this.parentElement.hidden=true">✕</button>
+  </div>
+
+</main>
+
+<!-- WaveSurfer v7 + Regions plugin (CDN) -->
+<script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
