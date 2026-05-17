@@ -14,13 +14,14 @@ Uso:
   python labeler/app.py
   # Abrir http://localhost:7860
 """
+import asyncio
 import io
 import json
 import os
 import subprocess
 import sys
-import tempfile
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List, Optional
 
@@ -28,6 +29,8 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+
+_executor = ThreadPoolExecutor(max_workers=2)
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 BASE_DIR    = Path(__file__).parent
@@ -156,38 +159,57 @@ class ExportRequest(BaseModel):
     segments: List[dict]
 
 
+def _process_job(job_id: str, orig: Path, wav_path: Path) -> None:
+    """Executa extração + transcrição em thread separada."""
+    job = _jobs[job_id]
+    try:
+        job["status"] = "extracting"
+        extract_audio(orig, wav_path)
+        job["status"] = "transcribing"
+        job["segments"] = transcribe(wav_path)
+        job["status"] = "done"
+    except Exception as e:
+        job["status"] = "error"
+        job["error"]  = str(e)
+
+
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
-    """Recebe vídeo/áudio, extrai WAV, transcreve e retorna job_id + segmentos."""
-    job_id   = str(uuid.uuid4())[:8]
-    job_dir  = UPLOADS_DIR / job_id
+    """Salva o arquivo, dispara extração+transcrição em background e retorna job_id."""
+    job_id  = str(uuid.uuid4())[:8]
+    job_dir = UPLOADS_DIR / job_id
     job_dir.mkdir(parents=True, exist_ok=True)
 
-    # Salva arquivo original
     suffix   = Path(file.filename).suffix or ".bin"
     orig     = job_dir / f"original{suffix}"
     orig.write_bytes(await file.read())
 
-    # Extrai WAV
     wav_path = job_dir / "audio.wav"
-    try:
-        extract_audio(orig, wav_path)
-    except Exception as e:
-        raise HTTPException(400, f"Erro ao extrair áudio: {e}")
-
-    # Transcreve
-    try:
-        segments = transcribe(wav_path)
-    except Exception as e:
-        raise HTTPException(500, f"Erro na transcrição: {e}")
-
     _jobs[job_id] = {
-        "wav": str(wav_path),
+        "wav":      str(wav_path),
         "filename": file.filename,
-        "segments": segments,
+        "status":   "pending",
+        "segments": [],
+        "error":    "",
     }
 
-    return {"job_id": job_id, "filename": file.filename, "segments": segments}
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(_executor, _process_job, job_id, orig, wav_path)
+
+    return {"job_id": job_id, "filename": file.filename}
+
+
+@app.get("/status/{job_id}")
+def status(job_id: str):
+    """Retorna status do job: pending | extracting | transcribing | done | error."""
+    job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(404, "Job não encontrado")
+    return {
+        "status":   job["status"],
+        "segments": job["segments"] if job["status"] == "done" else [],
+        "error":    job.get("error", ""),
+    }
 
 
 @app.get("/audio/{job_id}")

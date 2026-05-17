@@ -1,12 +1,13 @@
 'use strict';
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let jobId     = null;
-let segments  = [];       // [{id, start, end, text}]
-let ws        = null;     // WaveSurfer instance
-let wsRegions = null;     // RegionsPlugin instance
-let regMap    = {};       // id → Region object
-let activeId  = null;
+let jobId        = null;
+let segments     = [];       // [{id, start, end, text}]
+let ws           = null;     // WaveSurfer instance
+let wsRegions    = null;     // RegionsPlugin instance
+let regMap       = {};       // id → Region object
+let activeId     = null;
+let playingSegId = null;     // id do segmento tocando agora
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const uploadPanel   = document.getElementById('upload-panel');
@@ -40,6 +41,12 @@ dropZone.addEventListener('drop', e => {
   if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
 
+const STATUS_MSG = {
+  pending:      'Aguardando...',
+  extracting:   'Extraindo áudio (ffmpeg)...',
+  transcribing: 'Transcrevendo com TDvX...',
+};
+
 async function handleFile(file) {
   showPanel('progress');
   progressMsg.textContent = `Enviando "${file.name}"...`;
@@ -60,16 +67,41 @@ async function handleFile(file) {
     return;
   }
 
-  jobId    = data.job_id;
-  segments = data.segments.map(normalizeSegment);
+  jobId = data.job_id;
 
+  // Polling até o job terminar
+  const segs = await pollStatus(jobId, data.filename);
+  if (!segs) return; // erro já mostrado
+
+  segments = segs.map(normalizeSegment);
   fileName.textContent = data.filename;
   renderSegments();
   showPanel('editor');
   btnExport.disabled = false;
 
-  // Waveform carrega em segundo plano
   initWaveform().catch(e => showWaveformError(e.message));
+}
+
+async function pollStatus(id, name) {
+  const start = Date.now();
+  while (true) {
+    await new Promise(r => setTimeout(r, 1500));
+    let s;
+    try {
+      const res = await fetch(`/status/${id}`);
+      s = await res.json();
+    } catch (e) {
+      progressMsg.textContent = `Erro de rede: ${e.message}`;
+      return null;
+    }
+    if (s.status === 'error') {
+      progressMsg.textContent = `Erro: ${s.error}`;
+      return null;
+    }
+    if (s.status === 'done') return s.segments;
+    const elapsed = Math.round((Date.now() - start) / 1000);
+    progressMsg.textContent = `${STATUS_MSG[s.status] || s.status} (${elapsed}s)`;
+  }
 }
 
 // ── WaveSurfer v7 ─────────────────────────────────────────────────────────────
@@ -179,11 +211,33 @@ function buildRow(seg) {
     </div>
   `;
 
-  row.querySelector('[data-action="play"]').addEventListener('click', () => {
+  row.querySelector('[data-action="play"]').addEventListener('click', e => {
     if (!ws) return;
+    const btn = e.currentTarget;
+    if (playingSegId === seg.id && ws.isPlaying()) {
+      ws.pause();
+      btn.textContent = '▶';
+      playingSegId = null;
+      return;
+    }
+    // Para qualquer segmento tocando antes
+    if (playingSegId !== null) {
+      const prev = segmentsList.querySelector(`[data-id="${playingSegId}"] [data-action="play"]`);
+      if (prev) prev.textContent = '▶';
+    }
+    playingSegId = seg.id;
+    btn.textContent = '⏸';
     ws.setTime(seg.start);
     ws.play();
-    const check = t => { if (t >= seg.end) { ws.pause(); btnPlay.textContent = '▶'; } else ws.once('timeupdate', check); };
+    const check = t => {
+      if (t >= seg.end) {
+        ws.pause();
+        btn.textContent = '▶';
+        playingSegId = null;
+      } else {
+        ws.once('timeupdate', check);
+      }
+    };
     ws.once('timeupdate', check);
   });
 
