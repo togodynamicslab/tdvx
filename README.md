@@ -15,8 +15,8 @@ Fine-tuning do `whisper-medium` com:
 | GPU | 8× NVIDIA RTX 5090 (32 GB VRAM cada = 256 GB total) |
 | RAM | 128 GB+ |
 | Disco | 300 GB (corpus CV ~70 GB + CORAA ~50 GB + checkpoints) |
-| SO | Ubuntu 22.04+ |
-| Python | **3.11** (NeMo não suporta 3.12+) |
+| SO | Ubuntu 22.04+ / 24.04+ |
+| Python | **3.11+** (3.12 confirmado em vast.ai) |
 | CUDA | 12.8+ |
 
 ---
@@ -27,7 +27,6 @@ Fine-tuning do `whisper-medium` com:
 
 ```bash
 sudo apt update && sudo apt install -y \
-    python3.11 python3.11-venv python3-pip \
     ffmpeg git wget curl build-essential \
     libsndfile1 libsndfile1-dev jq
 ```
@@ -39,15 +38,19 @@ git clone -b finetune https://github.com/togodynamicslab/tdvx.git ~/tdvx
 cd ~/tdvx
 ```
 
-### 3. Ambiente Python 3.11
+### 3. Ambiente Python
+
+> **vast.ai:** o venv `/venv/main` já está ativo com Python 3.12 e PyTorch+CUDA — pule para o passo 5.
 
 ```bash
-python3.11 -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 ```
 
 ### 4. PyTorch com CUDA 12.8 (RTX 5090 / Blackwell)
+
+> Pule se estiver usando vast.ai — PyTorch já vem instalado no `/venv/main`.
 
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
@@ -59,6 +62,7 @@ python -c "import torch; print(torch.cuda.device_count(), 'GPUs —', torch.cuda
 ### 5. Dependências do projeto
 
 ```bash
+pip install --upgrade pip
 pip install -r requirements-finetune.txt
 pip install librosa jiwer python-dotenv datasets accelerate
 ```
