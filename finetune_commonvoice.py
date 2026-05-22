@@ -1386,7 +1386,7 @@ def run_finetune(args: argparse.Namespace) -> None:
         training_args = TrainingArguments(
             output_dir=str(output_dir),
             per_device_train_batch_size=args.batch_size,
-            per_device_eval_batch_size=args.batch_size,   # sem gradiente → mesma memória
+            per_device_eval_batch_size=args.eval_batch_size,
             gradient_accumulation_steps=args.gradient_accumulation_steps,
             learning_rate=args.learning_rate,
             warmup_steps=args.warmup_steps,
@@ -1570,7 +1570,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--early-stopping-threshold", type=float, default=0.001,
                    help="Melhora mínima no eval_loss para contar como progresso")
     p.add_argument("--batch-size",               type=int,   default=64,
-                   help="Amostras por GPU por step. 64 preenche ~20GB por GPU (5090 32GB)")
+                   help="Amostras por GPU por step de treino")
+    p.add_argument("--eval-batch-size",          type=int,   default=16,
+                   help="Amostras por GPU no eval (menor que treino evita OOM com logits grandes)")
     p.add_argument("--gradient-accumulation-steps", type=int, default=1,
                    help="Batch efetivo = batch_size × grad_accum × n_gpus (ex.: 64×1×8=512)")
     p.add_argument("--learning-rate",            type=float, default=1e-5)
