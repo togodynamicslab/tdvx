@@ -37,11 +37,7 @@ _orig_fn = _mu.PreTrainedModel.from_pretrained.__func__
 
 @classmethod
 def _safe_from_pretrained(cls, pretrained_model_name_or_path, *args, **kwargs):
-    if "dtype" in kwargs:
-        import torch
-        dtype_val = kwargs.pop("dtype")
-        if "torch_dtype" not in kwargs and dtype_val is not None:
-            kwargs["torch_dtype"] = dtype_val
+    kwargs.pop("dtype", None)  # ctranslate2 passa dtype=torch.float32 mas __init__ não aceita
     return _orig_fn(cls, pretrained_model_name_or_path, *args, **kwargs)
 
 _mu.PreTrainedModel.from_pretrained = _safe_from_pretrained
