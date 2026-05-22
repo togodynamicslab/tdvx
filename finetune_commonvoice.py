@@ -961,10 +961,10 @@ def convert_to_ctranslate2(hf_dir: Path, ct2_dir: Path, quantization: str = "int
         needs_downgrade = False
 
     if needs_downgrade:
-        log.info("transformers %s detectado — downgrade temporário para 4.44.2 (CT2)", tf_version)
+        log.info("transformers %s detectado — downgrade temporário para 4.36.2 (CT2)", tf_version)
         try:
             subprocess.run(
-                [sys.executable, "-m", "pip", "install", "transformers==4.44.2", "-q"],
+                [sys.executable, "-m", "pip", "install", "transformers==4.36.2", "-q"],
                 check=True,
             )
             ok = _run_conversion()
