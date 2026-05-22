@@ -373,13 +373,27 @@ class CORAALocalDataset(torch.utils.data.Dataset):
 
     def _augment_audio(self, audio: np.ndarray) -> np.ndarray:
         rng = self._rng
+        n = len(audio)
         if rng.random() < 0.4:
-            noise     = rng.standard_normal(len(audio)).astype(np.float32)
+            noise     = rng.standard_normal(n).astype(np.float32)
             sig_rms   = np.sqrt(np.mean(audio ** 2)) + 1e-9
             noise_rms = np.sqrt(np.mean(noise  ** 2)) + 1e-9
             audio     = audio + (sig_rms / (noise_rms * 10 ** (25 / 20))) * noise
         if rng.random() < 0.2:
             audio = self._librosa.effects.time_stretch(audio, rate=float(rng.uniform(0.9, 1.1)))
+        # reverb: expõe o modelo a eco de sala (ponto fraco identificado no eval)
+        p = rng.random()
+        if p < 0.15:
+            ir_len = int(0.2 * 16_000)
+            ir = (np.exp(-np.linspace(0, 6, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        elif p < 0.25:
+            ir_len = int(1.5 * 16_000)
+            ir = (np.exp(-np.linspace(0, 3, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        audio /= np.max(np.abs(audio)) + 1e-9
         return np.clip(audio, -1.0, 1.0).astype(np.float32)
 
 
@@ -594,10 +608,11 @@ class CommonVoiceDataset(torch.utils.data.Dataset):
     def _augment_audio(self, audio: np.ndarray) -> np.ndarray:
         """Augmentação leve aleatória para robustez a ruído e variações de fala."""
         rng = self._rng
+        n = len(audio)
 
         # 40% chance: adiciona ruído branco fraco (SNR ~25 dB)
         if rng.random() < 0.4:
-            noise = rng.standard_normal(len(audio)).astype(np.float32)
+            noise = rng.standard_normal(n).astype(np.float32)
             signal_rms = np.sqrt(np.mean(audio ** 2)) + 1e-9
             noise_rms  = np.sqrt(np.mean(noise ** 2)) + 1e-9
             snr_linear = 10 ** (25 / 20)
@@ -607,6 +622,20 @@ class CommonVoiceDataset(torch.utils.data.Dataset):
         if rng.random() < 0.2:
             rate = float(rng.uniform(0.9, 1.1))
             audio = self._librosa.effects.time_stretch(audio, rate=rate)
+
+        # reverb: expõe o modelo a eco de sala (ponto fraco identificado no eval)
+        p = rng.random()
+        if p < 0.15:
+            ir_len = int(0.2 * 16_000)
+            ir = (np.exp(-np.linspace(0, 6, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        elif p < 0.25:
+            ir_len = int(1.5 * 16_000)
+            ir = (np.exp(-np.linspace(0, 3, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        audio /= np.max(np.abs(audio)) + 1e-9
 
         return np.clip(audio, -1.0, 1.0).astype(np.float32)
 
@@ -772,13 +801,27 @@ class HFAudioDataset(torch.utils.data.Dataset):
     def _augment_audio(self, audio: np.ndarray) -> np.ndarray:
         import librosa as _lib
         rng = self._rng
+        n = len(audio)
         if rng.random() < 0.4:
-            noise      = rng.standard_normal(len(audio)).astype(np.float32)
+            noise      = rng.standard_normal(n).astype(np.float32)
             sig_rms    = np.sqrt(np.mean(audio ** 2)) + 1e-9
             noise_rms  = np.sqrt(np.mean(noise  ** 2)) + 1e-9
             audio      = audio + (sig_rms / (noise_rms * 10 ** (25 / 20))) * noise
         if rng.random() < 0.2:
             audio = _lib.effects.time_stretch(audio, rate=float(rng.uniform(0.9, 1.1)))
+        # reverb: expõe o modelo a eco de sala (ponto fraco identificado no eval)
+        p = rng.random()
+        if p < 0.15:
+            ir_len = int(0.2 * 16_000)
+            ir = (np.exp(-np.linspace(0, 6, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        elif p < 0.25:
+            ir_len = int(1.5 * 16_000)
+            ir = (np.exp(-np.linspace(0, 3, ir_len)) * rng.standard_normal(ir_len)).astype(np.float32)
+            ir /= np.max(np.abs(ir)) + 1e-9
+            audio = np.convolve(audio, ir, mode="full")[:n].astype(np.float32)
+        audio /= np.max(np.abs(audio)) + 1e-9
         return np.clip(audio, -1.0, 1.0).astype(np.float32)
 
 
