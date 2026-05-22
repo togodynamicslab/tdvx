@@ -129,7 +129,7 @@ except ImportError:
 _ROOT = Path(__file__).parent
 
 _DEFAULT_CVSS_DIR   = _ROOT / "cvss"
-_DEFAULT_OUTPUT_DIR = _ROOT / "models" / "tdvx-v4-cv-pt"
+_DEFAULT_OUTPUT_DIR = _ROOT / "models" / "tdvx-v1.5" / "tdvx-v1.5-hf"
 _DEFAULT_BASE_MODEL = "openai/whisper-medium"
 _DEFAULT_LANGUAGE   = "pt"
 
@@ -1218,7 +1218,9 @@ def run_finetune(args: argparse.Namespace) -> None:
     whisper_lang   = _LANGUAGE_MAP.get(lang_code, lang_code)
     cvss_dir       = Path(args.cvss_dir).resolve()
     output_dir     = Path(args.output_dir).resolve()
-    ct2_dir        = output_dir.parent / (output_dir.name + "-ct2")
+    _hf_name       = output_dir.name
+    _ct2_name      = (_hf_name[:-3] + "-ct2") if _hf_name.endswith("-hf") else (_hf_name + "-ct2")
+    ct2_dir        = output_dir.parent / _ct2_name
 
     hf_token = args.hf_token or os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
 
