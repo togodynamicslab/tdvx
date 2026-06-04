@@ -1,0 +1,411 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-d181-7153-a35d-bff7bf3d945e",
+    "sha256": "ca048870de1cd9e8a65d934440e608575d4c665ae71b96f9cb37d1db0826af7f",
+    "created": "2026-04-19T18:19:12.362Z",
+    "duration": 9.090625,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "De vídeos corporativos a podcasts, narrativas ou tutoriais, transforme sua ideia em algo único, com presença e personalidade.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "de",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.9248047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "De"
+              },
+              {
+                "word": "vídeos",
+                "start": 0.24,
+                "end": 0.56,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vídeos"
+              },
+              {
+                "word": "corporativos",
+                "start": 0.56,
+                "end": 1.1999999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "corporativos"
+              },
+              {
+                "word": "a",
+                "start": 1.1999999,
+                "end": 1.4399999,
+                "confidence": 0.9838867,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "podcasts",
+                "start": 1.4399999,
+                "end": 2.32,
+                "confidence": 0.9904785,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "podcasts,"
+              },
+              {
+                "word": "narrativas",
+                "start": 2.48,
+                "end": 3.1999998,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "narrativas"
+              },
+              {
+                "word": "ou",
+                "start": 3.1999998,
+                "end": 3.4399998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ou"
+              },
+              {
+                "word": "tutoriais",
+                "start": 3.4399998,
+                "end": 4.4,
+                "confidence": 0.9550781,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tutoriais,"
+              },
+              {
+                "word": "transforme",
+                "start": 4.7999997,
+                "end": 5.2,
+                "confidence": 0.9873047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "transforme"
+              },
+              {
+                "word": "sua",
+                "start": 5.2,
+                "end": 5.44,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sua"
+              },
+              {
+                "word": "ideia",
+                "start": 5.44,
+                "end": 5.68,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ideia"
+              },
+              {
+                "word": "em",
+                "start": 5.68,
+                "end": 5.92,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "algo",
+                "start": 5.92,
+                "end": 6.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "algo"
+              },
+              {
+                "word": "único",
+                "start": 6.16,
+                "end": 6.7999997,
+                "confidence": 0.9914551,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "único,"
+              },
+              {
+                "word": "com",
+                "start": 6.7999997,
+                "end": 6.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "presença",
+                "start": 6.96,
+                "end": 7.52,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "presença"
+              },
+              {
+                "word": "e",
+                "start": 7.52,
+                "end": 7.7599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "personalidade",
+                "start": 7.7599998,
+                "end": 8.48,
+                "confidence": 0.9995117,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "personalidade."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: De vídeos corporativos a podcasts, narrativas ou tutoriais, transforme sua ideia em algo único, com presença e personalidade.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "De vídeos corporativos a podcasts, narrativas ou tutoriais, transforme sua ideia em algo único, com presença e personalidade.",
+                      "start": 0.0,
+                      "end": 8.48
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 18,
+                  "start": 0.0,
+                  "end": 8.48
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.32,
+        "confidence": 0.9784668,
+        "channel": 0,
+        "transcript": "De vídeos corporativos a podcasts,",
+        "words": [
+          {
+            "word": "de",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.9248047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "De"
+          },
+          {
+            "word": "vídeos",
+            "start": 0.24,
+            "end": 0.56,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vídeos"
+          },
+          {
+            "word": "corporativos",
+            "start": 0.56,
+            "end": 1.1999999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "corporativos"
+          },
+          {
+            "word": "a",
+            "start": 1.1999999,
+            "end": 1.4399999,
+            "confidence": 0.9838867,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "podcasts",
+            "start": 1.4399999,
+            "end": 2.32,
+            "confidence": 0.9904785,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "podcasts,"
+          }
+        ],
+        "speaker": 0,
+        "id": "fd18d591-96fc-475c-af2d-a71b87357548"
+      },
+      {
+        "start": 2.48,
+        "end": 4.4,
+        "confidence": 0.9840495,
+        "channel": 0,
+        "transcript": "narrativas ou tutoriais,",
+        "words": [
+          {
+            "word": "narrativas",
+            "start": 2.48,
+            "end": 3.1999998,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "narrativas"
+          },
+          {
+            "word": "ou",
+            "start": 3.1999998,
+            "end": 3.4399998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ou"
+          },
+          {
+            "word": "tutoriais",
+            "start": 3.4399998,
+            "end": 4.4,
+            "confidence": 0.9550781,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tutoriais,"
+          }
+        ],
+        "speaker": 0,
+        "id": "a4295127-373b-4365-aeb1-88ad7a574909"
+      },
+      {
+        "start": 4.7999997,
+        "end": 8.48,
+        "confidence": 0.9977295,
+        "channel": 0,
+        "transcript": "transforme sua ideia em algo único, com presença e personalidade.",
+        "words": [
+          {
+            "word": "transforme",
+            "start": 4.7999997,
+            "end": 5.2,
+            "confidence": 0.9873047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "transforme"
+          },
+          {
+            "word": "sua",
+            "start": 5.2,
+            "end": 5.44,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sua"
+          },
+          {
+            "word": "ideia",
+            "start": 5.44,
+            "end": 5.68,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ideia"
+          },
+          {
+            "word": "em",
+            "start": 5.68,
+            "end": 5.92,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "algo",
+            "start": 5.92,
+            "end": 6.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "algo"
+          },
+          {
+            "word": "único",
+            "start": 6.16,
+            "end": 6.7999997,
+            "confidence": 0.9914551,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "único,"
+          },
+          {
+            "word": "com",
+            "start": 6.7999997,
+            "end": 6.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "presença",
+            "start": 6.96,
+            "end": 7.52,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "presença"
+          },
+          {
+            "word": "e",
+            "start": 7.52,
+            "end": 7.7599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "personalidade",
+            "start": 7.7599998,
+            "end": 8.48,
+            "confidence": 0.9995117,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "personalidade."
+          }
+        ],
+        "speaker": 0,
+        "id": "fbc75daa-d2e7-44fa-be1b-af607a74bcc4"
+      }
+    ]
+  }
+}

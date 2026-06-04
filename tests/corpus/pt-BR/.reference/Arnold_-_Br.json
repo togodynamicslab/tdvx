@@ -1,0 +1,499 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-75dd-7550-a5f3-c4f734ac7fe0",
+    "sha256": "b55482dbfeb01499d13448f16d672cddd5468307b60f46bbd659a0a69e797ced",
+    "created": "2026-04-19T18:18:49.060Z",
+    "duration": 9.743688,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Vamos usar 1 timbre de presença no seu projeto? Assim você garante autoridade e confiança, do primeiro segundo até a última palavra.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "vamos",
+                "start": 0.0,
+                "end": 0.39999998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Vamos"
+              },
+              {
+                "word": "usar",
+                "start": 0.39999998,
+                "end": 0.71999997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "usar"
+              },
+              {
+                "word": "1",
+                "start": 0.71999997,
+                "end": 0.88,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "timbre",
+                "start": 0.88,
+                "end": 1.1999999,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "timbre"
+              },
+              {
+                "word": "de",
+                "start": 1.1999999,
+                "end": 1.36,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "presença",
+                "start": 1.36,
+                "end": 1.68,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "presença"
+              },
+              {
+                "word": "no",
+                "start": 1.68,
+                "end": 2.0,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "no"
+              },
+              {
+                "word": "seu",
+                "start": 2.0,
+                "end": 2.1599998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "seu"
+              },
+              {
+                "word": "projeto",
+                "start": 2.1599998,
+                "end": 2.8799999,
+                "confidence": 0.9543457,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "projeto?"
+              },
+              {
+                "word": "assim",
+                "start": 3.04,
+                "end": 3.4399998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Assim"
+              },
+              {
+                "word": "você",
+                "start": 3.4399998,
+                "end": 3.76,
+                "confidence": 0.8833008,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "você"
+              },
+              {
+                "word": "garante",
+                "start": 3.76,
+                "end": 4.24,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "garante"
+              },
+              {
+                "word": "autoridade",
+                "start": 4.24,
+                "end": 5.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "autoridade"
+              },
+              {
+                "word": "e",
+                "start": 5.04,
+                "end": 5.3599997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "confiança",
+                "start": 5.3599997,
+                "end": 6.2400002,
+                "confidence": 0.8894043,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "confiança,"
+              },
+              {
+                "word": "do",
+                "start": 6.3999996,
+                "end": 6.64,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "primeiro",
+                "start": 6.64,
+                "end": 7.12,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "primeiro"
+              },
+              {
+                "word": "segundo",
+                "start": 7.12,
+                "end": 7.8399997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "segundo"
+              },
+              {
+                "word": "até",
+                "start": 7.8399997,
+                "end": 8.32,
+                "confidence": 0.98535156,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "até"
+              },
+              {
+                "word": "a",
+                "start": 8.32,
+                "end": 8.639999,
+                "confidence": 0.9760742,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "última",
+                "start": 8.639999,
+                "end": 8.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "última"
+              },
+              {
+                "word": "palavra",
+                "start": 8.96,
+                "end": 9.44,
+                "confidence": 0.9995117,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "palavra."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Vamos usar 1 timbre de presença no seu projeto? Assim você garante autoridade e confiança, do primeiro segundo até a última palavra.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Vamos usar 1 timbre de presença no seu projeto?",
+                      "start": 0.0,
+                      "end": 2.8799999
+                    },
+                    {
+                      "text": "Assim você garante autoridade e confiança, do primeiro segundo até a última palavra.",
+                      "start": 3.04,
+                      "end": 9.44
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 22,
+                  "start": 0.0,
+                  "end": 9.44
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.8799999,
+        "confidence": 0.9931912,
+        "channel": 0,
+        "transcript": "Vamos usar 1 timbre de presença no seu projeto?",
+        "words": [
+          {
+            "word": "vamos",
+            "start": 0.0,
+            "end": 0.39999998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Vamos"
+          },
+          {
+            "word": "usar",
+            "start": 0.39999998,
+            "end": 0.71999997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "usar"
+          },
+          {
+            "word": "1",
+            "start": 0.71999997,
+            "end": 0.88,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "timbre",
+            "start": 0.88,
+            "end": 1.1999999,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "timbre"
+          },
+          {
+            "word": "de",
+            "start": 1.1999999,
+            "end": 1.36,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "presença",
+            "start": 1.36,
+            "end": 1.68,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "presença"
+          },
+          {
+            "word": "no",
+            "start": 1.68,
+            "end": 2.0,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "no"
+          },
+          {
+            "word": "seu",
+            "start": 2.0,
+            "end": 2.1599998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "seu"
+          },
+          {
+            "word": "projeto",
+            "start": 2.1599998,
+            "end": 2.8799999,
+            "confidence": 0.9543457,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "projeto?"
+          }
+        ],
+        "speaker": 0,
+        "id": "2dded4b0-c3a1-44cc-904b-3025be73326e"
+      },
+      {
+        "start": 3.04,
+        "end": 5.04,
+        "confidence": 0.9683838,
+        "channel": 0,
+        "transcript": "Assim você garante autoridade",
+        "words": [
+          {
+            "word": "assim",
+            "start": 3.04,
+            "end": 3.4399998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Assim"
+          },
+          {
+            "word": "você",
+            "start": 3.4399998,
+            "end": 3.76,
+            "confidence": 0.8833008,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "você"
+          },
+          {
+            "word": "garante",
+            "start": 3.76,
+            "end": 4.24,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "garante"
+          },
+          {
+            "word": "autoridade",
+            "start": 4.24,
+            "end": 5.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "autoridade"
+          }
+        ],
+        "speaker": 0,
+        "id": "32b5eace-d492-4c71-8283-76bdab5ac5e6"
+      },
+      {
+        "start": 5.04,
+        "end": 6.2400002,
+        "confidence": 0.94470215,
+        "channel": 0,
+        "transcript": "e confiança,",
+        "words": [
+          {
+            "word": "e",
+            "start": 5.04,
+            "end": 5.3599997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "confiança",
+            "start": 5.3599997,
+            "end": 6.2400002,
+            "confidence": 0.8894043,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "confiança,"
+          }
+        ],
+        "speaker": 0,
+        "id": "62f6fa2a-b785-4b04-a9ca-40dcfa74f2b7"
+      },
+      {
+        "start": 6.3999996,
+        "end": 9.44,
+        "confidence": 0.9938616,
+        "channel": 0,
+        "transcript": "do primeiro segundo até a última palavra.",
+        "words": [
+          {
+            "word": "do",
+            "start": 6.3999996,
+            "end": 6.64,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "primeiro",
+            "start": 6.64,
+            "end": 7.12,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "primeiro"
+          },
+          {
+            "word": "segundo",
+            "start": 7.12,
+            "end": 7.8399997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "segundo"
+          },
+          {
+            "word": "até",
+            "start": 7.8399997,
+            "end": 8.32,
+            "confidence": 0.98535156,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "até"
+          },
+          {
+            "word": "a",
+            "start": 8.32,
+            "end": 8.639999,
+            "confidence": 0.9760742,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "última",
+            "start": 8.639999,
+            "end": 8.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "última"
+          },
+          {
+            "word": "palavra",
+            "start": 8.96,
+            "end": 9.44,
+            "confidence": 0.9995117,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "palavra."
+          }
+        ],
+        "speaker": 0,
+        "id": "01401cc1-fdda-404e-81b6-7baf25d4aded"
+      }
+    ]
+  }
+}

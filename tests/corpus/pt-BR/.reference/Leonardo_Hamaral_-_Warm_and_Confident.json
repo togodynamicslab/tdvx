@@ -1,0 +1,317 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-c4e0-7ce1-a69e-24d97fdf8f36",
+    "sha256": "fd95d77ea24d611e6ecbd755df811bfbf52dbfaa7992749de56f931178f95205",
+    "created": "2026-04-19T18:19:09.298Z",
+    "duration": 4.4118123,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Todos pensam em mudar o mundo, mas ninguém pensa em mudar a si mesmo.",
+            "confidence": 1.0,
+            "words": [
+              {
+                "word": "todos",
+                "start": 0.0,
+                "end": 0.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "Todos"
+              },
+              {
+                "word": "pensam",
+                "start": 0.48,
+                "end": 0.88,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "pensam"
+              },
+              {
+                "word": "em",
+                "start": 0.88,
+                "end": 1.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "mudar",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "mudar"
+              },
+              {
+                "word": "o",
+                "start": 1.36,
+                "end": 1.52,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "mundo",
+                "start": 1.52,
+                "end": 2.08,
+                "confidence": 0.984375,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "mundo,"
+              },
+              {
+                "word": "mas",
+                "start": 2.08,
+                "end": 2.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "mas"
+              },
+              {
+                "word": "ninguém",
+                "start": 2.24,
+                "end": 2.6399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "ninguém"
+              },
+              {
+                "word": "pensa",
+                "start": 2.6399999,
+                "end": 2.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "pensa"
+              },
+              {
+                "word": "em",
+                "start": 2.96,
+                "end": 3.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "mudar",
+                "start": 3.12,
+                "end": 3.4399998,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.78933954,
+                "punctuated_word": "mudar"
+              },
+              {
+                "word": "a",
+                "start": 3.4399998,
+                "end": 3.6,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.6394594,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "si",
+                "start": 3.6,
+                "end": 3.76,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.7810516,
+                "punctuated_word": "si"
+              },
+              {
+                "word": "mesmo",
+                "start": 3.76,
+                "end": 4.08,
+                "confidence": 0.99658203,
+                "speaker": 0,
+                "speaker_confidence": 0.7810516,
+                "punctuated_word": "mesmo."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Todos pensam em mudar o mundo, mas ninguém pensa em mudar a si mesmo.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Todos pensam em mudar o mundo, mas ninguém pensa em mudar a si mesmo.",
+                      "start": 0.0,
+                      "end": 4.08
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 14,
+                  "start": 0.0,
+                  "end": 4.08
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 4.08,
+        "confidence": 0.998291,
+        "channel": 0,
+        "transcript": "Todos pensam em mudar o mundo, mas ninguém pensa em mudar a si mesmo.",
+        "words": [
+          {
+            "word": "todos",
+            "start": 0.0,
+            "end": 0.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "Todos"
+          },
+          {
+            "word": "pensam",
+            "start": 0.48,
+            "end": 0.88,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "pensam"
+          },
+          {
+            "word": "em",
+            "start": 0.88,
+            "end": 1.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "mudar",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "mudar"
+          },
+          {
+            "word": "o",
+            "start": 1.36,
+            "end": 1.52,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "mundo",
+            "start": 1.52,
+            "end": 2.08,
+            "confidence": 0.984375,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "mundo,"
+          },
+          {
+            "word": "mas",
+            "start": 2.08,
+            "end": 2.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "mas"
+          },
+          {
+            "word": "ninguém",
+            "start": 2.24,
+            "end": 2.6399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "ninguém"
+          },
+          {
+            "word": "pensa",
+            "start": 2.6399999,
+            "end": 2.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "pensa"
+          },
+          {
+            "word": "em",
+            "start": 2.96,
+            "end": 3.12,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "mudar",
+            "start": 3.12,
+            "end": 3.4399998,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.78933954,
+            "punctuated_word": "mudar"
+          },
+          {
+            "word": "a",
+            "start": 3.4399998,
+            "end": 3.6,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.6394594,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "si",
+            "start": 3.6,
+            "end": 3.76,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.7810516,
+            "punctuated_word": "si"
+          },
+          {
+            "word": "mesmo",
+            "start": 3.76,
+            "end": 4.08,
+            "confidence": 0.99658203,
+            "speaker": 0,
+            "speaker_confidence": 0.7810516,
+            "punctuated_word": "mesmo."
+          }
+        ],
+        "speaker": 0,
+        "id": "e6d1b83c-bce8-49a2-9a6f-6d79df9396d8"
+      }
+    ]
+  }
+}

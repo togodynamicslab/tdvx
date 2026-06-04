@@ -1,0 +1,484 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-feb0-7ee3-8404-154ebe6c3441",
+    "sha256": "52369887e309653d5706b58e2c38569da8eed7f1c1111902c765a14495f53e59",
+    "created": "2026-04-19T18:19:24.162Z",
+    "duration": 7.706125,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Já imaginou realizar seus maiores sonhos e se livrar do chefe chato? Chega de acordar cedo pra ganhar pouco, viver estressado com burnout.",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "já",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.7001953,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Já"
+              },
+              {
+                "word": "imaginou",
+                "start": 0.24,
+                "end": 0.64,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "imaginou"
+              },
+              {
+                "word": "realizar",
+                "start": 0.64,
+                "end": 1.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "realizar"
+              },
+              {
+                "word": "seus",
+                "start": 1.04,
+                "end": 1.36,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "seus"
+              },
+              {
+                "word": "maiores",
+                "start": 1.36,
+                "end": 1.68,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "maiores"
+              },
+              {
+                "word": "sonhos",
+                "start": 1.68,
+                "end": 2.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "sonhos"
+              },
+              {
+                "word": "e",
+                "start": 2.08,
+                "end": 2.32,
+                "confidence": 0.984375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "se",
+                "start": 2.32,
+                "end": 2.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "se"
+              },
+              {
+                "word": "livrar",
+                "start": 2.48,
+                "end": 2.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "livrar"
+              },
+              {
+                "word": "do",
+                "start": 2.72,
+                "end": 2.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "chefe",
+                "start": 2.96,
+                "end": 3.1999998,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "chefe"
+              },
+              {
+                "word": "chato",
+                "start": 3.1999998,
+                "end": 3.84,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "chato?"
+              },
+              {
+                "word": "chega",
+                "start": 3.9199998,
+                "end": 4.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Chega"
+              },
+              {
+                "word": "de",
+                "start": 4.24,
+                "end": 4.4,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "acordar",
+                "start": 4.4,
+                "end": 4.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "acordar"
+              },
+              {
+                "word": "cedo",
+                "start": 4.72,
+                "end": 4.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "cedo"
+              },
+              {
+                "word": "pra",
+                "start": 4.96,
+                "end": 5.2,
+                "confidence": 0.5102539,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pra"
+              },
+              {
+                "word": "ganhar",
+                "start": 5.2,
+                "end": 5.44,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ganhar"
+              },
+              {
+                "word": "pouco",
+                "start": 5.44,
+                "end": 5.92,
+                "confidence": 0.982666,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pouco,"
+              },
+              {
+                "word": "viver",
+                "start": 5.92,
+                "end": 6.16,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "viver"
+              },
+              {
+                "word": "estressado",
+                "start": 6.16,
+                "end": 6.64,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "estressado"
+              },
+              {
+                "word": "com",
+                "start": 6.64,
+                "end": 6.8799996,
+                "confidence": 0.9604492,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "burnout",
+                "start": 6.8799996,
+                "end": 7.2799997,
+                "confidence": 0.9633789,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "burnout."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Já imaginou realizar seus maiores sonhos e se livrar do chefe chato? Chega de acordar cedo pra ganhar pouco, viver estressado com burnout.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Já imaginou realizar seus maiores sonhos e se livrar do chefe chato?",
+                      "start": 0.0,
+                      "end": 3.84
+                    },
+                    {
+                      "text": "Chega de acordar cedo pra ganhar pouco, viver estressado com burnout.",
+                      "start": 3.9199998,
+                      "end": 7.2799997
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 23,
+                  "start": 0.0,
+                  "end": 7.2799997
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 7.2799997,
+        "confidence": 0.9602051,
+        "channel": 0,
+        "transcript": "Já imaginou realizar seus maiores sonhos e se livrar do chefe chato? Chega de acordar cedo pra ganhar pouco, viver estressado com burnout.",
+        "words": [
+          {
+            "word": "já",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.7001953,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Já"
+          },
+          {
+            "word": "imaginou",
+            "start": 0.24,
+            "end": 0.64,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "imaginou"
+          },
+          {
+            "word": "realizar",
+            "start": 0.64,
+            "end": 1.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "realizar"
+          },
+          {
+            "word": "seus",
+            "start": 1.04,
+            "end": 1.36,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "seus"
+          },
+          {
+            "word": "maiores",
+            "start": 1.36,
+            "end": 1.68,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "maiores"
+          },
+          {
+            "word": "sonhos",
+            "start": 1.68,
+            "end": 2.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "sonhos"
+          },
+          {
+            "word": "e",
+            "start": 2.08,
+            "end": 2.32,
+            "confidence": 0.984375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "se",
+            "start": 2.32,
+            "end": 2.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "se"
+          },
+          {
+            "word": "livrar",
+            "start": 2.48,
+            "end": 2.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "livrar"
+          },
+          {
+            "word": "do",
+            "start": 2.72,
+            "end": 2.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "chefe",
+            "start": 2.96,
+            "end": 3.1999998,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "chefe"
+          },
+          {
+            "word": "chato",
+            "start": 3.1999998,
+            "end": 3.84,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "chato?"
+          },
+          {
+            "word": "chega",
+            "start": 3.9199998,
+            "end": 4.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Chega"
+          },
+          {
+            "word": "de",
+            "start": 4.24,
+            "end": 4.4,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "acordar",
+            "start": 4.4,
+            "end": 4.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "acordar"
+          },
+          {
+            "word": "cedo",
+            "start": 4.72,
+            "end": 4.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "cedo"
+          },
+          {
+            "word": "pra",
+            "start": 4.96,
+            "end": 5.2,
+            "confidence": 0.5102539,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pra"
+          },
+          {
+            "word": "ganhar",
+            "start": 5.2,
+            "end": 5.44,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ganhar"
+          },
+          {
+            "word": "pouco",
+            "start": 5.44,
+            "end": 5.92,
+            "confidence": 0.982666,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pouco,"
+          },
+          {
+            "word": "viver",
+            "start": 5.92,
+            "end": 6.16,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "viver"
+          },
+          {
+            "word": "estressado",
+            "start": 6.16,
+            "end": 6.64,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "estressado"
+          },
+          {
+            "word": "com",
+            "start": 6.64,
+            "end": 6.8799996,
+            "confidence": 0.9604492,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "burnout",
+            "start": 6.8799996,
+            "end": 7.2799997,
+            "confidence": 0.9633789,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "burnout."
+          }
+        ],
+        "speaker": 0,
+        "id": "e1dd9f51-f823-4cbd-aa7f-3cd1db350ea8"
+      }
+    ]
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-6fa6-7382-b3e6-0ac32b4b5a4a",
+    "sha256": "94495ca66046553d2a41aa9faaf9afe29601d1ca9afcc32eecea14154c3f88bf",
+    "created": "2026-04-19T18:18:47.390Z",
+    "duration": 9.456312,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Quando o relógio parou à meianoite, a casa mergulhou em silêncio. Então veio o som lento de passos no andar de cima.",
+            "confidence": 1.0,
+            "words": [
+              {
+                "word": "quando",
+                "start": 0.0,
+                "end": 0.32,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Quando"
+              },
+              {
+                "word": "o",
+                "start": 0.32,
+                "end": 0.48,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "relógio",
+                "start": 0.48,
+                "end": 0.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "relógio"
+              },
+              {
+                "word": "parou",
+                "start": 0.96,
+                "end": 1.28,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "parou"
+              },
+              {
+                "word": "à",
+                "start": 1.28,
+                "end": 1.5999999,
+                "confidence": 0.9873047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "à"
+              },
+              {
+                "word": "meianoite",
+                "start": 1.5999999,
+                "end": 2.4799998,
+                "confidence": 0.98291016,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "meianoite,"
+              },
+              {
+                "word": "a",
+                "start": 3.1999998,
+                "end": 3.52,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "casa",
+                "start": 3.52,
+                "end": 3.76,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "casa"
+              },
+              {
+                "word": "mergulhou",
+                "start": 3.76,
+                "end": 4.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mergulhou"
+              },
+              {
+                "word": "em",
+                "start": 4.4,
+                "end": 4.64,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "em"
+              },
+              {
+                "word": "silêncio",
+                "start": 4.64,
+                "end": 5.44,
+                "confidence": 0.8444824,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "silêncio."
+              },
+              {
+                "word": "então",
+                "start": 5.92,
+                "end": 6.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Então"
+              },
+              {
+                "word": "veio",
+                "start": 6.24,
+                "end": 6.56,
+                "confidence": 0.97314453,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "veio"
+              },
+              {
+                "word": "o",
+                "start": 6.56,
+                "end": 6.72,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "som",
+                "start": 6.72,
+                "end": 6.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "som"
+              },
+              {
+                "word": "lento",
+                "start": 6.96,
+                "end": 7.3599997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "lento"
+              },
+              {
+                "word": "de",
+                "start": 7.3599997,
+                "end": 7.6,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "passos",
+                "start": 7.6,
+                "end": 7.9199996,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "passos"
+              },
+              {
+                "word": "no",
+                "start": 7.9199996,
+                "end": 8.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "no"
+              },
+              {
+                "word": "andar",
+                "start": 8.24,
+                "end": 8.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "andar"
+              },
+              {
+                "word": "de",
+                "start": 8.48,
+                "end": 8.72,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "cima",
+                "start": 8.72,
+                "end": 9.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "cima."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Quando o relógio parou à meianoite, a casa mergulhou em silêncio. Então veio o som lento de passos no andar de cima.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Quando o relógio parou à meianoite, a casa mergulhou em silêncio.",
+                      "start": 0.0,
+                      "end": 5.44
+                    },
+                    {
+                      "text": "Então veio o som lento de passos no andar de cima.",
+                      "start": 5.92,
+                      "end": 9.04
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 22,
+                  "start": 0.0,
+                  "end": 9.04
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.4799998,
+        "confidence": 0.9932454,
+        "channel": 0,
+        "transcript": "Quando o relógio parou à meianoite,",
+        "words": [
+          {
+            "word": "quando",
+            "start": 0.0,
+            "end": 0.32,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Quando"
+          },
+          {
+            "word": "o",
+            "start": 0.32,
+            "end": 0.48,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "relógio",
+            "start": 0.48,
+            "end": 0.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "relógio"
+          },
+          {
+            "word": "parou",
+            "start": 0.96,
+            "end": 1.28,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "parou"
+          },
+          {
+            "word": "à",
+            "start": 1.28,
+            "end": 1.5999999,
+            "confidence": 0.9873047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "à"
+          },
+          {
+            "word": "meianoite",
+            "start": 1.5999999,
+            "end": 2.4799998,
+            "confidence": 0.98291016,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "meianoite,"
+          }
+        ],
+        "speaker": 0,
+        "id": "d856805e-c837-4948-8eb2-4ddc860ece8f"
+      },
+      {
+        "start": 3.1999998,
+        "end": 5.44,
+        "confidence": 0.96850586,
+        "channel": 0,
+        "transcript": "a casa mergulhou em silêncio.",
+        "words": [
+          {
+            "word": "a",
+            "start": 3.1999998,
+            "end": 3.52,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "casa",
+            "start": 3.52,
+            "end": 3.76,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "casa"
+          },
+          {
+            "word": "mergulhou",
+            "start": 3.76,
+            "end": 4.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mergulhou"
+          },
+          {
+            "word": "em",
+            "start": 4.4,
+            "end": 4.64,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "em"
+          },
+          {
+            "word": "silêncio",
+            "start": 4.64,
+            "end": 5.44,
+            "confidence": 0.8444824,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "silêncio."
+          }
+        ],
+        "speaker": 0,
+        "id": "96725769-f540-47ba-9b70-7f0d35ead68c"
+      },
+      {
+        "start": 5.92,
+        "end": 9.04,
+        "confidence": 0.9967596,
+        "channel": 0,
+        "transcript": "Então veio o som lento de passos no andar de cima.",
+        "words": [
+          {
+            "word": "então",
+            "start": 5.92,
+            "end": 6.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Então"
+          },
+          {
+            "word": "veio",
+            "start": 6.24,
+            "end": 6.56,
+            "confidence": 0.97314453,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "veio"
+          },
+          {
+            "word": "o",
+            "start": 6.56,
+            "end": 6.72,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "som",
+            "start": 6.72,
+            "end": 6.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "som"
+          },
+          {
+            "word": "lento",
+            "start": 6.96,
+            "end": 7.3599997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "lento"
+          },
+          {
+            "word": "de",
+            "start": 7.3599997,
+            "end": 7.6,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "passos",
+            "start": 7.6,
+            "end": 7.9199996,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "passos"
+          },
+          {
+            "word": "no",
+            "start": 7.9199996,
+            "end": 8.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "no"
+          },
+          {
+            "word": "andar",
+            "start": 8.24,
+            "end": 8.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "andar"
+          },
+          {
+            "word": "de",
+            "start": 8.48,
+            "end": 8.72,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "cima",
+            "start": 8.72,
+            "end": 9.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "cima."
+          }
+        ],
+        "speaker": 0,
+        "id": "75504f38-0cfa-4444-8a8b-36e75412842e"
+      }
+    ]
+  }
+}

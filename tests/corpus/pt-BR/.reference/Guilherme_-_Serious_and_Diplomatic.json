@@ -1,0 +1,245 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-ae22-7b62-84f3-31e345478827",
+    "sha256": "3404a4841b5cd704415e4a0ca3763fdfb02fe4c792542f8579c986b599104fd9",
+    "created": "2026-04-19T18:19:03.408Z",
+    "duration": 2.82125,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "O maior espaço do mundo é o espaço para melhorar.",
+            "confidence": 0.9951172,
+            "words": [
+              {
+                "word": "o",
+                "start": 0.0,
+                "end": 0.16,
+                "confidence": 0.55810547,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "O"
+              },
+              {
+                "word": "maior",
+                "start": 0.16,
+                "end": 0.39999998,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "maior"
+              },
+              {
+                "word": "espaço",
+                "start": 0.39999998,
+                "end": 0.71999997,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "espaço"
+              },
+              {
+                "word": "do",
+                "start": 0.71999997,
+                "end": 0.96,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "mundo",
+                "start": 0.96,
+                "end": 1.12,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mundo"
+              },
+              {
+                "word": "é",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "o",
+                "start": 1.36,
+                "end": 1.52,
+                "confidence": 0.9892578,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "espaço",
+                "start": 1.52,
+                "end": 1.8399999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "espaço"
+              },
+              {
+                "word": "para",
+                "start": 1.8399999,
+                "end": 2.0,
+                "confidence": 0.9453125,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "melhorar",
+                "start": 2.0,
+                "end": 2.48,
+                "confidence": 0.9995117,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "melhorar."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: O maior espaço do mundo é o espaço para melhorar.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "O maior espaço do mundo é o espaço para melhorar.",
+                      "start": 0.0,
+                      "end": 2.48
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 10,
+                  "start": 0.0,
+                  "end": 2.48
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.48,
+        "confidence": 0.947168,
+        "channel": 0,
+        "transcript": "O maior espaço do mundo é o espaço para melhorar.",
+        "words": [
+          {
+            "word": "o",
+            "start": 0.0,
+            "end": 0.16,
+            "confidence": 0.55810547,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "O"
+          },
+          {
+            "word": "maior",
+            "start": 0.16,
+            "end": 0.39999998,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "maior"
+          },
+          {
+            "word": "espaço",
+            "start": 0.39999998,
+            "end": 0.71999997,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "espaço"
+          },
+          {
+            "word": "do",
+            "start": 0.71999997,
+            "end": 0.96,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "mundo",
+            "start": 0.96,
+            "end": 1.12,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mundo"
+          },
+          {
+            "word": "é",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "o",
+            "start": 1.36,
+            "end": 1.52,
+            "confidence": 0.9892578,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "espaço",
+            "start": 1.52,
+            "end": 1.8399999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "espaço"
+          },
+          {
+            "word": "para",
+            "start": 1.8399999,
+            "end": 2.0,
+            "confidence": 0.9453125,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "melhorar",
+            "start": 2.0,
+            "end": 2.48,
+            "confidence": 0.9995117,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "melhorar."
+          }
+        ],
+        "speaker": 0,
+        "id": "51b156b4-bcf9-4be7-8c18-bd97def3c3e6"
+      }
+    ]
+  }
+}

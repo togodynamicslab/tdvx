@@ -1,0 +1,515 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-f053-73b1-8446-3b614fe77ec9",
+    "sha256": "9e2de923b479d9a1d5a5529bd34ecce863ee923822de8e2311e774329846873d",
+    "created": "2026-04-19T18:19:20.330Z",
+    "duration": 11.964063,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Olá, esta voz é imponente, grave e decidida. Perfeita para seus documentários, narrações, personagens e vídeos. Estou pronto para trabalhar com você.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "olá",
+                "start": 0.0,
+                "end": 0.71999997,
+                "confidence": 0.8874512,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Olá,"
+              },
+              {
+                "word": "esta",
+                "start": 0.71999997,
+                "end": 1.04,
+                "confidence": 0.9863281,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "esta"
+              },
+              {
+                "word": "voz",
+                "start": 1.04,
+                "end": 1.36,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "voz"
+              },
+              {
+                "word": "é",
+                "start": 1.36,
+                "end": 1.5999999,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "imponente",
+                "start": 1.5999999,
+                "end": 2.4799998,
+                "confidence": 0.98999023,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "imponente,"
+              },
+              {
+                "word": "grave",
+                "start": 2.48,
+                "end": 2.96,
+                "confidence": 0.9902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "grave"
+              },
+              {
+                "word": "e",
+                "start": 2.96,
+                "end": 3.28,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "decidida",
+                "start": 3.28,
+                "end": 4.16,
+                "confidence": 0.88639325,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "decidida."
+              },
+              {
+                "word": "perfeita",
+                "start": 4.3199997,
+                "end": 4.7999997,
+                "confidence": 0.99316406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Perfeita"
+              },
+              {
+                "word": "para",
+                "start": 4.7999997,
+                "end": 5.12,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "seus",
+                "start": 5.12,
+                "end": 5.44,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "seus"
+              },
+              {
+                "word": "documentários",
+                "start": 5.44,
+                "end": 6.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "documentários,"
+              },
+              {
+                "word": "narrações",
+                "start": 6.56,
+                "end": 7.44,
+                "confidence": 0.9876302,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "narrações,"
+              },
+              {
+                "word": "personagens",
+                "start": 7.52,
+                "end": 8.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "personagens"
+              },
+              {
+                "word": "e",
+                "start": 8.24,
+                "end": 8.559999,
+                "confidence": 0.9873047,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "vídeos",
+                "start": 8.559999,
+                "end": 9.28,
+                "confidence": 0.96655273,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vídeos."
+              },
+              {
+                "word": "estou",
+                "start": 9.28,
+                "end": 9.76,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Estou"
+              },
+              {
+                "word": "pronto",
+                "start": 9.76,
+                "end": 10.16,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pronto"
+              },
+              {
+                "word": "para",
+                "start": 10.16,
+                "end": 10.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "trabalhar",
+                "start": 10.4,
+                "end": 10.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "trabalhar"
+              },
+              {
+                "word": "com",
+                "start": 10.96,
+                "end": 11.28,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "com"
+              },
+              {
+                "word": "você",
+                "start": 11.28,
+                "end": 11.599999,
+                "confidence": 0.9736328,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "você."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Olá, esta voz é imponente, grave e decidida. Perfeita para seus documentários, narrações, personagens e vídeos. Estou pronto para trabalhar com você.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Olá, esta voz é imponente, grave e decidida.",
+                      "start": 0.0,
+                      "end": 4.16
+                    },
+                    {
+                      "text": "Perfeita para seus documentários, narrações, personagens e vídeos.",
+                      "start": 4.3199997,
+                      "end": 9.28
+                    },
+                    {
+                      "text": "Estou pronto para trabalhar com você.",
+                      "start": 9.28,
+                      "end": 11.599999
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 22,
+                  "start": 0.0,
+                  "end": 11.599999
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.4799998,
+        "confidence": 0.9727539,
+        "channel": 0,
+        "transcript": "Olá, esta voz é imponente,",
+        "words": [
+          {
+            "word": "olá",
+            "start": 0.0,
+            "end": 0.71999997,
+            "confidence": 0.8874512,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Olá,"
+          },
+          {
+            "word": "esta",
+            "start": 0.71999997,
+            "end": 1.04,
+            "confidence": 0.9863281,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "esta"
+          },
+          {
+            "word": "voz",
+            "start": 1.04,
+            "end": 1.36,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "voz"
+          },
+          {
+            "word": "é",
+            "start": 1.36,
+            "end": 1.5999999,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "imponente",
+            "start": 1.5999999,
+            "end": 2.4799998,
+            "confidence": 0.98999023,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "imponente,"
+          }
+        ],
+        "speaker": 0,
+        "id": "232f1d89-220d-417a-b8f7-ae74a48a467e"
+      },
+      {
+        "start": 2.48,
+        "end": 4.16,
+        "confidence": 0.9585504,
+        "channel": 0,
+        "transcript": "grave e decidida.",
+        "words": [
+          {
+            "word": "grave",
+            "start": 2.48,
+            "end": 2.96,
+            "confidence": 0.9902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "grave"
+          },
+          {
+            "word": "e",
+            "start": 2.96,
+            "end": 3.28,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "decidida",
+            "start": 3.28,
+            "end": 4.16,
+            "confidence": 0.88639325,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "decidida."
+          }
+        ],
+        "speaker": 0,
+        "id": "52caff13-cc3a-4350-9002-37db0d248bab"
+      },
+      {
+        "start": 4.3199997,
+        "end": 6.48,
+        "confidence": 0.99780273,
+        "channel": 0,
+        "transcript": "Perfeita para seus documentários,",
+        "words": [
+          {
+            "word": "perfeita",
+            "start": 4.3199997,
+            "end": 4.7999997,
+            "confidence": 0.99316406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Perfeita"
+          },
+          {
+            "word": "para",
+            "start": 4.7999997,
+            "end": 5.12,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "seus",
+            "start": 5.12,
+            "end": 5.44,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "seus"
+          },
+          {
+            "word": "documentários",
+            "start": 5.44,
+            "end": 6.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "documentários,"
+          }
+        ],
+        "speaker": 0,
+        "id": "45aabb80-3169-40e2-8603-d497905b0a32"
+      },
+      {
+        "start": 6.56,
+        "end": 7.44,
+        "confidence": 0.9876302,
+        "channel": 0,
+        "transcript": "narrações,",
+        "words": [
+          {
+            "word": "narrações",
+            "start": 6.56,
+            "end": 7.44,
+            "confidence": 0.9876302,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "narrações,"
+          }
+        ],
+        "speaker": 0,
+        "id": "546df443-fdc7-43af-960d-9aae5c01000a"
+      },
+      {
+        "start": 7.52,
+        "end": 11.599999,
+        "confidence": 0.99161786,
+        "channel": 0,
+        "transcript": "personagens e vídeos. Estou pronto para trabalhar com você.",
+        "words": [
+          {
+            "word": "personagens",
+            "start": 7.52,
+            "end": 8.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "personagens"
+          },
+          {
+            "word": "e",
+            "start": 8.24,
+            "end": 8.559999,
+            "confidence": 0.9873047,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "vídeos",
+            "start": 8.559999,
+            "end": 9.28,
+            "confidence": 0.96655273,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vídeos."
+          },
+          {
+            "word": "estou",
+            "start": 9.28,
+            "end": 9.76,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Estou"
+          },
+          {
+            "word": "pronto",
+            "start": 9.76,
+            "end": 10.16,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pronto"
+          },
+          {
+            "word": "para",
+            "start": 10.16,
+            "end": 10.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "trabalhar",
+            "start": 10.4,
+            "end": 10.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "trabalhar"
+          },
+          {
+            "word": "com",
+            "start": 10.96,
+            "end": 11.28,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "com"
+          },
+          {
+            "word": "você",
+            "start": 11.28,
+            "end": 11.599999,
+            "confidence": 0.9736328,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "você."
+          }
+        ],
+        "speaker": 0,
+        "id": "1e58e090-5d1c-4667-9c79-f6b92b908f12"
+      }
+    ]
+  }
+}

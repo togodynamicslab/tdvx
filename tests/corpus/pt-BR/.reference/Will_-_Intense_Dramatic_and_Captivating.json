@@ -1,0 +1,565 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f8-01d9-7822-ac7d-c597c5843f08",
+    "sha256": "75a2df8872178233a1f212bc6fb76a7339462cf0c8a853aa75a7e0b65b78a398",
+    "created": "2026-04-19T18:19:24.988Z",
+    "duration": 9.926562,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Eu entrei correndo dentro de casa e tranquei a porta. E ele gritava do lado de fora, abre essa porta. Mas quando eu olhei pela janela",
+            "confidence": 0.99902344,
+            "words": [
+              {
+                "word": "eu",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Eu"
+              },
+              {
+                "word": "entrei",
+                "start": 0.24,
+                "end": 0.56,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "entrei"
+              },
+              {
+                "word": "correndo",
+                "start": 0.56,
+                "end": 0.96,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "correndo"
+              },
+              {
+                "word": "dentro",
+                "start": 0.96,
+                "end": 1.28,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "dentro"
+              },
+              {
+                "word": "de",
+                "start": 1.28,
+                "end": 1.52,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "casa",
+                "start": 1.52,
+                "end": 2.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "casa"
+              },
+              {
+                "word": "e",
+                "start": 2.08,
+                "end": 2.3999999,
+                "confidence": 0.6879883,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "tranquei",
+                "start": 2.3999999,
+                "end": 2.72,
+                "confidence": 0.9926758,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tranquei"
+              },
+              {
+                "word": "a",
+                "start": 2.72,
+                "end": 2.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "porta",
+                "start": 2.96,
+                "end": 3.5199997,
+                "confidence": 0.7866211,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "porta."
+              },
+              {
+                "word": "e",
+                "start": 3.6799998,
+                "end": 3.84,
+                "confidence": 0.99609375,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "E"
+              },
+              {
+                "word": "ele",
+                "start": 3.84,
+                "end": 4.08,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "ele"
+              },
+              {
+                "word": "gritava",
+                "start": 4.08,
+                "end": 4.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "gritava"
+              },
+              {
+                "word": "do",
+                "start": 4.4,
+                "end": 4.72,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "do"
+              },
+              {
+                "word": "lado",
+                "start": 4.72,
+                "end": 4.88,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "lado"
+              },
+              {
+                "word": "de",
+                "start": 4.88,
+                "end": 5.04,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "fora",
+                "start": 5.04,
+                "end": 5.68,
+                "confidence": 0.92211914,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "fora,"
+              },
+              {
+                "word": "abre",
+                "start": 6.0,
+                "end": 6.16,
+                "confidence": 0.9863281,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "abre"
+              },
+              {
+                "word": "essa",
+                "start": 6.16,
+                "end": 6.48,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "essa"
+              },
+              {
+                "word": "porta",
+                "start": 6.48,
+                "end": 7.12,
+                "confidence": 0.92700195,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "porta."
+              },
+              {
+                "word": "mas",
+                "start": 7.3599997,
+                "end": 7.68,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Mas"
+              },
+              {
+                "word": "quando",
+                "start": 7.68,
+                "end": 8.0,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "quando"
+              },
+              {
+                "word": "eu",
+                "start": 8.0,
+                "end": 8.24,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "eu"
+              },
+              {
+                "word": "olhei",
+                "start": 8.24,
+                "end": 8.559999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "olhei"
+              },
+              {
+                "word": "pela",
+                "start": 8.559999,
+                "end": 8.88,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "pela"
+              },
+              {
+                "word": "janela",
+                "start": 8.88,
+                "end": 9.44,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "janela"
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Eu entrei correndo dentro de casa e tranquei a porta. E ele gritava do lado de fora, abre essa porta. Mas quando eu olhei pela janela",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Eu entrei correndo dentro de casa e tranquei a porta.",
+                      "start": 0.0,
+                      "end": 3.5199997
+                    },
+                    {
+                      "text": "E ele gritava do lado de fora, abre essa porta.",
+                      "start": 3.6799998,
+                      "end": 7.12
+                    },
+                    {
+                      "text": "Mas quando eu olhei pela janela",
+                      "start": 7.3599997,
+                      "end": 9.44
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 26,
+                  "start": 0.0,
+                  "end": 9.44
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 5.68,
+        "confidence": 0.9630486,
+        "channel": 0,
+        "transcript": "Eu entrei correndo dentro de casa e tranquei a porta. E ele gritava do lado de fora,",
+        "words": [
+          {
+            "word": "eu",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Eu"
+          },
+          {
+            "word": "entrei",
+            "start": 0.24,
+            "end": 0.56,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "entrei"
+          },
+          {
+            "word": "correndo",
+            "start": 0.56,
+            "end": 0.96,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "correndo"
+          },
+          {
+            "word": "dentro",
+            "start": 0.96,
+            "end": 1.28,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "dentro"
+          },
+          {
+            "word": "de",
+            "start": 1.28,
+            "end": 1.52,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "casa",
+            "start": 1.52,
+            "end": 2.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "casa"
+          },
+          {
+            "word": "e",
+            "start": 2.08,
+            "end": 2.3999999,
+            "confidence": 0.6879883,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "tranquei",
+            "start": 2.3999999,
+            "end": 2.72,
+            "confidence": 0.9926758,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tranquei"
+          },
+          {
+            "word": "a",
+            "start": 2.72,
+            "end": 2.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "porta",
+            "start": 2.96,
+            "end": 3.5199997,
+            "confidence": 0.7866211,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "porta."
+          },
+          {
+            "word": "e",
+            "start": 3.6799998,
+            "end": 3.84,
+            "confidence": 0.99609375,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "E"
+          },
+          {
+            "word": "ele",
+            "start": 3.84,
+            "end": 4.08,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "ele"
+          },
+          {
+            "word": "gritava",
+            "start": 4.08,
+            "end": 4.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "gritava"
+          },
+          {
+            "word": "do",
+            "start": 4.4,
+            "end": 4.72,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "do"
+          },
+          {
+            "word": "lado",
+            "start": 4.72,
+            "end": 4.88,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "lado"
+          },
+          {
+            "word": "de",
+            "start": 4.88,
+            "end": 5.04,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "fora",
+            "start": 5.04,
+            "end": 5.68,
+            "confidence": 0.92211914,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "fora,"
+          }
+        ],
+        "speaker": 0,
+        "id": "986ab089-5865-4d8d-91b9-da4c93429909"
+      },
+      {
+        "start": 6.0,
+        "end": 7.12,
+        "confidence": 0.9691569,
+        "channel": 0,
+        "transcript": "abre essa porta.",
+        "words": [
+          {
+            "word": "abre",
+            "start": 6.0,
+            "end": 6.16,
+            "confidence": 0.9863281,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "abre"
+          },
+          {
+            "word": "essa",
+            "start": 6.16,
+            "end": 6.48,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "essa"
+          },
+          {
+            "word": "porta",
+            "start": 6.48,
+            "end": 7.12,
+            "confidence": 0.92700195,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "porta."
+          }
+        ],
+        "speaker": 0,
+        "id": "bf9c7d4e-72bc-404a-bbaf-47b813a8bf90"
+      },
+      {
+        "start": 7.3599997,
+        "end": 9.44,
+        "confidence": 0.99902344,
+        "channel": 0,
+        "transcript": "Mas quando eu olhei pela janela",
+        "words": [
+          {
+            "word": "mas",
+            "start": 7.3599997,
+            "end": 7.68,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Mas"
+          },
+          {
+            "word": "quando",
+            "start": 7.68,
+            "end": 8.0,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "quando"
+          },
+          {
+            "word": "eu",
+            "start": 8.0,
+            "end": 8.24,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "eu"
+          },
+          {
+            "word": "olhei",
+            "start": 8.24,
+            "end": 8.559999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "olhei"
+          },
+          {
+            "word": "pela",
+            "start": 8.559999,
+            "end": 8.88,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "pela"
+          },
+          {
+            "word": "janela",
+            "start": 8.88,
+            "end": 9.44,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "janela"
+          }
+        ],
+        "speaker": 0,
+        "id": "610abb78-aed8-46e6-a9f8-7e15e0726810"
+      }
+    ]
+  }
+}

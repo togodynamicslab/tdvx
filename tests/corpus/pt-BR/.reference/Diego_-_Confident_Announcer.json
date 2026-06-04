@@ -1,0 +1,227 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-9282-7f43-be91-e30b77151cd4",
+    "sha256": "3f0994378f0f5b585353e603640c7be428d5ee9a08d3e7e61d8bddeae987b09a",
+    "created": "2026-04-19T18:18:56.325Z",
+    "duration": 2.4613125,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Aquele que está tonto acha que o mundo gira.",
+            "confidence": 0.9980469,
+            "words": [
+              {
+                "word": "aquele",
+                "start": 0.0,
+                "end": 0.39999998,
+                "confidence": 0.9863281,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Aquele"
+              },
+              {
+                "word": "que",
+                "start": 0.39999998,
+                "end": 0.64,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "está",
+                "start": 0.64,
+                "end": 0.79999995,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "está"
+              },
+              {
+                "word": "tonto",
+                "start": 0.79999995,
+                "end": 1.12,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "tonto"
+              },
+              {
+                "word": "acha",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "acha"
+              },
+              {
+                "word": "que",
+                "start": 1.36,
+                "end": 1.52,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "o",
+                "start": 1.52,
+                "end": 1.68,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "mundo",
+                "start": 1.68,
+                "end": 1.92,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "mundo"
+              },
+              {
+                "word": "gira",
+                "start": 1.92,
+                "end": 2.24,
+                "confidence": 0.9863281,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "gira."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Aquele que está tonto acha que o mundo gira.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Aquele que está tonto acha que o mundo gira.",
+                      "start": 0.0,
+                      "end": 2.24
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 9,
+                  "start": 0.0,
+                  "end": 2.24
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.24,
+        "confidence": 0.99598527,
+        "channel": 0,
+        "transcript": "Aquele que está tonto acha que o mundo gira.",
+        "words": [
+          {
+            "word": "aquele",
+            "start": 0.0,
+            "end": 0.39999998,
+            "confidence": 0.9863281,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Aquele"
+          },
+          {
+            "word": "que",
+            "start": 0.39999998,
+            "end": 0.64,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "está",
+            "start": 0.64,
+            "end": 0.79999995,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "está"
+          },
+          {
+            "word": "tonto",
+            "start": 0.79999995,
+            "end": 1.12,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "tonto"
+          },
+          {
+            "word": "acha",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "acha"
+          },
+          {
+            "word": "que",
+            "start": 1.36,
+            "end": 1.52,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "o",
+            "start": 1.52,
+            "end": 1.68,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "mundo",
+            "start": 1.68,
+            "end": 1.92,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "mundo"
+          },
+          {
+            "word": "gira",
+            "start": 1.92,
+            "end": 2.24,
+            "confidence": 0.9863281,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "gira."
+          }
+        ],
+        "speaker": 0,
+        "id": "51608b64-8122-499b-91f4-aa9f4f105029"
+      }
+    ]
+  }
+}

@@ -1,0 +1,536 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-9ba9-7831-8813-4ae5004b0d1a",
+    "sha256": "336df71b277ef972d8676e7b5166e08f7c5d566329fad091dde0d38692cc2043",
+    "created": "2026-04-19T18:18:58.742Z",
+    "duration": 9.2735,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Você não precisa mais procurar por 1 voz para mídias sociais. Esta é a ideal para Shorts, Reels, TikTok, Instagram. Sim, você acaba de encontrar.",
+            "confidence": 0.9970703,
+            "words": [
+              {
+                "word": "você",
+                "start": 0.0,
+                "end": 0.32,
+                "confidence": 0.76171875,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "Você"
+              },
+              {
+                "word": "não",
+                "start": 0.32,
+                "end": 0.48,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "não"
+              },
+              {
+                "word": "precisa",
+                "start": 0.48,
+                "end": 0.79999995,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "precisa"
+              },
+              {
+                "word": "mais",
+                "start": 0.79999995,
+                "end": 0.96,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "mais"
+              },
+              {
+                "word": "procurar",
+                "start": 0.96,
+                "end": 1.36,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "procurar"
+              },
+              {
+                "word": "por",
+                "start": 1.36,
+                "end": 1.5999999,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "por"
+              },
+              {
+                "word": "1",
+                "start": 1.5999999,
+                "end": 1.76,
+                "confidence": 0.9921875,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "voz",
+                "start": 1.76,
+                "end": 2.08,
+                "confidence": 0.9970703,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "voz"
+              },
+              {
+                "word": "para",
+                "start": 2.08,
+                "end": 2.32,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "mídias",
+                "start": 2.32,
+                "end": 2.72,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "mídias"
+              },
+              {
+                "word": "sociais",
+                "start": 2.72,
+                "end": 3.5199997,
+                "confidence": 0.8588867,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "sociais."
+              },
+              {
+                "word": "esta",
+                "start": 3.52,
+                "end": 3.84,
+                "confidence": 0.97998047,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "Esta"
+              },
+              {
+                "word": "é",
+                "start": 3.84,
+                "end": 3.9199998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "a",
+                "start": 3.9199998,
+                "end": 4.08,
+                "confidence": 0.91259766,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "ideal",
+                "start": 4.08,
+                "end": 4.3199997,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "ideal"
+              },
+              {
+                "word": "para",
+                "start": 4.3199997,
+                "end": 4.64,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "shorts",
+                "start": 4.64,
+                "end": 5.44,
+                "confidence": 0.93566895,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "Shorts,"
+              },
+              {
+                "word": "reels",
+                "start": 5.44,
+                "end": 6.08,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "Reels,"
+              },
+              {
+                "word": "tiktok",
+                "start": 6.08,
+                "end": 6.7999997,
+                "confidence": 0.97802734,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "TikTok,"
+              },
+              {
+                "word": "instagram",
+                "start": 6.7999997,
+                "end": 7.52,
+                "confidence": 0.8952637,
+                "speaker": 0,
+                "speaker_confidence": 0.8945912,
+                "punctuated_word": "Instagram."
+              },
+              {
+                "word": "sim",
+                "start": 7.52,
+                "end": 7.9199996,
+                "confidence": 0.9926758,
+                "speaker": 0,
+                "speaker_confidence": 0.74086666,
+                "punctuated_word": "Sim,"
+              },
+              {
+                "word": "você",
+                "start": 7.9199996,
+                "end": 8.08,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.79167575,
+                "punctuated_word": "você"
+              },
+              {
+                "word": "acaba",
+                "start": 8.08,
+                "end": 8.4,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.79167575,
+                "punctuated_word": "acaba"
+              },
+              {
+                "word": "de",
+                "start": 8.4,
+                "end": 8.48,
+                "confidence": 1.0,
+                "speaker": 0,
+                "speaker_confidence": 0.79167575,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "encontrar",
+                "start": 8.48,
+                "end": 8.88,
+                "confidence": 0.9760742,
+                "speaker": 0,
+                "speaker_confidence": 0.79167575,
+                "punctuated_word": "encontrar."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Você não precisa mais procurar por 1 voz para mídias sociais. Esta é a ideal para Shorts, Reels, TikTok, Instagram. Sim, você acaba de encontrar.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Você não precisa mais procurar por 1 voz para mídias sociais.",
+                      "start": 0.0,
+                      "end": 3.5199997
+                    },
+                    {
+                      "text": "Esta é a ideal para Shorts, Reels, TikTok, Instagram.",
+                      "start": 3.52,
+                      "end": 7.52
+                    },
+                    {
+                      "text": "Sim, você acaba de encontrar.",
+                      "start": 7.52,
+                      "end": 8.88
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 25,
+                  "start": 0.0,
+                  "end": 8.88
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 5.44,
+        "confidence": 0.9661434,
+        "channel": 0,
+        "transcript": "Você não precisa mais procurar por 1 voz para mídias sociais. Esta é a ideal para Shorts,",
+        "words": [
+          {
+            "word": "você",
+            "start": 0.0,
+            "end": 0.32,
+            "confidence": 0.76171875,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "Você"
+          },
+          {
+            "word": "não",
+            "start": 0.32,
+            "end": 0.48,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "não"
+          },
+          {
+            "word": "precisa",
+            "start": 0.48,
+            "end": 0.79999995,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "precisa"
+          },
+          {
+            "word": "mais",
+            "start": 0.79999995,
+            "end": 0.96,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "mais"
+          },
+          {
+            "word": "procurar",
+            "start": 0.96,
+            "end": 1.36,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "procurar"
+          },
+          {
+            "word": "por",
+            "start": 1.36,
+            "end": 1.5999999,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "por"
+          },
+          {
+            "word": "1",
+            "start": 1.5999999,
+            "end": 1.76,
+            "confidence": 0.9921875,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "voz",
+            "start": 1.76,
+            "end": 2.08,
+            "confidence": 0.9970703,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "voz"
+          },
+          {
+            "word": "para",
+            "start": 2.08,
+            "end": 2.32,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "mídias",
+            "start": 2.32,
+            "end": 2.72,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "mídias"
+          },
+          {
+            "word": "sociais",
+            "start": 2.72,
+            "end": 3.5199997,
+            "confidence": 0.8588867,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "sociais."
+          },
+          {
+            "word": "esta",
+            "start": 3.52,
+            "end": 3.84,
+            "confidence": 0.97998047,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "Esta"
+          },
+          {
+            "word": "é",
+            "start": 3.84,
+            "end": 3.9199998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "a",
+            "start": 3.9199998,
+            "end": 4.08,
+            "confidence": 0.91259766,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "ideal",
+            "start": 4.08,
+            "end": 4.3199997,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "ideal"
+          },
+          {
+            "word": "para",
+            "start": 4.3199997,
+            "end": 4.64,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "shorts",
+            "start": 4.64,
+            "end": 5.44,
+            "confidence": 0.93566895,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "Shorts,"
+          }
+        ],
+        "speaker": 0,
+        "id": "16c088c7-3331-4d4e-b593-78765cd82925"
+      },
+      {
+        "start": 5.44,
+        "end": 8.88,
+        "confidence": 0.9796448,
+        "channel": 0,
+        "transcript": "Reels, TikTok, Instagram. Sim, você acaba de encontrar.",
+        "words": [
+          {
+            "word": "reels",
+            "start": 5.44,
+            "end": 6.08,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "Reels,"
+          },
+          {
+            "word": "tiktok",
+            "start": 6.08,
+            "end": 6.7999997,
+            "confidence": 0.97802734,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "TikTok,"
+          },
+          {
+            "word": "instagram",
+            "start": 6.7999997,
+            "end": 7.52,
+            "confidence": 0.8952637,
+            "speaker": 0,
+            "speaker_confidence": 0.8945912,
+            "punctuated_word": "Instagram."
+          },
+          {
+            "word": "sim",
+            "start": 7.52,
+            "end": 7.9199996,
+            "confidence": 0.9926758,
+            "speaker": 0,
+            "speaker_confidence": 0.74086666,
+            "punctuated_word": "Sim,"
+          },
+          {
+            "word": "você",
+            "start": 7.9199996,
+            "end": 8.08,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.79167575,
+            "punctuated_word": "você"
+          },
+          {
+            "word": "acaba",
+            "start": 8.08,
+            "end": 8.4,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.79167575,
+            "punctuated_word": "acaba"
+          },
+          {
+            "word": "de",
+            "start": 8.4,
+            "end": 8.48,
+            "confidence": 1.0,
+            "speaker": 0,
+            "speaker_confidence": 0.79167575,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "encontrar",
+            "start": 8.48,
+            "end": 8.88,
+            "confidence": 0.9760742,
+            "speaker": 0,
+            "speaker_confidence": 0.79167575,
+            "punctuated_word": "encontrar."
+          }
+        ],
+        "speaker": 0,
+        "id": "bf53598c-ac83-4cc6-8e21-82f8e76b7afb"
+      }
+    ]
+  }
+}

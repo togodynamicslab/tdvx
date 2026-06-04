@@ -1,0 +1,274 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-7265-7342-acf9-8df386368ff5",
+    "sha256": "41f8e794d0682ad7607ab534a2bd555239b13ac2b63182ed7649ad09cf2751df",
+    "created": "2026-04-19T18:18:48.277Z",
+    "duration": 7.549375,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Fala carniceiros, aqui é o açougueirão chegando para conquistar seu coração.",
+            "confidence": 0.99121094,
+            "words": [
+              {
+                "word": "fala",
+                "start": 0.16,
+                "end": 0.56,
+                "confidence": 0.9902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Fala"
+              },
+              {
+                "word": "carniceiros",
+                "start": 0.56,
+                "end": 1.8399999,
+                "confidence": 0.70458984,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "carniceiros,"
+              },
+              {
+                "word": "aqui",
+                "start": 2.0,
+                "end": 2.32,
+                "confidence": 0.99121094,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "aqui"
+              },
+              {
+                "word": "é",
+                "start": 2.32,
+                "end": 2.48,
+                "confidence": 0.9951172,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "é"
+              },
+              {
+                "word": "o",
+                "start": 2.48,
+                "end": 2.6399999,
+                "confidence": 0.9921875,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "o"
+              },
+              {
+                "word": "açougueirão",
+                "start": 2.6399999,
+                "end": 3.28,
+                "confidence": 0.95654297,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "açougueirão"
+              },
+              {
+                "word": "chegando",
+                "start": 3.28,
+                "end": 3.6799998,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "chegando"
+              },
+              {
+                "word": "para",
+                "start": 3.6799998,
+                "end": 4.0,
+                "confidence": 0.97802734,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "conquistar",
+                "start": 4.0,
+                "end": 4.56,
+                "confidence": 0.9980469,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "conquistar"
+              },
+              {
+                "word": "seu",
+                "start": 4.56,
+                "end": 4.96,
+                "confidence": 0.9941406,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "seu"
+              },
+              {
+                "word": "coração",
+                "start": 4.96,
+                "end": 5.44,
+                "confidence": 0.8208008,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "coração."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Fala carniceiros, aqui é o açougueirão chegando para conquistar seu coração.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Fala carniceiros, aqui é o açougueirão chegando para conquistar seu coração.",
+                      "start": 0.16,
+                      "end": 5.44
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 11,
+                  "start": 0.16,
+                  "end": 5.44
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.16,
+        "end": 1.8399999,
+        "confidence": 0.8474121,
+        "channel": 0,
+        "transcript": "Fala carniceiros,",
+        "words": [
+          {
+            "word": "fala",
+            "start": 0.16,
+            "end": 0.56,
+            "confidence": 0.9902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Fala"
+          },
+          {
+            "word": "carniceiros",
+            "start": 0.56,
+            "end": 1.8399999,
+            "confidence": 0.70458984,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "carniceiros,"
+          }
+        ],
+        "speaker": 0,
+        "id": "56ff0236-f094-4724-8b9c-71afff141cee"
+      },
+      {
+        "start": 2.0,
+        "end": 5.44,
+        "confidence": 0.9694553,
+        "channel": 0,
+        "transcript": "aqui é o açougueirão chegando para conquistar seu coração.",
+        "words": [
+          {
+            "word": "aqui",
+            "start": 2.0,
+            "end": 2.32,
+            "confidence": 0.99121094,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "aqui"
+          },
+          {
+            "word": "é",
+            "start": 2.32,
+            "end": 2.48,
+            "confidence": 0.9951172,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "é"
+          },
+          {
+            "word": "o",
+            "start": 2.48,
+            "end": 2.6399999,
+            "confidence": 0.9921875,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "o"
+          },
+          {
+            "word": "açougueirão",
+            "start": 2.6399999,
+            "end": 3.28,
+            "confidence": 0.95654297,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "açougueirão"
+          },
+          {
+            "word": "chegando",
+            "start": 3.28,
+            "end": 3.6799998,
+            "confidence": 0.99902344,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "chegando"
+          },
+          {
+            "word": "para",
+            "start": 3.6799998,
+            "end": 4.0,
+            "confidence": 0.97802734,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "para"
+          },
+          {
+            "word": "conquistar",
+            "start": 4.0,
+            "end": 4.56,
+            "confidence": 0.9980469,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "conquistar"
+          },
+          {
+            "word": "seu",
+            "start": 4.56,
+            "end": 4.96,
+            "confidence": 0.9941406,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "seu"
+          },
+          {
+            "word": "coração",
+            "start": 4.96,
+            "end": 5.44,
+            "confidence": 0.8208008,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "coração."
+          }
+        ],
+        "speaker": 0,
+        "id": "fb3f4ac3-2d4c-4924-b82d-8cea294302b2"
+      }
+    ]
+  }
+}

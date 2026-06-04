@@ -1,0 +1,540 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "019da6f7-aa63-7803-8dbe-0d4e77c96ea7",
+    "sha256": "62f66fa303c114344758dab0b75b6cb6f0c22ce000c284b9f4d73f3643c727b7",
+    "created": "2026-04-19T18:19:02.726Z",
+    "duration": 11.4155,
+    "channels": 1,
+    "models": [
+      "869781fd-6665-4e85-bedb-50db537af2d2"
+    ],
+    "model_info": {
+      "869781fd-6665-4e85-bedb-50db537af2d2": {
+        "name": "general-nova-3",
+        "version": "2025-08-18.31473",
+        "arch": "nova-3"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Era 1 vez João e Maria. Abandonados na floresta, encontraram 1 casa feita de doces e 1 bruxa muito perigosa. Será que eles escaparam?",
+            "confidence": 0.9980054,
+            "words": [
+              {
+                "word": "era",
+                "start": 0.0,
+                "end": 0.24,
+                "confidence": 0.9477582,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Era"
+              },
+              {
+                "word": "1",
+                "start": 0.24,
+                "end": 0.48,
+                "confidence": 0.99080735,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "vez",
+                "start": 0.48,
+                "end": 0.71999997,
+                "confidence": 0.99959546,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "vez"
+              },
+              {
+                "word": "joão",
+                "start": 0.71999997,
+                "end": 1.12,
+                "confidence": 0.8445035,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "João"
+              },
+              {
+                "word": "e",
+                "start": 1.12,
+                "end": 1.36,
+                "confidence": 0.9994523,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "maria",
+                "start": 1.36,
+                "end": 2.0,
+                "confidence": 0.83064264,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Maria."
+              },
+              {
+                "word": "abandonados",
+                "start": 2.24,
+                "end": 2.96,
+                "confidence": 0.9985011,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Abandonados"
+              },
+              {
+                "word": "na",
+                "start": 2.96,
+                "end": 3.28,
+                "confidence": 0.99540097,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "na"
+              },
+              {
+                "word": "floresta",
+                "start": 3.28,
+                "end": 4.08,
+                "confidence": 0.94402504,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "floresta,"
+              },
+              {
+                "word": "encontraram",
+                "start": 4.16,
+                "end": 4.7999997,
+                "confidence": 0.9965481,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "encontraram"
+              },
+              {
+                "word": "1",
+                "start": 4.7999997,
+                "end": 5.12,
+                "confidence": 0.99836594,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "casa",
+                "start": 5.12,
+                "end": 5.44,
+                "confidence": 0.9997125,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "casa"
+              },
+              {
+                "word": "feita",
+                "start": 5.44,
+                "end": 5.8399997,
+                "confidence": 0.99092156,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "feita"
+              },
+              {
+                "word": "de",
+                "start": 5.8399997,
+                "end": 6.0,
+                "confidence": 0.9995152,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "doces",
+                "start": 6.0,
+                "end": 6.64,
+                "confidence": 0.99220955,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "doces"
+              },
+              {
+                "word": "e",
+                "start": 6.64,
+                "end": 6.8799996,
+                "confidence": 0.8527438,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "e"
+              },
+              {
+                "word": "1",
+                "start": 6.8799996,
+                "end": 7.2,
+                "confidence": 0.9987367,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "1"
+              },
+              {
+                "word": "bruxa",
+                "start": 7.2,
+                "end": 7.7599998,
+                "confidence": 0.99939954,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "bruxa"
+              },
+              {
+                "word": "muito",
+                "start": 7.7599998,
+                "end": 8.16,
+                "confidence": 0.9972051,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "muito"
+              },
+              {
+                "word": "perigosa",
+                "start": 8.16,
+                "end": 9.2,
+                "confidence": 0.9964755,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "perigosa."
+              },
+              {
+                "word": "será",
+                "start": 9.679999,
+                "end": 9.92,
+                "confidence": 0.99814355,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "Será"
+              },
+              {
+                "word": "que",
+                "start": 9.92,
+                "end": 10.08,
+                "confidence": 0.99975103,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "que"
+              },
+              {
+                "word": "eles",
+                "start": 10.08,
+                "end": 10.4,
+                "confidence": 0.9982437,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "eles"
+              },
+              {
+                "word": "escaparam",
+                "start": 10.4,
+                "end": 10.96,
+                "confidence": 0.9980054,
+                "speaker": 0,
+                "speaker_confidence": 1.0,
+                "punctuated_word": "escaparam?"
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Era 1 vez João e Maria. Abandonados na floresta, encontraram 1 casa feita de doces e 1 bruxa muito perigosa. Será que eles escaparam?",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Era 1 vez João e Maria.",
+                      "start": 0.0,
+                      "end": 2.0
+                    },
+                    {
+                      "text": "Abandonados na floresta, encontraram 1 casa feita de doces e 1 bruxa muito perigosa.",
+                      "start": 2.24,
+                      "end": 9.2
+                    },
+                    {
+                      "text": "Será que eles escaparam?",
+                      "start": 9.679999,
+                      "end": 10.96
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 24,
+                  "start": 0.0,
+                  "end": 10.96
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.0,
+        "end": 2.0,
+        "confidence": 0.93545985,
+        "channel": 0,
+        "transcript": "Era 1 vez João e Maria.",
+        "words": [
+          {
+            "word": "era",
+            "start": 0.0,
+            "end": 0.24,
+            "confidence": 0.9477582,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Era"
+          },
+          {
+            "word": "1",
+            "start": 0.24,
+            "end": 0.48,
+            "confidence": 0.99080735,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "vez",
+            "start": 0.48,
+            "end": 0.71999997,
+            "confidence": 0.99959546,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "vez"
+          },
+          {
+            "word": "joão",
+            "start": 0.71999997,
+            "end": 1.12,
+            "confidence": 0.8445035,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "João"
+          },
+          {
+            "word": "e",
+            "start": 1.12,
+            "end": 1.36,
+            "confidence": 0.9994523,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "maria",
+            "start": 1.36,
+            "end": 2.0,
+            "confidence": 0.83064264,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Maria."
+          }
+        ],
+        "speaker": 0,
+        "id": "b8524783-22aa-48b5-927a-3a0974fc1001"
+      },
+      {
+        "start": 2.24,
+        "end": 4.08,
+        "confidence": 0.9793091,
+        "channel": 0,
+        "transcript": "Abandonados na floresta,",
+        "words": [
+          {
+            "word": "abandonados",
+            "start": 2.24,
+            "end": 2.96,
+            "confidence": 0.9985011,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Abandonados"
+          },
+          {
+            "word": "na",
+            "start": 2.96,
+            "end": 3.28,
+            "confidence": 0.99540097,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "na"
+          },
+          {
+            "word": "floresta",
+            "start": 3.28,
+            "end": 4.08,
+            "confidence": 0.94402504,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "floresta,"
+          }
+        ],
+        "speaker": 0,
+        "id": "f2a99243-6bb3-4505-b680-9dfd6c3c6502"
+      },
+      {
+        "start": 4.16,
+        "end": 9.2,
+        "confidence": 0.983803,
+        "channel": 0,
+        "transcript": "encontraram 1 casa feita de doces e 1 bruxa muito perigosa.",
+        "words": [
+          {
+            "word": "encontraram",
+            "start": 4.16,
+            "end": 4.7999997,
+            "confidence": 0.9965481,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "encontraram"
+          },
+          {
+            "word": "1",
+            "start": 4.7999997,
+            "end": 5.12,
+            "confidence": 0.99836594,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "casa",
+            "start": 5.12,
+            "end": 5.44,
+            "confidence": 0.9997125,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "casa"
+          },
+          {
+            "word": "feita",
+            "start": 5.44,
+            "end": 5.8399997,
+            "confidence": 0.99092156,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "feita"
+          },
+          {
+            "word": "de",
+            "start": 5.8399997,
+            "end": 6.0,
+            "confidence": 0.9995152,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "de"
+          },
+          {
+            "word": "doces",
+            "start": 6.0,
+            "end": 6.64,
+            "confidence": 0.99220955,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "doces"
+          },
+          {
+            "word": "e",
+            "start": 6.64,
+            "end": 6.8799996,
+            "confidence": 0.8527438,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "e"
+          },
+          {
+            "word": "1",
+            "start": 6.8799996,
+            "end": 7.2,
+            "confidence": 0.9987367,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "1"
+          },
+          {
+            "word": "bruxa",
+            "start": 7.2,
+            "end": 7.7599998,
+            "confidence": 0.99939954,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "bruxa"
+          },
+          {
+            "word": "muito",
+            "start": 7.7599998,
+            "end": 8.16,
+            "confidence": 0.9972051,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "muito"
+          },
+          {
+            "word": "perigosa",
+            "start": 8.16,
+            "end": 9.2,
+            "confidence": 0.9964755,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "perigosa."
+          }
+        ],
+        "speaker": 0,
+        "id": "a7a941f4-7362-4c73-b750-a2f5bd46152f"
+      },
+      {
+        "start": 9.679999,
+        "end": 10.96,
+        "confidence": 0.9985359,
+        "channel": 0,
+        "transcript": "Será que eles escaparam?",
+        "words": [
+          {
+            "word": "será",
+            "start": 9.679999,
+            "end": 9.92,
+            "confidence": 0.99814355,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "Será"
+          },
+          {
+            "word": "que",
+            "start": 9.92,
+            "end": 10.08,
+            "confidence": 0.99975103,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "que"
+          },
+          {
+            "word": "eles",
+            "start": 10.08,
+            "end": 10.4,
+            "confidence": 0.9982437,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "eles"
+          },
+          {
+            "word": "escaparam",
+            "start": 10.4,
+            "end": 10.96,
+            "confidence": 0.9980054,
+            "speaker": 0,
+            "speaker_confidence": 1.0,
+            "punctuated_word": "escaparam?"
+          }
+        ],
+        "speaker": 0,
+        "id": "ad1188aa-a585-4b91-9bb7-aca335067554"
+      }
+    ]
+  }
+}

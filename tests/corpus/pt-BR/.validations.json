@@ -1,0 +1,422 @@
+{
+  "Adriano_-_Deep_Gravelly_and_Rugged.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:17",
+    "validator": "human",
+    "notes": ""
+  },
+  "Amandoca_-_Fun_Breathy_and_Vibrant.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:22",
+    "validator": "human",
+    "notes": ""
+  },
+  "Ana_Alice_-_Friendly__Clear.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:30",
+    "validator": "human",
+    "notes": ""
+  },
+  "Ana_Dias_-_Engaging_Smooth_and_Forceful.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:31",
+    "validator": "human",
+    "notes": ""
+  },
+  "Anderson_Carlos_-_Pleasant_and_Animated.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:33",
+    "validator": "human",
+    "notes": ""
+  },
+  "Anita.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:36",
+    "validator": "human",
+    "notes": ""
+  },
+  "Aougueiro_-_Evil_Cartoon_Character.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:50:40",
+    "validator": "human",
+    "notes": ""
+  },
+  "Arnold_-_Br.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:08",
+    "validator": "human",
+    "notes": ""
+  },
+  "Brilho.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:12",
+    "validator": "human",
+    "notes": ""
+  },
+  "Bruno__Calm_Warm_and_Seductive.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:16",
+    "validator": "human",
+    "notes": ""
+  },
+  "Campanholi_-_Expressive_and_Friendly.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:25",
+    "validator": "human",
+    "notes": ""
+  },
+  "Carla_-_Calm_Seductive_and_Enigmatic.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:29",
+    "validator": "human",
+    "notes": ""
+  },
+  "Carla_-_Energetic_and_Confident.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:39",
+    "validator": "human",
+    "notes": ""
+  },
+  "Ceeli.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:44",
+    "validator": "human",
+    "notes": ""
+  },
+  "Cleber_-_Tender_Warm_and_Energetic.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:57:51",
+    "validator": "human",
+    "notes": ""
+  },
+  "David_-_Deep_Gravelly_and_Resonnat.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:03",
+    "validator": "human",
+    "notes": ""
+  },
+  "DiMo.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:07",
+    "validator": "human",
+    "notes": ""
+  },
+  "Diego_-_Confident_Announcer.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:09",
+    "validator": "human",
+    "notes": ""
+  },
+  "Dinis_-_Optimistic_and_Encouraging.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:12",
+    "validator": "human",
+    "notes": ""
+  },
+  "Eliser.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:16",
+    "validator": "human",
+    "notes": ""
+  },
+  "Elvis_-_Resonating_Deep_and_Engaging.wav": {
+    "verdict": "neither",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:52",
+    "validator": "human",
+    "notes": ""
+  },
+  "Erik_Alves_-_Professional__Calm.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:55",
+    "validator": "human",
+    "notes": ""
+  },
+  "Fabio_Filho_-_Neutral_and_Direct.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:58:58",
+    "validator": "human",
+    "notes": ""
+  },
+  "Fernanda_-_Formal_and_Neutral.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:03",
+    "validator": "human",
+    "notes": ""
+  },
+  "Flvio_-_Chill_Calm_and_Friendly.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:05",
+    "validator": "human",
+    "notes": ""
+  },
+  "Graziella_-_Childrens_Narrator.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:08",
+    "validator": "human",
+    "notes": ""
+  },
+  "Guilherme_-_Serious_and_Diplomatic.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:10",
+    "validator": "human",
+    "notes": ""
+  },
+  "Helena_-_Kids_Storyteller.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:13",
+    "validator": "human",
+    "notes": ""
+  },
+  "Juliano_Magalhes_-_Clear_and_Deep.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:14",
+    "validator": "human",
+    "notes": ""
+  },
+  "Julio_-_Shorts__Energetic.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:17",
+    "validator": "human",
+    "notes": ""
+  },
+  "Kaique_-_Poetic_Soft_and_Gentle.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:21",
+    "validator": "human",
+    "notes": ""
+  },
+  "Katiuscia_-_Feminine_and_Gentle.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:26",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lax_Whisper.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:31",
+    "validator": "human",
+    "notes": ""
+  },
+  "Leon.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:36",
+    "validator": "human",
+    "notes": ""
+  },
+  "Leonardo_Hamaral_-_Warm_and_Confident.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:41",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lucas_-_Deep__Profound_Narrator.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:42",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lucas_-_Direct_and_Tender.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:44",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lucas_-_Engaging_Captivating_and_Kind.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:49",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lucas_-_Natural_Calm_and_Steady.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:52",
+    "validator": "human",
+    "notes": ""
+  },
+  "Lucke_-_Direct_and_Neutral.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T19:59:57",
+    "validator": "human",
+    "notes": ""
+  },
+  "Marcos_-_Didatic_Insightful_and_Warm.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:01",
+    "validator": "human",
+    "notes": ""
+  },
+  "Matheus_-_Clear_Calm_and_Confident.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:04",
+    "validator": "human",
+    "notes": ""
+  },
+  "Mercos_Assunxao_-_Calm_and_Poetic.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:07",
+    "validator": "human",
+    "notes": ""
+  },
+  "Paulo_-_Expressive_and_Confident.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:12",
+    "validator": "human",
+    "notes": ""
+  },
+  "Raquel_-_Expressive_and_Energetic.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:15",
+    "validator": "human",
+    "notes": ""
+  },
+  "Rener_-_Friendly_Polite_and_Inviting.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:18",
+    "validator": "human",
+    "notes": ""
+  },
+  "Ricardo_Vianna_-_Calm_and_Resonating.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:22",
+    "validator": "human",
+    "notes": ""
+  },
+  "Roberta_-_Smooth_and_Confident.wav": {
+    "verdict": "neither",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:53",
+    "validator": "human",
+    "notes": ""
+  },
+  "Roberto_Barbieri_-_Smooth_and_Sauve.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:00:57",
+    "validator": "human",
+    "notes": ""
+  },
+  "Ryan_Avila_-_Youthful_Upbeat_and_Kind.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:11",
+    "validator": "human",
+    "notes": ""
+  },
+  "Samuel_-_Slow_and_Confident.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:13",
+    "validator": "human",
+    "notes": ""
+  },
+  "Sandro_Dutra_-_Articulated_and_Clear.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:18",
+    "validator": "human",
+    "notes": ""
+  },
+  "Sergio_-_Deep_Resonant_and_Clear.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:20",
+    "validator": "human",
+    "notes": ""
+  },
+  "Thais_-_Youthful_and_Feminine.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:23",
+    "validator": "human",
+    "notes": ""
+  },
+  "Vagner_de_Souza_-_Sharp_and_Sarcastic.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:30",
+    "validator": "human",
+    "notes": ""
+  },
+  "Vinicius.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:32",
+    "validator": "human",
+    "notes": ""
+  },
+  "Weverton_-_Youthful_Energetic_and_Clear.wav": {
+    "verdict": "hyp",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:34",
+    "validator": "human",
+    "notes": ""
+  },
+  "Will_-_Dynamic_Deep_and_Articulate.wav": {
+    "verdict": "ref",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:43",
+    "validator": "human",
+    "notes": ""
+  },
+  "Will_-_Intense_Dramatic_and_Captivating.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:44",
+    "validator": "human",
+    "notes": ""
+  },
+  "Wlademir_-_Deep_Emotive_and_Resonant.wav": {
+    "verdict": "equivalent",
+    "corrected_text": null,
+    "validated_at": "2026-04-19T20:01:47",
+    "validator": "human",
+    "notes": ""
+  }
+}
