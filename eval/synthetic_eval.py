@@ -77,6 +77,39 @@ try:
 except ImportError:
     sys.exit("pip install jiwer")
 
+try:
+    from nara_wpe.wpe import wpe_v6
+    from nara_wpe.utils import stft as _wpe_stft, istft as _wpe_istft
+    _HAS_NARA_WPE = True
+except ImportError:
+    _HAS_NARA_WPE = False
+    log.warning("nara-wpe não encontrado — dereverberation desativada (pip install nara-wpe)")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dereverberation (WPE single-channel)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def dereverb(audio: np.ndarray, taps: int = 10, delay: int = 3, iterations: int = 3) -> np.ndarray:
+    """WPE single-channel dereverberation via nara-wpe."""
+    if not _HAS_NARA_WPE:
+        return audio
+    try:
+        y = audio.astype(np.float64)[np.newaxis, :]          # (1, T)
+        Y = _wpe_stft(y, size=512, shift=128)                 # (1, frames, bins)
+        Y = Y.transpose(2, 0, 1)                              # (bins, 1, frames)
+        Z = wpe_v6(Y, taps=taps, delay=delay, iterations=iterations)
+        Z = Z.transpose(1, 2, 0)                              # (1, frames, bins)
+        z = _wpe_istft(Z, size=512, shift=128)                # (1, T)
+        out = z[0].astype(np.float32)
+        # normaliza amplitude para não distorcer o range original
+        peak = np.max(np.abs(out)) + 1e-9
+        orig_peak = np.max(np.abs(audio)) + 1e-9
+        return out * (orig_peak / peak)
+    except Exception as e:
+        log.warning("dereverb falhou (%s) — usando áudio original", e)
+        return audio
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Frases padrão pt-BR (usadas quando --texts-file não é passado)
@@ -282,7 +315,7 @@ def transcribe(model: "WhisperModel", audio: np.ndarray) -> Tuple[str, str, floa
         # v2: anti-alucinação em ruído
         condition_on_previous_text=False,
         no_speech_threshold=0.6,
-        logprob_threshold=-1.0,
+        log_prob_threshold=-1.0,
         compression_ratio_threshold=2.4,
     )
     texts = []
@@ -477,9 +510,11 @@ def main():
             if audio_dir:
                 sf.write(audio_dir / f"{tid:03d}_{noise_type}.wav", noisy_audio, SAMPLE_RATE)
 
+            audio_for_asr = dereverb(noisy_audio)
+
             t0 = time.perf_counter()
             try:
-                transcription, lang, avg_log_prob, no_speech_prob = transcribe(model, noisy_audio)
+                transcription, lang, avg_log_prob, no_speech_prob = transcribe(model, audio_for_asr)
             except Exception as e:
                 log.warning("  Erro na transcrição: %s", e)
                 transcription, lang, avg_log_prob, no_speech_prob = "", "?", -99.0, 1.0
