@@ -82,8 +82,13 @@ Thumbs.db
 finetuning_data/
 
 # ── MLflow — tracking de experimentos ────────────────────────────────────────
-mlruns/                  # runs locais (SQLite backend)
-mlartifacts/             # artefatos locais
-mlflow.db                # banco SQLite local (dev)
+mlruns/
+mlartifacts/
+mlflow.db
 .mlflow/
+
+# ── Não pertencem ao finetune ─────────────────────────────────────────────────
+labeler/
+logs/
+coraa/
 
