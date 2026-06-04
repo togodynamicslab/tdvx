@@ -892,57 +892,40 @@ def apply_lora(model: "WhisperForConditionalGeneration") -> "WhisperForCondition
 
 def convert_to_ctranslate2(hf_dir: Path, ct2_dir: Path, quantization: str = "int8") -> bool:
     """
-    Converte o modelo fine-tunado para o formato CTranslate2 (faster-whisper).
-    A quantização int8 reduz o modelo em ~4x e acelera 2-3x em CPU/GPU.
+    Converte o modelo fine-tunado para CTranslate2 (faster-whisper) via Python API.
 
-    Lida automaticamente com a incompatibilidade entre transformers>=5.0 e ctranslate2:
-    faz downgrade temporário para 4.44.2, converte, e restaura a versão original.
+    Aplica monkey-patch em PreTrainedModel.from_pretrained para remover o kwarg
+    `dtype` que ctranslate2 injeta mas transformers>=4.46 repassa ao __init__ do
+    Whisper, causando TypeError. A conversão int8 não depende desse dtype.
     """
-    import importlib.metadata as _meta
-
     ct2_dir.mkdir(parents=True, exist_ok=True)
 
-    ct2_cmd = [sys.executable, "-m", "ctranslate2.converters.transformers",
-               "--model", str(hf_dir), "--output_dir", str(ct2_dir),
-               "--quantization", quantization, "--force"]
-
-    def _run_conversion() -> bool:
-        for cmd in [ct2_cmd, ["ct2-transformers-converter",
-                               "--model", str(hf_dir), "--output_dir", str(ct2_dir),
-                               "--quantization", quantization, "--force"]]:
-            try:
-                log.info("Convertendo para CTranslate2 (quantização: %s) ...", quantization)
-                subprocess.run(cmd, check=True)
-                log.info("Conversão concluída → %s", ct2_dir)
-                return True
-            except (subprocess.CalledProcessError, FileNotFoundError):
-                continue
-        return False
-
-    # Verifica se transformers >= 5.0 (incompatível com ctranslate2 atual)
     try:
-        tf_version = _meta.version("transformers")
-        needs_downgrade = int(tf_version.split(".")[0]) >= 5
-    except Exception:
-        needs_downgrade = False
+        import transformers.modeling_utils as _mu
+        from ctranslate2.converters.transformers import TransformersConverter
 
-    if needs_downgrade:
-        log.info("transformers %s detectado — downgrade temporário para 4.36.2 (CT2)", tf_version)
-        try:
-            subprocess.run(
-                [sys.executable, "-m", "pip", "install", "transformers==4.36.2", "-q"],
-                check=True,
-            )
-            ok = _run_conversion()
-        finally:
-            log.info("Restaurando transformers %s ...", tf_version)
-            subprocess.run(
-                [sys.executable, "-m", "pip", "install", f"transformers=={tf_version}", "-q"],
-                check=True,
-            )
-        return ok
+        _orig = _mu.PreTrainedModel.from_pretrained.__func__
 
-    ok = _run_conversion()
+        @classmethod  # type: ignore[misc]
+        def _patched(cls, pretrained_model_name_or_path, *args, **kwargs):
+            kwargs.pop("dtype", None)
+            return _orig(cls, pretrained_model_name_or_path, *args, **kwargs)
+
+        _mu.PreTrainedModel.from_pretrained = _patched
+
+        log.info("Convertendo para CTranslate2 (quantização: %s) ...", quantization)
+        converter = TransformersConverter(
+            model_name_or_path=str(hf_dir),
+            low_cpu_mem_usage=True,
+        )
+        converter.convert(str(ct2_dir), quantization=quantization, force=True)
+        log.info("Conversão concluída → %s", ct2_dir)
+        return True
+
+    except Exception as exc:
+        log.error("Conversão CT2 falhou: %s", exc)
+
+    ok = False
     if not ok:
         log.warning(
             "Conversão automática falhou. Execute manualmente:\n"
