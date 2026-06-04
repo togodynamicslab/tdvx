@@ -1150,6 +1150,51 @@ class MlflowTracker:
 # Pipeline principal
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _auto_configure_batch(args: argparse.Namespace) -> None:
+    """
+    Detecta VRAM disponível por GPU e ajusta batch_size, gradient_accumulation_steps,
+    gradient_checkpointing e bf16 para manter batch efetivo ~512 sem OOM.
+
+    Tiers (whisper-medium, por GPU):
+        < 10 GB  → batch=8,  accum=8,  checkpointing=True,  bf16=False
+        10-16 GB → batch=16, accum=4,  checkpointing=True,  bf16=True
+        16-24 GB → batch=32, accum=2,  checkpointing=True,  bf16=True
+        24-40 GB → batch=48, accum=2,  checkpointing=False, bf16=True
+        ≥ 40 GB  → batch=64, accum=1,  checkpointing=False, bf16=True
+    """
+    if not torch.cuda.is_available():
+        return
+
+    vram_gb = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
+
+    if vram_gb < 10:
+        batch, accum, ckpt, bf16 = 8, 8, True, False
+    elif vram_gb < 16:
+        batch, accum, ckpt, bf16 = 16, 4, True, True
+    elif vram_gb < 24:
+        batch, accum, ckpt, bf16 = 32, 2, True, True
+    elif vram_gb < 40:
+        batch, accum, ckpt, bf16 = 48, 2, False, True
+    else:
+        batch, accum, ckpt, bf16 = 64, 1, False, True
+
+    n_gpus = torch.cuda.device_count()
+    effective = batch * accum * n_gpus
+
+    log.info(
+        "Auto-batch: %.1f GB VRAM/GPU × %d GPUs → "
+        "batch=%d accum=%d checkpointing=%s bf16=%s (efetivo=%d)",
+        vram_gb, n_gpus, batch, accum, ckpt, bf16, effective,
+    )
+
+    args.batch_size                  = batch
+    args.gradient_accumulation_steps = accum
+    args.no_gradient_checkpointing   = not ckpt
+    if bf16:
+        args.bf16 = True
+        args.fp16 = False
+
+
 def run_finetune(args: argparse.Namespace) -> None:
     if _TRAIN_DEPS_MISSING:
         log.error(
@@ -1162,6 +1207,8 @@ def run_finetune(args: argparse.Namespace) -> None:
     os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
     set_seed(42)
+
+    _auto_configure_batch(args)
 
     lang_code      = args.language.lower()
     whisper_lang   = _LANGUAGE_MAP.get(lang_code, lang_code)
