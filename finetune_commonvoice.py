@@ -1168,15 +1168,15 @@ def _auto_configure_batch(args: argparse.Namespace) -> None:
     vram_gb = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
 
     if vram_gb < 10:
-        batch, accum, ckpt, bf16 = 4, 16, True, False
-    elif vram_gb < 16:
-        batch, accum, ckpt, bf16 = 8, 8, True, True
-    elif vram_gb < 24:
-        batch, accum, ckpt, bf16 = 16, 4, True, True
-    elif vram_gb < 40:
+        batch, accum, ckpt, bf16 = 8, 8, True, False
+    elif vram_gb < 20:
+        batch, accum, ckpt, bf16 = 32, 2, True, True
+    elif vram_gb < 32:
         batch, accum, ckpt, bf16 = 48, 2, False, True
-    else:
+    elif vram_gb < 48:
         batch, accum, ckpt, bf16 = 64, 1, False, True
+    else:
+        batch, accum, ckpt, bf16 = 96, 1, False, True
 
     n_gpus = torch.cuda.device_count()
     effective = batch * accum * n_gpus
