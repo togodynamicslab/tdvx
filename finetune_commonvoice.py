@@ -1168,11 +1168,11 @@ def _auto_configure_batch(args: argparse.Namespace) -> None:
     vram_gb = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
 
     if vram_gb < 10:
-        batch, accum, ckpt, bf16 = 8, 8, True, False
+        batch, accum, ckpt, bf16 = 4, 16, True, False
     elif vram_gb < 16:
-        batch, accum, ckpt, bf16 = 16, 4, True, True
+        batch, accum, ckpt, bf16 = 8, 8, True, True
     elif vram_gb < 24:
-        batch, accum, ckpt, bf16 = 32, 2, True, True
+        batch, accum, ckpt, bf16 = 16, 4, True, True
     elif vram_gb < 40:
         batch, accum, ckpt, bf16 = 48, 2, False, True
     else:
@@ -1341,8 +1341,16 @@ def run_finetune(args: argparse.Namespace) -> None:
         tracker.log_params(args, len(train_ds), len(eval_ds))
 
         # ── 5. Modelo ─────────────────────────────────────────────────────────
-        log.info("Carregando modelo: %s", args.base_model)
-        model = WhisperForConditionalGeneration.from_pretrained(args.base_model)
+        # Determina dtype de carregamento — bf16/fp16 economiza ~1.5 GB vs fp32
+        _has_bf16    = torch.cuda.is_available() and torch.cuda.is_bf16_supported()
+        _load_bf16   = torch.cuda.is_available() and (args.bf16 or _has_bf16) and not args.fp16
+        _load_dtype  = torch.bfloat16 if _load_bf16 else (torch.float16 if args.fp16 else torch.float32)
+
+        log.info("Carregando modelo: %s  (dtype=%s)", args.base_model, _load_dtype)
+        model = WhisperForConditionalGeneration.from_pretrained(
+            args.base_model,
+            torch_dtype=_load_dtype,
+        )
 
         # Configura geração para o idioma alvo
         model.generation_config.language               = whisper_lang
